@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.9
+  version: 1.0.12
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -2721,6 +2721,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         timestamp:
           type: string
           format: date-time
@@ -2734,16 +2747,29 @@ components:
           maxLength: 255
         before_state: {}
         after_state: {}
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         user:
           type: integer
       required:
       - action_type
       - after_state
       - before_state
+      - created_at
       - description
       - id
       - target_object
+      - tenant_id
       - timestamp
+      - updated_at
       - user
     Context:
       type: object
@@ -2751,14 +2777,40 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         value:
           type: string
           maxLength: 255
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         key:
           type: integer
       required:
+      - created_at
       - id
       - key
+      - tenant_id
+      - updated_at
       - value
     ContextKey:
       type: object
@@ -2766,6 +2818,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 255
@@ -2774,10 +2839,23 @@ components:
         app_name:
           type: string
           maxLength: 255
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
       required:
       - app_name
+      - created_at
       - id
       - name
+      - tenant_id
+      - updated_at
     Country:
       type: object
       properties:
@@ -2801,6 +2879,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         first_name:
           type: string
           maxLength: 50
@@ -2870,6 +2961,16 @@ components:
           format: date
         notes:
           type: string
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         user:
           type: integer
         employee_address:
@@ -2898,9 +2999,12 @@ components:
             type: integer
           readOnly: true
       required:
+      - created_at
       - first_name
       - id
       - qualifications
+      - tenant_id
+      - updated_at
       - user
     EmployeeQualification:
       type: object
@@ -2908,34 +3012,86 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         issue_date:
           type: string
           format: date
         expiry_date:
           type: string
           format: date
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         employee:
           type: integer
         qualification:
           type: integer
       required:
+      - created_at
       - employee
       - id
       - qualification
+      - tenant_id
+      - updated_at
     EmploymentType:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 50
         description:
           type: string
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
       required:
+      - created_at
       - id
       - name
+      - tenant_id
+      - updated_at
     PaginatedAddressList:
       type: object
       required:
@@ -3362,6 +3518,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         timestamp:
           type: string
           format: date-time
@@ -3375,6 +3544,16 @@ components:
           maxLength: 255
         before_state: {}
         after_state: {}
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         user:
           type: integer
     PatchedContext:
@@ -3383,9 +3562,32 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         value:
           type: string
           maxLength: 255
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         key:
           type: integer
     PatchedContextKey:
@@ -3394,6 +3596,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 255
@@ -3402,6 +3617,16 @@ components:
         app_name:
           type: string
           maxLength: 255
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
     PatchedCountry:
       type: object
       properties:
@@ -3421,6 +3646,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         first_name:
           type: string
           maxLength: 50
@@ -3490,6 +3728,16 @@ components:
           format: date
         notes:
           type: string
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         user:
           type: integer
         employee_address:
@@ -3523,12 +3771,35 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         issue_date:
           type: string
           format: date
         expiry_date:
           type: string
           format: date
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         employee:
           type: integer
         qualification:
@@ -3539,22 +3810,68 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 50
         description:
           type: string
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
     PatchedPermission:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 255
         description:
           type: string
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
     PatchedProduction:
       type: object
       properties:
@@ -3587,22 +3904,68 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 100
         description:
           type: string
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
     PatchedRole:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 100
         description:
           type: string
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         parent:
           type:
           - integer
@@ -3618,6 +3981,29 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         role:
           type: integer
         permission:
@@ -3728,6 +4114,29 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         user:
           type: integer
         role:
@@ -3738,9 +4147,32 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 100
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         address:
           type: integer
     Permission:
@@ -3749,14 +4181,40 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 255
         description:
           type: string
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
       required:
+      - created_at
       - id
       - name
+      - tenant_id
+      - updated_at
     Production:
       type: object
       properties:
@@ -3792,25 +4250,74 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 100
         description:
           type: string
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
       required:
+      - created_at
       - id
       - name
+      - tenant_id
+      - updated_at
     Role:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 100
         description:
           type: string
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         parent:
           type:
           - integer
@@ -3821,15 +4328,41 @@ components:
             type: integer
           readOnly: true
       required:
+      - created_at
       - id
       - name
       - permissions
+      - tenant_id
+      - updated_at
     RolePermission:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         role:
           type: integer
         permission:
@@ -3840,9 +4373,12 @@ components:
           - 'null'
       required:
       - context
+      - created_at
       - id
       - permission
       - role
+      - tenant_id
+      - updated_at
     ServerMeta:
       type: object
       properties:
@@ -3991,13 +4527,39 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         user:
           type: integer
         role:
           type: integer
       required:
+      - created_at
       - id
       - role
+      - tenant_id
+      - updated_at
       - user
     WorkLocation:
       type: object
@@ -4005,15 +4567,41 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 100
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         address:
           type: integer
       required:
       - address
+      - created_at
       - id
       - name
+      - tenant_id
+      - updated_at
   securitySchemes:
     CadenceOIDC:
       type: http
