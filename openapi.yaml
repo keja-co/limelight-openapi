@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.2
+  version: 1.0.6
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -3666,26 +3666,10 @@ components:
             only.
           pattern: ^[\w.@+-]+$
           maxLength: 150
-        first_name:
-          type: string
-          maxLength: 150
-        last_name:
-          type: string
-          maxLength: 150
-        email:
-          type: string
-          format: email
-          title: Email address
-          maxLength: 254
         is_staff:
           type: boolean
           title: Staff status
           description: Designates whether the user can log into this admin site.
-        is_active:
-          type: boolean
-          title: Active
-          description: Designates whether this user should be treated as active. Unselect
-            this instead of deleting accounts.
         date_joined:
           type: string
           format: date-time
@@ -3694,6 +3678,34 @@ components:
           - string
           - 'null'
           maxLength: 255
+        first_name:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        last_name:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        date_of_birth:
+          type:
+          - string
+          - 'null'
+          format: date
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        phone:
+          type:
+          - string
+          - 'null'
+          maxLength: 25
+        is_active:
+          type: boolean
         groups:
           type: array
           items:
@@ -3904,26 +3916,10 @@ components:
             only.
           pattern: ^[\w.@+-]+$
           maxLength: 150
-        first_name:
-          type: string
-          maxLength: 150
-        last_name:
-          type: string
-          maxLength: 150
-        email:
-          type: string
-          format: email
-          title: Email address
-          maxLength: 254
         is_staff:
           type: boolean
           title: Staff status
           description: Designates whether the user can log into this admin site.
-        is_active:
-          type: boolean
-          title: Active
-          description: Designates whether this user should be treated as active. Unselect
-            this instead of deleting accounts.
         date_joined:
           type: string
           format: date-time
@@ -3932,6 +3928,34 @@ components:
           - string
           - 'null'
           maxLength: 255
+        first_name:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        last_name:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        date_of_birth:
+          type:
+          - string
+          - 'null'
+          format: date
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        phone:
+          type:
+          - string
+          - 'null'
+          maxLength: 25
+        is_active:
+          type: boolean
         groups:
           type: array
           items:
