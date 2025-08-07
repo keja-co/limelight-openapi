@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.28
+  version: 1.0.29
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -6359,6 +6359,7 @@ components:
       - created_at
       - created_by
       - id
+      - seating_mode
       - tenant_id
       - updated_at
       - venue
