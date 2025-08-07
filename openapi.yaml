@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.6
+  version: 1.0.8
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -1847,7 +1847,7 @@ paths:
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this user.
+        description: A unique integer value identifying this User.
         required: true
       tags:
       - api
@@ -1869,7 +1869,7 @@ paths:
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this user.
+        description: A unique integer value identifying this User.
         required: true
       tags:
       - api
@@ -1897,7 +1897,7 @@ paths:
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this user.
+        description: A unique integer value identifying this User.
         required: true
       tags:
       - api
@@ -1924,7 +1924,7 @@ paths:
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this user.
+        description: A unique integer value identifying this User.
         required: true
       tags:
       - api
@@ -3673,6 +3673,11 @@ components:
         date_joined:
           type: string
           format: date-time
+        ulid:
+          type:
+          - string
+          - 'null'
+          maxLength: 26
         user_sso_id:
           type:
           - string
@@ -3706,6 +3711,8 @@ components:
           maxLength: 25
         is_active:
           type: boolean
+        tenant:
+          type: integer
         groups:
           type: array
           items:
@@ -3923,6 +3930,11 @@ components:
         date_joined:
           type: string
           format: date-time
+        ulid:
+          type:
+          - string
+          - 'null'
+          maxLength: 26
         user_sso_id:
           type:
           - string
@@ -3956,6 +3968,8 @@ components:
           maxLength: 25
         is_active:
           type: boolean
+        tenant:
+          type: integer
         groups:
           type: array
           items:
@@ -3968,8 +3982,11 @@ components:
             type: integer
           description: Specific permissions for this user.
       required:
+      - email
       - id
       - password
+      - tenant
+      - user_sso_id
       - username
     UserRoleAssignment:
       type: object
