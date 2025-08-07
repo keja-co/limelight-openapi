@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.41
+  version: 1.0.43
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -20,6 +20,590 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerMeta'
           description: ''
+  /api/auditions/v1/audition/:
+    get:
+      operationId: api_auditions_v1_audition_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAuditionList'
+          description: ''
+    post:
+      operationId: api_auditions_v1_audition_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Audition'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audition'
+          description: ''
+  /api/auditions/v1/audition/{id}/:
+    get:
+      operationId: api_auditions_v1_audition_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Audition.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audition'
+          description: ''
+    put:
+      operationId: api_auditions_v1_audition_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Audition.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Audition'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audition'
+          description: ''
+    patch:
+      operationId: api_auditions_v1_audition_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Audition.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAudition'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audition'
+          description: ''
+    delete:
+      operationId: api_auditions_v1_audition_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Audition.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/auditions/v1/feedback/:
+    get:
+      operationId: api_auditions_v1_feedback_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFeedbackList'
+          description: ''
+    post:
+      operationId: api_auditions_v1_feedback_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+          description: ''
+  /api/auditions/v1/feedback/{id}/:
+    get:
+      operationId: api_auditions_v1_feedback_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Feedback.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+          description: ''
+    put:
+      operationId: api_auditions_v1_feedback_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Feedback.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+          description: ''
+    patch:
+      operationId: api_auditions_v1_feedback_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Feedback.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFeedback'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+          description: ''
+    delete:
+      operationId: api_auditions_v1_feedback_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Feedback.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/auditions/v1/signup/:
+    get:
+      operationId: api_auditions_v1_signup_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSignupList'
+          description: ''
+    post:
+      operationId: api_auditions_v1_signup_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Signup'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signup'
+          description: ''
+  /api/auditions/v1/signup/{id}/:
+    get:
+      operationId: api_auditions_v1_signup_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Signup.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signup'
+          description: ''
+    put:
+      operationId: api_auditions_v1_signup_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Signup.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Signup'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signup'
+          description: ''
+    patch:
+      operationId: api_auditions_v1_signup_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Signup.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSignup'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signup'
+          description: ''
+    delete:
+      operationId: api_auditions_v1_signup_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Signup.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/auditions/v1/slot/:
+    get:
+      operationId: api_auditions_v1_slot_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSlotList'
+          description: ''
+    post:
+      operationId: api_auditions_v1_slot_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Slot'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Slot'
+          description: ''
+  /api/auditions/v1/slot/{id}/:
+    get:
+      operationId: api_auditions_v1_slot_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Slot.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Slot'
+          description: ''
+    put:
+      operationId: api_auditions_v1_slot_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Slot.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Slot'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Slot'
+          description: ''
+    patch:
+      operationId: api_auditions_v1_slot_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Slot.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSlot'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Slot'
+          description: ''
+    delete:
+      operationId: api_auditions_v1_slot_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Slot.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/compliance/auditlogs/:
     get:
       operationId: api_compliance_auditlogs_list
@@ -4405,6 +4989,60 @@ components:
       - timestamp
       - updated_at
       - user
+    Audition:
+      type: object
+      description: Serializer for the Audition model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: Name of the audition
+          maxLength: 255
+        description:
+          type: string
+          description: Description of the audition
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        venue:
+          type:
+          - integer
+          - 'null'
+          description: Venue for the audition
+      required:
+      - created_at
+      - created_by
+      - description
+      - id
+      - name
+      - production
+      - tenant
+      - updated_at
     Context:
       type: object
       properties:
@@ -4760,6 +5398,64 @@ components:
       - name
       - tenant
       - updated_at
+    Feedback:
+      type: object
+      description: Serializer for the Feedback model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Feedback notes. Supports markdown.
+        score:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,4}(?:\.\d{0,2})?$
+          description: If the panel wishes to use scores, they can enter them here.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        signup:
+          type: integer
+        reviewer:
+          type:
+          - integer
+          - 'null'
+          description: User who provided the feedback. Can be null if feedback is
+            anonymous.
+      required:
+      - created_at
+      - created_by
+      - id
+      - signup
+      - tenant
+      - updated_at
     PaginatedAddressList:
       type: object
       required:
@@ -4806,6 +5502,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AuditLog'
+    PaginatedAuditionList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Audition'
     PaginatedContextKeyList:
       type: object
       required:
@@ -4944,6 +5663,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EmploymentType'
+    PaginatedFeedbackList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feedback'
     PaginatedPerformanceList:
       type: object
       required:
@@ -5220,6 +5962,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RolePermission'
+    PaginatedSignupList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Signup'
+    PaginatedSlotList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Slot'
     PaginatedStateList:
       type: object
       required:
@@ -5501,6 +6289,51 @@ components:
           - 'null'
         user:
           type: integer
+    PatchedAudition:
+      type: object
+      description: Serializer for the Audition model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: Name of the audition
+          maxLength: 255
+        description:
+          type: string
+          description: Description of the audition
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        venue:
+          type:
+          - integer
+          - 'null'
+          description: Venue for the audition
     PatchedContext:
       type: object
       properties:
@@ -5810,6 +6643,57 @@ components:
           type:
           - integer
           - 'null'
+    PatchedFeedback:
+      type: object
+      description: Serializer for the Feedback model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Feedback notes. Supports markdown.
+        score:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,4}(?:\.\d{0,2})?$
+          description: If the panel wishes to use scores, they can enter them here.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        signup:
+          type: integer
+        reviewer:
+          type:
+          - integer
+          - 'null'
+          description: User who provided the feedback. Can be null if feedback is
+            anonymous.
     PatchedPerformance:
       type: object
       properties:
@@ -6298,6 +7182,137 @@ components:
           type:
           - integer
           - 'null'
+    PatchedSignup:
+      type: object
+      description: Serializer for the Signup model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        first_name:
+          type:
+          - string
+          - 'null'
+          description: First name of the user signing up
+          maxLength: 255
+        last_name:
+          type:
+          - string
+          - 'null'
+          description: Last name of the user signing up
+          maxLength: 255
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address of the user signing up
+          maxLength: 254
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Phone number of the user signing up
+          maxLength: 20
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Notes for the signup. Supports markdown.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        slot:
+          type: integer
+        user:
+          type:
+          - integer
+          - 'null'
+          description: If the participant has an account, this will be set to the
+            user. If not, it will be null and the first_name, last_name, email, and
+            phone fields will be used to identify the participant.
+    PatchedSlot:
+      type: object
+      description: Serializer for the Slot model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the slot
+          maxLength: 255
+        start_time:
+          type: string
+          format: date-time
+          description: Start time of the slot
+        end_time:
+          type: string
+          format: date-time
+          description: End time of the slot
+        limit:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Limit of participants who can register for the slot. Leave
+            null/none to disable limit.
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Notes for the slot. Supports markdown.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        audition:
+          type: integer
     PatchedState:
       type: object
       properties:
@@ -7363,6 +8378,156 @@ components:
           type: integer
       required:
       - status
+    Signup:
+      type: object
+      description: Serializer for the Signup model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        first_name:
+          type:
+          - string
+          - 'null'
+          description: First name of the user signing up
+          maxLength: 255
+        last_name:
+          type:
+          - string
+          - 'null'
+          description: Last name of the user signing up
+          maxLength: 255
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address of the user signing up
+          maxLength: 254
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Phone number of the user signing up
+          maxLength: 20
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Notes for the signup. Supports markdown.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        slot:
+          type: integer
+        user:
+          type:
+          - integer
+          - 'null'
+          description: If the participant has an account, this will be set to the
+            user. If not, it will be null and the first_name, last_name, email, and
+            phone fields will be used to identify the participant.
+      required:
+      - created_at
+      - created_by
+      - email
+      - first_name
+      - id
+      - slot
+      - tenant
+      - updated_at
+      - user
+    Slot:
+      type: object
+      description: Serializer for the Slot model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the slot
+          maxLength: 255
+        start_time:
+          type: string
+          format: date-time
+          description: Start time of the slot
+        end_time:
+          type: string
+          format: date-time
+          description: End time of the slot
+        limit:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Limit of participants who can register for the slot. Leave
+            null/none to disable limit.
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Notes for the slot. Supports markdown.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        audition:
+          type: integer
+      required:
+      - audition
+      - created_at
+      - created_by
+      - end_time
+      - id
+      - start_time
+      - tenant
+      - updated_at
     State:
       type: object
       properties:
