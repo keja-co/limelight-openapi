@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.43
+  version: 1.0.45
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -20,6 +20,310 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerMeta'
           description: ''
+  /api/assets/v1/assets/:
+    get:
+      operationId: api_assets_v1_assets_list
+      description: API endpoint that allows assets to be viewed or edited.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAssetList'
+          description: ''
+    post:
+      operationId: api_assets_v1_assets_create
+      description: API endpoint that allows assets to be viewed or edited.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Asset'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+          description: ''
+  /api/assets/v1/assets/{id}/:
+    get:
+      operationId: api_assets_v1_assets_retrieve
+      description: API endpoint that allows assets to be viewed or edited.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Asset.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+          description: ''
+    put:
+      operationId: api_assets_v1_assets_update
+      description: API endpoint that allows assets to be viewed or edited.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Asset.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Asset'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+          description: ''
+    patch:
+      operationId: api_assets_v1_assets_partial_update
+      description: API endpoint that allows assets to be viewed or edited.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Asset.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAsset'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+          description: ''
+    delete:
+      operationId: api_assets_v1_assets_destroy
+      description: API endpoint that allows assets to be viewed or edited.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Asset.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/assets/v1/assignments/:
+    get:
+      operationId: api_assets_v1_assignments_list
+      description: API endpoint that allows assignments to be viewed or edited.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAssignmentList'
+          description: ''
+    post:
+      operationId: api_assets_v1_assignments_create
+      description: API endpoint that allows assignments to be viewed or edited.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Assignment'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assignment'
+          description: ''
+  /api/assets/v1/assignments/{id}/:
+    get:
+      operationId: api_assets_v1_assignments_retrieve
+      description: API endpoint that allows assignments to be viewed or edited.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Asset Assignment.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assignment'
+          description: ''
+    put:
+      operationId: api_assets_v1_assignments_update
+      description: API endpoint that allows assignments to be viewed or edited.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Asset Assignment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Assignment'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assignment'
+          description: ''
+    patch:
+      operationId: api_assets_v1_assignments_partial_update
+      description: API endpoint that allows assignments to be viewed or edited.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Asset Assignment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAssignment'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assignment'
+          description: ''
+    delete:
+      operationId: api_assets_v1_assignments_destroy
+      description: API endpoint that allows assignments to be viewed or edited.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Asset Assignment.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/auditions/v1/audition/:
     get:
       operationId: api_auditions_v1_audition_list
@@ -4933,6 +5237,150 @@ components:
       - line_1
       - tenant
       - updated_at
+    Asset:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: Name of the asset
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/TypeEnum'
+          description: |-
+            Type of the asset, either company or personal
+
+            * `company` - Company Property
+            * `personal` - Personal Property
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the asset
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Additional notes about the asset
+        value:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          description: Monetary value of the asset
+        condition:
+          allOf:
+          - $ref: '#/components/schemas/ConditionEnum'
+          description: |-
+            Condition of the asset
+
+            * `new` - New
+            * `good` - Good
+            * `fair` - Fair
+            * `poor` - Poor
+            * `damaged` - Damaged
+            * `out_of_service` - Out of Service
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        owning_user:
+          type:
+          - integer
+          - 'null'
+          description: User who owns the asset
+      required:
+      - created_at
+      - created_by
+      - id
+      - name
+      - tenant
+      - updated_at
+    Assignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        start_date:
+          type: string
+          format: date-time
+          description: Date and time when the asset was assigned
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Date and time when the asset was returned
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        asset:
+          type: integer
+          description: The asset being assigned
+        user:
+          type:
+          - integer
+          - 'null'
+          description: User to whom the asset is assigned
+        production:
+          type:
+          - integer
+          - 'null'
+          description: Production associated with the asset assignment
+      required:
+      - asset
+      - created_at
+      - created_by
+      - id
+      - start_date
+      - tenant
+      - updated_at
     AuditLog:
       type: object
       properties:
@@ -5043,6 +5491,22 @@ components:
       - production
       - tenant
       - updated_at
+    ConditionEnum:
+      enum:
+      - new
+      - good
+      - fair
+      - poor
+      - damaged
+      - out_of_service
+      type: string
+      description: |-
+        * `new` - New
+        * `good` - Good
+        * `fair` - Fair
+        * `poor` - Poor
+        * `damaged` - Damaged
+        * `out_of_service` - Out of Service
     Context:
       type: object
       properties:
@@ -5479,6 +5943,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Address'
+    PaginatedAssetList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
+    PaginatedAssignmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Assignment'
     PaginatedAuditLogList:
       type: object
       required:
@@ -6245,6 +6755,135 @@ components:
           - 'null'
         country:
           type: integer
+    PatchedAsset:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: Name of the asset
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/TypeEnum'
+          description: |-
+            Type of the asset, either company or personal
+
+            * `company` - Company Property
+            * `personal` - Personal Property
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the asset
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Additional notes about the asset
+        value:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          description: Monetary value of the asset
+        condition:
+          allOf:
+          - $ref: '#/components/schemas/ConditionEnum'
+          description: |-
+            Condition of the asset
+
+            * `new` - New
+            * `good` - Good
+            * `fair` - Fair
+            * `poor` - Poor
+            * `damaged` - Damaged
+            * `out_of_service` - Out of Service
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        owning_user:
+          type:
+          - integer
+          - 'null'
+          description: User who owns the asset
+    PatchedAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        start_date:
+          type: string
+          format: date-time
+          description: Date and time when the asset was assigned
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Date and time when the asset was returned
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        asset:
+          type: integer
+          description: The asset being assigned
+        user:
+          type:
+          - integer
+          - 'null'
+          description: User to whom the asset is assigned
+        production:
+          type:
+          - integer
+          - 'null'
+          description: Production associated with the asset assignment
     PatchedAuditLog:
       type: object
       properties:
@@ -8575,6 +9214,14 @@ components:
       - name
       - tenant
       - updated_at
+    TypeEnum:
+      enum:
+      - company
+      - personal
+      type: string
+      description: |-
+        * `company` - Company Property
+        * `personal` - Personal Property
     User:
       type: object
       properties:
