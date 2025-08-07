@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.20
+  version: 1.0.21
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -1935,9 +1935,9 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/location/addresses/:
+  /api/location/v1/addresses/:
     get:
-      operationId: api_location_addresses_list
+      operationId: api_location_v1_addresses_list
       parameters:
       - name: page
         required: false
@@ -1965,7 +1965,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedAddressList'
           description: ''
     post:
-      operationId: api_location_addresses_create
+      operationId: api_location_v1_addresses_create
       tags:
       - api
       requestBody:
@@ -1985,9 +1985,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Address'
           description: ''
-  /api/location/addresses/{id}/:
+  /api/location/v1/addresses/{id}/:
     get:
-      operationId: api_location_addresses_retrieve
+      operationId: api_location_v1_addresses_retrieve
       parameters:
       - in: path
         name: id
@@ -2009,7 +2009,7 @@ paths:
                 $ref: '#/components/schemas/Address'
           description: ''
     put:
-      operationId: api_location_addresses_update
+      operationId: api_location_v1_addresses_update
       parameters:
       - in: path
         name: id
@@ -2037,7 +2037,7 @@ paths:
                 $ref: '#/components/schemas/Address'
           description: ''
     patch:
-      operationId: api_location_addresses_partial_update
+      operationId: api_location_v1_addresses_partial_update
       parameters:
       - in: path
         name: id
@@ -2064,7 +2064,7 @@ paths:
                 $ref: '#/components/schemas/Address'
           description: ''
     delete:
-      operationId: api_location_addresses_destroy
+      operationId: api_location_v1_addresses_destroy
       parameters:
       - in: path
         name: id
@@ -2081,9 +2081,9 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/location/countries/:
+  /api/location/v1/countries/:
     get:
-      operationId: api_location_countries_list
+      operationId: api_location_v1_countries_list
       parameters:
       - name: page
         required: false
@@ -2111,7 +2111,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedCountryList'
           description: ''
     post:
-      operationId: api_location_countries_create
+      operationId: api_location_v1_countries_create
       tags:
       - api
       requestBody:
@@ -2131,9 +2131,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Country'
           description: ''
-  /api/location/countries/{id}/:
+  /api/location/v1/countries/{id}/:
     get:
-      operationId: api_location_countries_retrieve
+      operationId: api_location_v1_countries_retrieve
       parameters:
       - in: path
         name: id
@@ -2155,7 +2155,7 @@ paths:
                 $ref: '#/components/schemas/Country'
           description: ''
     put:
-      operationId: api_location_countries_update
+      operationId: api_location_v1_countries_update
       parameters:
       - in: path
         name: id
@@ -2183,7 +2183,7 @@ paths:
                 $ref: '#/components/schemas/Country'
           description: ''
     patch:
-      operationId: api_location_countries_partial_update
+      operationId: api_location_v1_countries_partial_update
       parameters:
       - in: path
         name: id
@@ -2210,7 +2210,7 @@ paths:
                 $ref: '#/components/schemas/Country'
           description: ''
     delete:
-      operationId: api_location_countries_destroy
+      operationId: api_location_v1_countries_destroy
       parameters:
       - in: path
         name: id
@@ -2227,9 +2227,9 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/location/states/:
+  /api/location/v1/states/:
     get:
-      operationId: api_location_states_list
+      operationId: api_location_v1_states_list
       parameters:
       - name: page
         required: false
@@ -2257,7 +2257,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedStateList'
           description: ''
     post:
-      operationId: api_location_states_create
+      operationId: api_location_v1_states_create
       tags:
       - api
       requestBody:
@@ -2277,9 +2277,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/State'
           description: ''
-  /api/location/states/{id}/:
+  /api/location/v1/states/{id}/:
     get:
-      operationId: api_location_states_retrieve
+      operationId: api_location_v1_states_retrieve
       parameters:
       - in: path
         name: id
@@ -2301,7 +2301,7 @@ paths:
                 $ref: '#/components/schemas/State'
           description: ''
     put:
-      operationId: api_location_states_update
+      operationId: api_location_v1_states_update
       parameters:
       - in: path
         name: id
@@ -2329,7 +2329,7 @@ paths:
                 $ref: '#/components/schemas/State'
           description: ''
     patch:
-      operationId: api_location_states_partial_update
+      operationId: api_location_v1_states_partial_update
       parameters:
       - in: path
         name: id
@@ -2356,13 +2356,451 @@ paths:
                 $ref: '#/components/schemas/State'
           description: ''
     delete:
-      operationId: api_location_states_destroy
+      operationId: api_location_v1_states_destroy
       parameters:
       - in: path
         name: id
         schema:
           type: integer
         description: A unique integer value identifying this state.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/location/v1/venue-tag-assignments/:
+    get:
+      operationId: api_location_v1_venue_tag_assignments_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVenueTagAssignmentList'
+          description: ''
+    post:
+      operationId: api_location_v1_venue_tag_assignments_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VenueTagAssignment'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueTagAssignment'
+          description: ''
+  /api/location/v1/venue-tag-assignments/{id}/:
+    get:
+      operationId: api_location_v1_venue_tag_assignments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue tag assignment.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueTagAssignment'
+          description: ''
+    put:
+      operationId: api_location_v1_venue_tag_assignments_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue tag assignment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VenueTagAssignment'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueTagAssignment'
+          description: ''
+    patch:
+      operationId: api_location_v1_venue_tag_assignments_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue tag assignment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVenueTagAssignment'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueTagAssignment'
+          description: ''
+    delete:
+      operationId: api_location_v1_venue_tag_assignments_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue tag assignment.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/location/v1/venue-tags/:
+    get:
+      operationId: api_location_v1_venue_tags_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVenueTagList'
+          description: ''
+    post:
+      operationId: api_location_v1_venue_tags_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VenueTag'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueTag'
+          description: ''
+  /api/location/v1/venue-tags/{id}/:
+    get:
+      operationId: api_location_v1_venue_tags_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue tag.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueTag'
+          description: ''
+    put:
+      operationId: api_location_v1_venue_tags_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue tag.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VenueTag'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueTag'
+          description: ''
+    patch:
+      operationId: api_location_v1_venue_tags_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue tag.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVenueTag'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueTag'
+          description: ''
+    delete:
+      operationId: api_location_v1_venue_tags_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue tag.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/location/v1/venues/:
+    get:
+      operationId: api_location_v1_venues_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVenueList'
+          description: ''
+    post:
+      operationId: api_location_v1_venues_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Venue'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+          description: ''
+  /api/location/v1/venues/{id}/:
+    get:
+      operationId: api_location_v1_venues_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+          description: ''
+    put:
+      operationId: api_location_v1_venues_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Venue'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+          description: ''
+    patch:
+      operationId: api_location_v1_venues_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVenue'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+          description: ''
+    delete:
+      operationId: api_location_v1_venues_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue.
         required: true
       tags:
       - api
@@ -3012,10 +3450,12 @@ components:
           maxLength: 20
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -3029,6 +3469,7 @@ components:
       required:
       - country
       - created_at
+      - created_by
       - id
       - line_1
       - tenant_id
@@ -3202,16 +3643,19 @@ components:
           maxLength: 3
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
           - 'null'
       required:
       - created_at
+      - created_by
       - id
       - iso_code
       - name
@@ -3307,10 +3751,12 @@ components:
           type: string
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -3344,6 +3790,7 @@ components:
           readOnly: true
       required:
       - created_at
+      - created_by
       - first_name
       - id
       - qualifications
@@ -3377,10 +3824,12 @@ components:
           format: date
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -3391,6 +3840,7 @@ components:
           type: integer
       required:
       - created_at
+      - created_by
       - employee
       - id
       - qualification
@@ -3422,16 +3872,19 @@ components:
           type: string
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
           - 'null'
       required:
       - created_at
+      - created_by
       - id
       - name
       - tenant_id
@@ -3850,6 +4303,75 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserRoleAssignment'
+    PaginatedVenueList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Venue'
+    PaginatedVenueTagAssignmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/VenueTagAssignment'
+    PaginatedVenueTagList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/VenueTag'
     PaginatedWorkLocationList:
       type: object
       required:
@@ -3911,10 +4433,12 @@ components:
           maxLength: 20
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -4068,10 +4592,12 @@ components:
           maxLength: 3
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -4166,10 +4692,12 @@ components:
           type: string
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -4228,10 +4756,12 @@ components:
           format: date
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -4266,10 +4796,12 @@ components:
           type: string
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -4359,7 +4891,6 @@ components:
           type:
           - integer
           - 'null'
-          readOnly: true
         director:
           type:
           - integer
@@ -4395,7 +4926,6 @@ components:
           type:
           - integer
           - 'null'
-          readOnly: true
         production:
           type: integer
         member:
@@ -4433,7 +4963,6 @@ components:
           type:
           - integer
           - 'null'
-          readOnly: true
         production:
           type: integer
         member:
@@ -4464,10 +4993,12 @@ components:
           type: string
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -4580,10 +5111,12 @@ components:
           maxLength: 10
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -4704,6 +5237,141 @@ components:
           type: integer
         role:
           type: integer
+    PatchedVenue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        address:
+          $ref: '#/components/schemas/Address'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: Name of the venue
+          maxLength: 255
+        notes:
+          type: string
+          description: Additional notes about the venue
+        contact_name:
+          type: string
+          description: Contact person for the venue
+          maxLength: 100
+        contact_email:
+          type: string
+          format: email
+          description: Email address for the venue contact
+          maxLength: 254
+        contact_phone:
+          type: string
+          description: Contact person for the venue contact
+          maxLength: 128
+        is_active:
+          type: boolean
+          description: Is the venue currently active?
+        tenant_id:
+          type: integer
+          readOnly: true
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        tags:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+          description: Tags associated with the venue
+    PatchedVenueTag:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: Name of the tag
+          maxLength: 100
+        description:
+          type: string
+          description: Description of the tag
+        tenant_id:
+          type: integer
+          readOnly: true
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+    PatchedVenueTagAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        venue:
+          $ref: '#/components/schemas/Venue'
+        tag:
+          $ref: '#/components/schemas/VenueTag'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenant_id:
+          type: integer
+          readOnly: true
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
     PatchedWorkLocation:
       type: object
       properties:
@@ -4728,10 +5396,12 @@ components:
           maxLength: 100
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -4829,7 +5499,6 @@ components:
           type:
           - integer
           - 'null'
-          readOnly: true
         director:
           type:
           - integer
@@ -4841,7 +5510,6 @@ components:
       - name
       - tenant_id
       - updated_at
-      - updated_by
     ProductionMember:
       type: object
       properties:
@@ -4873,7 +5541,6 @@ components:
           type:
           - integer
           - 'null'
-          readOnly: true
         production:
           type: integer
         member:
@@ -4886,7 +5553,6 @@ components:
       - production
       - tenant_id
       - updated_at
-      - updated_by
     ProductionRoleAssignment:
       type: object
       properties:
@@ -4920,7 +5586,6 @@ components:
           type:
           - integer
           - 'null'
-          readOnly: true
         production:
           type: integer
         member:
@@ -4934,7 +5599,6 @@ components:
       - role
       - tenant_id
       - updated_at
-      - updated_by
     Qualification:
       type: object
       properties:
@@ -4961,16 +5625,19 @@ components:
           type: string
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
           - 'null'
       required:
       - created_at
+      - created_by
       - id
       - name
       - tenant_id
@@ -5182,10 +5849,12 @@ components:
           maxLength: 10
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -5195,6 +5864,7 @@ components:
       required:
       - country
       - created_at
+      - created_by
       - id
       - name
       - tenant_id
@@ -5348,6 +6018,165 @@ components:
       - tenant_id
       - updated_at
       - user
+    Venue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        address:
+          $ref: '#/components/schemas/Address'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: Name of the venue
+          maxLength: 255
+        notes:
+          type: string
+          description: Additional notes about the venue
+        contact_name:
+          type: string
+          description: Contact person for the venue
+          maxLength: 100
+        contact_email:
+          type: string
+          format: email
+          description: Email address for the venue contact
+          maxLength: 254
+        contact_phone:
+          type: string
+          description: Contact person for the venue contact
+          maxLength: 128
+        is_active:
+          type: boolean
+          description: Is the venue currently active?
+        tenant_id:
+          type: integer
+          readOnly: true
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        tags:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+          description: Tags associated with the venue
+      required:
+      - address
+      - created_at
+      - created_by
+      - id
+      - name
+      - tags
+      - tenant_id
+      - updated_at
+    VenueTag:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: Name of the tag
+          maxLength: 100
+        description:
+          type: string
+          description: Description of the tag
+        tenant_id:
+          type: integer
+          readOnly: true
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - id
+      - name
+      - tenant_id
+      - updated_at
+    VenueTagAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        venue:
+          $ref: '#/components/schemas/Venue'
+        tag:
+          $ref: '#/components/schemas/VenueTag'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenant_id:
+          type: integer
+          readOnly: true
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - id
+      - tag
+      - tenant_id
+      - updated_at
+      - venue
     WorkLocation:
       type: object
       properties:
@@ -5372,10 +6201,12 @@ components:
           maxLength: 100
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
@@ -5385,6 +6216,7 @@ components:
       required:
       - address
       - created_at
+      - created_by
       - id
       - name
       - tenant_id
