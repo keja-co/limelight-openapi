@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.30
+  version: 1.0.40
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -2957,6 +2957,444 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/production/v1/performance/:
+    get:
+      operationId: api_production_v1_performance_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPerformanceList'
+          description: ''
+    post:
+      operationId: api_production_v1_performance_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Performance'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Performance'
+          description: ''
+  /api/production/v1/performance/{id}/:
+    get:
+      operationId: api_production_v1_performance_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Performance.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Performance'
+          description: ''
+    put:
+      operationId: api_production_v1_performance_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Performance.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Performance'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Performance'
+          description: ''
+    patch:
+      operationId: api_production_v1_performance_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Performance.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPerformance'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Performance'
+          description: ''
+    delete:
+      operationId: api_production_v1_performance_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Performance.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/production/v1/prod-category/:
+    get:
+      operationId: api_production_v1_prod_category_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductionCategoryList'
+          description: ''
+    post:
+      operationId: api_production_v1_prod_category_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionCategory'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCategory'
+          description: ''
+  /api/production/v1/prod-category-assignment/:
+    get:
+      operationId: api_production_v1_prod_category_assignment_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductionCategoryAssignmentList'
+          description: ''
+    post:
+      operationId: api_production_v1_prod_category_assignment_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionCategoryAssignment'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCategoryAssignment'
+          description: ''
+  /api/production/v1/prod-category-assignment/{id}/:
+    get:
+      operationId: api_production_v1_prod_category_assignment_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Category Assignment.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCategoryAssignment'
+          description: ''
+    put:
+      operationId: api_production_v1_prod_category_assignment_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Category Assignment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionCategoryAssignment'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCategoryAssignment'
+          description: ''
+    patch:
+      operationId: api_production_v1_prod_category_assignment_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Category Assignment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProductionCategoryAssignment'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCategoryAssignment'
+          description: ''
+    delete:
+      operationId: api_production_v1_prod_category_assignment_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Category Assignment.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/production/v1/prod-category/{id}/:
+    get:
+      operationId: api_production_v1_prod_category_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this production category.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCategory'
+          description: ''
+    put:
+      operationId: api_production_v1_prod_category_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this production category.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionCategory'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCategory'
+          description: ''
+    patch:
+      operationId: api_production_v1_prod_category_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this production category.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProductionCategory'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCategory'
+          description: ''
+    delete:
+      operationId: api_production_v1_prod_category_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this production category.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/production/v1/prod-members/:
     get:
       operationId: api_production_v1_prod_members_list
@@ -3395,6 +3833,298 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/production/v1/rehearsal/:
+    get:
+      operationId: api_production_v1_rehearsal_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRehearsalList'
+          description: ''
+    post:
+      operationId: api_production_v1_rehearsal_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rehearsal'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rehearsal'
+          description: ''
+  /api/production/v1/rehearsal-participant/:
+    get:
+      operationId: api_production_v1_rehearsal_participant_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRehearsalParticipantList'
+          description: ''
+    post:
+      operationId: api_production_v1_rehearsal_participant_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RehearsalParticipant'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RehearsalParticipant'
+          description: ''
+  /api/production/v1/rehearsal-participant/{id}/:
+    get:
+      operationId: api_production_v1_rehearsal_participant_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Rehearsal Participant.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RehearsalParticipant'
+          description: ''
+    put:
+      operationId: api_production_v1_rehearsal_participant_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Rehearsal Participant.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RehearsalParticipant'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RehearsalParticipant'
+          description: ''
+    patch:
+      operationId: api_production_v1_rehearsal_participant_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Rehearsal Participant.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRehearsalParticipant'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RehearsalParticipant'
+          description: ''
+    delete:
+      operationId: api_production_v1_rehearsal_participant_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Rehearsal Participant.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/production/v1/rehearsal/{id}/:
+    get:
+      operationId: api_production_v1_rehearsal_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Rehearsal.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rehearsal'
+          description: ''
+    put:
+      operationId: api_production_v1_rehearsal_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Rehearsal.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rehearsal'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rehearsal'
+          description: ''
+    patch:
+      operationId: api_production_v1_rehearsal_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Rehearsal.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRehearsal'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rehearsal'
+          description: ''
+    delete:
+      operationId: api_production_v1_rehearsal_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Rehearsal.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/schema/:
     get:
       operationId: api_schema_retrieve
@@ -3594,9 +4324,8 @@ components:
         postal_code:
           type: string
           maxLength: 20
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -3618,7 +4347,7 @@ components:
       - created_by
       - id
       - line_1
-      - tenant_id
+      - tenant
       - updated_at
     AuditLog:
       type: object
@@ -3652,7 +4381,7 @@ components:
           maxLength: 255
         before_state: {}
         after_state: {}
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -3672,7 +4401,7 @@ components:
       - description
       - id
       - target_object
-      - tenant_id
+      - tenant
       - timestamp
       - updated_at
       - user
@@ -3698,7 +4427,7 @@ components:
         value:
           type: string
           maxLength: 255
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -3714,7 +4443,7 @@ components:
       - created_at
       - id
       - key
-      - tenant_id
+      - tenant
       - updated_at
       - value
     ContextKey:
@@ -3744,7 +4473,7 @@ components:
         app_name:
           type: string
           maxLength: 255
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -3759,7 +4488,7 @@ components:
       - created_at
       - id
       - name
-      - tenant_id
+      - tenant
       - updated_at
     Country:
       type: object
@@ -3787,9 +4516,8 @@ components:
           type: string
           description: ISO 3166-1 alpha-3 country code
           maxLength: 3
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -3805,7 +4533,7 @@ components:
       - id
       - iso_code
       - name
-      - tenant_id
+      - tenant
       - updated_at
     Employee:
       type: object
@@ -3895,9 +4623,8 @@ components:
           format: date
         notes:
           type: string
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -3940,7 +4667,7 @@ components:
       - first_name
       - id
       - qualifications
-      - tenant_id
+      - tenant
       - updated_at
       - user
     EmployeeQualification:
@@ -3968,9 +4695,8 @@ components:
         expiry_date:
           type: string
           format: date
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -3990,7 +4716,7 @@ components:
       - employee
       - id
       - qualification
-      - tenant_id
+      - tenant
       - updated_at
     EmploymentType:
       type: object
@@ -4016,9 +4742,8 @@ components:
           maxLength: 50
         description:
           type: string
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -4033,7 +4758,7 @@ components:
       - created_by
       - id
       - name
-      - tenant_id
+      - tenant
       - updated_at
     PaginatedAddressList:
       type: object
@@ -4219,6 +4944,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EmploymentType'
+    PaginatedPerformanceList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Performance'
     PaginatedPermissionList:
       type: object
       required:
@@ -4242,6 +4990,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Permission'
+    PaginatedProductionCategoryAssignmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductionCategoryAssignment'
+    PaginatedProductionCategoryList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductionCategory'
     PaginatedProductionList:
       type: object
       required:
@@ -4334,6 +5128,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Qualification'
+    PaginatedRehearsalList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rehearsal'
+    PaginatedRehearsalParticipantList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RehearsalParticipant'
     PaginatedRoleList:
       type: object
       required:
@@ -4600,9 +5440,8 @@ components:
         postal_code:
           type: string
           maxLength: 20
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -4650,7 +5489,7 @@ components:
           maxLength: 255
         before_state: {}
         after_state: {}
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -4684,7 +5523,7 @@ components:
         value:
           type: string
           maxLength: 255
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -4723,7 +5562,7 @@ components:
         app_name:
           type: string
           maxLength: 255
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -4759,9 +5598,8 @@ components:
           type: string
           description: ISO 3166-1 alpha-3 country code
           maxLength: 3
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -4859,9 +5697,8 @@ components:
           format: date
         notes:
           type: string
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -4923,9 +5760,8 @@ components:
         expiry_date:
           type: string
           format: date
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -4963,15 +5799,57 @@ components:
           maxLength: 50
         description:
           type: string
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
           readOnly: true
         updated_by:
+          type:
+          - integer
+          - 'null'
+    PatchedPerformance:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        date:
+          type: string
+          format: date-time
+        notes:
+          type: string
+        status:
+          $ref: '#/components/schemas/PerformanceStatusEnum'
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        venue:
           type:
           - integer
           - 'null'
@@ -4999,7 +5877,7 @@ components:
           maxLength: 255
         description:
           type: string
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -5047,10 +5925,9 @@ components:
           type: string
           maxLength: 255
         status:
-          $ref: '#/components/schemas/StatusEnum'
-        tenant_id:
+          $ref: '#/components/schemas/ProductionStatusEnum'
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5064,6 +5941,92 @@ components:
           type:
           - integer
           - 'null'
+    PatchedProductionCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+          description: Description of the production category.
+        slug:
+          type: string
+          description: A URL-friendly version of the category name.
+          maxLength: 255
+          pattern: ^[-a-zA-Z0-9_]+$
+        is_active:
+          type: boolean
+          description: Indicates if the category is currently active.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        parent:
+          type:
+          - integer
+          - 'null'
+          description: Parent category for hierarchical categorisation.
+    PatchedProductionCategoryAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        is_primary:
+          type: boolean
+          description: Indicates if this is the primary category for the production.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        category:
+          type: integer
     PatchedProductionMember:
       type: object
       properties:
@@ -5083,9 +6046,8 @@ components:
           - string
           - 'null'
           format: date-time
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5120,9 +6082,8 @@ components:
           format: date-time
         role:
           $ref: '#/components/schemas/RoleEnum'
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5160,9 +6121,8 @@ components:
           maxLength: 100
         description:
           type: string
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5172,6 +6132,92 @@ components:
           type:
           - integer
           - 'null'
+    PatchedRehearsal:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        start_datetime:
+          type: string
+          format: date-time
+        end_datetime:
+          type: string
+          format: date-time
+        notes:
+          type: string
+          description: Rehearsal Notes, e.g. what scene are being rehearsed, what
+            is needed, etc. Support Markdown formatting.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        venue:
+          type:
+          - integer
+          - 'null'
+    PatchedRehearsalParticipant:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        is_required:
+          type: boolean
+          description: Indicates if the participant is required for this rehearsal
+            (as some members may be added to a rehearsal but not be required to attend).
+        notes:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        rehearsal:
+          type: integer
+        member:
+          type: integer
     PatchedRole:
       type: object
       properties:
@@ -5196,7 +6242,7 @@ components:
           maxLength: 100
         description:
           type: string
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -5234,7 +6280,7 @@ components:
           - string
           - 'null'
           format: date-time
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -5278,9 +6324,8 @@ components:
           type: string
           description: Abbreviation or code for the state/region
           maxLength: 10
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5392,7 +6437,7 @@ components:
           - string
           - 'null'
           format: date-time
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -5450,9 +6495,8 @@ components:
         is_active:
           type: boolean
           description: Is the venue currently active?
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5500,9 +6544,8 @@ components:
         notes:
           type: string
           description: Additional notes about the capacity
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5541,9 +6584,8 @@ components:
         description:
           type: string
           description: Description of the tag
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5572,9 +6614,8 @@ components:
           - string
           - 'null'
           format: date-time
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5612,9 +6653,8 @@ components:
         name:
           type: string
           maxLength: 100
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5626,6 +6666,69 @@ components:
           - 'null'
         address:
           type: integer
+    Performance:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        date:
+          type: string
+          format: date-time
+        notes:
+          type: string
+        status:
+          $ref: '#/components/schemas/PerformanceStatusEnum'
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        venue:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - date
+      - id
+      - production
+      - tenant
+      - updated_at
+    PerformanceStatusEnum:
+      enum:
+      - scheduled
+      - cancelled
+      - postponed
+      - completed
+      type: string
+      description: |-
+        * `scheduled` - Scheduled
+        * `cancelled` - Cancelled
+        * `postponed` - Postponed
+        * `completed` - Completed
     Permission:
       type: object
       properties:
@@ -5650,7 +6753,7 @@ components:
           maxLength: 255
         description:
           type: string
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -5664,7 +6767,7 @@ components:
       - created_at
       - id
       - name
-      - tenant_id
+      - tenant
       - updated_at
     Production:
       type: object
@@ -5704,10 +6807,9 @@ components:
           type: string
           maxLength: 255
         status:
-          $ref: '#/components/schemas/StatusEnum'
-        tenant_id:
+          $ref: '#/components/schemas/ProductionStatusEnum'
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5726,7 +6828,109 @@ components:
       - created_by
       - id
       - name
-      - tenant_id
+      - tenant
+      - updated_at
+    ProductionCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+          description: Description of the production category.
+        slug:
+          type: string
+          description: A URL-friendly version of the category name.
+          maxLength: 255
+          pattern: ^[-a-zA-Z0-9_]+$
+        is_active:
+          type: boolean
+          description: Indicates if the category is currently active.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        parent:
+          type:
+          - integer
+          - 'null'
+          description: Parent category for hierarchical categorisation.
+      required:
+      - created_at
+      - created_by
+      - id
+      - name
+      - slug
+      - tenant
+      - updated_at
+    ProductionCategoryAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        is_primary:
+          type: boolean
+          description: Indicates if this is the primary category for the production.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        category:
+          type: integer
+      required:
+      - category
+      - created_at
+      - created_by
+      - id
+      - production
+      - tenant
       - updated_at
     ProductionMember:
       type: object
@@ -5747,9 +6951,8 @@ components:
           - string
           - 'null'
           format: date-time
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5769,7 +6972,7 @@ components:
       - id
       - member
       - production
-      - tenant_id
+      - tenant
       - updated_at
     ProductionRoleAssignment:
       type: object
@@ -5792,9 +6995,8 @@ components:
           format: date-time
         role:
           $ref: '#/components/schemas/RoleEnum'
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5815,8 +7017,28 @@ components:
       - member
       - production
       - role
-      - tenant_id
+      - tenant
       - updated_at
+    ProductionStatusEnum:
+      enum:
+      - planning
+      - auditions
+      - rehearsals
+      - tech
+      - performances
+      - completed
+      - cancelled
+      - archived
+      type: string
+      description: |-
+        * `planning` - Planning
+        * `auditions` - Auditions Open
+        * `rehearsals` - Rehearsals
+        * `tech` - Tech Week
+        * `performances` - Performance Run
+        * `completed` - Completed
+        * `cancelled` - Cancelled
+        * `archived` - Archived
     Qualification:
       type: object
       properties:
@@ -5841,9 +7063,8 @@ components:
           maxLength: 100
         description:
           type: string
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -5858,7 +7079,110 @@ components:
       - created_by
       - id
       - name
-      - tenant_id
+      - tenant
+      - updated_at
+    Rehearsal:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        start_datetime:
+          type: string
+          format: date-time
+        end_datetime:
+          type: string
+          format: date-time
+        notes:
+          type: string
+          description: Rehearsal Notes, e.g. what scene are being rehearsed, what
+            is needed, etc. Support Markdown formatting.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        venue:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - end_datetime
+      - id
+      - production
+      - start_datetime
+      - tenant
+      - updated_at
+    RehearsalParticipant:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        is_required:
+          type: boolean
+          description: Indicates if the participant is required for this rehearsal
+            (as some members may be added to a rehearsal but not be required to attend).
+        notes:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        rehearsal:
+          type: integer
+        member:
+          type: integer
+      required:
+      - created_at
+      - created_by
+      - id
+      - member
+      - rehearsal
+      - tenant
       - updated_at
     Role:
       type: object
@@ -5884,7 +7208,7 @@ components:
           maxLength: 100
         description:
           type: string
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -5908,7 +7232,7 @@ components:
       - id
       - name
       - permissions
-      - tenant_id
+      - tenant
       - updated_at
     RoleEnum:
       enum:
@@ -5991,7 +7315,7 @@ components:
           - string
           - 'null'
           format: date-time
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -6015,7 +7339,7 @@ components:
       - id
       - permission
       - role
-      - tenant_id
+      - tenant
       - updated_at
     ServerMeta:
       type: object
@@ -6065,9 +7389,8 @@ components:
           type: string
           description: Abbreviation or code for the state/region
           maxLength: 10
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -6085,28 +7408,8 @@ components:
       - created_by
       - id
       - name
-      - tenant_id
+      - tenant
       - updated_at
-    StatusEnum:
-      enum:
-      - planning
-      - auditions
-      - rehearsals
-      - tech
-      - performances
-      - completed
-      - cancelled
-      - archived
-      type: string
-      description: |-
-        * `planning` - Planning
-        * `auditions` - Auditions Open
-        * `rehearsals` - Rehearsals
-        * `tech` - Tech Week
-        * `performances` - Performance Run
-        * `completed` - Completed
-        * `cancelled` - Cancelled
-        * `archived` - Archived
     User:
       type: object
       properties:
@@ -6215,7 +7518,7 @@ components:
           - string
           - 'null'
           format: date-time
-        tenant_id:
+        tenant:
           type: integer
         created_by:
           type:
@@ -6233,7 +7536,7 @@ components:
       - created_at
       - id
       - role
-      - tenant_id
+      - tenant
       - updated_at
       - user
     Venue:
@@ -6280,9 +7583,8 @@ components:
         is_active:
           type: boolean
           description: Is the venue currently active?
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -6305,7 +7607,7 @@ components:
       - id
       - name
       - tags
-      - tenant_id
+      - tenant
       - updated_at
     VenueCapacity:
       type: object
@@ -6339,9 +7641,8 @@ components:
         notes:
           type: string
           description: Additional notes about the capacity
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -6360,7 +7661,7 @@ components:
       - created_by
       - id
       - seating_mode
-      - tenant_id
+      - tenant
       - updated_at
       - venue
     VenueTag:
@@ -6389,9 +7690,8 @@ components:
         description:
           type: string
           description: Description of the tag
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -6406,7 +7706,7 @@ components:
       - created_by
       - id
       - name
-      - tenant_id
+      - tenant
       - updated_at
     VenueTagAssignment:
       type: object
@@ -6427,9 +7727,8 @@ components:
           - string
           - 'null'
           format: date-time
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -6450,7 +7749,7 @@ components:
       - created_by
       - id
       - tag
-      - tenant_id
+      - tenant
       - updated_at
       - venue
     WorkLocation:
@@ -6475,9 +7774,8 @@ components:
         name:
           type: string
           maxLength: 100
-        tenant_id:
+        tenant:
           type: integer
-          readOnly: true
         created_by:
           type:
           - integer
@@ -6495,7 +7793,7 @@ components:
       - created_by
       - id
       - name
-      - tenant_id
+      - tenant
       - updated_at
   securitySchemes:
     CadenceOIDC:
