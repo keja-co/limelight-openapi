@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.16
+  version: 1.0.20
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -2373,9 +2373,301 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/productions/:
+  /api/production/v1/prod-members/:
     get:
-      operationId: api_production_productions_list
+      operationId: api_production_v1_prod_members_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductionMemberList'
+          description: ''
+    post:
+      operationId: api_production_v1_prod_members_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionMember'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionMember'
+          description: ''
+  /api/production/v1/prod-members/{id}/:
+    get:
+      operationId: api_production_v1_prod_members_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this production member.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionMember'
+          description: ''
+    put:
+      operationId: api_production_v1_prod_members_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this production member.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionMember'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionMember'
+          description: ''
+    patch:
+      operationId: api_production_v1_prod_members_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this production member.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProductionMember'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionMember'
+          description: ''
+    delete:
+      operationId: api_production_v1_prod_members_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this production member.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/production/v1/prod-roles/:
+    get:
+      operationId: api_production_v1_prod_roles_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductionRoleAssignmentList'
+          description: ''
+    post:
+      operationId: api_production_v1_prod_roles_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionRoleAssignment'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionRoleAssignment'
+          description: ''
+  /api/production/v1/prod-roles/{id}/:
+    get:
+      operationId: api_production_v1_prod_roles_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionRoleAssignment'
+          description: ''
+    put:
+      operationId: api_production_v1_prod_roles_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionRoleAssignment'
+        required: true
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionRoleAssignment'
+          description: ''
+    patch:
+      operationId: api_production_v1_prod_roles_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProductionRoleAssignment'
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionRoleAssignment'
+          description: ''
+    delete:
+      operationId: api_production_v1_prod_roles_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceOIDC: []
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/production/v1/production/:
+    get:
+      operationId: api_production_v1_production_list
       parameters:
       - name: page
         required: false
@@ -2403,7 +2695,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductionList'
           description: ''
     post:
-      operationId: api_production_productions_create
+      operationId: api_production_v1_production_create
       tags:
       - api
       requestBody:
@@ -2423,15 +2715,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/Production'
           description: ''
-  /api/production/productions/{id}/:
+  /api/production/v1/production/{id}/:
     get:
-      operationId: api_production_productions_retrieve
+      operationId: api_production_v1_production_retrieve
       parameters:
       - in: path
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this production.
+        description: A unique integer value identifying this Production.
         required: true
       tags:
       - api
@@ -2447,13 +2739,13 @@ paths:
                 $ref: '#/components/schemas/Production'
           description: ''
     put:
-      operationId: api_production_productions_update
+      operationId: api_production_v1_production_update
       parameters:
       - in: path
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this production.
+        description: A unique integer value identifying this Production.
         required: true
       tags:
       - api
@@ -2475,13 +2767,13 @@ paths:
                 $ref: '#/components/schemas/Production'
           description: ''
     patch:
-      operationId: api_production_productions_partial_update
+      operationId: api_production_v1_production_partial_update
       parameters:
       - in: path
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this production.
+        description: A unique integer value identifying this Production.
         required: true
       tags:
       - api
@@ -2502,13 +2794,13 @@ paths:
                 $ref: '#/components/schemas/Production'
           description: ''
     delete:
-      operationId: api_production_productions_destroy
+      operationId: api_production_v1_production_destroy
       parameters:
       - in: path
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this production.
+        description: A unique integer value identifying this Production.
         required: true
       tags:
       - api
@@ -3374,6 +3666,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Production'
+    PaginatedProductionMemberList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductionMember'
+    PaginatedProductionRoleAssignmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductionRoleAssignment'
     PaginatedQualificationList:
       type: object
       required:
@@ -4011,14 +4349,95 @@ components:
           $ref: '#/components/schemas/StatusEnum'
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
           type:
           - integer
           - 'null'
+          readOnly: true
+        director:
+          type:
+          - integer
+          - 'null'
+    PatchedProductionMember:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenant_id:
+          type: integer
+          readOnly: true
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        production:
+          type: integer
+        member:
+          type: integer
+    PatchedProductionRoleAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        tenant_id:
+          type: integer
+          readOnly: true
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        production:
+          type: integer
+        member:
+          type: integer
     PatchedQualification:
       type: object
       properties:
@@ -4400,20 +4819,122 @@ components:
           $ref: '#/components/schemas/StatusEnum'
         tenant_id:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
           - 'null'
+          readOnly: true
         updated_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        director:
           type:
           - integer
           - 'null'
       required:
       - created_at
+      - created_by
       - id
       - name
       - tenant_id
       - updated_at
+      - updated_by
+    ProductionMember:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenant_id:
+          type: integer
+          readOnly: true
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        production:
+          type: integer
+        member:
+          type: integer
+      required:
+      - created_at
+      - created_by
+      - id
+      - member
+      - production
+      - tenant_id
+      - updated_at
+      - updated_by
+    ProductionRoleAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        tenant_id:
+          type: integer
+          readOnly: true
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        production:
+          type: integer
+        member:
+          type: integer
+      required:
+      - created_at
+      - created_by
+      - id
+      - member
+      - production
+      - role
+      - tenant_id
+      - updated_at
+      - updated_by
     Qualification:
       type: object
       properties:
@@ -4504,6 +5025,68 @@ components:
       - permissions
       - tenant_id
       - updated_at
+    RoleEnum:
+      enum:
+      - actor
+      - cast
+      - crew
+      - choreographer
+      - assistant_choreographer
+      - costume_designer
+      - assistant_costume_designer
+      - designer
+      - director
+      - assistant_director
+      - lighting_designer
+      - assistant_lighting_designer
+      - lighting_operator
+      - assistant_lighting_operator
+      - producer
+      - assistant_producer
+      - prod_manager
+      - musician
+      - set_designer
+      - assistant_set_designer
+      - sound_designer
+      - assistant_sound_designer
+      - sound_operator
+      - assistant_sound_operator
+      - stage_manager
+      - assistant_stage_manager
+      - deputy_stage_manager
+      - technician
+      - volunteer
+      type: string
+      description: |-
+        * `actor` - Actor
+        * `cast` - Cast Member
+        * `crew` - Crew Member
+        * `choreographer` - Choreographer
+        * `assistant_choreographer` - Assistant Choreographer
+        * `costume_designer` - Costume Designer
+        * `assistant_costume_designer` - Assistant Costume Designer
+        * `designer` - Designer
+        * `director` - Director
+        * `assistant_director` - Assistant Director
+        * `lighting_designer` - Lighting Designer
+        * `assistant_lighting_designer` - Assistant Lighting Designer
+        * `lighting_operator` - Lighting Operator
+        * `assistant_lighting_operator` - Assistant Lighting Operator
+        * `producer` - Producer
+        * `assistant_producer` - Assistant Producer
+        * `prod_manager` - Production Manager
+        * `musician` - Musician
+        * `set_designer` - Set Designer
+        * `assistant_set_designer` - Assistant Set Designer
+        * `sound_designer` - Sound Designer
+        * `assistant_sound_designer` - Assistant Sound Designer
+        * `sound_operator` - Sound Operator
+        * `assistant_sound_operator` - Assistant Sound Operator
+        * `stage_manager` - Stage Manager
+        * `assistant_stage_manager` - Assistant Stage Manager
+        * `deputy_stage_manager` - Deputy Stage Manager
+        * `technician` - Technician
+        * `volunteer` - Volunteer
     RolePermission:
       type: object
       properties:
@@ -4618,16 +5201,24 @@ components:
       - updated_at
     StatusEnum:
       enum:
-      - planned
-      - in_progress
+      - planning
+      - auditions
+      - rehearsals
+      - tech
+      - performances
       - completed
-      - Archived
+      - cancelled
+      - archived
       type: string
       description: |-
-        * `planned` - Planned
-        * `in_progress` - In Progress
+        * `planning` - Planning
+        * `auditions` - Auditions Open
+        * `rehearsals` - Rehearsals
+        * `tech` - Tech Week
+        * `performances` - Performance Run
         * `completed` - Completed
-        * `Archived` - Archived
+        * `cancelled` - Cancelled
+        * `archived` - Archived
     User:
       type: object
       properties:
