@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.12
+  version: 1.0.16
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -2688,6 +2688,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         line_1:
           type: string
           description: Street address or PO Box
@@ -2705,6 +2718,16 @@ components:
         postal_code:
           type: string
           maxLength: 20
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         state:
           type:
           - integer
@@ -2713,8 +2736,11 @@ components:
           type: integer
       required:
       - country
+      - created_at
       - id
       - line_1
+      - tenant_id
+      - updated_at
     AuditLog:
       type: object
       properties:
@@ -2862,6 +2888,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 100
@@ -2869,10 +2908,23 @@ components:
           type: string
           description: ISO 3166-1 alpha-3 country code
           maxLength: 3
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
       required:
+      - created_at
       - id
       - iso_code
       - name
+      - tenant_id
+      - updated_at
     Employee:
       type: object
       properties:
@@ -3489,6 +3541,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         line_1:
           type: string
           description: Street address or PO Box
@@ -3506,6 +3571,16 @@ components:
         postal_code:
           type: string
           maxLength: 20
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         state:
           type:
           - integer
@@ -3633,6 +3708,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 100
@@ -3640,6 +3728,16 @@ components:
           type: string
           description: ISO 3166-1 alpha-3 country code
           maxLength: 3
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
     PatchedEmployee:
       type: object
       properties:
@@ -3878,6 +3976,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 255
@@ -3898,6 +4009,16 @@ components:
           maxLength: 255
         status:
           $ref: '#/components/schemas/StatusEnum'
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
     PatchedQualification:
       type: object
       properties:
@@ -4018,6 +4139,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 100
@@ -4025,6 +4159,16 @@ components:
           type: string
           description: Abbreviation or code for the state/region
           maxLength: 10
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         country:
           type: integer
     PatchedUser:
@@ -4221,6 +4365,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 255
@@ -4241,9 +4398,22 @@ components:
           maxLength: 255
         status:
           $ref: '#/components/schemas/StatusEnum'
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
       required:
+      - created_at
       - id
       - name
+      - tenant_id
+      - updated_at
     Qualification:
       type: object
       properties:
@@ -4407,6 +4577,19 @@ components:
         id:
           type: integer
           readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
           maxLength: 100
@@ -4414,12 +4597,25 @@ components:
           type: string
           description: Abbreviation or code for the state/region
           maxLength: 10
+        tenant_id:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+        updated_by:
+          type:
+          - integer
+          - 'null'
         country:
           type: integer
       required:
       - country
+      - created_at
       - id
       - name
+      - tenant_id
+      - updated_at
     StatusEnum:
       enum:
       - planned
