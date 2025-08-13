@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.46
+  version: 1.0.49
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -1842,6 +1842,614 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this user role assignment.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/forms/v1/form/:
+    get:
+      operationId: api_forms_v1_form_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFormList'
+          description: ''
+    post:
+      operationId: api_forms_v1_form_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Form'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+          description: ''
+  /api/forms/v1/form-field/:
+    get:
+      operationId: api_forms_v1_form_field_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFormFieldList'
+          description: ''
+    post:
+      operationId: api_forms_v1_form_field_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormField'
+            examples:
+              FormFieldExampleForALongTextField:
+                value:
+                  id: 1
+                  form: 1
+                  order: 1
+                  type: short_text
+                  title: Sample Field
+                  description: This is a sample field description.
+                  placeholder: Enter text here
+                  is_required: true
+                  configuration:
+                    max_length: 500
+                    min_length: 10
+                    lines: 3
+                summary: Form Field Example for a Long Text Field
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormField'
+          description: ''
+  /api/forms/v1/form-field/{id}/:
+    get:
+      operationId: api_forms_v1_form_field_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form Field.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormField'
+          description: ''
+    put:
+      operationId: api_forms_v1_form_field_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form Field.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormField'
+            examples:
+              FormFieldExampleForALongTextField:
+                value:
+                  id: 1
+                  form: 1
+                  order: 1
+                  type: short_text
+                  title: Sample Field
+                  description: This is a sample field description.
+                  placeholder: Enter text here
+                  is_required: true
+                  configuration:
+                    max_length: 500
+                    min_length: 10
+                    lines: 3
+                summary: Form Field Example for a Long Text Field
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormField'
+          description: ''
+    patch:
+      operationId: api_forms_v1_form_field_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form Field.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFormField'
+            examples:
+              FormFieldExampleForALongTextField:
+                value:
+                  id: 1
+                  form: 1
+                  order: 1
+                  type: short_text
+                  title: Sample Field
+                  description: This is a sample field description.
+                  placeholder: Enter text here
+                  is_required: true
+                  configuration:
+                    max_length: 500
+                    min_length: 10
+                    lines: 3
+                summary: Form Field Example for a Long Text Field
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormField'
+          description: ''
+    delete:
+      operationId: api_forms_v1_form_field_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form Field.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/forms/v1/form/{id}/:
+    get:
+      operationId: api_forms_v1_form_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+          description: ''
+    put:
+      operationId: api_forms_v1_form_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Form'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+          description: ''
+    patch:
+      operationId: api_forms_v1_form_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedForm'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+          description: ''
+    delete:
+      operationId: api_forms_v1_form_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/forms/v1/submission/:
+    get:
+      operationId: api_forms_v1_submission_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSubmissionList'
+          description: ''
+    post:
+      operationId: api_forms_v1_submission_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submission'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+          description: ''
+  /api/forms/v1/submission-field-value/:
+    get:
+      operationId: api_forms_v1_submission_field_value_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSubmissionFieldValueList'
+          description: ''
+    post:
+      operationId: api_forms_v1_submission_field_value_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionFieldValue'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionFieldValue'
+          description: ''
+  /api/forms/v1/submission-field-value/{id}/:
+    get:
+      operationId: api_forms_v1_submission_field_value_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Submission Field Value.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionFieldValue'
+          description: ''
+    put:
+      operationId: api_forms_v1_submission_field_value_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Submission Field Value.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionFieldValue'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionFieldValue'
+          description: ''
+    patch:
+      operationId: api_forms_v1_submission_field_value_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Submission Field Value.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSubmissionFieldValue'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionFieldValue'
+          description: ''
+    delete:
+      operationId: api_forms_v1_submission_field_value_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Submission Field Value.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/forms/v1/submission/{id}/:
+    get:
+      operationId: api_forms_v1_submission_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form Submission.
+        required: true
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+          description: ''
+    put:
+      operationId: api_forms_v1_submission_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form Submission.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submission'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+          description: ''
+    patch:
+      operationId: api_forms_v1_submission_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form Submission.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSubmission'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+          description: ''
+    delete:
+      operationId: api_forms_v1_submission_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form Submission.
         required: true
       tags:
       - api
@@ -5055,7 +5663,7 @@ components:
           maxLength: 255
         type:
           allOf:
-          - $ref: '#/components/schemas/TypeEnum'
+          - $ref: '#/components/schemas/AssetTypeEnum'
           description: |-
             Type of the asset, either company or personal
 
@@ -5113,6 +5721,14 @@ components:
       - name
       - tenant
       - updated_at
+    AssetTypeEnum:
+      enum:
+      - company
+      - personal
+      type: string
+      description: |-
+        * `company` - Company Property
+        * `personal` - Personal Property
     Assignment:
       type: object
       properties:
@@ -5713,6 +6329,184 @@ components:
       - signup
       - tenant
       - updated_at
+    Form:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        open_date_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        close_date_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        max_submissions:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        max_individual_submissions:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        success_message:
+          type: string
+        is_template:
+          type: boolean
+        is_active:
+          type: boolean
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type:
+          - integer
+          - 'null'
+          description: If this form is associated with a production, select it here.
+      required:
+      - created_at
+      - created_by
+      - id
+      - tenant
+      - title
+      - updated_at
+    FormField:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        type:
+          $ref: '#/components/schemas/FormFieldTypeEnum'
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        placeholder:
+          type: string
+          maxLength: 200
+        is_required:
+          type: boolean
+        configuration:
+          description: JSON formatted config data for the chosen field type
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        form:
+          type: integer
+      required:
+      - created_at
+      - created_by
+      - form
+      - id
+      - order
+      - tenant
+      - title
+      - type
+      - updated_at
+    FormFieldTypeEnum:
+      enum:
+      - short_text
+      - long_text
+      - rich_text
+      - multi_choice
+      - number
+      - info
+      - file
+      - slider
+      - date
+      - time
+      - datetime
+      - email
+      - phone
+      - url
+      - checkbox
+      - section_header
+      - rating
+      - signature
+      type: string
+      description: |-
+        * `short_text` - Single Line Text
+        * `long_text` - Multiple Line Text
+        * `rich_text` - Rich Text Editor
+        * `multi_choice` - Multiple Choice
+        * `number` - Number
+        * `info` - Information Display
+        * `file` - File Upload
+        * `slider` - Slider
+        * `date` - Date Picker
+        * `time` - Time Picker
+        * `datetime` - Date and Time Picker
+        * `email` - Email Address
+        * `phone` - Phone Number
+        * `url` - URL
+        * `checkbox` - Single Checkbox
+        * `section_header` - Section Header
+        * `rating` - Star Rating
+        * `signature` - Digital Signature
     PaginatedAddressList:
       type: object
       required:
@@ -5989,6 +6783,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Feedback'
+    PaginatedFormFieldList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormField'
+    PaginatedFormList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Form'
     PaginatedPerformanceList:
       type: object
       required:
@@ -6334,6 +7174,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/State'
+    PaginatedSubmissionFieldValueList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmissionFieldValue'
+    PaginatedSubmissionList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Submission'
     PaginatedUserList:
       type: object
       required:
@@ -6573,7 +7459,7 @@ components:
           maxLength: 255
         type:
           allOf:
-          - $ref: '#/components/schemas/TypeEnum'
+          - $ref: '#/components/schemas/AssetTypeEnum'
           description: |-
             Type of the asset, either company or personal
 
@@ -7126,6 +8012,127 @@ components:
           - 'null'
           description: User who provided the feedback. Can be null if feedback is
             anonymous.
+    PatchedForm:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        open_date_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        close_date_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        max_submissions:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        max_individual_submissions:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        success_message:
+          type: string
+        is_template:
+          type: boolean
+        is_active:
+          type: boolean
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type:
+          - integer
+          - 'null'
+          description: If this form is associated with a production, select it here.
+    PatchedFormField:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        type:
+          $ref: '#/components/schemas/FormFieldTypeEnum'
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        placeholder:
+          type: string
+          maxLength: 200
+        is_required:
+          type: boolean
+        configuration:
+          description: JSON formatted config data for the chosen field type
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        form:
+          type: integer
     PatchedPerformance:
       type: object
       properties:
@@ -7783,6 +8790,105 @@ components:
           - integer
           - 'null'
         country:
+          type: integer
+    PatchedSubmission:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        submitted_date_time:
+          type: string
+          format: date-time
+          readOnly: true
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        form:
+          type: integer
+        member:
+          type:
+          - integer
+          - 'null'
+    PatchedSubmissionFieldValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        text_data:
+          type: string
+        number_data:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        date_data:
+          type:
+          - string
+          - 'null'
+          format: date
+        file_uri:
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 500
+        json_data:
+          oneOf:
+          - {}
+          - type: 'null'
+        boolean_data:
+          type: boolean
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        submission:
+          type: integer
+        form_field:
           type: integer
     PatchedUser:
       type: object
@@ -9007,14 +10113,121 @@ components:
       - name
       - tenant
       - updated_at
-    TypeEnum:
-      enum:
-      - company
-      - personal
-      type: string
-      description: |-
-        * `company` - Company Property
-        * `personal` - Personal Property
+    Submission:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        submitted_date_time:
+          type: string
+          format: date-time
+          readOnly: true
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        form:
+          type: integer
+        member:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - form
+      - id
+      - submitted_date_time
+      - tenant
+      - updated_at
+    SubmissionFieldValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        text_data:
+          type: string
+        number_data:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        date_data:
+          type:
+          - string
+          - 'null'
+          format: date
+        file_uri:
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 500
+        json_data:
+          oneOf:
+          - {}
+          - type: 'null'
+        boolean_data:
+          type: boolean
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        submission:
+          type: integer
+        form_field:
+          type: integer
+      required:
+      - created_at
+      - created_by
+      - form_field
+      - id
+      - submission
+      - tenant
+      - updated_at
     User:
       type: object
       properties:
