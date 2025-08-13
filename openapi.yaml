@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.57
+  version: 1.0.59
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -2897,21 +2897,35 @@ paths:
             schema:
               $ref: '#/components/schemas/FormField'
             examples:
-              FormFieldExampleForALongTextField:
+              ShortTextField:
                 value:
-                  id: 1
                   form: 1
                   order: 1
                   type: short_text
-                  title: Sample Field
-                  description: This is a sample field description.
-                  placeholder: Enter text here
+                  title: Full Name
+                  description: Please enter your full name
                   is_required: true
                   configuration:
-                    max_length: 500
-                    min_length: 10
-                    lines: 3
-                summary: Form Field Example for a Long Text Field
+                    min_length: 2
+                    max_length: 100
+                    pattern: ''
+                summary: Short Text Field
+              MultipleChoiceField:
+                value:
+                  form: 1
+                  order: 2
+                  type: multi_choice
+                  title: Favorite Colors
+                  description: Select your favorite color(s)
+                  is_required: false
+                  configuration:
+                    options:
+                    - Red
+                    - Blue
+                    - Green
+                    - Yellow
+                    allow_multiple: true
+                summary: Multiple Choice Field
         required: true
       security:
       - CadenceSession: []
@@ -2922,6 +2936,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FormField'
+              examples:
+                ShortTextField:
+                  value:
+                    form: 1
+                    order: 1
+                    type: short_text
+                    title: Full Name
+                    description: Please enter your full name
+                    is_required: true
+                    configuration:
+                      min_length: 2
+                      max_length: 100
+                      pattern: ''
+                  summary: Short Text Field
+                MultipleChoiceField:
+                  value:
+                    form: 1
+                    order: 2
+                    type: multi_choice
+                    title: Favorite Colors
+                    description: Select your favorite color(s)
+                    is_required: false
+                    configuration:
+                      options:
+                      - Red
+                      - Blue
+                      - Green
+                      - Yellow
+                      allow_multiple: true
+                  summary: Multiple Choice Field
           description: ''
   /api/forms/v1/form-field/{id}/:
     get:
@@ -7649,6 +7693,467 @@ components:
         id:
           type: integer
           readOnly: true
+        configuration:
+          oneOf:
+          - type: object
+            title: Single Line Text Configuration
+            properties:
+              max_length:
+                default: 255
+                description: Maximum length of the text
+                maximum: 1000
+                title: Max Length
+                type: integer
+              min_length:
+                default: 0
+                description: Minimum length of the text
+                minimum: 0
+                title: Min Length
+                type: integer
+              lines:
+                default: 1
+                description: Number of lines for the text input
+                title: Lines
+                type: integer
+              pattern:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Regex pattern for validation
+                title: Pattern
+            required: []
+          - type: object
+            title: Multiple Line Text Configuration
+            properties:
+              max_length:
+                default: 5000
+                description: Maximum length of the text
+                maximum: 10000
+                title: Max Length
+                type: integer
+              min_length:
+                default: 0
+                description: Minimum length of the text
+                minimum: 0
+                title: Min Length
+                type: integer
+              lines:
+                default: 3
+                description: Number of lines for the text input
+                title: Lines
+                type: integer
+              rich_text:
+                default: false
+                description: Whether rich text formatting is allowed
+                title: Rich Text
+                type: boolean
+            required: []
+          - type: object
+            title: Multiple Choice Configuration
+            properties:
+              options:
+                description: List of options for the multiple choice field
+                items:
+                  type: string
+                minItems: 1
+                title: Options
+                type: array
+              allow_multiple:
+                default: false
+                description: Whether multiple selections are allowed
+                title: Allow Multiple
+                type: boolean
+              allow_other:
+                default: false
+                description: Whether an 'Other' option is allowed for custom input
+                title: Allow Other
+                type: boolean
+              other_placeholder:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Placeholder text for the 'Other' input field
+                title: Other Placeholder
+            required:
+            - options
+          - type: object
+            title: Floating Point Number Configuration
+            properties:
+              min_value:
+                anyOf:
+                - minimum: 0
+                  type: number
+                - type: 'null'
+                default: null
+                description: Minimum value allowed
+                title: Min Value
+              max_value:
+                anyOf:
+                - maximum: 1000000
+                  type: number
+                - type: 'null'
+                default: null
+                description: Maximum value allowed
+                title: Max Value
+              step:
+                default: 1.0
+                description: Step increment for the number input
+                exclusiveMinimum: 0
+                title: Step
+                type: number
+            required: []
+          - type: object
+            title: Decimal Number Configuration
+            properties:
+              min_value:
+                anyOf:
+                - minimum: 0.0
+                  type: number
+                - type: string
+                - type: 'null'
+                default: null
+                description: Minimum value allowed
+                title: Min Value
+              max_value:
+                anyOf:
+                - maximum: 1000000.0
+                  type: number
+                - type: string
+                - type: 'null'
+                default: null
+                description: Maximum value allowed
+                title: Max Value
+              step:
+                default: 0.01
+                description: Step increment for the decimal number input
+                exclusiveMinimum: 0
+                title: Step
+                type: number
+              decimal_places:
+                anyOf:
+                - maximum: 6
+                  minimum: 0
+                  type: integer
+                - type: 'null'
+                default: 2
+                description: Number of decimal places allowed
+                title: Decimal Places
+            required: []
+          - type: object
+            title: Information Display Configuration
+            properties:
+              content:
+                description: Content to display in the information field
+                title: Content
+                type: string
+            required:
+            - content
+          - type: object
+            title: File Upload Configuration
+            properties:
+              allowed_file_types:
+                description: List of allowed file types (e.g., 'image', 'document',
+                  'video', 'audio', 'all')
+                items:
+                  $ref: '#/$defs/FileType'
+                title: Allowed File Types
+                type: array
+              max_file_size:
+                default: 10485760
+                description: Maximum file size in bytes (default is 10MB, cannot be
+                  more than 100MB)
+                maximum: 104857600
+                minimum: 0
+                title: Max File Size
+                type: integer
+              allow_multiple:
+                default: false
+                description: Whether multiple file uploads are allowed
+                title: Allow Multiple
+                type: boolean
+            required: []
+          - type: object
+            title: Slider Configuration
+            properties:
+              min_value:
+                anyOf:
+                - minimum: 0.0
+                  type: number
+                - type: string
+                default: 0.0
+                description: Minimum value for the slider
+                title: Min Value
+              max_value:
+                anyOf:
+                - maximum: 1000.0
+                  type: number
+                - type: string
+                default: 10.0
+                description: Maximum value for the slider
+                title: Max Value
+              step:
+                anyOf:
+                - exclusiveMinimum: 0.0
+                  type: number
+                - type: string
+                default: 1.0
+                description: Step increment for the slider
+                title: Step
+            required: []
+          - type: object
+            title: Date Picker Configuration
+            properties:
+              min_date:
+                anyOf:
+                - format: date
+                  type: string
+                - type: 'null'
+                default: null
+                description: Minimum date allowed in YYYY-MM-DD format
+                title: Min Date
+              max_date:
+                anyOf:
+                - format: date
+                  type: string
+                - type: 'null'
+                default: null
+                description: Maximum date allowed in YYYY-MM-DD format
+                title: Max Date
+            required: []
+          - type: object
+            title: Time Picker Configuration
+            properties:
+              min_time:
+                anyOf:
+                - format: time
+                  type: string
+                - type: 'null'
+                default: null
+                description: Minimum time allowed in HH:MM format
+                title: Min Time
+              max_time:
+                anyOf:
+                - format: time
+                  type: string
+                - type: 'null'
+                default: null
+                description: Maximum time allowed in HH:MM format
+                title: Max Time
+            required: []
+          - type: object
+            title: Date and Time Picker Configuration
+            properties:
+              min_datetime:
+                anyOf:
+                - format: date-time
+                  type: string
+                - type: 'null'
+                default: null
+                description: Minimum date and time allowed in ISO format
+                title: Min Datetime
+              max_datetime:
+                anyOf:
+                - format: date-time
+                  type: string
+                - type: 'null'
+                default: null
+                description: Maximum date and time allowed in ISO format
+                title: Max Datetime
+            required: []
+          - type: object
+            title: Email Address Configuration
+            properties:
+              allowed_domains:
+                anyOf:
+                - items:
+                    type: string
+                  type: array
+                - type: 'null'
+                default: null
+                description: List of allowed email domains (e.g., ['example.com',
+                  'test.com'])
+                title: Allowed Domains
+            required: []
+          - type: object
+            title: Phone Number Configuration
+            properties:
+              allowed_countries:
+                anyOf:
+                - items:
+                    type: string
+                  type: array
+                - type: 'null'
+                default: null
+                description: List of allowed country codes for phone numbers (e.g.,
+                  ['US', 'IN'])
+                title: Allowed Countries
+            required: []
+          - type: object
+            title: URL Configuration
+            properties:
+              allowed_schemes:
+                default:
+                - http
+                - https
+                description: List of allowed URL schemes (e.g., ['http', 'https'])
+                items:
+                  type: string
+                title: Allowed Schemes
+                type: array
+              allow_custom_schemes:
+                default: false
+                description: Whether to allow custom URL schemes
+                title: Allow Custom Schemes
+                type: boolean
+            required: []
+          - type: object
+            title: Single Checkbox Configuration
+            properties:
+              label:
+                description: Label for the checkbox
+                title: Label
+                type: string
+              is_checked:
+                default: false
+                description: Whether the checkbox is checked by default
+                title: Is Checked
+                type: boolean
+            required:
+            - label
+          - type: object
+            title: Section Header Configuration
+            properties:
+              title:
+                default: null
+                description: Title of the section
+                title: Title
+                type: string
+              description:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Description of the section
+                title: Description
+            required: []
+          - type: object
+            title: Star Rating Configuration
+            properties:
+              max_rating:
+                default: 5
+                description: Maximum rating value (default is 5, can be between 1
+                  and 10)
+                maximum: 10
+                minimum: 1
+                title: Max Rating
+                type: integer
+              allow_half_stars:
+                default: false
+                description: Whether to allow half-star ratings
+                title: Allow Half Stars
+                type: boolean
+            required: []
+          - type: object
+            title: Digital Signature Configuration
+            properties:
+              allow_drawing:
+                default: true
+                description: Whether users can draw their signature
+                title: Allow Drawing
+                type: boolean
+              allow_upload:
+                default: false
+                description: Whether users can upload an image of their signature
+                title: Allow Upload
+                type: boolean
+              allow_typing:
+                default: false
+                description: Whether users can type their signature
+                title: Allow Typing
+                type: boolean
+              max_file_size:
+                default: 5242880
+                description: Maximum file size for uploaded signatures in bytes (default
+                  is 5MB, cannot be more than 10MB)
+                maximum: 10485760
+                minimum: 0
+                title: Max File Size
+                type: integer
+            required: []
+          - type: object
+            title: External Signature Configuration
+            properties:
+              service:
+                $ref: '#/$defs/ExternalSignatureService'
+                description: External signature service to use (e.g., 'dropboxsign',
+                  'docusign', 'adobe', etc.)
+              service_url:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: URL of the external signature service (if applicable)
+                title: Service Url
+              form_id:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Form ID for the external signature service (if required)
+                title: Form Id
+              template_id:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Template ID for the external signature service (if required)
+                title: Template Id
+              client_id:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Client ID for the external signature service (if required)
+                title: Client Id
+              client_secret:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Client secret for the external signature service (if
+                  required)
+                title: Client Secret
+              api_key:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: API key for the external signature service (if required)
+                title: Api Key
+              allow_drawing:
+                default: true
+                description: Whether users can draw their signature using the external
+                  service
+                title: Allow Drawing
+                type: boolean
+              allow_upload:
+                default: false
+                description: Whether users can upload an image of their signature
+                  using the external service
+                title: Allow Upload
+                type: boolean
+              allow_typing:
+                default: false
+                description: Whether users can type their signature using the external
+                  service
+                title: Allow Typing
+                type: boolean
+            required:
+            - service
+          description: Field configuration object. The structure depends on the field
+            type.
         created_at:
           type: string
           format: date-time
@@ -7667,27 +8172,54 @@ components:
           maximum: 9223372036854775807
           minimum: 0
           format: int64
+          description: Order of the field in the form, used for rendering and display.
         type:
-          $ref: '#/components/schemas/FormFieldTypeEnum'
+          allOf:
+          - $ref: '#/components/schemas/FormFieldTypeEnum'
+          description: |-
+            Type of the form field, determines how it will be rendered and validated.
+
+            * `short_text` - Single Line Text
+            * `long_text` - Multiple Line Text
+            * `multi_choice` - Multiple Choice
+            * `number` - Floating Point Number
+            * `decimal_number` - Decimal Number
+            * `info` - Information Display
+            * `file` - File Upload
+            * `slider` - Slider
+            * `date` - Date Picker
+            * `time` - Time Picker
+            * `datetime` - Date and Time Picker
+            * `email` - Email Address
+            * `phone` - Phone Number
+            * `url` - URL
+            * `checkbox` - Single Checkbox
+            * `section_header` - Section Header
+            * `rating` - Star Rating
+            * `signature` - Digital Signature
+            * `external_signature` - External Signature
         title:
           type: string
+          description: Title of the form field, displayed to users.
           maxLength: 200
         description:
           type: string
+          description: Optional description for the field, displayed to users.
         placeholder:
           type: string
+          description: Placeholder text for the field, displayed when the field is
+            empty. Not applicable for all field types.
           maxLength: 200
         is_required:
           type: boolean
-        configuration:
-          description: JSON formatted config data for the chosen field type
+          description: Whether this field is required to be filled out by the user.
+            If true, the form cannot be submitted without a value for this field.
         tenant:
           type: integer
         created_by:
           type:
           - integer
           - 'null'
-          readOnly: true
         updated_by:
           type:
           - integer
@@ -7695,8 +8227,8 @@ components:
         form:
           type: integer
       required:
+      - configuration
       - created_at
-      - created_by
       - form
       - id
       - order
@@ -7708,9 +8240,9 @@ components:
       enum:
       - short_text
       - long_text
-      - rich_text
       - multi_choice
       - number
+      - decimal_number
       - info
       - file
       - slider
@@ -7724,13 +8256,14 @@ components:
       - section_header
       - rating
       - signature
+      - external_signature
       type: string
       description: |-
         * `short_text` - Single Line Text
         * `long_text` - Multiple Line Text
-        * `rich_text` - Rich Text Editor
         * `multi_choice` - Multiple Choice
-        * `number` - Number
+        * `number` - Floating Point Number
+        * `decimal_number` - Decimal Number
         * `info` - Information Display
         * `file` - File Upload
         * `slider` - Slider
@@ -7744,6 +8277,7 @@ components:
         * `section_header` - Section Header
         * `rating` - Star Rating
         * `signature` - Digital Signature
+        * `external_signature` - External Signature
     PaginatedAddressList:
       type: object
       required:
@@ -9644,6 +10178,467 @@ components:
         id:
           type: integer
           readOnly: true
+        configuration:
+          oneOf:
+          - type: object
+            title: Single Line Text Configuration
+            properties:
+              max_length:
+                default: 255
+                description: Maximum length of the text
+                maximum: 1000
+                title: Max Length
+                type: integer
+              min_length:
+                default: 0
+                description: Minimum length of the text
+                minimum: 0
+                title: Min Length
+                type: integer
+              lines:
+                default: 1
+                description: Number of lines for the text input
+                title: Lines
+                type: integer
+              pattern:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Regex pattern for validation
+                title: Pattern
+            required: []
+          - type: object
+            title: Multiple Line Text Configuration
+            properties:
+              max_length:
+                default: 5000
+                description: Maximum length of the text
+                maximum: 10000
+                title: Max Length
+                type: integer
+              min_length:
+                default: 0
+                description: Minimum length of the text
+                minimum: 0
+                title: Min Length
+                type: integer
+              lines:
+                default: 3
+                description: Number of lines for the text input
+                title: Lines
+                type: integer
+              rich_text:
+                default: false
+                description: Whether rich text formatting is allowed
+                title: Rich Text
+                type: boolean
+            required: []
+          - type: object
+            title: Multiple Choice Configuration
+            properties:
+              options:
+                description: List of options for the multiple choice field
+                items:
+                  type: string
+                minItems: 1
+                title: Options
+                type: array
+              allow_multiple:
+                default: false
+                description: Whether multiple selections are allowed
+                title: Allow Multiple
+                type: boolean
+              allow_other:
+                default: false
+                description: Whether an 'Other' option is allowed for custom input
+                title: Allow Other
+                type: boolean
+              other_placeholder:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Placeholder text for the 'Other' input field
+                title: Other Placeholder
+            required:
+            - options
+          - type: object
+            title: Floating Point Number Configuration
+            properties:
+              min_value:
+                anyOf:
+                - minimum: 0
+                  type: number
+                - type: 'null'
+                default: null
+                description: Minimum value allowed
+                title: Min Value
+              max_value:
+                anyOf:
+                - maximum: 1000000
+                  type: number
+                - type: 'null'
+                default: null
+                description: Maximum value allowed
+                title: Max Value
+              step:
+                default: 1.0
+                description: Step increment for the number input
+                exclusiveMinimum: 0
+                title: Step
+                type: number
+            required: []
+          - type: object
+            title: Decimal Number Configuration
+            properties:
+              min_value:
+                anyOf:
+                - minimum: 0.0
+                  type: number
+                - type: string
+                - type: 'null'
+                default: null
+                description: Minimum value allowed
+                title: Min Value
+              max_value:
+                anyOf:
+                - maximum: 1000000.0
+                  type: number
+                - type: string
+                - type: 'null'
+                default: null
+                description: Maximum value allowed
+                title: Max Value
+              step:
+                default: 0.01
+                description: Step increment for the decimal number input
+                exclusiveMinimum: 0
+                title: Step
+                type: number
+              decimal_places:
+                anyOf:
+                - maximum: 6
+                  minimum: 0
+                  type: integer
+                - type: 'null'
+                default: 2
+                description: Number of decimal places allowed
+                title: Decimal Places
+            required: []
+          - type: object
+            title: Information Display Configuration
+            properties:
+              content:
+                description: Content to display in the information field
+                title: Content
+                type: string
+            required:
+            - content
+          - type: object
+            title: File Upload Configuration
+            properties:
+              allowed_file_types:
+                description: List of allowed file types (e.g., 'image', 'document',
+                  'video', 'audio', 'all')
+                items:
+                  $ref: '#/$defs/FileType'
+                title: Allowed File Types
+                type: array
+              max_file_size:
+                default: 10485760
+                description: Maximum file size in bytes (default is 10MB, cannot be
+                  more than 100MB)
+                maximum: 104857600
+                minimum: 0
+                title: Max File Size
+                type: integer
+              allow_multiple:
+                default: false
+                description: Whether multiple file uploads are allowed
+                title: Allow Multiple
+                type: boolean
+            required: []
+          - type: object
+            title: Slider Configuration
+            properties:
+              min_value:
+                anyOf:
+                - minimum: 0.0
+                  type: number
+                - type: string
+                default: 0.0
+                description: Minimum value for the slider
+                title: Min Value
+              max_value:
+                anyOf:
+                - maximum: 1000.0
+                  type: number
+                - type: string
+                default: 10.0
+                description: Maximum value for the slider
+                title: Max Value
+              step:
+                anyOf:
+                - exclusiveMinimum: 0.0
+                  type: number
+                - type: string
+                default: 1.0
+                description: Step increment for the slider
+                title: Step
+            required: []
+          - type: object
+            title: Date Picker Configuration
+            properties:
+              min_date:
+                anyOf:
+                - format: date
+                  type: string
+                - type: 'null'
+                default: null
+                description: Minimum date allowed in YYYY-MM-DD format
+                title: Min Date
+              max_date:
+                anyOf:
+                - format: date
+                  type: string
+                - type: 'null'
+                default: null
+                description: Maximum date allowed in YYYY-MM-DD format
+                title: Max Date
+            required: []
+          - type: object
+            title: Time Picker Configuration
+            properties:
+              min_time:
+                anyOf:
+                - format: time
+                  type: string
+                - type: 'null'
+                default: null
+                description: Minimum time allowed in HH:MM format
+                title: Min Time
+              max_time:
+                anyOf:
+                - format: time
+                  type: string
+                - type: 'null'
+                default: null
+                description: Maximum time allowed in HH:MM format
+                title: Max Time
+            required: []
+          - type: object
+            title: Date and Time Picker Configuration
+            properties:
+              min_datetime:
+                anyOf:
+                - format: date-time
+                  type: string
+                - type: 'null'
+                default: null
+                description: Minimum date and time allowed in ISO format
+                title: Min Datetime
+              max_datetime:
+                anyOf:
+                - format: date-time
+                  type: string
+                - type: 'null'
+                default: null
+                description: Maximum date and time allowed in ISO format
+                title: Max Datetime
+            required: []
+          - type: object
+            title: Email Address Configuration
+            properties:
+              allowed_domains:
+                anyOf:
+                - items:
+                    type: string
+                  type: array
+                - type: 'null'
+                default: null
+                description: List of allowed email domains (e.g., ['example.com',
+                  'test.com'])
+                title: Allowed Domains
+            required: []
+          - type: object
+            title: Phone Number Configuration
+            properties:
+              allowed_countries:
+                anyOf:
+                - items:
+                    type: string
+                  type: array
+                - type: 'null'
+                default: null
+                description: List of allowed country codes for phone numbers (e.g.,
+                  ['US', 'IN'])
+                title: Allowed Countries
+            required: []
+          - type: object
+            title: URL Configuration
+            properties:
+              allowed_schemes:
+                default:
+                - http
+                - https
+                description: List of allowed URL schemes (e.g., ['http', 'https'])
+                items:
+                  type: string
+                title: Allowed Schemes
+                type: array
+              allow_custom_schemes:
+                default: false
+                description: Whether to allow custom URL schemes
+                title: Allow Custom Schemes
+                type: boolean
+            required: []
+          - type: object
+            title: Single Checkbox Configuration
+            properties:
+              label:
+                description: Label for the checkbox
+                title: Label
+                type: string
+              is_checked:
+                default: false
+                description: Whether the checkbox is checked by default
+                title: Is Checked
+                type: boolean
+            required:
+            - label
+          - type: object
+            title: Section Header Configuration
+            properties:
+              title:
+                default: null
+                description: Title of the section
+                title: Title
+                type: string
+              description:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Description of the section
+                title: Description
+            required: []
+          - type: object
+            title: Star Rating Configuration
+            properties:
+              max_rating:
+                default: 5
+                description: Maximum rating value (default is 5, can be between 1
+                  and 10)
+                maximum: 10
+                minimum: 1
+                title: Max Rating
+                type: integer
+              allow_half_stars:
+                default: false
+                description: Whether to allow half-star ratings
+                title: Allow Half Stars
+                type: boolean
+            required: []
+          - type: object
+            title: Digital Signature Configuration
+            properties:
+              allow_drawing:
+                default: true
+                description: Whether users can draw their signature
+                title: Allow Drawing
+                type: boolean
+              allow_upload:
+                default: false
+                description: Whether users can upload an image of their signature
+                title: Allow Upload
+                type: boolean
+              allow_typing:
+                default: false
+                description: Whether users can type their signature
+                title: Allow Typing
+                type: boolean
+              max_file_size:
+                default: 5242880
+                description: Maximum file size for uploaded signatures in bytes (default
+                  is 5MB, cannot be more than 10MB)
+                maximum: 10485760
+                minimum: 0
+                title: Max File Size
+                type: integer
+            required: []
+          - type: object
+            title: External Signature Configuration
+            properties:
+              service:
+                $ref: '#/$defs/ExternalSignatureService'
+                description: External signature service to use (e.g., 'dropboxsign',
+                  'docusign', 'adobe', etc.)
+              service_url:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: URL of the external signature service (if applicable)
+                title: Service Url
+              form_id:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Form ID for the external signature service (if required)
+                title: Form Id
+              template_id:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Template ID for the external signature service (if required)
+                title: Template Id
+              client_id:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Client ID for the external signature service (if required)
+                title: Client Id
+              client_secret:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: Client secret for the external signature service (if
+                  required)
+                title: Client Secret
+              api_key:
+                anyOf:
+                - type: string
+                - type: 'null'
+                default: null
+                description: API key for the external signature service (if required)
+                title: Api Key
+              allow_drawing:
+                default: true
+                description: Whether users can draw their signature using the external
+                  service
+                title: Allow Drawing
+                type: boolean
+              allow_upload:
+                default: false
+                description: Whether users can upload an image of their signature
+                  using the external service
+                title: Allow Upload
+                type: boolean
+              allow_typing:
+                default: false
+                description: Whether users can type their signature using the external
+                  service
+                title: Allow Typing
+                type: boolean
+            required:
+            - service
+          description: Field configuration object. The structure depends on the field
+            type.
         created_at:
           type: string
           format: date-time
@@ -9662,27 +10657,54 @@ components:
           maximum: 9223372036854775807
           minimum: 0
           format: int64
+          description: Order of the field in the form, used for rendering and display.
         type:
-          $ref: '#/components/schemas/FormFieldTypeEnum'
+          allOf:
+          - $ref: '#/components/schemas/FormFieldTypeEnum'
+          description: |-
+            Type of the form field, determines how it will be rendered and validated.
+
+            * `short_text` - Single Line Text
+            * `long_text` - Multiple Line Text
+            * `multi_choice` - Multiple Choice
+            * `number` - Floating Point Number
+            * `decimal_number` - Decimal Number
+            * `info` - Information Display
+            * `file` - File Upload
+            * `slider` - Slider
+            * `date` - Date Picker
+            * `time` - Time Picker
+            * `datetime` - Date and Time Picker
+            * `email` - Email Address
+            * `phone` - Phone Number
+            * `url` - URL
+            * `checkbox` - Single Checkbox
+            * `section_header` - Section Header
+            * `rating` - Star Rating
+            * `signature` - Digital Signature
+            * `external_signature` - External Signature
         title:
           type: string
+          description: Title of the form field, displayed to users.
           maxLength: 200
         description:
           type: string
+          description: Optional description for the field, displayed to users.
         placeholder:
           type: string
+          description: Placeholder text for the field, displayed when the field is
+            empty. Not applicable for all field types.
           maxLength: 200
         is_required:
           type: boolean
-        configuration:
-          description: JSON formatted config data for the chosen field type
+          description: Whether this field is required to be filled out by the user.
+            If true, the form cannot be submitted without a value for this field.
         tenant:
           type: integer
         created_by:
           type:
           - integer
           - 'null'
-          readOnly: true
         updated_by:
           type:
           - integer
@@ -10419,16 +11441,45 @@ components:
           - string
           - 'null'
           format: date
-        file_uri:
+        datetime_data:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        time_data:
+          type:
+          - string
+          - 'null'
+          format: time
+        choice_data:
+          type: string
+          description: Stores selected choices for multi-choice fields as a comma-separated
+            string.
+        phone_data:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+        url_data:
           type:
           - string
           - 'null'
           format: uri
           maxLength: 500
-        json_data:
-          oneOf:
-          - {}
-          - type: 'null'
+        email_data:
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        file_uri:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI of the uploaded file, if applicable. Signature fields will
+            store the signature image URI here.
+          maxLength: 500
         boolean_data:
           type: boolean
         tenant:
@@ -11792,16 +12843,45 @@ components:
           - string
           - 'null'
           format: date
-        file_uri:
+        datetime_data:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        time_data:
+          type:
+          - string
+          - 'null'
+          format: time
+        choice_data:
+          type: string
+          description: Stores selected choices for multi-choice fields as a comma-separated
+            string.
+        phone_data:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+        url_data:
           type:
           - string
           - 'null'
           format: uri
           maxLength: 500
-        json_data:
-          oneOf:
-          - {}
-          - type: 'null'
+        email_data:
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        file_uri:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URI of the uploaded file, if applicable. Signature fields will
+            store the signature image URI here.
+          maxLength: 500
         boolean_data:
           type: boolean
         tenant:
