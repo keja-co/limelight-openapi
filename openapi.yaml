@@ -13583,6 +13583,508 @@ components:
       - name
       - tenant
       - updated_at
+    FileType:
+      type: string
+      enum:
+      - image
+      - document
+      - video
+      - audio
+      - all
+      title: FileType
+      description: Available file types for upload fields
+    ExternalSignatureService:
+      type: string
+      enum:
+      - dropboxsign
+      - docusign
+      - adobe
+      - juro
+      - signnow
+      - pandadoc
+      - zoho
+      - custom
+      title: ExternalSignatureService
+      description: Available external signature services
+    ShortTextConfig:
+      properties:
+        max_length:
+          default: 255
+          description: Maximum length of the text
+          maximum: 1000
+          title: Max Length
+          type: integer
+        min_length:
+          default: 0
+          description: Minimum length of the text
+          minimum: 0
+          title: Min Length
+          type: integer
+        lines:
+          default: 1
+          description: Number of lines for the text input
+          title: Lines
+          type: integer
+        pattern:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+          description: Regex pattern for validation
+          title: Pattern
+      title: ShortTextConfig
+      type: object
+    LongTextConfig:
+      properties:
+        max_length:
+          default: 5000
+          description: Maximum length of the text
+          maximum: 10000
+          title: Max Length
+          type: integer
+        min_length:
+          default: 0
+          description: Minimum length of the text
+          minimum: 0
+          title: Min Length
+          type: integer
+        lines:
+          default: 3
+          description: Number of lines for the text input
+          title: Lines
+          type: integer
+        rich_text:
+          default: false
+          description: Whether rich text formatting is allowed
+          title: Rich Text
+          type: boolean
+      title: LongTextConfig
+      type: object
+    MultiChoiceConfig:
+      properties:
+        options:
+          description: List of options for the multiple choice field
+          items:
+            type: string
+          minItems: 1
+          title: Options
+          type: array
+        allow_multiple:
+          default: false
+          description: Whether multiple selections are allowed
+          title: Allow Multiple
+          type: boolean
+        allow_other:
+          default: false
+          description: Whether an 'Other' option is allowed for custom input
+          title: Allow Other
+          type: boolean
+        other_placeholder:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+          description: Placeholder text for the 'Other' input field
+          title: Other Placeholder
+      required:
+      - options
+      title: MultiChoiceConfig
+      type: object
+    NumberConfig:
+      properties:
+        min_value:
+          anyOf:
+          - minimum: 0
+            type: number
+          - type: 'null'
+          default: null
+          description: Minimum value allowed
+          title: Min Value
+        max_value:
+          anyOf:
+          - maximum: 1000000
+            type: number
+          - type: 'null'
+          default: null
+          description: Maximum value allowed
+          title: Max Value
+        step:
+          default: 1.0
+          description: Step increment for the number input
+          exclusiveMinimum: 0
+          title: Step
+          type: number
+      title: NumberConfig
+      type: object
+    DecimalNumberConfig:
+      properties:
+        min_value:
+          anyOf:
+          - minimum: 0.0
+            type: number
+          - type: string
+          - type: 'null'
+          default: null
+          description: Minimum value allowed
+          title: Min Value
+        max_value:
+          anyOf:
+          - maximum: 1000000.0
+            type: number
+          - type: string
+          - type: 'null'
+          default: null
+          description: Maximum value allowed
+          title: Max Value
+        step:
+          default: 0.01
+          description: Step increment for the decimal number input
+          exclusiveMinimum: 0
+          title: Step
+          type: number
+        decimal_places:
+          anyOf:
+          - maximum: 6
+            minimum: 0
+            type: integer
+          - type: 'null'
+          default: 2
+          description: Number of decimal places allowed
+          title: Decimal Places
+      title: DecimalNumberConfig
+      type: object
+    InfoConfig:
+      properties:
+        content:
+          description: Content to display in the information field
+          title: Content
+          type: string
+      required:
+      - content
+      title: InfoConfig
+      type: object
+    FileConfig:
+      $defs:
+        FileType:
+          enum:
+          - image
+          - document
+          - video
+          - audio
+          - all
+          title: FileType
+          type: string
+      properties:
+        allowed_file_types:
+          description: List of allowed file types (e.g., 'image', 'document', 'video',
+            'audio', 'all')
+          items:
+            $ref: '#/components/schemas/FileType'
+          title: Allowed File Types
+          type: array
+        max_file_size:
+          default: 10485760
+          description: Maximum file size in bytes (default is 10MB, cannot be more
+            than 100MB)
+          maximum: 104857600
+          minimum: 0
+          title: Max File Size
+          type: integer
+        allow_multiple:
+          default: false
+          description: Whether multiple file uploads are allowed
+          title: Allow Multiple
+          type: boolean
+      title: FileConfig
+      type: object
+    SliderConfig:
+      properties:
+        min_value:
+          anyOf:
+          - minimum: 0.0
+            type: number
+          - type: string
+          default: 0.0
+          description: Minimum value for the slider
+          title: Min Value
+        max_value:
+          anyOf:
+          - maximum: 1000.0
+            type: number
+          - type: string
+          default: 10.0
+          description: Maximum value for the slider
+          title: Max Value
+        step:
+          anyOf:
+          - exclusiveMinimum: 0.0
+            type: number
+          - type: string
+          default: 1.0
+          description: Step increment for the slider
+          title: Step
+      title: SliderConfig
+      type: object
+    DateConfig:
+      properties:
+        min_date:
+          anyOf:
+          - format: date
+            type: string
+          - type: 'null'
+          default: null
+          description: Minimum date allowed in YYYY-MM-DD format
+          title: Min Date
+        max_date:
+          anyOf:
+          - format: date
+            type: string
+          - type: 'null'
+          default: null
+          description: Maximum date allowed in YYYY-MM-DD format
+          title: Max Date
+      title: DateConfig
+      type: object
+    TimeConfig:
+      properties:
+        min_time:
+          anyOf:
+          - format: time
+            type: string
+          - type: 'null'
+          default: null
+          description: Minimum time allowed in HH:MM format
+          title: Min Time
+        max_time:
+          anyOf:
+          - format: time
+            type: string
+          - type: 'null'
+          default: null
+          description: Maximum time allowed in HH:MM format
+          title: Max Time
+      title: TimeConfig
+      type: object
+    DatetimeConfig:
+      properties:
+        min_datetime:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          default: null
+          description: Minimum date and time allowed in ISO format
+          title: Min Datetime
+        max_datetime:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          default: null
+          description: Maximum date and time allowed in ISO format
+          title: Max Datetime
+      title: DateTimeConfig
+      type: object
+    EmailConfig:
+      properties:
+        allowed_domains:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          default: null
+          description: List of allowed email domains (e.g., ['example.com', 'test.com'])
+          title: Allowed Domains
+      title: EmailConfig
+      type: object
+    PhoneConfig:
+      properties:
+        allowed_countries:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          default: null
+          description: List of allowed country codes for phone numbers (e.g., ['US',
+            'IN'])
+          title: Allowed Countries
+      title: PhoneConfig
+      type: object
+    UrlConfig:
+      properties:
+        allowed_schemes:
+          default:
+          - http
+          - https
+          description: List of allowed URL schemes (e.g., ['http', 'https'])
+          items:
+            type: string
+          title: Allowed Schemes
+          type: array
+        allow_custom_schemes:
+          default: false
+          description: Whether to allow custom URL schemes
+          title: Allow Custom Schemes
+          type: boolean
+      title: URLConfig
+      type: object
+    CheckboxConfig:
+      properties:
+        label:
+          description: Label for the checkbox
+          title: Label
+          type: string
+        is_checked:
+          default: false
+          description: Whether the checkbox is checked by default
+          title: Is Checked
+          type: boolean
+      required:
+      - label
+      title: CheckboxConfig
+      type: object
+    SectionHeaderConfig:
+      properties:
+        title:
+          default: null
+          description: Title of the section
+          title: Title
+          type: string
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+          description: Description of the section
+          title: Description
+      title: SectionConfig
+      type: object
+    RatingConfig:
+      properties:
+        max_rating:
+          default: 5
+          description: Maximum rating value (default is 5, can be between 1 and 10)
+          maximum: 10
+          minimum: 1
+          title: Max Rating
+          type: integer
+        allow_half_stars:
+          default: false
+          description: Whether to allow half-star ratings
+          title: Allow Half Stars
+          type: boolean
+      title: RatingConfig
+      type: object
+    SignatureConfig:
+      properties:
+        allow_drawing:
+          default: true
+          description: Whether users can draw their signature
+          title: Allow Drawing
+          type: boolean
+        allow_upload:
+          default: false
+          description: Whether users can upload an image of their signature
+          title: Allow Upload
+          type: boolean
+        allow_typing:
+          default: false
+          description: Whether users can type their signature
+          title: Allow Typing
+          type: boolean
+        max_file_size:
+          default: 5242880
+          description: Maximum file size for uploaded signatures in bytes (default
+            is 5MB, cannot be more than 10MB)
+          maximum: 10485760
+          minimum: 0
+          title: Max File Size
+          type: integer
+      title: SignatureConfig
+      type: object
+    ExternalSignatureConfig:
+      $defs:
+        ExternalSignatureService:
+          enum:
+          - dropboxsign
+          - docusign
+          - adobe
+          - juro
+          - signnow
+          - pandadoc
+          - zoho
+          - custom
+          title: ExternalSignatureService
+          type: string
+      properties:
+        service:
+          $ref: '#/components/schemas/ExternalSignatureService'
+          description: External signature service to use (e.g., 'dropboxsign', 'docusign',
+            'adobe', etc.)
+        service_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+          description: URL of the external signature service (if applicable)
+          title: Service Url
+        form_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+          description: Form ID for the external signature service (if required)
+          title: Form Id
+        template_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+          description: Template ID for the external signature service (if required)
+          title: Template Id
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+          description: Client ID for the external signature service (if required)
+          title: Client Id
+        client_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+          description: Client secret for the external signature service (if required)
+          title: Client Secret
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+          description: API key for the external signature service (if required)
+          title: Api Key
+        allow_drawing:
+          default: true
+          description: Whether users can draw their signature using the external service
+          title: Allow Drawing
+          type: boolean
+        allow_upload:
+          default: false
+          description: Whether users can upload an image of their signature using
+            the external service
+          title: Allow Upload
+          type: boolean
+        allow_typing:
+          default: false
+          description: Whether users can type their signature using the external service
+          title: Allow Typing
+          type: boolean
+      required:
+      - service
+      title: ExternalSignatureConfig
+      type: object
   securitySchemes:
     CadenceSession:
       type: apiKey
