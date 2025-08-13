@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.49
+  version: 1.0.57
   description: Limelight manages your theatre production process from auditions to
     bump out.
 paths:
@@ -21,7 +21,7 @@ paths:
           description: ''
   /api/assets/v1/assets/:
     get:
-      operationId: api_assets_v1_assets_list
+      operationId: assets_v1_assets_list
       description: API endpoint that allows assets to be viewed or edited.
       parameters:
       - name: page
@@ -37,7 +37,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - assets
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -49,10 +49,10 @@ paths:
                 $ref: '#/components/schemas/PaginatedAssetList'
           description: ''
     post:
-      operationId: api_assets_v1_assets_create
+      operationId: assets_v1_assets_create
       description: API endpoint that allows assets to be viewed or edited.
       tags:
-      - api
+      - assets
       requestBody:
         content:
           application/json:
@@ -71,7 +71,7 @@ paths:
           description: ''
   /api/assets/v1/assets/{id}/:
     get:
-      operationId: api_assets_v1_assets_retrieve
+      operationId: assets_v1_assets_retrieve
       description: API endpoint that allows assets to be viewed or edited.
       parameters:
       - in: path
@@ -81,7 +81,7 @@ paths:
         description: A unique integer value identifying this Asset.
         required: true
       tags:
-      - api
+      - assets
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -93,7 +93,7 @@ paths:
                 $ref: '#/components/schemas/Asset'
           description: ''
     put:
-      operationId: api_assets_v1_assets_update
+      operationId: assets_v1_assets_update
       description: API endpoint that allows assets to be viewed or edited.
       parameters:
       - in: path
@@ -103,7 +103,7 @@ paths:
         description: A unique integer value identifying this Asset.
         required: true
       tags:
-      - api
+      - assets
       requestBody:
         content:
           application/json:
@@ -121,7 +121,7 @@ paths:
                 $ref: '#/components/schemas/Asset'
           description: ''
     patch:
-      operationId: api_assets_v1_assets_partial_update
+      operationId: assets_v1_assets_partial_update
       description: API endpoint that allows assets to be viewed or edited.
       parameters:
       - in: path
@@ -131,7 +131,7 @@ paths:
         description: A unique integer value identifying this Asset.
         required: true
       tags:
-      - api
+      - assets
       requestBody:
         content:
           application/json:
@@ -148,7 +148,7 @@ paths:
                 $ref: '#/components/schemas/Asset'
           description: ''
     delete:
-      operationId: api_assets_v1_assets_destroy
+      operationId: assets_v1_assets_destroy
       description: API endpoint that allows assets to be viewed or edited.
       parameters:
       - in: path
@@ -158,7 +158,7 @@ paths:
         description: A unique integer value identifying this Asset.
         required: true
       tags:
-      - api
+      - assets
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -167,7 +167,7 @@ paths:
           description: No response body
   /api/assets/v1/assignments/:
     get:
-      operationId: api_assets_v1_assignments_list
+      operationId: assets_v1_assignments_list
       description: API endpoint that allows assignments to be viewed or edited.
       parameters:
       - name: page
@@ -183,7 +183,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - assets
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -195,10 +195,10 @@ paths:
                 $ref: '#/components/schemas/PaginatedAssignmentList'
           description: ''
     post:
-      operationId: api_assets_v1_assignments_create
+      operationId: assets_v1_assignments_create
       description: API endpoint that allows assignments to be viewed or edited.
       tags:
-      - api
+      - assets
       requestBody:
         content:
           application/json:
@@ -217,7 +217,7 @@ paths:
           description: ''
   /api/assets/v1/assignments/{id}/:
     get:
-      operationId: api_assets_v1_assignments_retrieve
+      operationId: assets_v1_assignments_retrieve
       description: API endpoint that allows assignments to be viewed or edited.
       parameters:
       - in: path
@@ -227,7 +227,7 @@ paths:
         description: A unique integer value identifying this Asset Assignment.
         required: true
       tags:
-      - api
+      - assets
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -239,7 +239,7 @@ paths:
                 $ref: '#/components/schemas/Assignment'
           description: ''
     put:
-      operationId: api_assets_v1_assignments_update
+      operationId: assets_v1_assignments_update
       description: API endpoint that allows assignments to be viewed or edited.
       parameters:
       - in: path
@@ -249,7 +249,7 @@ paths:
         description: A unique integer value identifying this Asset Assignment.
         required: true
       tags:
-      - api
+      - assets
       requestBody:
         content:
           application/json:
@@ -267,7 +267,7 @@ paths:
                 $ref: '#/components/schemas/Assignment'
           description: ''
     patch:
-      operationId: api_assets_v1_assignments_partial_update
+      operationId: assets_v1_assignments_partial_update
       description: API endpoint that allows assignments to be viewed or edited.
       parameters:
       - in: path
@@ -277,7 +277,7 @@ paths:
         description: A unique integer value identifying this Asset Assignment.
         required: true
       tags:
-      - api
+      - assets
       requestBody:
         content:
           application/json:
@@ -294,7 +294,7 @@ paths:
                 $ref: '#/components/schemas/Assignment'
           description: ''
     delete:
-      operationId: api_assets_v1_assignments_destroy
+      operationId: assets_v1_assignments_destroy
       description: API endpoint that allows assignments to be viewed or edited.
       parameters:
       - in: path
@@ -304,7 +304,7 @@ paths:
         description: A unique integer value identifying this Asset Assignment.
         required: true
       tags:
-      - api
+      - assets
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -313,7 +313,7 @@ paths:
           description: No response body
   /api/auditions/v1/audition/:
     get:
-      operationId: api_auditions_v1_audition_list
+      operationId: auditions_v1_audition_list
       parameters:
       - name: page
         required: false
@@ -328,7 +328,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - auditions
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -340,9 +340,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedAuditionList'
           description: ''
     post:
-      operationId: api_auditions_v1_audition_create
+      operationId: auditions_v1_audition_create
       tags:
-      - api
+      - auditions
       requestBody:
         content:
           application/json:
@@ -361,7 +361,7 @@ paths:
           description: ''
   /api/auditions/v1/audition/{id}/:
     get:
-      operationId: api_auditions_v1_audition_retrieve
+      operationId: auditions_v1_audition_retrieve
       parameters:
       - in: path
         name: id
@@ -370,7 +370,7 @@ paths:
         description: A unique integer value identifying this Audition.
         required: true
       tags:
-      - api
+      - auditions
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -382,7 +382,7 @@ paths:
                 $ref: '#/components/schemas/Audition'
           description: ''
     put:
-      operationId: api_auditions_v1_audition_update
+      operationId: auditions_v1_audition_update
       parameters:
       - in: path
         name: id
@@ -391,7 +391,7 @@ paths:
         description: A unique integer value identifying this Audition.
         required: true
       tags:
-      - api
+      - auditions
       requestBody:
         content:
           application/json:
@@ -409,7 +409,7 @@ paths:
                 $ref: '#/components/schemas/Audition'
           description: ''
     patch:
-      operationId: api_auditions_v1_audition_partial_update
+      operationId: auditions_v1_audition_partial_update
       parameters:
       - in: path
         name: id
@@ -418,7 +418,7 @@ paths:
         description: A unique integer value identifying this Audition.
         required: true
       tags:
-      - api
+      - auditions
       requestBody:
         content:
           application/json:
@@ -435,7 +435,7 @@ paths:
                 $ref: '#/components/schemas/Audition'
           description: ''
     delete:
-      operationId: api_auditions_v1_audition_destroy
+      operationId: auditions_v1_audition_destroy
       parameters:
       - in: path
         name: id
@@ -444,7 +444,7 @@ paths:
         description: A unique integer value identifying this Audition.
         required: true
       tags:
-      - api
+      - auditions
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -453,7 +453,7 @@ paths:
           description: No response body
   /api/auditions/v1/feedback/:
     get:
-      operationId: api_auditions_v1_feedback_list
+      operationId: auditions_v1_feedback_list
       parameters:
       - name: page
         required: false
@@ -468,7 +468,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - auditions
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -480,9 +480,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedFeedbackList'
           description: ''
     post:
-      operationId: api_auditions_v1_feedback_create
+      operationId: auditions_v1_feedback_create
       tags:
-      - api
+      - auditions
       requestBody:
         content:
           application/json:
@@ -501,7 +501,7 @@ paths:
           description: ''
   /api/auditions/v1/feedback/{id}/:
     get:
-      operationId: api_auditions_v1_feedback_retrieve
+      operationId: auditions_v1_feedback_retrieve
       parameters:
       - in: path
         name: id
@@ -510,7 +510,7 @@ paths:
         description: A unique integer value identifying this Feedback.
         required: true
       tags:
-      - api
+      - auditions
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -522,7 +522,7 @@ paths:
                 $ref: '#/components/schemas/Feedback'
           description: ''
     put:
-      operationId: api_auditions_v1_feedback_update
+      operationId: auditions_v1_feedback_update
       parameters:
       - in: path
         name: id
@@ -531,7 +531,7 @@ paths:
         description: A unique integer value identifying this Feedback.
         required: true
       tags:
-      - api
+      - auditions
       requestBody:
         content:
           application/json:
@@ -549,7 +549,7 @@ paths:
                 $ref: '#/components/schemas/Feedback'
           description: ''
     patch:
-      operationId: api_auditions_v1_feedback_partial_update
+      operationId: auditions_v1_feedback_partial_update
       parameters:
       - in: path
         name: id
@@ -558,7 +558,7 @@ paths:
         description: A unique integer value identifying this Feedback.
         required: true
       tags:
-      - api
+      - auditions
       requestBody:
         content:
           application/json:
@@ -575,7 +575,7 @@ paths:
                 $ref: '#/components/schemas/Feedback'
           description: ''
     delete:
-      operationId: api_auditions_v1_feedback_destroy
+      operationId: auditions_v1_feedback_destroy
       parameters:
       - in: path
         name: id
@@ -584,7 +584,7 @@ paths:
         description: A unique integer value identifying this Feedback.
         required: true
       tags:
-      - api
+      - auditions
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -593,7 +593,7 @@ paths:
           description: No response body
   /api/auditions/v1/signup/:
     get:
-      operationId: api_auditions_v1_signup_list
+      operationId: auditions_v1_signup_list
       parameters:
       - name: page
         required: false
@@ -608,7 +608,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - auditions
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -620,9 +620,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedSignupList'
           description: ''
     post:
-      operationId: api_auditions_v1_signup_create
+      operationId: auditions_v1_signup_create
       tags:
-      - api
+      - auditions
       requestBody:
         content:
           application/json:
@@ -641,7 +641,7 @@ paths:
           description: ''
   /api/auditions/v1/signup/{id}/:
     get:
-      operationId: api_auditions_v1_signup_retrieve
+      operationId: auditions_v1_signup_retrieve
       parameters:
       - in: path
         name: id
@@ -650,7 +650,7 @@ paths:
         description: A unique integer value identifying this Signup.
         required: true
       tags:
-      - api
+      - auditions
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -662,7 +662,7 @@ paths:
                 $ref: '#/components/schemas/Signup'
           description: ''
     put:
-      operationId: api_auditions_v1_signup_update
+      operationId: auditions_v1_signup_update
       parameters:
       - in: path
         name: id
@@ -671,7 +671,7 @@ paths:
         description: A unique integer value identifying this Signup.
         required: true
       tags:
-      - api
+      - auditions
       requestBody:
         content:
           application/json:
@@ -689,7 +689,7 @@ paths:
                 $ref: '#/components/schemas/Signup'
           description: ''
     patch:
-      operationId: api_auditions_v1_signup_partial_update
+      operationId: auditions_v1_signup_partial_update
       parameters:
       - in: path
         name: id
@@ -698,7 +698,7 @@ paths:
         description: A unique integer value identifying this Signup.
         required: true
       tags:
-      - api
+      - auditions
       requestBody:
         content:
           application/json:
@@ -715,7 +715,7 @@ paths:
                 $ref: '#/components/schemas/Signup'
           description: ''
     delete:
-      operationId: api_auditions_v1_signup_destroy
+      operationId: auditions_v1_signup_destroy
       parameters:
       - in: path
         name: id
@@ -724,7 +724,7 @@ paths:
         description: A unique integer value identifying this Signup.
         required: true
       tags:
-      - api
+      - auditions
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -733,7 +733,7 @@ paths:
           description: No response body
   /api/auditions/v1/slot/:
     get:
-      operationId: api_auditions_v1_slot_list
+      operationId: auditions_v1_slot_list
       parameters:
       - name: page
         required: false
@@ -748,7 +748,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - auditions
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -760,9 +760,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedSlotList'
           description: ''
     post:
-      operationId: api_auditions_v1_slot_create
+      operationId: auditions_v1_slot_create
       tags:
-      - api
+      - auditions
       requestBody:
         content:
           application/json:
@@ -781,7 +781,7 @@ paths:
           description: ''
   /api/auditions/v1/slot/{id}/:
     get:
-      operationId: api_auditions_v1_slot_retrieve
+      operationId: auditions_v1_slot_retrieve
       parameters:
       - in: path
         name: id
@@ -790,7 +790,7 @@ paths:
         description: A unique integer value identifying this Slot.
         required: true
       tags:
-      - api
+      - auditions
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -802,7 +802,7 @@ paths:
                 $ref: '#/components/schemas/Slot'
           description: ''
     put:
-      operationId: api_auditions_v1_slot_update
+      operationId: auditions_v1_slot_update
       parameters:
       - in: path
         name: id
@@ -811,7 +811,7 @@ paths:
         description: A unique integer value identifying this Slot.
         required: true
       tags:
-      - api
+      - auditions
       requestBody:
         content:
           application/json:
@@ -829,7 +829,7 @@ paths:
                 $ref: '#/components/schemas/Slot'
           description: ''
     patch:
-      operationId: api_auditions_v1_slot_partial_update
+      operationId: auditions_v1_slot_partial_update
       parameters:
       - in: path
         name: id
@@ -838,7 +838,7 @@ paths:
         description: A unique integer value identifying this Slot.
         required: true
       tags:
-      - api
+      - auditions
       requestBody:
         content:
           application/json:
@@ -855,7 +855,7 @@ paths:
                 $ref: '#/components/schemas/Slot'
           description: ''
     delete:
-      operationId: api_auditions_v1_slot_destroy
+      operationId: auditions_v1_slot_destroy
       parameters:
       - in: path
         name: id
@@ -864,7 +864,7 @@ paths:
         description: A unique integer value identifying this Slot.
         required: true
       tags:
-      - api
+      - auditions
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -873,7 +873,7 @@ paths:
           description: No response body
   /api/compliance/auditlogs/:
     get:
-      operationId: api_compliance_auditlogs_list
+      operationId: compliance_auditlogs_list
       parameters:
       - name: page
         required: false
@@ -888,7 +888,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -900,9 +900,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedAuditLogList'
           description: ''
     post:
-      operationId: api_compliance_auditlogs_create
+      operationId: compliance_auditlogs_create
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -921,7 +921,7 @@ paths:
           description: ''
   /api/compliance/auditlogs/{id}/:
     get:
-      operationId: api_compliance_auditlogs_retrieve
+      operationId: compliance_auditlogs_retrieve
       parameters:
       - in: path
         name: id
@@ -930,7 +930,7 @@ paths:
         description: A unique integer value identifying this audit log.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -942,7 +942,7 @@ paths:
                 $ref: '#/components/schemas/AuditLog'
           description: ''
     put:
-      operationId: api_compliance_auditlogs_update
+      operationId: compliance_auditlogs_update
       parameters:
       - in: path
         name: id
@@ -951,7 +951,7 @@ paths:
         description: A unique integer value identifying this audit log.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -969,7 +969,7 @@ paths:
                 $ref: '#/components/schemas/AuditLog'
           description: ''
     patch:
-      operationId: api_compliance_auditlogs_partial_update
+      operationId: compliance_auditlogs_partial_update
       parameters:
       - in: path
         name: id
@@ -978,7 +978,7 @@ paths:
         description: A unique integer value identifying this audit log.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -995,7 +995,7 @@ paths:
                 $ref: '#/components/schemas/AuditLog'
           description: ''
     delete:
-      operationId: api_compliance_auditlogs_destroy
+      operationId: compliance_auditlogs_destroy
       parameters:
       - in: path
         name: id
@@ -1004,7 +1004,7 @@ paths:
         description: A unique integer value identifying this audit log.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1013,7 +1013,7 @@ paths:
           description: No response body
   /api/compliance/contextkeys/:
     get:
-      operationId: api_compliance_contextkeys_list
+      operationId: compliance_contextkeys_list
       parameters:
       - name: page
         required: false
@@ -1028,7 +1028,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1040,9 +1040,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedContextKeyList'
           description: ''
     post:
-      operationId: api_compliance_contextkeys_create
+      operationId: compliance_contextkeys_create
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1061,7 +1061,7 @@ paths:
           description: ''
   /api/compliance/contextkeys/{id}/:
     get:
-      operationId: api_compliance_contextkeys_retrieve
+      operationId: compliance_contextkeys_retrieve
       parameters:
       - in: path
         name: id
@@ -1070,7 +1070,7 @@ paths:
         description: A unique integer value identifying this context key.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1082,7 +1082,7 @@ paths:
                 $ref: '#/components/schemas/ContextKey'
           description: ''
     put:
-      operationId: api_compliance_contextkeys_update
+      operationId: compliance_contextkeys_update
       parameters:
       - in: path
         name: id
@@ -1091,7 +1091,7 @@ paths:
         description: A unique integer value identifying this context key.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1109,7 +1109,7 @@ paths:
                 $ref: '#/components/schemas/ContextKey'
           description: ''
     patch:
-      operationId: api_compliance_contextkeys_partial_update
+      operationId: compliance_contextkeys_partial_update
       parameters:
       - in: path
         name: id
@@ -1118,7 +1118,7 @@ paths:
         description: A unique integer value identifying this context key.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1135,7 +1135,7 @@ paths:
                 $ref: '#/components/schemas/ContextKey'
           description: ''
     delete:
-      operationId: api_compliance_contextkeys_destroy
+      operationId: compliance_contextkeys_destroy
       parameters:
       - in: path
         name: id
@@ -1144,7 +1144,7 @@ paths:
         description: A unique integer value identifying this context key.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1153,7 +1153,7 @@ paths:
           description: No response body
   /api/compliance/contexts/:
     get:
-      operationId: api_compliance_contexts_list
+      operationId: compliance_contexts_list
       parameters:
       - name: page
         required: false
@@ -1168,7 +1168,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1180,9 +1180,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedContextList'
           description: ''
     post:
-      operationId: api_compliance_contexts_create
+      operationId: compliance_contexts_create
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1201,7 +1201,7 @@ paths:
           description: ''
   /api/compliance/contexts/{id}/:
     get:
-      operationId: api_compliance_contexts_retrieve
+      operationId: compliance_contexts_retrieve
       parameters:
       - in: path
         name: id
@@ -1210,7 +1210,7 @@ paths:
         description: A unique integer value identifying this context.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1222,7 +1222,7 @@ paths:
                 $ref: '#/components/schemas/Context'
           description: ''
     put:
-      operationId: api_compliance_contexts_update
+      operationId: compliance_contexts_update
       parameters:
       - in: path
         name: id
@@ -1231,7 +1231,7 @@ paths:
         description: A unique integer value identifying this context.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1249,7 +1249,7 @@ paths:
                 $ref: '#/components/schemas/Context'
           description: ''
     patch:
-      operationId: api_compliance_contexts_partial_update
+      operationId: compliance_contexts_partial_update
       parameters:
       - in: path
         name: id
@@ -1258,7 +1258,7 @@ paths:
         description: A unique integer value identifying this context.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1275,7 +1275,7 @@ paths:
                 $ref: '#/components/schemas/Context'
           description: ''
     delete:
-      operationId: api_compliance_contexts_destroy
+      operationId: compliance_contexts_destroy
       parameters:
       - in: path
         name: id
@@ -1284,7 +1284,7 @@ paths:
         description: A unique integer value identifying this context.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1293,7 +1293,7 @@ paths:
           description: No response body
   /api/compliance/permissions/:
     get:
-      operationId: api_compliance_permissions_list
+      operationId: compliance_permissions_list
       parameters:
       - name: page
         required: false
@@ -1308,7 +1308,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1320,9 +1320,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedPermissionList'
           description: ''
     post:
-      operationId: api_compliance_permissions_create
+      operationId: compliance_permissions_create
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1341,7 +1341,7 @@ paths:
           description: ''
   /api/compliance/permissions/{id}/:
     get:
-      operationId: api_compliance_permissions_retrieve
+      operationId: compliance_permissions_retrieve
       parameters:
       - in: path
         name: id
@@ -1350,7 +1350,7 @@ paths:
         description: A unique integer value identifying this permission.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1362,7 +1362,7 @@ paths:
                 $ref: '#/components/schemas/Permission'
           description: ''
     put:
-      operationId: api_compliance_permissions_update
+      operationId: compliance_permissions_update
       parameters:
       - in: path
         name: id
@@ -1371,7 +1371,7 @@ paths:
         description: A unique integer value identifying this permission.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1389,7 +1389,7 @@ paths:
                 $ref: '#/components/schemas/Permission'
           description: ''
     patch:
-      operationId: api_compliance_permissions_partial_update
+      operationId: compliance_permissions_partial_update
       parameters:
       - in: path
         name: id
@@ -1398,7 +1398,7 @@ paths:
         description: A unique integer value identifying this permission.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1415,7 +1415,7 @@ paths:
                 $ref: '#/components/schemas/Permission'
           description: ''
     delete:
-      operationId: api_compliance_permissions_destroy
+      operationId: compliance_permissions_destroy
       parameters:
       - in: path
         name: id
@@ -1424,7 +1424,7 @@ paths:
         description: A unique integer value identifying this permission.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1433,7 +1433,7 @@ paths:
           description: No response body
   /api/compliance/rolepermissions/:
     get:
-      operationId: api_compliance_rolepermissions_list
+      operationId: compliance_rolepermissions_list
       parameters:
       - name: page
         required: false
@@ -1448,7 +1448,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1460,9 +1460,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedRolePermissionList'
           description: ''
     post:
-      operationId: api_compliance_rolepermissions_create
+      operationId: compliance_rolepermissions_create
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1481,7 +1481,7 @@ paths:
           description: ''
   /api/compliance/rolepermissions/{id}/:
     get:
-      operationId: api_compliance_rolepermissions_retrieve
+      operationId: compliance_rolepermissions_retrieve
       parameters:
       - in: path
         name: id
@@ -1490,7 +1490,7 @@ paths:
         description: A unique integer value identifying this role permission.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1502,7 +1502,7 @@ paths:
                 $ref: '#/components/schemas/RolePermission'
           description: ''
     put:
-      operationId: api_compliance_rolepermissions_update
+      operationId: compliance_rolepermissions_update
       parameters:
       - in: path
         name: id
@@ -1511,7 +1511,7 @@ paths:
         description: A unique integer value identifying this role permission.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1529,7 +1529,7 @@ paths:
                 $ref: '#/components/schemas/RolePermission'
           description: ''
     patch:
-      operationId: api_compliance_rolepermissions_partial_update
+      operationId: compliance_rolepermissions_partial_update
       parameters:
       - in: path
         name: id
@@ -1538,7 +1538,7 @@ paths:
         description: A unique integer value identifying this role permission.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1555,7 +1555,7 @@ paths:
                 $ref: '#/components/schemas/RolePermission'
           description: ''
     delete:
-      operationId: api_compliance_rolepermissions_destroy
+      operationId: compliance_rolepermissions_destroy
       parameters:
       - in: path
         name: id
@@ -1564,7 +1564,7 @@ paths:
         description: A unique integer value identifying this role permission.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1573,7 +1573,7 @@ paths:
           description: No response body
   /api/compliance/roles/:
     get:
-      operationId: api_compliance_roles_list
+      operationId: compliance_roles_list
       parameters:
       - name: page
         required: false
@@ -1588,7 +1588,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1600,9 +1600,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedRoleList'
           description: ''
     post:
-      operationId: api_compliance_roles_create
+      operationId: compliance_roles_create
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1621,7 +1621,7 @@ paths:
           description: ''
   /api/compliance/roles/{id}/:
     get:
-      operationId: api_compliance_roles_retrieve
+      operationId: compliance_roles_retrieve
       parameters:
       - in: path
         name: id
@@ -1630,7 +1630,7 @@ paths:
         description: A unique integer value identifying this role.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1642,7 +1642,7 @@ paths:
                 $ref: '#/components/schemas/Role'
           description: ''
     put:
-      operationId: api_compliance_roles_update
+      operationId: compliance_roles_update
       parameters:
       - in: path
         name: id
@@ -1651,7 +1651,7 @@ paths:
         description: A unique integer value identifying this role.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1669,7 +1669,7 @@ paths:
                 $ref: '#/components/schemas/Role'
           description: ''
     patch:
-      operationId: api_compliance_roles_partial_update
+      operationId: compliance_roles_partial_update
       parameters:
       - in: path
         name: id
@@ -1678,7 +1678,7 @@ paths:
         description: A unique integer value identifying this role.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1695,7 +1695,7 @@ paths:
                 $ref: '#/components/schemas/Role'
           description: ''
     delete:
-      operationId: api_compliance_roles_destroy
+      operationId: compliance_roles_destroy
       parameters:
       - in: path
         name: id
@@ -1704,7 +1704,7 @@ paths:
         description: A unique integer value identifying this role.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1713,7 +1713,7 @@ paths:
           description: No response body
   /api/compliance/userroleassignments/:
     get:
-      operationId: api_compliance_userroleassignments_list
+      operationId: compliance_userroleassignments_list
       parameters:
       - name: page
         required: false
@@ -1728,7 +1728,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1740,9 +1740,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedUserRoleAssignmentList'
           description: ''
     post:
-      operationId: api_compliance_userroleassignments_create
+      operationId: compliance_userroleassignments_create
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1761,7 +1761,7 @@ paths:
           description: ''
   /api/compliance/userroleassignments/{id}/:
     get:
-      operationId: api_compliance_userroleassignments_retrieve
+      operationId: compliance_userroleassignments_retrieve
       parameters:
       - in: path
         name: id
@@ -1770,7 +1770,7 @@ paths:
         description: A unique integer value identifying this user role assignment.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1782,7 +1782,7 @@ paths:
                 $ref: '#/components/schemas/UserRoleAssignment'
           description: ''
     put:
-      operationId: api_compliance_userroleassignments_update
+      operationId: compliance_userroleassignments_update
       parameters:
       - in: path
         name: id
@@ -1791,7 +1791,7 @@ paths:
         description: A unique integer value identifying this user role assignment.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1809,7 +1809,7 @@ paths:
                 $ref: '#/components/schemas/UserRoleAssignment'
           description: ''
     patch:
-      operationId: api_compliance_userroleassignments_partial_update
+      operationId: compliance_userroleassignments_partial_update
       parameters:
       - in: path
         name: id
@@ -1818,7 +1818,7 @@ paths:
         description: A unique integer value identifying this user role assignment.
         required: true
       tags:
-      - api
+      - compliance
       requestBody:
         content:
           application/json:
@@ -1835,7 +1835,7 @@ paths:
                 $ref: '#/components/schemas/UserRoleAssignment'
           description: ''
     delete:
-      operationId: api_compliance_userroleassignments_destroy
+      operationId: compliance_userroleassignments_destroy
       parameters:
       - in: path
         name: id
@@ -1844,16 +1844,16 @@ paths:
         description: A unique integer value identifying this user role assignment.
         required: true
       tags:
-      - api
+      - compliance
       security:
       - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
           description: No response body
-  /api/forms/v1/form/:
+  /api/documents/v1/repos/:
     get:
-      operationId: api_forms_v1_form_list
+      operationId: documents_v1_repos_list
       parameters:
       - name: page
         required: false
@@ -1868,7 +1868,967 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDocumentRepoList'
+          description: ''
+    post:
+      operationId: documents_v1_repos_create
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentRepo'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentRepo'
+          description: ''
+  /api/documents/v1/repos/{id}/:
+    get:
+      operationId: documents_v1_repos_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Document Repository.
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentRepo'
+          description: ''
+    put:
+      operationId: documents_v1_repos_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Document Repository.
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentRepo'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentRepo'
+          description: ''
+    patch:
+      operationId: documents_v1_repos_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Document Repository.
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDocumentRepo'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentRepo'
+          description: ''
+    delete:
+      operationId: documents_v1_repos_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Document Repository.
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/documents/v1/repos/{repo_id}/documents/:
+    get:
+      operationId: documents_v1_repos_documents_list
+      parameters:
+      - in: query
+        name: folder_id
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDocumentList'
+          description: ''
+    post:
+      operationId: documents_v1_repos_documents_create
+      parameters:
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/documents/v1/repos/{repo_id}/documents/{document_id}/tags/:
+    get:
+      operationId: documents_v1_repos_documents_tags_list
+      parameters:
+      - in: path
+        name: document_id
+        schema:
+          type: string
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDocumentTagList'
+          description: ''
+    post:
+      operationId: documents_v1_repos_documents_tags_create
+      parameters:
+      - in: path
+        name: document_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentTag'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentTag'
+          description: ''
+  /api/documents/v1/repos/{repo_id}/documents/{document_id}/tags/{id}/:
+    get:
+      operationId: documents_v1_repos_documents_tags_retrieve
+      parameters:
+      - in: path
+        name: document_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Document Tag.
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentTag'
+          description: ''
+    delete:
+      operationId: documents_v1_repos_documents_tags_destroy
+      parameters:
+      - in: path
+        name: document_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Document Tag.
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/documents/v1/repos/{repo_id}/documents/{document_id}/versions/:
+    get:
+      operationId: documents_v1_repos_documents_versions_list
+      parameters:
+      - in: path
+        name: document_id
+        schema:
+          type: string
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDocumentVersionList'
+          description: ''
+    post:
+      operationId: documents_v1_repos_documents_versions_create
+      parameters:
+      - in: path
+        name: document_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentVersion'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentVersion'
+          description: ''
+  /api/documents/v1/repos/{repo_id}/documents/{document_id}/versions/{id}/:
+    get:
+      operationId: documents_v1_repos_documents_versions_retrieve
+      parameters:
+      - in: path
+        name: document_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Document Version ID
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentVersion'
+          description: ''
+    put:
+      operationId: documents_v1_repos_documents_versions_update
+      parameters:
+      - in: path
+        name: document_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Document Version ID
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentVersion'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentVersion'
+          description: ''
+    patch:
+      operationId: documents_v1_repos_documents_versions_partial_update
+      parameters:
+      - in: path
+        name: document_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Document Version ID
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDocumentVersion'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentVersion'
+          description: ''
+    delete:
+      operationId: documents_v1_repos_documents_versions_destroy
+      parameters:
+      - in: path
+        name: document_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Document Version ID
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/documents/v1/repos/{repo_id}/documents/{id}/:
+    get:
+      operationId: documents_v1_repos_documents_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Document.
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    put:
+      operationId: documents_v1_repos_documents_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Document.
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    patch:
+      operationId: documents_v1_repos_documents_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Document.
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    delete:
+      operationId: documents_v1_repos_documents_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Document.
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/documents/v1/repos/{repo_id}/folders/:
+    get:
+      operationId: documents_v1_repos_folders_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: parent_folder_id
+        schema:
+          type: string
+        description: Find folders within a specific parent folder
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFolderList'
+          description: ''
+    post:
+      operationId: documents_v1_repos_folders_create
+      parameters:
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Folder'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+          description: ''
+  /api/documents/v1/repos/{repo_id}/folders/{id}/:
+    get:
+      operationId: documents_v1_repos_folders_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Folder.
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+          description: ''
+    put:
+      operationId: documents_v1_repos_folders_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Folder.
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Folder'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+          description: ''
+    patch:
+      operationId: documents_v1_repos_folders_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Folder.
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFolder'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+          description: ''
+    delete:
+      operationId: documents_v1_repos_folders_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Folder.
+        required: true
+      - in: path
+        name: repo_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/documents/v1/tags/:
+    get:
+      operationId: documents_v1_tags_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTagList'
+          description: ''
+    post:
+      operationId: documents_v1_tags_create
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: ''
+  /api/documents/v1/tags/{id}/:
+    get:
+      operationId: documents_v1_tags_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Tag.
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: ''
+    put:
+      operationId: documents_v1_tags_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Tag.
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: ''
+    patch:
+      operationId: documents_v1_tags_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Tag.
+        required: true
+      tags:
+      - documents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTag'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: ''
+    delete:
+      operationId: documents_v1_tags_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Tag.
+        required: true
+      tags:
+      - documents
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/forms/v1/form/:
+    get:
+      operationId: forms_v1_form_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - forms
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1880,9 +2840,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedFormList'
           description: ''
     post:
-      operationId: api_forms_v1_form_create
+      operationId: forms_v1_form_create
       tags:
-      - api
+      - forms
       requestBody:
         content:
           application/json:
@@ -1901,7 +2861,7 @@ paths:
           description: ''
   /api/forms/v1/form-field/:
     get:
-      operationId: api_forms_v1_form_field_list
+      operationId: forms_v1_form_field_list
       parameters:
       - name: page
         required: false
@@ -1916,7 +2876,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - forms
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1928,9 +2888,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedFormFieldList'
           description: ''
     post:
-      operationId: api_forms_v1_form_field_create
+      operationId: forms_v1_form_field_create
       tags:
-      - api
+      - forms
       requestBody:
         content:
           application/json:
@@ -1965,7 +2925,7 @@ paths:
           description: ''
   /api/forms/v1/form-field/{id}/:
     get:
-      operationId: api_forms_v1_form_field_retrieve
+      operationId: forms_v1_form_field_retrieve
       parameters:
       - in: path
         name: id
@@ -1974,7 +2934,7 @@ paths:
         description: A unique integer value identifying this Form Field.
         required: true
       tags:
-      - api
+      - forms
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -1986,7 +2946,7 @@ paths:
                 $ref: '#/components/schemas/FormField'
           description: ''
     put:
-      operationId: api_forms_v1_form_field_update
+      operationId: forms_v1_form_field_update
       parameters:
       - in: path
         name: id
@@ -1995,7 +2955,7 @@ paths:
         description: A unique integer value identifying this Form Field.
         required: true
       tags:
-      - api
+      - forms
       requestBody:
         content:
           application/json:
@@ -2029,7 +2989,7 @@ paths:
                 $ref: '#/components/schemas/FormField'
           description: ''
     patch:
-      operationId: api_forms_v1_form_field_partial_update
+      operationId: forms_v1_form_field_partial_update
       parameters:
       - in: path
         name: id
@@ -2038,7 +2998,7 @@ paths:
         description: A unique integer value identifying this Form Field.
         required: true
       tags:
-      - api
+      - forms
       requestBody:
         content:
           application/json:
@@ -2071,7 +3031,7 @@ paths:
                 $ref: '#/components/schemas/FormField'
           description: ''
     delete:
-      operationId: api_forms_v1_form_field_destroy
+      operationId: forms_v1_form_field_destroy
       parameters:
       - in: path
         name: id
@@ -2080,7 +3040,7 @@ paths:
         description: A unique integer value identifying this Form Field.
         required: true
       tags:
-      - api
+      - forms
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2089,7 +3049,7 @@ paths:
           description: No response body
   /api/forms/v1/form/{id}/:
     get:
-      operationId: api_forms_v1_form_retrieve
+      operationId: forms_v1_form_retrieve
       parameters:
       - in: path
         name: id
@@ -2098,7 +3058,7 @@ paths:
         description: A unique integer value identifying this Form.
         required: true
       tags:
-      - api
+      - forms
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2110,7 +3070,7 @@ paths:
                 $ref: '#/components/schemas/Form'
           description: ''
     put:
-      operationId: api_forms_v1_form_update
+      operationId: forms_v1_form_update
       parameters:
       - in: path
         name: id
@@ -2119,7 +3079,7 @@ paths:
         description: A unique integer value identifying this Form.
         required: true
       tags:
-      - api
+      - forms
       requestBody:
         content:
           application/json:
@@ -2137,7 +3097,7 @@ paths:
                 $ref: '#/components/schemas/Form'
           description: ''
     patch:
-      operationId: api_forms_v1_form_partial_update
+      operationId: forms_v1_form_partial_update
       parameters:
       - in: path
         name: id
@@ -2146,7 +3106,7 @@ paths:
         description: A unique integer value identifying this Form.
         required: true
       tags:
-      - api
+      - forms
       requestBody:
         content:
           application/json:
@@ -2163,7 +3123,7 @@ paths:
                 $ref: '#/components/schemas/Form'
           description: ''
     delete:
-      operationId: api_forms_v1_form_destroy
+      operationId: forms_v1_form_destroy
       parameters:
       - in: path
         name: id
@@ -2172,7 +3132,7 @@ paths:
         description: A unique integer value identifying this Form.
         required: true
       tags:
-      - api
+      - forms
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2181,7 +3141,7 @@ paths:
           description: No response body
   /api/forms/v1/submission/:
     get:
-      operationId: api_forms_v1_submission_list
+      operationId: forms_v1_submission_list
       parameters:
       - name: page
         required: false
@@ -2196,7 +3156,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - forms
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2208,9 +3168,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedSubmissionList'
           description: ''
     post:
-      operationId: api_forms_v1_submission_create
+      operationId: forms_v1_submission_create
       tags:
-      - api
+      - forms
       requestBody:
         content:
           application/json:
@@ -2229,7 +3189,7 @@ paths:
           description: ''
   /api/forms/v1/submission-field-value/:
     get:
-      operationId: api_forms_v1_submission_field_value_list
+      operationId: forms_v1_submission_field_value_list
       parameters:
       - name: page
         required: false
@@ -2244,7 +3204,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - forms
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2256,9 +3216,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedSubmissionFieldValueList'
           description: ''
     post:
-      operationId: api_forms_v1_submission_field_value_create
+      operationId: forms_v1_submission_field_value_create
       tags:
-      - api
+      - forms
       requestBody:
         content:
           application/json:
@@ -2277,7 +3237,7 @@ paths:
           description: ''
   /api/forms/v1/submission-field-value/{id}/:
     get:
-      operationId: api_forms_v1_submission_field_value_retrieve
+      operationId: forms_v1_submission_field_value_retrieve
       parameters:
       - in: path
         name: id
@@ -2286,7 +3246,7 @@ paths:
         description: A unique integer value identifying this Submission Field Value.
         required: true
       tags:
-      - api
+      - forms
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2298,7 +3258,7 @@ paths:
                 $ref: '#/components/schemas/SubmissionFieldValue'
           description: ''
     put:
-      operationId: api_forms_v1_submission_field_value_update
+      operationId: forms_v1_submission_field_value_update
       parameters:
       - in: path
         name: id
@@ -2307,7 +3267,7 @@ paths:
         description: A unique integer value identifying this Submission Field Value.
         required: true
       tags:
-      - api
+      - forms
       requestBody:
         content:
           application/json:
@@ -2325,7 +3285,7 @@ paths:
                 $ref: '#/components/schemas/SubmissionFieldValue'
           description: ''
     patch:
-      operationId: api_forms_v1_submission_field_value_partial_update
+      operationId: forms_v1_submission_field_value_partial_update
       parameters:
       - in: path
         name: id
@@ -2334,7 +3294,7 @@ paths:
         description: A unique integer value identifying this Submission Field Value.
         required: true
       tags:
-      - api
+      - forms
       requestBody:
         content:
           application/json:
@@ -2351,7 +3311,7 @@ paths:
                 $ref: '#/components/schemas/SubmissionFieldValue'
           description: ''
     delete:
-      operationId: api_forms_v1_submission_field_value_destroy
+      operationId: forms_v1_submission_field_value_destroy
       parameters:
       - in: path
         name: id
@@ -2360,7 +3320,7 @@ paths:
         description: A unique integer value identifying this Submission Field Value.
         required: true
       tags:
-      - api
+      - forms
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2369,7 +3329,7 @@ paths:
           description: No response body
   /api/forms/v1/submission/{id}/:
     get:
-      operationId: api_forms_v1_submission_retrieve
+      operationId: forms_v1_submission_retrieve
       parameters:
       - in: path
         name: id
@@ -2378,7 +3338,7 @@ paths:
         description: A unique integer value identifying this Form Submission.
         required: true
       tags:
-      - api
+      - forms
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2390,7 +3350,7 @@ paths:
                 $ref: '#/components/schemas/Submission'
           description: ''
     put:
-      operationId: api_forms_v1_submission_update
+      operationId: forms_v1_submission_update
       parameters:
       - in: path
         name: id
@@ -2399,7 +3359,7 @@ paths:
         description: A unique integer value identifying this Form Submission.
         required: true
       tags:
-      - api
+      - forms
       requestBody:
         content:
           application/json:
@@ -2417,7 +3377,7 @@ paths:
                 $ref: '#/components/schemas/Submission'
           description: ''
     patch:
-      operationId: api_forms_v1_submission_partial_update
+      operationId: forms_v1_submission_partial_update
       parameters:
       - in: path
         name: id
@@ -2426,7 +3386,7 @@ paths:
         description: A unique integer value identifying this Form Submission.
         required: true
       tags:
-      - api
+      - forms
       requestBody:
         content:
           application/json:
@@ -2443,7 +3403,7 @@ paths:
                 $ref: '#/components/schemas/Submission'
           description: ''
     delete:
-      operationId: api_forms_v1_submission_destroy
+      operationId: forms_v1_submission_destroy
       parameters:
       - in: path
         name: id
@@ -2452,7 +3412,7 @@ paths:
         description: A unique integer value identifying this Form Submission.
         required: true
       tags:
-      - api
+      - forms
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2461,7 +3421,7 @@ paths:
           description: No response body
   /api/hr/employee-qualifications/:
     get:
-      operationId: api_hr_employee_qualifications_list
+      operationId: hr_employee_qualifications_list
       parameters:
       - name: page
         required: false
@@ -2476,7 +3436,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2488,9 +3448,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedEmployeeQualificationList'
           description: ''
     post:
-      operationId: api_hr_employee_qualifications_create
+      operationId: hr_employee_qualifications_create
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -2509,7 +3469,7 @@ paths:
           description: ''
   /api/hr/employee-qualifications/{id}/:
     get:
-      operationId: api_hr_employee_qualifications_retrieve
+      operationId: hr_employee_qualifications_retrieve
       parameters:
       - in: path
         name: id
@@ -2518,7 +3478,7 @@ paths:
         description: A unique integer value identifying this employee qualification.
         required: true
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2530,7 +3490,7 @@ paths:
                 $ref: '#/components/schemas/EmployeeQualification'
           description: ''
     put:
-      operationId: api_hr_employee_qualifications_update
+      operationId: hr_employee_qualifications_update
       parameters:
       - in: path
         name: id
@@ -2539,7 +3499,7 @@ paths:
         description: A unique integer value identifying this employee qualification.
         required: true
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -2557,7 +3517,7 @@ paths:
                 $ref: '#/components/schemas/EmployeeQualification'
           description: ''
     patch:
-      operationId: api_hr_employee_qualifications_partial_update
+      operationId: hr_employee_qualifications_partial_update
       parameters:
       - in: path
         name: id
@@ -2566,7 +3526,7 @@ paths:
         description: A unique integer value identifying this employee qualification.
         required: true
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -2583,7 +3543,7 @@ paths:
                 $ref: '#/components/schemas/EmployeeQualification'
           description: ''
     delete:
-      operationId: api_hr_employee_qualifications_destroy
+      operationId: hr_employee_qualifications_destroy
       parameters:
       - in: path
         name: id
@@ -2592,7 +3552,7 @@ paths:
         description: A unique integer value identifying this employee qualification.
         required: true
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2601,7 +3561,7 @@ paths:
           description: No response body
   /api/hr/employees/:
     get:
-      operationId: api_hr_employees_list
+      operationId: hr_employees_list
       parameters:
       - name: page
         required: false
@@ -2616,7 +3576,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2628,9 +3588,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedEmployeeList'
           description: ''
     post:
-      operationId: api_hr_employees_create
+      operationId: hr_employees_create
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -2649,7 +3609,7 @@ paths:
           description: ''
   /api/hr/employees/{id}/:
     get:
-      operationId: api_hr_employees_retrieve
+      operationId: hr_employees_retrieve
       parameters:
       - in: path
         name: id
@@ -2658,7 +3618,7 @@ paths:
         description: A unique integer value identifying this Employee.
         required: true
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2670,7 +3630,7 @@ paths:
                 $ref: '#/components/schemas/Employee'
           description: ''
     put:
-      operationId: api_hr_employees_update
+      operationId: hr_employees_update
       parameters:
       - in: path
         name: id
@@ -2679,7 +3639,7 @@ paths:
         description: A unique integer value identifying this Employee.
         required: true
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -2697,7 +3657,7 @@ paths:
                 $ref: '#/components/schemas/Employee'
           description: ''
     patch:
-      operationId: api_hr_employees_partial_update
+      operationId: hr_employees_partial_update
       parameters:
       - in: path
         name: id
@@ -2706,7 +3666,7 @@ paths:
         description: A unique integer value identifying this Employee.
         required: true
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -2723,7 +3683,7 @@ paths:
                 $ref: '#/components/schemas/Employee'
           description: ''
     delete:
-      operationId: api_hr_employees_destroy
+      operationId: hr_employees_destroy
       parameters:
       - in: path
         name: id
@@ -2732,7 +3692,7 @@ paths:
         description: A unique integer value identifying this Employee.
         required: true
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2741,7 +3701,7 @@ paths:
           description: No response body
   /api/hr/employment-types/:
     get:
-      operationId: api_hr_employment_types_list
+      operationId: hr_employment_types_list
       parameters:
       - name: page
         required: false
@@ -2756,7 +3716,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2768,9 +3728,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedEmploymentTypeList'
           description: ''
     post:
-      operationId: api_hr_employment_types_create
+      operationId: hr_employment_types_create
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -2789,7 +3749,7 @@ paths:
           description: ''
   /api/hr/employment-types/{id}/:
     get:
-      operationId: api_hr_employment_types_retrieve
+      operationId: hr_employment_types_retrieve
       parameters:
       - in: path
         name: id
@@ -2798,7 +3758,7 @@ paths:
         description: A unique integer value identifying this employment type.
         required: true
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2810,7 +3770,7 @@ paths:
                 $ref: '#/components/schemas/EmploymentType'
           description: ''
     put:
-      operationId: api_hr_employment_types_update
+      operationId: hr_employment_types_update
       parameters:
       - in: path
         name: id
@@ -2819,7 +3779,7 @@ paths:
         description: A unique integer value identifying this employment type.
         required: true
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -2837,7 +3797,7 @@ paths:
                 $ref: '#/components/schemas/EmploymentType'
           description: ''
     patch:
-      operationId: api_hr_employment_types_partial_update
+      operationId: hr_employment_types_partial_update
       parameters:
       - in: path
         name: id
@@ -2846,7 +3806,7 @@ paths:
         description: A unique integer value identifying this employment type.
         required: true
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -2863,7 +3823,7 @@ paths:
                 $ref: '#/components/schemas/EmploymentType'
           description: ''
     delete:
-      operationId: api_hr_employment_types_destroy
+      operationId: hr_employment_types_destroy
       parameters:
       - in: path
         name: id
@@ -2872,7 +3832,7 @@ paths:
         description: A unique integer value identifying this employment type.
         required: true
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2881,7 +3841,7 @@ paths:
           description: No response body
   /api/hr/qualifications/:
     get:
-      operationId: api_hr_qualifications_list
+      operationId: hr_qualifications_list
       parameters:
       - name: page
         required: false
@@ -2896,7 +3856,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2908,9 +3868,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedQualificationList'
           description: ''
     post:
-      operationId: api_hr_qualifications_create
+      operationId: hr_qualifications_create
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -2929,7 +3889,7 @@ paths:
           description: ''
   /api/hr/qualifications/{id}/:
     get:
-      operationId: api_hr_qualifications_retrieve
+      operationId: hr_qualifications_retrieve
       parameters:
       - in: path
         name: id
@@ -2938,7 +3898,7 @@ paths:
         description: A unique integer value identifying this qualification.
         required: true
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -2950,7 +3910,7 @@ paths:
                 $ref: '#/components/schemas/Qualification'
           description: ''
     put:
-      operationId: api_hr_qualifications_update
+      operationId: hr_qualifications_update
       parameters:
       - in: path
         name: id
@@ -2959,7 +3919,7 @@ paths:
         description: A unique integer value identifying this qualification.
         required: true
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -2977,7 +3937,7 @@ paths:
                 $ref: '#/components/schemas/Qualification'
           description: ''
     patch:
-      operationId: api_hr_qualifications_partial_update
+      operationId: hr_qualifications_partial_update
       parameters:
       - in: path
         name: id
@@ -2986,7 +3946,7 @@ paths:
         description: A unique integer value identifying this qualification.
         required: true
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -3003,7 +3963,7 @@ paths:
                 $ref: '#/components/schemas/Qualification'
           description: ''
     delete:
-      operationId: api_hr_qualifications_destroy
+      operationId: hr_qualifications_destroy
       parameters:
       - in: path
         name: id
@@ -3012,7 +3972,7 @@ paths:
         description: A unique integer value identifying this qualification.
         required: true
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3021,7 +3981,7 @@ paths:
           description: No response body
   /api/hr/work-locations/:
     get:
-      operationId: api_hr_work_locations_list
+      operationId: hr_work_locations_list
       parameters:
       - name: page
         required: false
@@ -3036,7 +3996,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3048,9 +4008,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedWorkLocationList'
           description: ''
     post:
-      operationId: api_hr_work_locations_create
+      operationId: hr_work_locations_create
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -3069,7 +4029,7 @@ paths:
           description: ''
   /api/hr/work-locations/{id}/:
     get:
-      operationId: api_hr_work_locations_retrieve
+      operationId: hr_work_locations_retrieve
       parameters:
       - in: path
         name: id
@@ -3078,7 +4038,7 @@ paths:
         description: A unique integer value identifying this work location.
         required: true
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3090,7 +4050,7 @@ paths:
                 $ref: '#/components/schemas/WorkLocation'
           description: ''
     put:
-      operationId: api_hr_work_locations_update
+      operationId: hr_work_locations_update
       parameters:
       - in: path
         name: id
@@ -3099,7 +4059,7 @@ paths:
         description: A unique integer value identifying this work location.
         required: true
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -3117,7 +4077,7 @@ paths:
                 $ref: '#/components/schemas/WorkLocation'
           description: ''
     patch:
-      operationId: api_hr_work_locations_partial_update
+      operationId: hr_work_locations_partial_update
       parameters:
       - in: path
         name: id
@@ -3126,7 +4086,7 @@ paths:
         description: A unique integer value identifying this work location.
         required: true
       tags:
-      - api
+      - hr
       requestBody:
         content:
           application/json:
@@ -3143,7 +4103,7 @@ paths:
                 $ref: '#/components/schemas/WorkLocation'
           description: ''
     delete:
-      operationId: api_hr_work_locations_destroy
+      operationId: hr_work_locations_destroy
       parameters:
       - in: path
         name: id
@@ -3152,7 +4112,7 @@ paths:
         description: A unique integer value identifying this work location.
         required: true
       tags:
-      - api
+      - hr
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3161,9 +4121,9 @@ paths:
           description: No response body
   /api/identity/session-status/:
     get:
-      operationId: api_identity_session_status_retrieve
+      operationId: identity_session_status_retrieve
       tags:
-      - api
+      - identity
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3177,7 +4137,7 @@ paths:
           description: ''
   /api/identity/users/:
     get:
-      operationId: api_identity_users_list
+      operationId: identity_users_list
       parameters:
       - name: page
         required: false
@@ -3192,7 +4152,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - identity
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3204,9 +4164,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedUserList'
           description: ''
     post:
-      operationId: api_identity_users_create
+      operationId: identity_users_create
       tags:
-      - api
+      - identity
       requestBody:
         content:
           application/json:
@@ -3225,7 +4185,7 @@ paths:
           description: ''
   /api/identity/users/{id}/:
     get:
-      operationId: api_identity_users_retrieve
+      operationId: identity_users_retrieve
       parameters:
       - in: path
         name: id
@@ -3234,7 +4194,7 @@ paths:
         description: A unique integer value identifying this User.
         required: true
       tags:
-      - api
+      - identity
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3246,7 +4206,7 @@ paths:
                 $ref: '#/components/schemas/User'
           description: ''
     put:
-      operationId: api_identity_users_update
+      operationId: identity_users_update
       parameters:
       - in: path
         name: id
@@ -3255,7 +4215,7 @@ paths:
         description: A unique integer value identifying this User.
         required: true
       tags:
-      - api
+      - identity
       requestBody:
         content:
           application/json:
@@ -3273,7 +4233,7 @@ paths:
                 $ref: '#/components/schemas/User'
           description: ''
     patch:
-      operationId: api_identity_users_partial_update
+      operationId: identity_users_partial_update
       parameters:
       - in: path
         name: id
@@ -3282,7 +4242,7 @@ paths:
         description: A unique integer value identifying this User.
         required: true
       tags:
-      - api
+      - identity
       requestBody:
         content:
           application/json:
@@ -3299,7 +4259,7 @@ paths:
                 $ref: '#/components/schemas/User'
           description: ''
     delete:
-      operationId: api_identity_users_destroy
+      operationId: identity_users_destroy
       parameters:
       - in: path
         name: id
@@ -3308,7 +4268,7 @@ paths:
         description: A unique integer value identifying this User.
         required: true
       tags:
-      - api
+      - identity
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3317,7 +4277,7 @@ paths:
           description: No response body
   /api/location/v1/addresses/:
     get:
-      operationId: api_location_v1_addresses_list
+      operationId: location_v1_addresses_list
       parameters:
       - name: page
         required: false
@@ -3332,7 +4292,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3344,9 +4304,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedAddressList'
           description: ''
     post:
-      operationId: api_location_v1_addresses_create
+      operationId: location_v1_addresses_create
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3365,7 +4325,7 @@ paths:
           description: ''
   /api/location/v1/addresses/{id}/:
     get:
-      operationId: api_location_v1_addresses_retrieve
+      operationId: location_v1_addresses_retrieve
       parameters:
       - in: path
         name: id
@@ -3374,7 +4334,7 @@ paths:
         description: A unique integer value identifying this address.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3386,7 +4346,7 @@ paths:
                 $ref: '#/components/schemas/Address'
           description: ''
     put:
-      operationId: api_location_v1_addresses_update
+      operationId: location_v1_addresses_update
       parameters:
       - in: path
         name: id
@@ -3395,7 +4355,7 @@ paths:
         description: A unique integer value identifying this address.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3413,7 +4373,7 @@ paths:
                 $ref: '#/components/schemas/Address'
           description: ''
     patch:
-      operationId: api_location_v1_addresses_partial_update
+      operationId: location_v1_addresses_partial_update
       parameters:
       - in: path
         name: id
@@ -3422,7 +4382,7 @@ paths:
         description: A unique integer value identifying this address.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3439,7 +4399,7 @@ paths:
                 $ref: '#/components/schemas/Address'
           description: ''
     delete:
-      operationId: api_location_v1_addresses_destroy
+      operationId: location_v1_addresses_destroy
       parameters:
       - in: path
         name: id
@@ -3448,7 +4408,7 @@ paths:
         description: A unique integer value identifying this address.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3457,7 +4417,7 @@ paths:
           description: No response body
   /api/location/v1/countries/:
     get:
-      operationId: api_location_v1_countries_list
+      operationId: location_v1_countries_list
       parameters:
       - name: page
         required: false
@@ -3472,7 +4432,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3484,9 +4444,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedCountryList'
           description: ''
     post:
-      operationId: api_location_v1_countries_create
+      operationId: location_v1_countries_create
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3505,7 +4465,7 @@ paths:
           description: ''
   /api/location/v1/countries/{id}/:
     get:
-      operationId: api_location_v1_countries_retrieve
+      operationId: location_v1_countries_retrieve
       parameters:
       - in: path
         name: id
@@ -3514,7 +4474,7 @@ paths:
         description: A unique integer value identifying this country.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3526,7 +4486,7 @@ paths:
                 $ref: '#/components/schemas/Country'
           description: ''
     put:
-      operationId: api_location_v1_countries_update
+      operationId: location_v1_countries_update
       parameters:
       - in: path
         name: id
@@ -3535,7 +4495,7 @@ paths:
         description: A unique integer value identifying this country.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3553,7 +4513,7 @@ paths:
                 $ref: '#/components/schemas/Country'
           description: ''
     patch:
-      operationId: api_location_v1_countries_partial_update
+      operationId: location_v1_countries_partial_update
       parameters:
       - in: path
         name: id
@@ -3562,7 +4522,7 @@ paths:
         description: A unique integer value identifying this country.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3579,7 +4539,7 @@ paths:
                 $ref: '#/components/schemas/Country'
           description: ''
     delete:
-      operationId: api_location_v1_countries_destroy
+      operationId: location_v1_countries_destroy
       parameters:
       - in: path
         name: id
@@ -3588,7 +4548,7 @@ paths:
         description: A unique integer value identifying this country.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3597,7 +4557,7 @@ paths:
           description: No response body
   /api/location/v1/states/:
     get:
-      operationId: api_location_v1_states_list
+      operationId: location_v1_states_list
       parameters:
       - name: page
         required: false
@@ -3612,7 +4572,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3624,9 +4584,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedStateList'
           description: ''
     post:
-      operationId: api_location_v1_states_create
+      operationId: location_v1_states_create
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3645,7 +4605,7 @@ paths:
           description: ''
   /api/location/v1/states/{id}/:
     get:
-      operationId: api_location_v1_states_retrieve
+      operationId: location_v1_states_retrieve
       parameters:
       - in: path
         name: id
@@ -3654,7 +4614,7 @@ paths:
         description: A unique integer value identifying this state.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3666,7 +4626,7 @@ paths:
                 $ref: '#/components/schemas/State'
           description: ''
     put:
-      operationId: api_location_v1_states_update
+      operationId: location_v1_states_update
       parameters:
       - in: path
         name: id
@@ -3675,7 +4635,7 @@ paths:
         description: A unique integer value identifying this state.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3693,7 +4653,7 @@ paths:
                 $ref: '#/components/schemas/State'
           description: ''
     patch:
-      operationId: api_location_v1_states_partial_update
+      operationId: location_v1_states_partial_update
       parameters:
       - in: path
         name: id
@@ -3702,7 +4662,7 @@ paths:
         description: A unique integer value identifying this state.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3719,7 +4679,7 @@ paths:
                 $ref: '#/components/schemas/State'
           description: ''
     delete:
-      operationId: api_location_v1_states_destroy
+      operationId: location_v1_states_destroy
       parameters:
       - in: path
         name: id
@@ -3728,7 +4688,7 @@ paths:
         description: A unique integer value identifying this state.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3737,7 +4697,7 @@ paths:
           description: No response body
   /api/location/v1/venue-capacities/:
     get:
-      operationId: api_location_v1_venue_capacities_list
+      operationId: location_v1_venue_capacities_list
       parameters:
       - name: page
         required: false
@@ -3752,7 +4712,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3764,9 +4724,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedVenueCapacityList'
           description: ''
     post:
-      operationId: api_location_v1_venue_capacities_create
+      operationId: location_v1_venue_capacities_create
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3785,7 +4745,7 @@ paths:
           description: ''
   /api/location/v1/venue-capacities/{id}/:
     get:
-      operationId: api_location_v1_venue_capacities_retrieve
+      operationId: location_v1_venue_capacities_retrieve
       parameters:
       - in: path
         name: id
@@ -3794,7 +4754,7 @@ paths:
         description: A unique integer value identifying this venue capacity.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3806,7 +4766,7 @@ paths:
                 $ref: '#/components/schemas/VenueCapacity'
           description: ''
     put:
-      operationId: api_location_v1_venue_capacities_update
+      operationId: location_v1_venue_capacities_update
       parameters:
       - in: path
         name: id
@@ -3815,7 +4775,7 @@ paths:
         description: A unique integer value identifying this venue capacity.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3833,7 +4793,7 @@ paths:
                 $ref: '#/components/schemas/VenueCapacity'
           description: ''
     patch:
-      operationId: api_location_v1_venue_capacities_partial_update
+      operationId: location_v1_venue_capacities_partial_update
       parameters:
       - in: path
         name: id
@@ -3842,7 +4802,7 @@ paths:
         description: A unique integer value identifying this venue capacity.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3859,7 +4819,7 @@ paths:
                 $ref: '#/components/schemas/VenueCapacity'
           description: ''
     delete:
-      operationId: api_location_v1_venue_capacities_destroy
+      operationId: location_v1_venue_capacities_destroy
       parameters:
       - in: path
         name: id
@@ -3868,7 +4828,7 @@ paths:
         description: A unique integer value identifying this venue capacity.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3877,7 +4837,7 @@ paths:
           description: No response body
   /api/location/v1/venue-tag-assignments/:
     get:
-      operationId: api_location_v1_venue_tag_assignments_list
+      operationId: location_v1_venue_tag_assignments_list
       parameters:
       - name: page
         required: false
@@ -3892,7 +4852,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3904,9 +4864,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedVenueTagAssignmentList'
           description: ''
     post:
-      operationId: api_location_v1_venue_tag_assignments_create
+      operationId: location_v1_venue_tag_assignments_create
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3925,7 +4885,7 @@ paths:
           description: ''
   /api/location/v1/venue-tag-assignments/{id}/:
     get:
-      operationId: api_location_v1_venue_tag_assignments_retrieve
+      operationId: location_v1_venue_tag_assignments_retrieve
       parameters:
       - in: path
         name: id
@@ -3934,7 +4894,7 @@ paths:
         description: A unique integer value identifying this venue tag assignment.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -3946,7 +4906,7 @@ paths:
                 $ref: '#/components/schemas/VenueTagAssignment'
           description: ''
     put:
-      operationId: api_location_v1_venue_tag_assignments_update
+      operationId: location_v1_venue_tag_assignments_update
       parameters:
       - in: path
         name: id
@@ -3955,7 +4915,7 @@ paths:
         description: A unique integer value identifying this venue tag assignment.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3973,7 +4933,7 @@ paths:
                 $ref: '#/components/schemas/VenueTagAssignment'
           description: ''
     patch:
-      operationId: api_location_v1_venue_tag_assignments_partial_update
+      operationId: location_v1_venue_tag_assignments_partial_update
       parameters:
       - in: path
         name: id
@@ -3982,7 +4942,7 @@ paths:
         description: A unique integer value identifying this venue tag assignment.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -3999,7 +4959,7 @@ paths:
                 $ref: '#/components/schemas/VenueTagAssignment'
           description: ''
     delete:
-      operationId: api_location_v1_venue_tag_assignments_destroy
+      operationId: location_v1_venue_tag_assignments_destroy
       parameters:
       - in: path
         name: id
@@ -4008,7 +4968,7 @@ paths:
         description: A unique integer value identifying this venue tag assignment.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4017,7 +4977,7 @@ paths:
           description: No response body
   /api/location/v1/venue-tags/:
     get:
-      operationId: api_location_v1_venue_tags_list
+      operationId: location_v1_venue_tags_list
       parameters:
       - name: page
         required: false
@@ -4032,7 +4992,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4044,9 +5004,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedVenueTagList'
           description: ''
     post:
-      operationId: api_location_v1_venue_tags_create
+      operationId: location_v1_venue_tags_create
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -4065,7 +5025,7 @@ paths:
           description: ''
   /api/location/v1/venue-tags/{id}/:
     get:
-      operationId: api_location_v1_venue_tags_retrieve
+      operationId: location_v1_venue_tags_retrieve
       parameters:
       - in: path
         name: id
@@ -4074,7 +5034,7 @@ paths:
         description: A unique integer value identifying this venue tag.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4086,7 +5046,7 @@ paths:
                 $ref: '#/components/schemas/VenueTag'
           description: ''
     put:
-      operationId: api_location_v1_venue_tags_update
+      operationId: location_v1_venue_tags_update
       parameters:
       - in: path
         name: id
@@ -4095,7 +5055,7 @@ paths:
         description: A unique integer value identifying this venue tag.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -4113,7 +5073,7 @@ paths:
                 $ref: '#/components/schemas/VenueTag'
           description: ''
     patch:
-      operationId: api_location_v1_venue_tags_partial_update
+      operationId: location_v1_venue_tags_partial_update
       parameters:
       - in: path
         name: id
@@ -4122,7 +5082,7 @@ paths:
         description: A unique integer value identifying this venue tag.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -4139,7 +5099,7 @@ paths:
                 $ref: '#/components/schemas/VenueTag'
           description: ''
     delete:
-      operationId: api_location_v1_venue_tags_destroy
+      operationId: location_v1_venue_tags_destroy
       parameters:
       - in: path
         name: id
@@ -4148,7 +5108,7 @@ paths:
         description: A unique integer value identifying this venue tag.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4157,7 +5117,7 @@ paths:
           description: No response body
   /api/location/v1/venues/:
     get:
-      operationId: api_location_v1_venues_list
+      operationId: location_v1_venues_list
       parameters:
       - name: page
         required: false
@@ -4172,7 +5132,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4184,9 +5144,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedVenueList'
           description: ''
     post:
-      operationId: api_location_v1_venues_create
+      operationId: location_v1_venues_create
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -4205,7 +5165,7 @@ paths:
           description: ''
   /api/location/v1/venues/{id}/:
     get:
-      operationId: api_location_v1_venues_retrieve
+      operationId: location_v1_venues_retrieve
       parameters:
       - in: path
         name: id
@@ -4214,7 +5174,7 @@ paths:
         description: A unique integer value identifying this venue.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4226,7 +5186,7 @@ paths:
                 $ref: '#/components/schemas/Venue'
           description: ''
     put:
-      operationId: api_location_v1_venues_update
+      operationId: location_v1_venues_update
       parameters:
       - in: path
         name: id
@@ -4235,7 +5195,7 @@ paths:
         description: A unique integer value identifying this venue.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -4253,7 +5213,7 @@ paths:
                 $ref: '#/components/schemas/Venue'
           description: ''
     patch:
-      operationId: api_location_v1_venues_partial_update
+      operationId: location_v1_venues_partial_update
       parameters:
       - in: path
         name: id
@@ -4262,7 +5222,7 @@ paths:
         description: A unique integer value identifying this venue.
         required: true
       tags:
-      - api
+      - location
       requestBody:
         content:
           application/json:
@@ -4279,7 +5239,7 @@ paths:
                 $ref: '#/components/schemas/Venue'
           description: ''
     delete:
-      operationId: api_location_v1_venues_destroy
+      operationId: location_v1_venues_destroy
       parameters:
       - in: path
         name: id
@@ -4288,7 +5248,7 @@ paths:
         description: A unique integer value identifying this venue.
         required: true
       tags:
-      - api
+      - location
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4297,7 +5257,7 @@ paths:
           description: No response body
   /api/production/v1/performance/:
     get:
-      operationId: api_production_v1_performance_list
+      operationId: production_v1_performance_list
       parameters:
       - name: page
         required: false
@@ -4312,7 +5272,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4324,9 +5284,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedPerformanceList'
           description: ''
     post:
-      operationId: api_production_v1_performance_create
+      operationId: production_v1_performance_create
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4345,7 +5305,7 @@ paths:
           description: ''
   /api/production/v1/performance/{id}/:
     get:
-      operationId: api_production_v1_performance_retrieve
+      operationId: production_v1_performance_retrieve
       parameters:
       - in: path
         name: id
@@ -4354,7 +5314,7 @@ paths:
         description: A unique integer value identifying this Performance.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4366,7 +5326,7 @@ paths:
                 $ref: '#/components/schemas/Performance'
           description: ''
     put:
-      operationId: api_production_v1_performance_update
+      operationId: production_v1_performance_update
       parameters:
       - in: path
         name: id
@@ -4375,7 +5335,7 @@ paths:
         description: A unique integer value identifying this Performance.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4393,7 +5353,7 @@ paths:
                 $ref: '#/components/schemas/Performance'
           description: ''
     patch:
-      operationId: api_production_v1_performance_partial_update
+      operationId: production_v1_performance_partial_update
       parameters:
       - in: path
         name: id
@@ -4402,7 +5362,7 @@ paths:
         description: A unique integer value identifying this Performance.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4419,7 +5379,7 @@ paths:
                 $ref: '#/components/schemas/Performance'
           description: ''
     delete:
-      operationId: api_production_v1_performance_destroy
+      operationId: production_v1_performance_destroy
       parameters:
       - in: path
         name: id
@@ -4428,7 +5388,7 @@ paths:
         description: A unique integer value identifying this Performance.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4437,7 +5397,7 @@ paths:
           description: No response body
   /api/production/v1/prod-category/:
     get:
-      operationId: api_production_v1_prod_category_list
+      operationId: production_v1_prod_category_list
       parameters:
       - name: page
         required: false
@@ -4452,7 +5412,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4464,9 +5424,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductionCategoryList'
           description: ''
     post:
-      operationId: api_production_v1_prod_category_create
+      operationId: production_v1_prod_category_create
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4485,7 +5445,7 @@ paths:
           description: ''
   /api/production/v1/prod-category-assignment/:
     get:
-      operationId: api_production_v1_prod_category_assignment_list
+      operationId: production_v1_prod_category_assignment_list
       parameters:
       - name: page
         required: false
@@ -4500,7 +5460,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4512,9 +5472,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductionCategoryAssignmentList'
           description: ''
     post:
-      operationId: api_production_v1_prod_category_assignment_create
+      operationId: production_v1_prod_category_assignment_create
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4533,7 +5493,7 @@ paths:
           description: ''
   /api/production/v1/prod-category-assignment/{id}/:
     get:
-      operationId: api_production_v1_prod_category_assignment_retrieve
+      operationId: production_v1_prod_category_assignment_retrieve
       parameters:
       - in: path
         name: id
@@ -4542,7 +5502,7 @@ paths:
         description: A unique integer value identifying this Production Category Assignment.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4554,7 +5514,7 @@ paths:
                 $ref: '#/components/schemas/ProductionCategoryAssignment'
           description: ''
     put:
-      operationId: api_production_v1_prod_category_assignment_update
+      operationId: production_v1_prod_category_assignment_update
       parameters:
       - in: path
         name: id
@@ -4563,7 +5523,7 @@ paths:
         description: A unique integer value identifying this Production Category Assignment.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4581,7 +5541,7 @@ paths:
                 $ref: '#/components/schemas/ProductionCategoryAssignment'
           description: ''
     patch:
-      operationId: api_production_v1_prod_category_assignment_partial_update
+      operationId: production_v1_prod_category_assignment_partial_update
       parameters:
       - in: path
         name: id
@@ -4590,7 +5550,7 @@ paths:
         description: A unique integer value identifying this Production Category Assignment.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4607,7 +5567,7 @@ paths:
                 $ref: '#/components/schemas/ProductionCategoryAssignment'
           description: ''
     delete:
-      operationId: api_production_v1_prod_category_assignment_destroy
+      operationId: production_v1_prod_category_assignment_destroy
       parameters:
       - in: path
         name: id
@@ -4616,7 +5576,7 @@ paths:
         description: A unique integer value identifying this Production Category Assignment.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4625,7 +5585,7 @@ paths:
           description: No response body
   /api/production/v1/prod-category/{id}/:
     get:
-      operationId: api_production_v1_prod_category_retrieve
+      operationId: production_v1_prod_category_retrieve
       parameters:
       - in: path
         name: id
@@ -4634,7 +5594,7 @@ paths:
         description: A unique integer value identifying this Production Category.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4646,7 +5606,7 @@ paths:
                 $ref: '#/components/schemas/ProductionCategory'
           description: ''
     put:
-      operationId: api_production_v1_prod_category_update
+      operationId: production_v1_prod_category_update
       parameters:
       - in: path
         name: id
@@ -4655,7 +5615,7 @@ paths:
         description: A unique integer value identifying this Production Category.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4673,7 +5633,7 @@ paths:
                 $ref: '#/components/schemas/ProductionCategory'
           description: ''
     patch:
-      operationId: api_production_v1_prod_category_partial_update
+      operationId: production_v1_prod_category_partial_update
       parameters:
       - in: path
         name: id
@@ -4682,7 +5642,7 @@ paths:
         description: A unique integer value identifying this Production Category.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4699,7 +5659,7 @@ paths:
                 $ref: '#/components/schemas/ProductionCategory'
           description: ''
     delete:
-      operationId: api_production_v1_prod_category_destroy
+      operationId: production_v1_prod_category_destroy
       parameters:
       - in: path
         name: id
@@ -4708,7 +5668,7 @@ paths:
         description: A unique integer value identifying this Production Category.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4717,7 +5677,7 @@ paths:
           description: No response body
   /api/production/v1/prod-members/:
     get:
-      operationId: api_production_v1_prod_members_list
+      operationId: production_v1_prod_members_list
       parameters:
       - name: page
         required: false
@@ -4732,7 +5692,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4744,9 +5704,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductionMemberList'
           description: ''
     post:
-      operationId: api_production_v1_prod_members_create
+      operationId: production_v1_prod_members_create
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4765,7 +5725,7 @@ paths:
           description: ''
   /api/production/v1/prod-members/{id}/:
     get:
-      operationId: api_production_v1_prod_members_retrieve
+      operationId: production_v1_prod_members_retrieve
       parameters:
       - in: path
         name: id
@@ -4774,7 +5734,7 @@ paths:
         description: A unique integer value identifying this production member.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4786,7 +5746,7 @@ paths:
                 $ref: '#/components/schemas/ProductionMember'
           description: ''
     put:
-      operationId: api_production_v1_prod_members_update
+      operationId: production_v1_prod_members_update
       parameters:
       - in: path
         name: id
@@ -4795,7 +5755,7 @@ paths:
         description: A unique integer value identifying this production member.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4813,7 +5773,7 @@ paths:
                 $ref: '#/components/schemas/ProductionMember'
           description: ''
     patch:
-      operationId: api_production_v1_prod_members_partial_update
+      operationId: production_v1_prod_members_partial_update
       parameters:
       - in: path
         name: id
@@ -4822,7 +5782,7 @@ paths:
         description: A unique integer value identifying this production member.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4839,7 +5799,7 @@ paths:
                 $ref: '#/components/schemas/ProductionMember'
           description: ''
     delete:
-      operationId: api_production_v1_prod_members_destroy
+      operationId: production_v1_prod_members_destroy
       parameters:
       - in: path
         name: id
@@ -4848,7 +5808,7 @@ paths:
         description: A unique integer value identifying this production member.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4857,7 +5817,7 @@ paths:
           description: No response body
   /api/production/v1/prod-roles/:
     get:
-      operationId: api_production_v1_prod_roles_list
+      operationId: production_v1_prod_roles_list
       parameters:
       - name: page
         required: false
@@ -4872,7 +5832,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4884,9 +5844,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductionRoleAssignmentList'
           description: ''
     post:
-      operationId: api_production_v1_prod_roles_create
+      operationId: production_v1_prod_roles_create
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4905,7 +5865,7 @@ paths:
           description: ''
   /api/production/v1/prod-roles/{id}/:
     get:
-      operationId: api_production_v1_prod_roles_retrieve
+      operationId: production_v1_prod_roles_retrieve
       parameters:
       - in: path
         name: id
@@ -4914,7 +5874,7 @@ paths:
         description: A unique integer value identifying this Production Role Assignment.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4926,7 +5886,7 @@ paths:
                 $ref: '#/components/schemas/ProductionRoleAssignment'
           description: ''
     put:
-      operationId: api_production_v1_prod_roles_update
+      operationId: production_v1_prod_roles_update
       parameters:
       - in: path
         name: id
@@ -4935,7 +5895,7 @@ paths:
         description: A unique integer value identifying this Production Role Assignment.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4953,7 +5913,7 @@ paths:
                 $ref: '#/components/schemas/ProductionRoleAssignment'
           description: ''
     patch:
-      operationId: api_production_v1_prod_roles_partial_update
+      operationId: production_v1_prod_roles_partial_update
       parameters:
       - in: path
         name: id
@@ -4962,7 +5922,7 @@ paths:
         description: A unique integer value identifying this Production Role Assignment.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -4979,7 +5939,7 @@ paths:
                 $ref: '#/components/schemas/ProductionRoleAssignment'
           description: ''
     delete:
-      operationId: api_production_v1_prod_roles_destroy
+      operationId: production_v1_prod_roles_destroy
       parameters:
       - in: path
         name: id
@@ -4988,7 +5948,7 @@ paths:
         description: A unique integer value identifying this Production Role Assignment.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -4997,7 +5957,7 @@ paths:
           description: No response body
   /api/production/v1/production/:
     get:
-      operationId: api_production_v1_production_list
+      operationId: production_v1_production_list
       parameters:
       - name: page
         required: false
@@ -5012,7 +5972,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -5024,9 +5984,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductionList'
           description: ''
     post:
-      operationId: api_production_v1_production_create
+      operationId: production_v1_production_create
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -5045,7 +6005,7 @@ paths:
           description: ''
   /api/production/v1/production/{id}/:
     get:
-      operationId: api_production_v1_production_retrieve
+      operationId: production_v1_production_retrieve
       parameters:
       - in: path
         name: id
@@ -5054,7 +6014,7 @@ paths:
         description: A unique integer value identifying this Production.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -5066,7 +6026,7 @@ paths:
                 $ref: '#/components/schemas/Production'
           description: ''
     put:
-      operationId: api_production_v1_production_update
+      operationId: production_v1_production_update
       parameters:
       - in: path
         name: id
@@ -5075,7 +6035,7 @@ paths:
         description: A unique integer value identifying this Production.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -5093,7 +6053,7 @@ paths:
                 $ref: '#/components/schemas/Production'
           description: ''
     patch:
-      operationId: api_production_v1_production_partial_update
+      operationId: production_v1_production_partial_update
       parameters:
       - in: path
         name: id
@@ -5102,7 +6062,7 @@ paths:
         description: A unique integer value identifying this Production.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -5119,7 +6079,7 @@ paths:
                 $ref: '#/components/schemas/Production'
           description: ''
     delete:
-      operationId: api_production_v1_production_destroy
+      operationId: production_v1_production_destroy
       parameters:
       - in: path
         name: id
@@ -5128,7 +6088,7 @@ paths:
         description: A unique integer value identifying this Production.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -5137,7 +6097,7 @@ paths:
           description: No response body
   /api/production/v1/rehearsal/:
     get:
-      operationId: api_production_v1_rehearsal_list
+      operationId: production_v1_rehearsal_list
       parameters:
       - name: page
         required: false
@@ -5152,7 +6112,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -5164,9 +6124,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedRehearsalList'
           description: ''
     post:
-      operationId: api_production_v1_rehearsal_create
+      operationId: production_v1_rehearsal_create
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -5185,7 +6145,7 @@ paths:
           description: ''
   /api/production/v1/rehearsal-participant/:
     get:
-      operationId: api_production_v1_rehearsal_participant_list
+      operationId: production_v1_rehearsal_participant_list
       parameters:
       - name: page
         required: false
@@ -5200,7 +6160,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -5212,9 +6172,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedRehearsalParticipantList'
           description: ''
     post:
-      operationId: api_production_v1_rehearsal_participant_create
+      operationId: production_v1_rehearsal_participant_create
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -5233,7 +6193,7 @@ paths:
           description: ''
   /api/production/v1/rehearsal-participant/{id}/:
     get:
-      operationId: api_production_v1_rehearsal_participant_retrieve
+      operationId: production_v1_rehearsal_participant_retrieve
       parameters:
       - in: path
         name: id
@@ -5242,7 +6202,7 @@ paths:
         description: A unique integer value identifying this Rehearsal Participant.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -5254,7 +6214,7 @@ paths:
                 $ref: '#/components/schemas/RehearsalParticipant'
           description: ''
     put:
-      operationId: api_production_v1_rehearsal_participant_update
+      operationId: production_v1_rehearsal_participant_update
       parameters:
       - in: path
         name: id
@@ -5263,7 +6223,7 @@ paths:
         description: A unique integer value identifying this Rehearsal Participant.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -5281,7 +6241,7 @@ paths:
                 $ref: '#/components/schemas/RehearsalParticipant'
           description: ''
     patch:
-      operationId: api_production_v1_rehearsal_participant_partial_update
+      operationId: production_v1_rehearsal_participant_partial_update
       parameters:
       - in: path
         name: id
@@ -5290,7 +6250,7 @@ paths:
         description: A unique integer value identifying this Rehearsal Participant.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -5307,7 +6267,7 @@ paths:
                 $ref: '#/components/schemas/RehearsalParticipant'
           description: ''
     delete:
-      operationId: api_production_v1_rehearsal_participant_destroy
+      operationId: production_v1_rehearsal_participant_destroy
       parameters:
       - in: path
         name: id
@@ -5316,7 +6276,7 @@ paths:
         description: A unique integer value identifying this Rehearsal Participant.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -5325,7 +6285,7 @@ paths:
           description: No response body
   /api/production/v1/rehearsal/{id}/:
     get:
-      operationId: api_production_v1_rehearsal_retrieve
+      operationId: production_v1_rehearsal_retrieve
       parameters:
       - in: path
         name: id
@@ -5334,7 +6294,7 @@ paths:
         description: A unique integer value identifying this Rehearsal.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -5346,7 +6306,7 @@ paths:
                 $ref: '#/components/schemas/Rehearsal'
           description: ''
     put:
-      operationId: api_production_v1_rehearsal_update
+      operationId: production_v1_rehearsal_update
       parameters:
       - in: path
         name: id
@@ -5355,7 +6315,7 @@ paths:
         description: A unique integer value identifying this Rehearsal.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -5373,7 +6333,7 @@ paths:
                 $ref: '#/components/schemas/Rehearsal'
           description: ''
     patch:
-      operationId: api_production_v1_rehearsal_partial_update
+      operationId: production_v1_rehearsal_partial_update
       parameters:
       - in: path
         name: id
@@ -5382,7 +6342,7 @@ paths:
         description: A unique integer value identifying this Rehearsal.
         required: true
       tags:
-      - api
+      - production
       requestBody:
         content:
           application/json:
@@ -5399,7 +6359,7 @@ paths:
                 $ref: '#/components/schemas/Rehearsal'
           description: ''
     delete:
-      operationId: api_production_v1_rehearsal_destroy
+      operationId: production_v1_rehearsal_destroy
       parameters:
       - in: path
         name: id
@@ -5408,7 +6368,7 @@ paths:
         description: A unique integer value identifying this Rehearsal.
         required: true
       tags:
-      - api
+      - production
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -5417,7 +6377,7 @@ paths:
           description: No response body
   /api/schema/:
     get:
-      operationId: api_schema_retrieve
+      operationId: schema_retrieve
       description: |-
         OpenApi3 schema for this API. Format can be selected via content negotiation.
 
@@ -5536,7 +6496,7 @@ paths:
           - zh-hans
           - zh-hant
       tags:
-      - api
+      - schema
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -6046,6 +7006,236 @@ components:
       - name
       - tenant
       - updated_at
+    Document:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/DocumentStatusEnum'
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type:
+          - integer
+          - 'null'
+        author:
+          type:
+          - integer
+          - 'null'
+        repo:
+          type: integer
+        folder:
+          type:
+          - integer
+          - 'null'
+        superseded_by:
+          type:
+          - integer
+          - 'null'
+          description: The document that supersedes this one, if any
+        tags:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+      required:
+      - created_at
+      - created_by
+      - id
+      - repo
+      - tags
+      - tenant
+      - title
+      - updated_at
+    DocumentRepo:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 100
+        code:
+          type: string
+          maxLength: 50
+        description:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+      required:
+      - code
+      - created_at
+      - created_by
+      - id
+      - name
+      - tenant
+      - updated_at
+    DocumentStatusEnum:
+      enum:
+      - draft
+      - review
+      - final
+      - archived
+      - superseded
+      - template
+      type: string
+      description: |-
+        * `draft` - Draft
+        * `review` - Under Review
+        * `final` - Final
+        * `archived` - Archived
+        * `superseded` - Superseded
+        * `template` - Template
+    DocumentTag:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        tag:
+          allOf:
+          - $ref: '#/components/schemas/Tag'
+          readOnly: true
+        document:
+          allOf:
+          - $ref: '#/components/schemas/Document'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - document
+      - id
+      - tag
+      - tenant
+      - updated_at
+    DocumentVersion:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        version:
+          type: integer
+          readOnly: true
+          description: The version of the document
+        file_url:
+          type: string
+          format: uri
+          description: URL to the document file
+          maxLength: 500
+        version_notes:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        document:
+          type: integer
+      required:
+      - created_at
+      - created_by
+      - document
+      - file_url
+      - id
+      - tenant
+      - updated_at
+      - version
     Employee:
       type: object
       properties:
@@ -6327,6 +7517,53 @@ components:
       - created_by
       - id
       - signup
+      - tenant
+      - updated_at
+    Folder:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 100
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        repo:
+          type: integer
+        parent:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - id
+      - name
+      - repo
       - tenant
       - updated_at
     Form:
@@ -6691,6 +7928,98 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Country'
+    PaginatedDocumentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+    PaginatedDocumentRepoList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentRepo'
+    PaginatedDocumentTagList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentTag'
+    PaginatedDocumentVersionList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentVersion'
     PaginatedEmployeeList:
       type: object
       required:
@@ -6783,6 +8112,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Feedback'
+    PaginatedFolderList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Folder'
     PaginatedFormFieldList:
       type: object
       required:
@@ -7220,6 +8572,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Submission'
+    PaginatedTagList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
     PaginatedUserList:
       type: object
       required:
@@ -7760,6 +9135,148 @@ components:
           type:
           - integer
           - 'null'
+    PatchedDocument:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/DocumentStatusEnum'
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type:
+          - integer
+          - 'null'
+        author:
+          type:
+          - integer
+          - 'null'
+        repo:
+          type: integer
+        folder:
+          type:
+          - integer
+          - 'null'
+        superseded_by:
+          type:
+          - integer
+          - 'null'
+          description: The document that supersedes this one, if any
+        tags:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+    PatchedDocumentRepo:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 100
+        code:
+          type: string
+          maxLength: 50
+        description:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+    PatchedDocumentVersion:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        version:
+          type: integer
+          readOnly: true
+          description: The version of the document
+        file_url:
+          type: string
+          format: uri
+          description: URL to the document file
+          maxLength: 500
+        version_notes:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        document:
+          type: integer
     PatchedEmployee:
       type: object
       properties:
@@ -8012,6 +9529,45 @@ components:
           - 'null'
           description: User who provided the feedback. Can be null if feedback is
             anonymous.
+    PatchedFolder:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 100
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        repo:
+          type: integer
+        parent:
+          type:
+          - integer
+          - 'null'
     PatchedForm:
       type: object
       properties:
@@ -8890,6 +10446,49 @@ components:
           type: integer
         form_field:
           type: integer
+    PatchedTag:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 50
+        colour:
+          type:
+          - string
+          - 'null'
+          description: 'Hex colour code without the # symbol'
+          maxLength: 6
+        description:
+          type:
+          - string
+          - 'null'
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
     PatchedUser:
       type: object
       properties:
@@ -10228,6 +11827,56 @@ components:
       - submission
       - tenant
       - updated_at
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 50
+        colour:
+          type:
+          - string
+          - 'null'
+          description: 'Hex colour code without the # symbol'
+          maxLength: 6
+        description:
+          type:
+          - string
+          - 'null'
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - id
+      - name
+      - tenant
+      - updated_at
     User:
       type: object
       properties:
@@ -10624,7 +12273,7 @@ components:
       in: cookie
       name: sessionid
 servers:
-- url: http://localhost:7032
+- url: http://localhost:8000
   description: Local Development Server
 - url: https://api.limelight.keja.co
   description: Production Server
