@@ -9,8 +9,7 @@ paths:
     get:
       operationId: root_retrieve
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       - {}
       responses:
@@ -40,8 +39,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -62,8 +60,7 @@ paths:
               $ref: '#/components/schemas/Asset'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -86,8 +83,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -115,8 +111,7 @@ paths:
               $ref: '#/components/schemas/Asset'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -143,8 +138,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedAsset'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -166,8 +160,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -192,8 +185,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -214,8 +206,7 @@ paths:
               $ref: '#/components/schemas/Assignment'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -238,8 +229,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -267,8 +257,7 @@ paths:
               $ref: '#/components/schemas/Assignment'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -295,8 +284,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedAssignment'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -318,8 +306,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -343,8 +330,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -364,8 +350,7 @@ paths:
               $ref: '#/components/schemas/Audition'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -387,8 +372,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -415,8 +399,7 @@ paths:
               $ref: '#/components/schemas/Audition'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -442,8 +425,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedAudition'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -464,8 +446,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -489,8 +470,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -510,8 +490,7 @@ paths:
               $ref: '#/components/schemas/Feedback'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -533,8 +512,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -561,8 +539,7 @@ paths:
               $ref: '#/components/schemas/Feedback'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -588,8 +565,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedFeedback'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -610,8 +586,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -635,8 +610,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -656,8 +630,7 @@ paths:
               $ref: '#/components/schemas/Signup'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -679,8 +652,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -707,8 +679,7 @@ paths:
               $ref: '#/components/schemas/Signup'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -734,8 +705,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedSignup'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -756,8 +726,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -781,8 +750,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -802,8 +770,7 @@ paths:
               $ref: '#/components/schemas/Slot'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -825,8 +792,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -853,8 +819,7 @@ paths:
               $ref: '#/components/schemas/Slot'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -880,8 +845,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedSlot'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -902,8 +866,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -927,8 +890,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -948,8 +910,7 @@ paths:
               $ref: '#/components/schemas/AuditLog'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -971,8 +932,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -999,8 +959,7 @@ paths:
               $ref: '#/components/schemas/AuditLog'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1026,8 +985,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedAuditLog'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1048,8 +1006,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -1073,8 +1030,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1094,8 +1050,7 @@ paths:
               $ref: '#/components/schemas/ContextKey'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -1117,8 +1072,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1145,8 +1099,7 @@ paths:
               $ref: '#/components/schemas/ContextKey'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1172,8 +1125,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedContextKey'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1194,8 +1146,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -1219,8 +1170,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1240,8 +1190,7 @@ paths:
               $ref: '#/components/schemas/Context'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -1263,8 +1212,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1291,8 +1239,7 @@ paths:
               $ref: '#/components/schemas/Context'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1318,8 +1265,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedContext'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1340,8 +1286,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -1365,8 +1310,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1386,8 +1330,7 @@ paths:
               $ref: '#/components/schemas/Permission'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -1409,8 +1352,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1437,8 +1379,7 @@ paths:
               $ref: '#/components/schemas/Permission'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1464,8 +1405,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedPermission'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1486,8 +1426,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -1511,8 +1450,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1532,8 +1470,7 @@ paths:
               $ref: '#/components/schemas/RolePermission'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -1555,8 +1492,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1583,8 +1519,7 @@ paths:
               $ref: '#/components/schemas/RolePermission'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1610,8 +1545,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedRolePermission'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1632,8 +1566,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -1657,8 +1590,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1678,8 +1610,7 @@ paths:
               $ref: '#/components/schemas/Role'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -1701,8 +1632,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1729,8 +1659,7 @@ paths:
               $ref: '#/components/schemas/Role'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1756,8 +1685,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedRole'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1778,8 +1706,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -1803,8 +1730,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1824,8 +1750,7 @@ paths:
               $ref: '#/components/schemas/UserRoleAssignment'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -1847,8 +1772,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1875,8 +1799,7 @@ paths:
               $ref: '#/components/schemas/UserRoleAssignment'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1902,8 +1825,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedUserRoleAssignment'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1924,8 +1846,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -1949,8 +1870,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -1970,8 +1890,7 @@ paths:
               $ref: '#/components/schemas/EmployeeQualification'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -1993,8 +1912,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2021,8 +1939,7 @@ paths:
               $ref: '#/components/schemas/EmployeeQualification'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2048,8 +1965,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedEmployeeQualification'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2070,8 +1986,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -2095,8 +2010,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2116,8 +2030,7 @@ paths:
               $ref: '#/components/schemas/Employee'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -2139,8 +2052,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2167,8 +2079,7 @@ paths:
               $ref: '#/components/schemas/Employee'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2194,8 +2105,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedEmployee'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2216,8 +2126,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -2241,8 +2150,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2262,8 +2170,7 @@ paths:
               $ref: '#/components/schemas/EmploymentType'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -2285,8 +2192,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2313,8 +2219,7 @@ paths:
               $ref: '#/components/schemas/EmploymentType'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2340,8 +2245,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedEmploymentType'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2362,8 +2266,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -2387,8 +2290,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2408,8 +2310,7 @@ paths:
               $ref: '#/components/schemas/Qualification'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -2431,8 +2332,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2459,8 +2359,7 @@ paths:
               $ref: '#/components/schemas/Qualification'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2486,8 +2385,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedQualification'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2508,8 +2406,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -2533,8 +2430,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2554,8 +2450,7 @@ paths:
               $ref: '#/components/schemas/WorkLocation'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -2577,8 +2472,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2605,8 +2499,7 @@ paths:
               $ref: '#/components/schemas/WorkLocation'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2632,8 +2525,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedWorkLocation'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2654,8 +2546,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -2666,8 +2557,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       - {}
       responses:
@@ -2696,8 +2586,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2717,8 +2606,7 @@ paths:
               $ref: '#/components/schemas/User'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -2740,8 +2628,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2768,8 +2655,7 @@ paths:
               $ref: '#/components/schemas/User'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2795,8 +2681,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedUser'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2817,8 +2702,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -2842,8 +2726,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2863,8 +2746,7 @@ paths:
               $ref: '#/components/schemas/Address'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -2886,8 +2768,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2914,8 +2795,7 @@ paths:
               $ref: '#/components/schemas/Address'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2941,8 +2821,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedAddress'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -2963,8 +2842,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -2988,8 +2866,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3009,8 +2886,7 @@ paths:
               $ref: '#/components/schemas/Country'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -3032,8 +2908,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3060,8 +2935,7 @@ paths:
               $ref: '#/components/schemas/Country'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3087,8 +2961,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedCountry'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3109,8 +2982,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -3134,8 +3006,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3155,8 +3026,7 @@ paths:
               $ref: '#/components/schemas/State'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -3178,8 +3048,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3206,8 +3075,7 @@ paths:
               $ref: '#/components/schemas/State'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3233,8 +3101,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedState'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3255,8 +3122,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -3280,8 +3146,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3301,8 +3166,7 @@ paths:
               $ref: '#/components/schemas/VenueCapacity'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -3324,8 +3188,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3352,8 +3215,7 @@ paths:
               $ref: '#/components/schemas/VenueCapacity'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3379,8 +3241,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedVenueCapacity'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3401,8 +3262,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -3426,8 +3286,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3447,8 +3306,7 @@ paths:
               $ref: '#/components/schemas/VenueTagAssignment'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -3470,8 +3328,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3498,8 +3355,7 @@ paths:
               $ref: '#/components/schemas/VenueTagAssignment'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3525,8 +3381,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedVenueTagAssignment'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3547,8 +3402,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -3572,8 +3426,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3593,8 +3446,7 @@ paths:
               $ref: '#/components/schemas/VenueTag'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -3616,8 +3468,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3644,8 +3495,7 @@ paths:
               $ref: '#/components/schemas/VenueTag'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3671,8 +3521,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedVenueTag'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3693,8 +3542,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -3718,8 +3566,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3739,8 +3586,7 @@ paths:
               $ref: '#/components/schemas/Venue'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -3762,8 +3608,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3790,8 +3635,7 @@ paths:
               $ref: '#/components/schemas/Venue'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3817,8 +3661,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedVenue'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3839,8 +3682,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -3864,8 +3706,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3885,8 +3726,7 @@ paths:
               $ref: '#/components/schemas/Performance'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -3908,8 +3748,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3936,8 +3775,7 @@ paths:
               $ref: '#/components/schemas/Performance'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3963,8 +3801,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedPerformance'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -3985,8 +3822,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -4010,8 +3846,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4031,8 +3866,7 @@ paths:
               $ref: '#/components/schemas/ProductionCategory'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -4060,8 +3894,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4081,8 +3914,7 @@ paths:
               $ref: '#/components/schemas/ProductionCategoryAssignment'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -4104,8 +3936,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4132,8 +3963,7 @@ paths:
               $ref: '#/components/schemas/ProductionCategoryAssignment'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4159,8 +3989,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedProductionCategoryAssignment'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4181,8 +4010,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -4200,8 +4028,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4228,8 +4055,7 @@ paths:
               $ref: '#/components/schemas/ProductionCategory'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4255,8 +4081,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedProductionCategory'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4277,8 +4102,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -4302,8 +4126,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4323,8 +4146,7 @@ paths:
               $ref: '#/components/schemas/ProductionMember'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -4346,8 +4168,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4374,8 +4195,7 @@ paths:
               $ref: '#/components/schemas/ProductionMember'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4401,8 +4221,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedProductionMember'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4423,8 +4242,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -4448,8 +4266,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4469,8 +4286,7 @@ paths:
               $ref: '#/components/schemas/ProductionRoleAssignment'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -4492,8 +4308,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4520,8 +4335,7 @@ paths:
               $ref: '#/components/schemas/ProductionRoleAssignment'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4547,8 +4361,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedProductionRoleAssignment'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4569,8 +4382,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -4594,8 +4406,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4615,8 +4426,7 @@ paths:
               $ref: '#/components/schemas/Production'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -4638,8 +4448,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4666,8 +4475,7 @@ paths:
               $ref: '#/components/schemas/Production'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4693,8 +4501,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedProduction'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4715,8 +4522,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -4740,8 +4546,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4761,8 +4566,7 @@ paths:
               $ref: '#/components/schemas/Rehearsal'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -4790,8 +4594,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4811,8 +4614,7 @@ paths:
               $ref: '#/components/schemas/RehearsalParticipant'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '201':
@@ -4834,8 +4636,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4862,8 +4663,7 @@ paths:
               $ref: '#/components/schemas/RehearsalParticipant'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4889,8 +4689,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedRehearsalParticipant'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4911,8 +4710,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -4930,8 +4728,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4958,8 +4755,7 @@ paths:
               $ref: '#/components/schemas/Rehearsal'
         required: true
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -4985,8 +4781,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedRehearsal'
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '200':
@@ -5007,8 +4802,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       responses:
         '204':
@@ -5136,8 +4930,7 @@ paths:
       tags:
       - api
       security:
-      - CadenceOIDC: []
-      - basicAuth: []
+      - CadenceSession: []
       - cookieAuth: []
       - {}
       responses:
@@ -9608,14 +9401,11 @@ components:
       - tenant
       - updated_at
   securitySchemes:
-    CadenceOIDC:
-      type: http
-      name: Authorization
-      in: header
-      scheme: bearer
-    basicAuth:
-      type: http
-      scheme: basic
+    CadenceSession:
+      type: apiKey
+      in: cookie
+      name: sessionid
+      description: Authenticated via browser session cookie after OIDC login at `/oidc/authenticate/`
     cookieAuth:
       type: apiKey
       in: cookie
