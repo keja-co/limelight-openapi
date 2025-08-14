@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.62
+  version: 1.0.70
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -7646,6 +7646,146 @@ paths:
               schema:
                 $ref: '#/components/schemas/Production'
           description: ''
+  /api/production/v1/production-venue/:
+    get:
+      operationId: production_v1_production_venue_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductionVenueList'
+          description: ''
+    post:
+      operationId: production_v1_production_venue_create
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionVenue'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionVenue'
+          description: ''
+  /api/production/v1/production-venue/{id}/:
+    get:
+      operationId: production_v1_production_venue_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Venue.
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionVenue'
+          description: ''
+    put:
+      operationId: production_v1_production_venue_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Venue.
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionVenue'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionVenue'
+          description: ''
+    patch:
+      operationId: production_v1_production_venue_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Venue.
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProductionVenue'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionVenue'
+          description: ''
+    delete:
+      operationId: production_v1_production_venue_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Venue.
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/production/v1/production/{id}/:
     get:
       operationId: production_v1_production_retrieve
@@ -8164,6 +8304,1104 @@ paths:
                 type: object
                 additionalProperties: {}
           description: ''
+  /api/ticketing/v1/discounts/:
+    get:
+      operationId: ticketing_v1_discounts_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDiscountList'
+          description: ''
+    post:
+      operationId: ticketing_v1_discounts_create
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Discount'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discount'
+          description: ''
+  /api/ticketing/v1/discounts/{discount_id}/ticket-types/:
+    get:
+      operationId: ticketing_v1_discounts_ticket_types_list
+      parameters:
+      - in: path
+        name: discount_id
+        schema:
+          type: integer
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDiscountTicketTypeList'
+          description: ''
+    post:
+      operationId: ticketing_v1_discounts_ticket_types_create
+      parameters:
+      - in: path
+        name: discount_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiscountTicketType'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscountTicketType'
+          description: ''
+  /api/ticketing/v1/discounts/{discount_id}/ticket-types/{id}/:
+    get:
+      operationId: ticketing_v1_discounts_ticket_types_retrieve
+      parameters:
+      - in: path
+        name: discount_id
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Discount Ticket Type.
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscountTicketType'
+          description: ''
+  /api/ticketing/v1/discounts/{id}/:
+    get:
+      operationId: ticketing_v1_discounts_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Discount.
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discount'
+          description: ''
+    put:
+      operationId: ticketing_v1_discounts_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Discount.
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Discount'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discount'
+          description: ''
+    patch:
+      operationId: ticketing_v1_discounts_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Discount.
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDiscount'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discount'
+          description: ''
+    delete:
+      operationId: ticketing_v1_discounts_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Discount.
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/ticketing/v1/prod-venue/{production_venue_id}/sections/:
+    get:
+      operationId: ticketing_v1_prod_venue_sections_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: production_venue_id
+        schema:
+          type: integer
+          description: The production & venue this section belongs to
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSectionList'
+          description: ''
+    post:
+      operationId: ticketing_v1_prod_venue_sections_create
+      parameters:
+      - in: path
+        name: production_venue_id
+        schema:
+          type: integer
+          description: The production & venue this section belongs to
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Section'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+          description: ''
+  /api/ticketing/v1/prod-venue/{production_venue_id}/sections/{id}/:
+    get:
+      operationId: ticketing_v1_prod_venue_sections_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Section.
+        required: true
+      - in: path
+        name: production_venue_id
+        schema:
+          type: integer
+          description: The production & venue this section belongs to
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+          description: ''
+    put:
+      operationId: ticketing_v1_prod_venue_sections_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Section.
+        required: true
+      - in: path
+        name: production_venue_id
+        schema:
+          type: integer
+          description: The production & venue this section belongs to
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Section'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+          description: ''
+    patch:
+      operationId: ticketing_v1_prod_venue_sections_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Section.
+        required: true
+      - in: path
+        name: production_venue_id
+        schema:
+          type: integer
+          description: The production & venue this section belongs to
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSection'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+          description: ''
+    delete:
+      operationId: ticketing_v1_prod_venue_sections_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Section.
+        required: true
+      - in: path
+        name: production_venue_id
+        schema:
+          type: integer
+          description: The production & venue this section belongs to
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/ticketing/v1/prod-venue/{production_venue_id}/sections/{section_id}/seats/:
+    get:
+      operationId: ticketing_v1_prod_venue_sections_seats_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: production_venue_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: section_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSectionSeatList'
+          description: ''
+    post:
+      operationId: ticketing_v1_prod_venue_sections_seats_create
+      parameters:
+      - in: path
+        name: production_venue_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: section_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SectionSeat'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectionSeat'
+          description: ''
+  /api/ticketing/v1/prod-venue/{production_venue_id}/sections/{section_id}/seats/{id}/:
+    get:
+      operationId: ticketing_v1_prod_venue_sections_seats_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Section Seat.
+        required: true
+      - in: path
+        name: production_venue_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: section_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectionSeat'
+          description: ''
+    put:
+      operationId: ticketing_v1_prod_venue_sections_seats_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Section Seat ID
+        required: true
+      - in: path
+        name: production_venue_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: section_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SectionSeat'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectionSeat'
+          description: ''
+    patch:
+      operationId: ticketing_v1_prod_venue_sections_seats_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Section Seat ID
+        required: true
+      - in: path
+        name: production_venue_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: section_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSectionSeat'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectionSeat'
+          description: ''
+    delete:
+      operationId: ticketing_v1_prod_venue_sections_seats_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Section Seat ID
+        required: true
+      - in: path
+        name: production_venue_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: section_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/ticketing/v1/prod-venue/{production_venue_id}/ticket-types/:
+    get:
+      operationId: ticketing_v1_prod_venue_ticket_types_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: production_venue_id
+        schema:
+          type: integer
+          description: The production venue this ticket type belongs to.
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTicketTypeList'
+          description: ''
+    post:
+      operationId: ticketing_v1_prod_venue_ticket_types_create
+      parameters:
+      - in: path
+        name: production_venue_id
+        schema:
+          type: integer
+          description: The production venue this ticket type belongs to.
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketType'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketType'
+          description: ''
+  /api/ticketing/v1/prod-venue/{production_venue_id}/ticket-types/{id}/:
+    get:
+      operationId: ticketing_v1_prod_venue_ticket_types_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Ticket Type.
+        required: true
+      - in: path
+        name: production_venue_id
+        schema:
+          type: integer
+          description: The production venue this ticket type belongs to.
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketType'
+          description: ''
+    put:
+      operationId: ticketing_v1_prod_venue_ticket_types_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Ticket Type.
+        required: true
+      - in: path
+        name: production_venue_id
+        schema:
+          type: integer
+          description: The production venue this ticket type belongs to.
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketType'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketType'
+          description: ''
+    patch:
+      operationId: ticketing_v1_prod_venue_ticket_types_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Ticket Type.
+        required: true
+      - in: path
+        name: production_venue_id
+        schema:
+          type: integer
+          description: The production venue this ticket type belongs to.
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTicketType'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketType'
+          description: ''
+    delete:
+      operationId: ticketing_v1_prod_venue_ticket_types_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Ticket Type.
+        required: true
+      - in: path
+        name: production_venue_id
+        schema:
+          type: integer
+          description: The production venue this ticket type belongs to.
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/ticketing/v1/purchases/:
+    get:
+      operationId: ticketing_v1_purchases_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPurchaseList'
+          description: ''
+    post:
+      operationId: ticketing_v1_purchases_create
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Purchase'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Purchase'
+          description: ''
+  /api/ticketing/v1/purchases/{id}/:
+    get:
+      operationId: ticketing_v1_purchases_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Purchase.
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Purchase'
+          description: ''
+    put:
+      operationId: ticketing_v1_purchases_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Purchase.
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Purchase'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Purchase'
+          description: ''
+    patch:
+      operationId: ticketing_v1_purchases_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Purchase.
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPurchase'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Purchase'
+          description: ''
+    delete:
+      operationId: ticketing_v1_purchases_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Purchase.
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/ticketing/v1/purchases/{purchase_id}/tickets/:
+    get:
+      operationId: ticketing_v1_purchases_tickets_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: purchase_id
+        schema:
+          type: integer
+          description: The purchase this ticket belongs to.
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTicketList'
+          description: ''
+    post:
+      operationId: ticketing_v1_purchases_tickets_create
+      parameters:
+      - in: path
+        name: purchase_id
+        schema:
+          type: integer
+          description: The purchase this ticket belongs to.
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+          description: ''
+  /api/ticketing/v1/purchases/{purchase_id}/tickets/{id}/:
+    get:
+      operationId: ticketing_v1_purchases_tickets_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Ticket.
+        required: true
+      - in: path
+        name: purchase_id
+        schema:
+          type: integer
+          description: The purchase this ticket belongs to.
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+          description: ''
+    put:
+      operationId: ticketing_v1_purchases_tickets_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Ticket.
+        required: true
+      - in: path
+        name: purchase_id
+        schema:
+          type: integer
+          description: The purchase this ticket belongs to.
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+          description: ''
+    patch:
+      operationId: ticketing_v1_purchases_tickets_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Ticket.
+        required: true
+      - in: path
+        name: purchase_id
+        schema:
+          type: integer
+          description: The purchase this ticket belongs to.
+        required: true
+      tags:
+      - ticketing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTicket'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+          description: ''
+    delete:
+      operationId: ticketing_v1_purchases_tickets_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Ticket.
+        required: true
+      - in: path
+        name: purchase_id
+        schema:
+          type: integer
+          description: The purchase this ticket belongs to.
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
 components:
   schemas:
     ActionTypeEnum:
@@ -8721,6 +9959,192 @@ components:
         * `JPY` - JPY - Japanese Yen
         * `NZD` - NZD - New Zealand Dollar
         * `USD` - USD - United States Dollar
+    Discount:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: Name of the discount, e.g., Early Bird, Student Discount, etc.
+          maxLength: 100
+        code:
+          type: string
+          description: Unique code for the discount, used by customers to apply the
+            discount.
+          maxLength: 50
+        description:
+          type: string
+          description: Description of the discount, if any.
+        discount_type:
+          allOf:
+          - $ref: '#/components/schemas/DiscountTypeEnum'
+          description: |-
+            Type of discount, e.g., Percentage Off, Fixed Amount Off, Buy One Get One.
+
+            * `percentage` - Percentage Off
+            * `fixed_amount` - Fixed Amount Off
+            * `bogo` - Buy One Get One
+        value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          description: Value of the discount. For percentage discounts, this is the
+            percentage off. For fixed amount discounts, this is the amount off.
+        minimum_value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          description: Minimum value of the order for the discount to apply.
+        minimum_tickets:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Minimum number of tickets required for the discount to apply.
+            0 means no minimum.
+        global_limit:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Global limit for the discount, i.e., maximum number of times
+            this discount can be used across all venues. null means unlimited. 0 means
+            no uses allowed.
+        customer_limit:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Limit for each customer, i.e., maximum number of times a single
+            customer can use this discount. null means unlimited. 0 means no uses
+            allowed.
+        valid_from:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Start date and time for the discount to be valid. If null,
+            the discount is valid immediately.
+        valid_until:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: End date and time for the discount to be valid. If null, the
+            discount is valid indefinitely.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+          description: The production this discount applies to.
+        production_venue:
+          type:
+          - integer
+          - 'null'
+          description: If the discount is specific to a venue, this field will be
+            set. If null, the discount applies to all venues for the production.
+        applicable_ticket_types:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+          description: Ticket types to which this discount applies. If empty, the
+            discount applies to all ticket types for the production.
+      required:
+      - applicable_ticket_types
+      - code
+      - created_at
+      - created_by
+      - id
+      - name
+      - production
+      - tenant
+      - updated_at
+      - value
+    DiscountTicketType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        discount:
+          allOf:
+          - $ref: '#/components/schemas/Discount'
+          readOnly: true
+        ticket_type:
+          allOf:
+          - $ref: '#/components/schemas/TicketType'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - discount
+      - id
+      - tenant
+      - ticket_type
+      - updated_at
+    DiscountTypeEnum:
+      enum:
+      - percentage
+      - fixed_amount
+      - bogo
+      type: string
+      description: |-
+        * `percentage` - Percentage Off
+        * `fixed_amount` - Fixed Amount Off
+        * `bogo` - Buy One Get One
     Document:
       type: object
       properties:
@@ -10564,6 +11988,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Country'
+    PaginatedDiscountList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+    PaginatedDiscountTicketTypeList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscountTicketType'
     PaginatedDocumentList:
       type: object
       required:
@@ -11116,6 +12586,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductionRoleAssignment'
+    PaginatedProductionVenueList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductionVenue'
+    PaginatedPurchaseList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Purchase'
     PaginatedQualificationList:
       type: object
       required:
@@ -11254,6 +12770,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RolePermission'
+    PaginatedSectionList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Section'
+    PaginatedSectionSeatList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SectionSeat'
     PaginatedSignupList:
       type: object
       required:
@@ -11392,6 +12954,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+    PaginatedTicketList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ticket'
+    PaginatedTicketTypeList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TicketType'
     PaginatedUserList:
       type: object
       required:
@@ -11999,6 +13607,125 @@ components:
           type:
           - integer
           - 'null'
+    PatchedDiscount:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: Name of the discount, e.g., Early Bird, Student Discount, etc.
+          maxLength: 100
+        code:
+          type: string
+          description: Unique code for the discount, used by customers to apply the
+            discount.
+          maxLength: 50
+        description:
+          type: string
+          description: Description of the discount, if any.
+        discount_type:
+          allOf:
+          - $ref: '#/components/schemas/DiscountTypeEnum'
+          description: |-
+            Type of discount, e.g., Percentage Off, Fixed Amount Off, Buy One Get One.
+
+            * `percentage` - Percentage Off
+            * `fixed_amount` - Fixed Amount Off
+            * `bogo` - Buy One Get One
+        value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          description: Value of the discount. For percentage discounts, this is the
+            percentage off. For fixed amount discounts, this is the amount off.
+        minimum_value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          description: Minimum value of the order for the discount to apply.
+        minimum_tickets:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Minimum number of tickets required for the discount to apply.
+            0 means no minimum.
+        global_limit:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Global limit for the discount, i.e., maximum number of times
+            this discount can be used across all venues. null means unlimited. 0 means
+            no uses allowed.
+        customer_limit:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Limit for each customer, i.e., maximum number of times a single
+            customer can use this discount. null means unlimited. 0 means no uses
+            allowed.
+        valid_from:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Start date and time for the discount to be valid. If null,
+            the discount is valid immediately.
+        valid_until:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: End date and time for the discount to be valid. If null, the
+            discount is valid indefinitely.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+          description: The production this discount applies to.
+        production_venue:
+          type:
+          - integer
+          - 'null'
+          description: If the discount is specific to a venue, this field will be
+            set. If null, the discount applies to all venues for the production.
+        applicable_ticket_types:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+          description: Ticket types to which this discount applies. If empty, the
+            discount applies to all ticket types for the production.
     PatchedDocument:
       type: object
       properties:
@@ -13337,6 +15064,7 @@ components:
           type:
           - integer
           - 'null'
+          description: The venue where the performance will take place.
     PatchedPermission:
       type: object
       properties:
@@ -13405,9 +15133,6 @@ components:
           - string
           - 'null'
           format: date-time
-        venue:
-          type: string
-          maxLength: 255
         status:
           $ref: '#/components/schemas/ProductionStatusEnum'
         tenant:
@@ -13421,6 +15146,12 @@ components:
           type:
           - integer
           - 'null'
+        venue:
+          type:
+          - integer
+          - 'null'
+          description: The primary venue for the production, not necessarily where
+            all performances will take place.
         director:
           type:
           - integer
@@ -13681,6 +15412,150 @@ components:
           type: integer
         member:
           type: integer
+    PatchedProductionVenue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        venue:
+          type: integer
+    PatchedPurchase:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        title:
+          type: string
+          description: Title for the purchase, e.g., 'VIP Tickets for Opening Night'.
+          maxLength: 200
+        customer_first_name:
+          type: string
+          description: First name of the customer making the purchase.
+          maxLength: 100
+        customer_last_name:
+          type: string
+          description: Last name of the customer making the purchase.
+          maxLength: 100
+        customer_email:
+          type: string
+          format: email
+          description: Email address of the customer making the purchase.
+          maxLength: 254
+        customer_phone:
+          type: string
+          description: Phone number of the customer making the purchase.
+          maxLength: 20
+        customer_address:
+          type: string
+          description: Address of the customer making the purchase.
+        purchase_method:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseMethodEnum'
+          description: |-
+            Method of purchase, e.g., Online, In Person, Box Office, Phone, Mobile App.
+
+            * `online` - Online
+            * `in_person` - In Person
+            * `box_office` - Box Office
+            * `phone` - Phone
+            * `mobile_app` - Mobile App
+        currency:
+          allOf:
+          - $ref: '#/components/schemas/CurrencyEnum'
+          description: |-
+            Currency for the purchase amount.
+
+            * `AUD` - AUD - Australian Dollar
+            * `CAD` - CAD - Canadian Dollar
+            * `EUR` - EUR - Euro
+            * `GBP` - GBP - British Pound
+            * `JPY` - JPY - Japanese Yen
+            * `NZD` - NZD - New Zealand Dollar
+            * `USD` - USD - United States Dollar
+        subtotal_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+          description: Subtotal amount for the purchase before any discounts.
+        discount_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+          description: Amount of discount applied to the purchase. 0 if no discount
+            was applied.
+        booking_fee:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+          description: Booking fee applied to the purchase. 0 if no booking fee was
+            applied.
+        total_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+          description: Total amount for the purchase paid by the customer, after any
+            discounts.
+        payment_reference:
+          type: string
+          description: Payment reference or transaction ID for the purchase, if applicable.
+          maxLength: 100
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        discount_applied:
+          type:
+          - integer
+          - 'null'
+          description: Discount applied to this purchase.
     PatchedQualification:
       type: object
       properties:
@@ -13945,6 +15820,145 @@ components:
         permission:
           type: integer
         context:
+          type:
+          - integer
+          - 'null'
+    PatchedSection:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section_code:
+          type: string
+          description: 'Section Code, example: L-MEZ, ORCH, R-BALC, etc.'
+          maxLength: 20
+        name:
+          type: string
+          description: 'Section Name, example: Left Mezzanine, Orchestra, Right Balcony,
+            etc.'
+          maxLength: 100
+        floor:
+          type: string
+          description: 'Floor level, example: Ground, 2nd Floor, etc.'
+          maxLength: 20
+        description:
+          type: string
+          description: Description of the section, if any.
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Sort order for displaying sections, lower numbers appear first.
+        seating_system:
+          allOf:
+          - $ref: '#/components/schemas/SeatingSystemEnum'
+          description: |-
+            Seating system for the section, e.g., General Admission, Reserved Seating.
+
+            * `none` - General Admission
+            * `seated` - Reserved Seating
+        limit:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Maximum number of seats available in this section. null means
+            unlimited. 0 means no seats available. Required for General Admission
+            sections, ignored for Reserved Seating sections.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production_venue:
+          type: integer
+          description: The production & venue this section belongs to
+    PatchedSectionSeat:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        section:
+          allOf:
+          - $ref: '#/components/schemas/Section'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        seat_code:
+          type: string
+          description: 'Seat Code, example: 1, 2, 3 etc. This should be unique within
+            the row.'
+          maxLength: 20
+        row:
+          type: string
+          description: 'Row identifier for the seat, example: A, B, C, etc.'
+          maxLength: 10
+        notes:
+          type: string
+          description: Additional notes about the seat, if any.
+        obstructed_view:
+          type: boolean
+          description: Indicates if the seat has an obstructed view. True if obstructed,
+            False otherwise. Add obstruction notes in the notes field.
+        display_x_position:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: X position for display purposes, used for layout rendering.
+        display_y_position:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Y position for display purposes, used for layout rendering.
+        accessible:
+          type: boolean
+          description: Indicates if the seat is accessible for individuals with disabilities.
+            Include accessibility notes in the notes field.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
           type:
           - integer
           - 'null'
@@ -14289,6 +16303,181 @@ components:
           type:
           - integer
           - 'null'
+    PatchedTicket:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        section_seat:
+          allOf:
+          - $ref: '#/components/schemas/SectionSeat'
+          readOnly: true
+        ticket_type:
+          allOf:
+          - $ref: '#/components/schemas/TicketType'
+          readOnly: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/Purchase'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        ticket_uuid:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique identifier for the ticket, used for tracking and validation.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TicketStatusEnum'
+          description: |-
+            Current status of the ticket.
+
+            * `active` - Active
+            * `used` - Used
+            * `refunded` - Refunded
+            * `cancelled` - Cancelled
+            * `transferred` - Transferred
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          description: Price of the ticket at the time of purchase.
+        checked_in_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp when the ticket was checked in. Null if not checked
+            in.
+        checked_in_by_alias:
+          type: string
+          description: Alias used by the user who checked in the ticket. Useful for
+            tracking check-ins by staff or volunteers who may not have a user account,
+            or integrations which use a system account.
+          maxLength: 100
+        checked_in_location:
+          type: string
+          description: Location where the ticket was checked in. Useful for tracking
+            check-ins at different points of entry or systems.
+          maxLength: 200
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        performance:
+          type: integer
+          description: The performance for which this ticket is valid.
+        section:
+          type: integer
+          description: The section for this ticket
+        seat:
+          type:
+          - integer
+          - 'null'
+          description: The specific seat for this ticket.
+        checked_in_by_user:
+          type:
+          - integer
+          - 'null'
+          description: User who checked in the ticket. Null if not checked in.
+    PatchedTicketType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        external_name:
+          type: string
+          description: Name of the ticket type, e.g., General Admission, VIP, etc.
+          maxLength: 100
+        internal_name:
+          type: string
+          description: Internal name for the ticket type, used for system references.
+          maxLength: 100
+        description:
+          type: string
+          description: Description of the ticket type, if any.
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          description: Price of the ticket type.
+        currency:
+          allOf:
+          - $ref: '#/components/schemas/CurrencyEnum'
+          description: |-
+            Currency for the ticket price, e.g. AUD, USD, EUR, etc.
+
+            * `AUD` - AUD - Australian Dollar
+            * `CAD` - CAD - Canadian Dollar
+            * `EUR` - EUR - Euro
+            * `GBP` - GBP - British Pound
+            * `JPY` - JPY - Japanese Yen
+            * `NZD` - NZD - New Zealand Dollar
+            * `USD` - USD - United States Dollar
+        limit:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Maximum number of tickets available for this type. null means
+            unlimited. 0 means no tickets available.
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Sort order for displaying ticket types, lower numbers appear
+            first.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production_venue:
+          type: integer
+          description: The production venue this ticket type belongs to.
     PatchedUser:
       type: object
       properties:
@@ -14733,6 +16922,7 @@ components:
           type:
           - integer
           - 'null'
+          description: The venue where the performance will take place.
       required:
       - created_at
       - created_by
@@ -14827,9 +17017,6 @@ components:
           - string
           - 'null'
           format: date-time
-        venue:
-          type: string
-          maxLength: 255
         status:
           $ref: '#/components/schemas/ProductionStatusEnum'
         tenant:
@@ -14843,6 +17030,12 @@ components:
           type:
           - integer
           - 'null'
+        venue:
+          type:
+          - integer
+          - 'null'
+          description: The primary venue for the production, not necessarily where
+            all performances will take place.
         director:
           type:
           - integer
@@ -15182,6 +17375,183 @@ components:
         * `completed` - Completed
         * `cancelled` - Cancelled
         * `archived` - Archived
+    ProductionVenue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        venue:
+          type: integer
+      required:
+      - created_at
+      - created_by
+      - id
+      - production
+      - tenant
+      - updated_at
+      - venue
+    Purchase:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        title:
+          type: string
+          description: Title for the purchase, e.g., 'VIP Tickets for Opening Night'.
+          maxLength: 200
+        customer_first_name:
+          type: string
+          description: First name of the customer making the purchase.
+          maxLength: 100
+        customer_last_name:
+          type: string
+          description: Last name of the customer making the purchase.
+          maxLength: 100
+        customer_email:
+          type: string
+          format: email
+          description: Email address of the customer making the purchase.
+          maxLength: 254
+        customer_phone:
+          type: string
+          description: Phone number of the customer making the purchase.
+          maxLength: 20
+        customer_address:
+          type: string
+          description: Address of the customer making the purchase.
+        purchase_method:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseMethodEnum'
+          description: |-
+            Method of purchase, e.g., Online, In Person, Box Office, Phone, Mobile App.
+
+            * `online` - Online
+            * `in_person` - In Person
+            * `box_office` - Box Office
+            * `phone` - Phone
+            * `mobile_app` - Mobile App
+        currency:
+          allOf:
+          - $ref: '#/components/schemas/CurrencyEnum'
+          description: |-
+            Currency for the purchase amount.
+
+            * `AUD` - AUD - Australian Dollar
+            * `CAD` - CAD - Canadian Dollar
+            * `EUR` - EUR - Euro
+            * `GBP` - GBP - British Pound
+            * `JPY` - JPY - Japanese Yen
+            * `NZD` - NZD - New Zealand Dollar
+            * `USD` - USD - United States Dollar
+        subtotal_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+          description: Subtotal amount for the purchase before any discounts.
+        discount_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+          description: Amount of discount applied to the purchase. 0 if no discount
+            was applied.
+        booking_fee:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+          description: Booking fee applied to the purchase. 0 if no booking fee was
+            applied.
+        total_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+          description: Total amount for the purchase paid by the customer, after any
+            discounts.
+        payment_reference:
+          type: string
+          description: Payment reference or transaction ID for the purchase, if applicable.
+          maxLength: 100
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        discount_applied:
+          type:
+          - integer
+          - 'null'
+          description: Discount applied to this purchase.
+      required:
+      - created_at
+      - created_by
+      - customer_address
+      - customer_email
+      - customer_first_name
+      - id
+      - subtotal_amount
+      - tenant
+      - total_amount
+      - updated_at
+    PurchaseMethodEnum:
+      enum:
+      - online
+      - in_person
+      - box_office
+      - phone
+      - mobile_app
+      type: string
+      description: |-
+        * `online` - Online
+        * `in_person` - In Person
+        * `box_office` - Box Office
+        * `phone` - Phone
+        * `mobile_app` - Mobile App
     Qualification:
       type: object
       properties:
@@ -15568,6 +17938,171 @@ components:
       - id
       - permission
       - role
+      - tenant
+      - updated_at
+    SeatingSystemEnum:
+      enum:
+      - none
+      - seated
+      type: string
+      description: |-
+        * `none` - General Admission
+        * `seated` - Reserved Seating
+    Section:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section_code:
+          type: string
+          description: 'Section Code, example: L-MEZ, ORCH, R-BALC, etc.'
+          maxLength: 20
+        name:
+          type: string
+          description: 'Section Name, example: Left Mezzanine, Orchestra, Right Balcony,
+            etc.'
+          maxLength: 100
+        floor:
+          type: string
+          description: 'Floor level, example: Ground, 2nd Floor, etc.'
+          maxLength: 20
+        description:
+          type: string
+          description: Description of the section, if any.
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Sort order for displaying sections, lower numbers appear first.
+        seating_system:
+          allOf:
+          - $ref: '#/components/schemas/SeatingSystemEnum'
+          description: |-
+            Seating system for the section, e.g., General Admission, Reserved Seating.
+
+            * `none` - General Admission
+            * `seated` - Reserved Seating
+        limit:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Maximum number of seats available in this section. null means
+            unlimited. 0 means no seats available. Required for General Admission
+            sections, ignored for Reserved Seating sections.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production_venue:
+          type: integer
+          description: The production & venue this section belongs to
+      required:
+      - created_at
+      - created_by
+      - id
+      - name
+      - production_venue
+      - section_code
+      - tenant
+      - updated_at
+    SectionSeat:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        section:
+          allOf:
+          - $ref: '#/components/schemas/Section'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        seat_code:
+          type: string
+          description: 'Seat Code, example: 1, 2, 3 etc. This should be unique within
+            the row.'
+          maxLength: 20
+        row:
+          type: string
+          description: 'Row identifier for the seat, example: A, B, C, etc.'
+          maxLength: 10
+        notes:
+          type: string
+          description: Additional notes about the seat, if any.
+        obstructed_view:
+          type: boolean
+          description: Indicates if the seat has an obstructed view. True if obstructed,
+            False otherwise. Add obstruction notes in the notes field.
+        display_x_position:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: X position for display purposes, used for layout rendering.
+        display_y_position:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Y position for display purposes, used for layout rendering.
+        accessible:
+          type: boolean
+          description: Indicates if the seat is accessible for individuals with disabilities.
+            Include accessibility notes in the notes field.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - id
+      - row
+      - seat_code
+      - section
       - tenant
       - updated_at
     ServerMeta:
@@ -15978,6 +18513,218 @@ components:
       - created_by
       - id
       - name
+      - tenant
+      - updated_at
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        section_seat:
+          allOf:
+          - $ref: '#/components/schemas/SectionSeat'
+          readOnly: true
+        ticket_type:
+          allOf:
+          - $ref: '#/components/schemas/TicketType'
+          readOnly: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/Purchase'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        ticket_uuid:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique identifier for the ticket, used for tracking and validation.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TicketStatusEnum'
+          description: |-
+            Current status of the ticket.
+
+            * `active` - Active
+            * `used` - Used
+            * `refunded` - Refunded
+            * `cancelled` - Cancelled
+            * `transferred` - Transferred
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          description: Price of the ticket at the time of purchase.
+        checked_in_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp when the ticket was checked in. Null if not checked
+            in.
+        checked_in_by_alias:
+          type: string
+          description: Alias used by the user who checked in the ticket. Useful for
+            tracking check-ins by staff or volunteers who may not have a user account,
+            or integrations which use a system account.
+          maxLength: 100
+        checked_in_location:
+          type: string
+          description: Location where the ticket was checked in. Useful for tracking
+            check-ins at different points of entry or systems.
+          maxLength: 200
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        performance:
+          type: integer
+          description: The performance for which this ticket is valid.
+        section:
+          type: integer
+          description: The section for this ticket
+        seat:
+          type:
+          - integer
+          - 'null'
+          description: The specific seat for this ticket.
+        checked_in_by_user:
+          type:
+          - integer
+          - 'null'
+          description: User who checked in the ticket. Null if not checked in.
+      required:
+      - created_at
+      - created_by
+      - id
+      - performance
+      - price
+      - purchase
+      - section
+      - section_seat
+      - tenant
+      - ticket_type
+      - ticket_uuid
+      - updated_at
+    TicketStatusEnum:
+      enum:
+      - active
+      - used
+      - refunded
+      - cancelled
+      - transferred
+      type: string
+      description: |-
+        * `active` - Active
+        * `used` - Used
+        * `refunded` - Refunded
+        * `cancelled` - Cancelled
+        * `transferred` - Transferred
+    TicketType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        external_name:
+          type: string
+          description: Name of the ticket type, e.g., General Admission, VIP, etc.
+          maxLength: 100
+        internal_name:
+          type: string
+          description: Internal name for the ticket type, used for system references.
+          maxLength: 100
+        description:
+          type: string
+          description: Description of the ticket type, if any.
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          description: Price of the ticket type.
+        currency:
+          allOf:
+          - $ref: '#/components/schemas/CurrencyEnum'
+          description: |-
+            Currency for the ticket price, e.g. AUD, USD, EUR, etc.
+
+            * `AUD` - AUD - Australian Dollar
+            * `CAD` - CAD - Canadian Dollar
+            * `EUR` - EUR - Euro
+            * `GBP` - GBP - British Pound
+            * `JPY` - JPY - Japanese Yen
+            * `NZD` - NZD - New Zealand Dollar
+            * `USD` - USD - United States Dollar
+        limit:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Maximum number of tickets available for this type. null means
+            unlimited. 0 means no tickets available.
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Sort order for displaying ticket types, lower numbers appear
+            first.
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production_venue:
+          type: integer
+          description: The production venue this ticket type belongs to.
+      required:
+      - created_at
+      - created_by
+      - external_name
+      - id
+      - internal_name
+      - price
+      - production_venue
       - tenant
       - updated_at
     User:
