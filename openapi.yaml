@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.70
+  version: 1.0.71
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -9741,9 +9741,6 @@ components:
       - production
       - tenant
       - updated_at
-    BlankEnum:
-      enum:
-      - ''
     ConditionEnum:
       enum:
       - new
@@ -11582,10 +11579,7 @@ components:
         status:
           $ref: '#/components/schemas/IncomeStatusEnum'
         payment_method:
-          oneOf:
-          - $ref: '#/components/schemas/IncomePaymentMethodEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
+          $ref: '#/components/schemas/IncomePaymentMethodEnum'
         source_name:
           type: string
           maxLength: 200
@@ -11641,6 +11635,7 @@ components:
       - created_at
       - created_by
       - id
+      - payment_method
       - tenant
       - title
       - updated_at
@@ -11779,8 +11774,6 @@ components:
         * `deposited` - Deposited
         * `cancelled` - Cancelled
         * `refunded` - Refunded
-    NullEnum:
-      type: 'null'
     PaginatedAddressList:
       type: object
       required:
@@ -14921,10 +14914,7 @@ components:
         status:
           $ref: '#/components/schemas/IncomeStatusEnum'
         payment_method:
-          oneOf:
-          - $ref: '#/components/schemas/IncomePaymentMethodEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
+          $ref: '#/components/schemas/IncomePaymentMethodEnum'
         source_name:
           type: string
           maxLength: 200
