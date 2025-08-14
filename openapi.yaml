@@ -4813,9 +4813,11 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/forms/v1/form/:
+  /api/forms/v1/forms/:
     get:
-      operationId: forms_v1_form_list
+      operationId: forms_v1_forms_list
+      description: Retrieve a list of all forms in the system.
+      summary: List all forms
       parameters:
       - name: page
         required: false
@@ -4842,7 +4844,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedFormList'
           description: ''
     post:
-      operationId: forms_v1_form_create
+      operationId: forms_v1_forms_create
+      description: Add a new form to the system.
+      summary: Create a new form
       tags:
       - forms
       requestBody:
@@ -4861,10 +4865,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Form'
           description: ''
-  /api/forms/v1/form-field/:
+  /api/forms/v1/forms/{form_id}/fields/:
     get:
-      operationId: forms_v1_form_field_list
+      operationId: forms_v1_forms_fields_list
+      description: Retrieve a list of all fields associated with a specific form.
+      summary: List all form fields
       parameters:
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
       - name: page
         required: false
         in: query
@@ -4945,7 +4957,16 @@ paths:
                   summary: External Signature Field
           description: ''
     post:
-      operationId: forms_v1_form_field_create
+      operationId: forms_v1_forms_fields_create
+      description: Add a new field to a specific form.
+      summary: Create a new form field
+      parameters:
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
       tags:
       - forms
       requestBody:
@@ -5024,10 +5045,18 @@ paths:
                       allow_multiple: true
                   summary: Multiple Choice Field
           description: ''
-  /api/forms/v1/form-field/{id}/:
+  /api/forms/v1/forms/{form_id}/fields/{id}/:
     get:
-      operationId: forms_v1_form_field_retrieve
+      operationId: forms_v1_forms_fields_retrieve
+      description: Get detailed information about a specific form field by its ID.
+      summary: Retrieve a specific form field
       parameters:
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
       - in: path
         name: id
         schema:
@@ -5090,8 +5119,16 @@ paths:
                   summary: External Signature Field
           description: ''
     put:
-      operationId: forms_v1_form_field_update
+      operationId: forms_v1_forms_fields_update
+      description: Modify the details of an existing form field by its ID.
+      summary: Update an existing form field
       parameters:
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
       - in: path
         name: id
         schema:
@@ -5203,8 +5240,17 @@ paths:
                   summary: External Signature Field
           description: ''
     patch:
-      operationId: forms_v1_form_field_partial_update
+      operationId: forms_v1_forms_fields_partial_update
+      description: Update specific fields of an existing form field without affecting
+        others.
+      summary: Partially update a form field
       parameters:
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
       - in: path
         name: id
         schema:
@@ -5315,8 +5361,16 @@ paths:
                   summary: External Signature Field
           description: ''
     delete:
-      operationId: forms_v1_form_field_destroy
+      operationId: forms_v1_forms_fields_destroy
+      description: Remove a form field from the system by its ID.
+      summary: Delete a form field
       parameters:
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
       - in: path
         name: id
         schema:
@@ -5331,9 +5385,464 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/forms/v1/form/{id}/:
+  /api/forms/v1/forms/{form_id}/submissions/:
     get:
-      operationId: forms_v1_form_retrieve
+      operationId: forms_v1_forms_submissions_list
+      description: Retrieve a list of all submissions associated with a specific form.
+      summary: List all submissions for a form
+      parameters:
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - forms
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSubmissionList'
+          description: ''
+    post:
+      operationId: forms_v1_forms_submissions_create
+      description: Add a new submission to a specific form.
+      summary: Create a new submission for a form
+      parameters:
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
+      tags:
+      - forms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submission'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+          description: ''
+  /api/forms/v1/forms/{form_id}/submissions/{id}/:
+    get:
+      operationId: forms_v1_forms_submissions_retrieve
+      description: Get detailed information about a specific submission by its ID.
+      summary: Retrieve a specific submission
+      parameters:
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form Submission.
+        required: true
+      tags:
+      - forms
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+          description: ''
+    put:
+      operationId: forms_v1_forms_submissions_update
+      description: Modify the details of an existing submission by its ID.
+      summary: Update an existing submission
+      parameters:
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form Submission.
+        required: true
+      tags:
+      - forms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submission'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+          description: ''
+    patch:
+      operationId: forms_v1_forms_submissions_partial_update
+      description: Update specific fields of an existing submission without affecting
+        others.
+      summary: Partially update a submission
+      parameters:
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form Submission.
+        required: true
+      tags:
+      - forms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSubmission'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+          description: ''
+    delete:
+      operationId: forms_v1_forms_submissions_destroy
+      description: Remove a submission from the system by its ID.
+      summary: Delete a submission
+      parameters:
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Form Submission.
+        required: true
+      tags:
+      - forms
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/forms/v1/forms/{form_id}/submissions/{submission_id}/field/{field_id}/response/:
+    get:
+      operationId: forms_v1_forms_submissions_field_response_list
+      description: Retrieve a list of all field values associated with a specific
+        submission.
+      summary: List all field values for a submission
+      parameters:
+      - in: path
+        name: field_id
+        schema:
+          type: integer
+        description: ID of the field of the form
+        required: true
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: submission_id
+        schema:
+          type: integer
+        description: ID of the submission
+        required: true
+      tags:
+      - forms
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSubmissionFieldValueList'
+          description: ''
+    post:
+      operationId: forms_v1_forms_submissions_field_response_create
+      description: Add a new field value to a specific submission.
+      summary: Create a new field value for a submission
+      parameters:
+      - in: path
+        name: field_id
+        schema:
+          type: integer
+        description: ID of the field of the form
+        required: true
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
+      - in: path
+        name: submission_id
+        schema:
+          type: integer
+        description: ID of the submission
+        required: true
+      tags:
+      - forms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionFieldValue'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionFieldValue'
+          description: ''
+  /api/forms/v1/forms/{form_id}/submissions/{submission_id}/field/{field_id}/response/{id}/:
+    get:
+      operationId: forms_v1_forms_submissions_field_response_retrieve
+      description: Get detailed information about a specific field value by its ID.
+      summary: Retrieve a specific field value
+      parameters:
+      - in: path
+        name: field_id
+        schema:
+          type: integer
+        description: ID of the field of the form
+        required: true
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Submission Field Value.
+        required: true
+      - in: path
+        name: submission_id
+        schema:
+          type: integer
+        description: ID of the submission
+        required: true
+      tags:
+      - forms
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionFieldValue'
+          description: ''
+    put:
+      operationId: forms_v1_forms_submissions_field_response_update
+      description: Modify the details of an existing field value by its ID.
+      summary: Update an existing field value
+      parameters:
+      - in: path
+        name: field_id
+        schema:
+          type: integer
+        description: ID of the field of the form
+        required: true
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Submission Field Value.
+        required: true
+      - in: path
+        name: submission_id
+        schema:
+          type: integer
+        description: ID of the submission
+        required: true
+      tags:
+      - forms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionFieldValue'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionFieldValue'
+          description: ''
+    patch:
+      operationId: forms_v1_forms_submissions_field_response_partial_update
+      description: Update specific fields of an existing field value without affecting
+        others.
+      summary: Partially update a field value
+      parameters:
+      - in: path
+        name: field_id
+        schema:
+          type: integer
+        description: ID of the field of the form
+        required: true
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Submission Field Value.
+        required: true
+      - in: path
+        name: submission_id
+        schema:
+          type: integer
+        description: ID of the submission
+        required: true
+      tags:
+      - forms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSubmissionFieldValue'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionFieldValue'
+          description: ''
+    delete:
+      operationId: forms_v1_forms_submissions_field_response_destroy
+      description: Remove a field value from the system by its ID.
+      summary: Delete a field value
+      parameters:
+      - in: path
+        name: field_id
+        schema:
+          type: integer
+        description: ID of the field of the form
+        required: true
+      - in: path
+        name: form_id
+        schema:
+          type: integer
+        description: ID of the form
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Submission Field Value.
+        required: true
+      - in: path
+        name: submission_id
+        schema:
+          type: integer
+        description: ID of the submission
+        required: true
+      tags:
+      - forms
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/forms/v1/forms/{id}/:
+    get:
+      operationId: forms_v1_forms_retrieve
+      description: Get detailed information about a specific form by its ID.
+      summary: Retrieve a specific form
       parameters:
       - in: path
         name: id
@@ -5354,7 +5863,9 @@ paths:
                 $ref: '#/components/schemas/Form'
           description: ''
     put:
-      operationId: forms_v1_form_update
+      operationId: forms_v1_forms_update
+      description: Modify the details of an existing form by its ID.
+      summary: Update an existing form
       parameters:
       - in: path
         name: id
@@ -5381,7 +5892,9 @@ paths:
                 $ref: '#/components/schemas/Form'
           description: ''
     patch:
-      operationId: forms_v1_form_partial_update
+      operationId: forms_v1_forms_partial_update
+      description: Update specific fields of an existing form without affecting others.
+      summary: Partially update a form
       parameters:
       - in: path
         name: id
@@ -5407,293 +5920,15 @@ paths:
                 $ref: '#/components/schemas/Form'
           description: ''
     delete:
-      operationId: forms_v1_form_destroy
+      operationId: forms_v1_forms_destroy
+      description: Remove a form from the system by its ID.
+      summary: Delete a form
       parameters:
       - in: path
         name: id
         schema:
           type: integer
         description: A unique integer value identifying this Form.
-        required: true
-      tags:
-      - forms
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/forms/v1/submission/:
-    get:
-      operationId: forms_v1_submission_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - forms
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedSubmissionList'
-          description: ''
-    post:
-      operationId: forms_v1_submission_create
-      tags:
-      - forms
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Submission'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Submission'
-          description: ''
-  /api/forms/v1/submission-field-value/:
-    get:
-      operationId: forms_v1_submission_field_value_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - forms
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedSubmissionFieldValueList'
-          description: ''
-    post:
-      operationId: forms_v1_submission_field_value_create
-      tags:
-      - forms
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SubmissionFieldValue'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SubmissionFieldValue'
-          description: ''
-  /api/forms/v1/submission-field-value/{id}/:
-    get:
-      operationId: forms_v1_submission_field_value_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Submission Field Value.
-        required: true
-      tags:
-      - forms
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SubmissionFieldValue'
-          description: ''
-    put:
-      operationId: forms_v1_submission_field_value_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Submission Field Value.
-        required: true
-      tags:
-      - forms
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SubmissionFieldValue'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SubmissionFieldValue'
-          description: ''
-    patch:
-      operationId: forms_v1_submission_field_value_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Submission Field Value.
-        required: true
-      tags:
-      - forms
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedSubmissionFieldValue'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SubmissionFieldValue'
-          description: ''
-    delete:
-      operationId: forms_v1_submission_field_value_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Submission Field Value.
-        required: true
-      tags:
-      - forms
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/forms/v1/submission/{id}/:
-    get:
-      operationId: forms_v1_submission_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Form Submission.
-        required: true
-      tags:
-      - forms
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Submission'
-          description: ''
-    put:
-      operationId: forms_v1_submission_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Form Submission.
-        required: true
-      tags:
-      - forms
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Submission'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Submission'
-          description: ''
-    patch:
-      operationId: forms_v1_submission_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Form Submission.
-        required: true
-      tags:
-      - forms
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedSubmission'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Submission'
-          description: ''
-    delete:
-      operationId: forms_v1_submission_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Form Submission.
         required: true
       tags:
       - forms
