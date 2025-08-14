@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.71
+  version: 1.0.73
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -25,7 +25,8 @@ paths:
   /api/assets/v1/assets/:
     get:
       operationId: assets_v1_assets_list
-      description: API endpoint that allows assets to be viewed or edited.
+      description: Retrieve a list of all assets in the system.
+      summary: List all assets
       parameters:
       - name: page
         required: false
@@ -53,7 +54,8 @@ paths:
           description: ''
     post:
       operationId: assets_v1_assets_create
-      description: API endpoint that allows assets to be viewed or edited.
+      description: Add a new asset to the system.
+      summary: Create a new asset
       tags:
       - assets
       requestBody:
@@ -72,107 +74,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Asset'
           description: ''
-  /api/assets/v1/assets/{id}/:
+  /api/assets/v1/assets/{asset_id}/assignments/:
     get:
-      operationId: assets_v1_assets_retrieve
-      description: API endpoint that allows assets to be viewed or edited.
+      operationId: assets_v1_assets_assignments_list
+      description: Retrieve a list of all assignments associated with a specific asset.
+      summary: List all assignments for an asset
       parameters:
       - in: path
-        name: id
+        name: asset_id
         schema:
           type: integer
-        description: A unique integer value identifying this Asset.
+        description: Asset ID
         required: true
-      tags:
-      - assets
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Asset'
-          description: ''
-    put:
-      operationId: assets_v1_assets_update
-      description: API endpoint that allows assets to be viewed or edited.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Asset.
-        required: true
-      tags:
-      - assets
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Asset'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Asset'
-          description: ''
-    patch:
-      operationId: assets_v1_assets_partial_update
-      description: API endpoint that allows assets to be viewed or edited.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Asset.
-        required: true
-      tags:
-      - assets
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedAsset'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Asset'
-          description: ''
-    delete:
-      operationId: assets_v1_assets_destroy
-      description: API endpoint that allows assets to be viewed or edited.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Asset.
-        required: true
-      tags:
-      - assets
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/assets/v1/assignments/:
-    get:
-      operationId: assets_v1_assignments_list
-      description: API endpoint that allows assignments to be viewed or edited.
-      parameters:
       - name: page
         required: false
         in: query
@@ -198,8 +111,16 @@ paths:
                 $ref: '#/components/schemas/PaginatedAssignmentList'
           description: ''
     post:
-      operationId: assets_v1_assignments_create
-      description: API endpoint that allows assignments to be viewed or edited.
+      operationId: assets_v1_assets_assignments_create
+      description: Add a new assignment to a specific asset.
+      summary: Create a new assignment for an asset
+      parameters:
+      - in: path
+        name: asset_id
+        schema:
+          type: integer
+        description: Asset ID
+        required: true
       tags:
       - assets
       requestBody:
@@ -218,16 +139,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/Assignment'
           description: ''
-  /api/assets/v1/assignments/{id}/:
+  /api/assets/v1/assets/{asset_id}/assignments/{id}/:
     get:
-      operationId: assets_v1_assignments_retrieve
-      description: API endpoint that allows assignments to be viewed or edited.
+      operationId: assets_v1_assets_assignments_retrieve
+      description: Get detailed information about a specific assignment by its ID.
+      summary: Retrieve a specific assignment
       parameters:
+      - in: path
+        name: asset_id
+        schema:
+          type: integer
+        description: Asset ID
+        required: true
       - in: path
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this Asset Assignment.
+        description: Assignment ID
         required: true
       tags:
       - assets
@@ -242,14 +170,21 @@ paths:
                 $ref: '#/components/schemas/Assignment'
           description: ''
     put:
-      operationId: assets_v1_assignments_update
-      description: API endpoint that allows assignments to be viewed or edited.
+      operationId: assets_v1_assets_assignments_update
+      description: Modify the details of an existing assignment by its ID.
+      summary: Update an existing assignment
       parameters:
+      - in: path
+        name: asset_id
+        schema:
+          type: integer
+        description: Asset ID
+        required: true
       - in: path
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this Asset Assignment.
+        description: Assignment ID
         required: true
       tags:
       - assets
@@ -270,14 +205,22 @@ paths:
                 $ref: '#/components/schemas/Assignment'
           description: ''
     patch:
-      operationId: assets_v1_assignments_partial_update
-      description: API endpoint that allows assignments to be viewed or edited.
+      operationId: assets_v1_assets_assignments_partial_update
+      description: Update specific fields of an existing assignment without affecting
+        others.
+      summary: Partially update an assignment
       parameters:
+      - in: path
+        name: asset_id
+        schema:
+          type: integer
+        description: Asset ID
+        required: true
       - in: path
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this Asset Assignment.
+        description: Assignment ID
         required: true
       tags:
       - assets
@@ -297,14 +240,21 @@ paths:
                 $ref: '#/components/schemas/Assignment'
           description: ''
     delete:
-      operationId: assets_v1_assignments_destroy
-      description: API endpoint that allows assignments to be viewed or edited.
+      operationId: assets_v1_assets_assignments_destroy
+      description: Remove an assignment from the system by its ID.
+      summary: Delete an assignment
       parameters:
+      - in: path
+        name: asset_id
+        schema:
+          type: integer
+        description: Asset ID
+        required: true
       - in: path
         name: id
         schema:
           type: integer
-        description: A unique integer value identifying this Asset Assignment.
+        description: Assignment ID
         required: true
       tags:
       - assets
@@ -314,9 +264,111 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/auditions/v1/audition/:
+  /api/assets/v1/assets/{id}/:
     get:
-      operationId: auditions_v1_audition_list
+      operationId: assets_v1_assets_retrieve
+      description: Get detailed information about a specific asset by its ID.
+      summary: Retrieve a specific asset
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Asset ID
+        required: true
+      tags:
+      - assets
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+          description: ''
+    put:
+      operationId: assets_v1_assets_update
+      description: Modify the details of an existing asset by its ID.
+      summary: Update an existing asset
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Asset ID
+        required: true
+      tags:
+      - assets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Asset'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+          description: ''
+    patch:
+      operationId: assets_v1_assets_partial_update
+      description: Update specific fields of an existing asset without affecting others.
+      summary: Partially update an asset
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Asset ID
+        required: true
+      tags:
+      - assets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAsset'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+          description: ''
+    delete:
+      operationId: assets_v1_assets_destroy
+      description: Remove an asset from the system by its ID.
+      summary: Delete an asset
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Asset ID
+        required: true
+      tags:
+      - assets
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/auditions/v1/auditions/:
+    get:
+      operationId: auditions_v1_auditions_list
+      description: Retrieve all auditions for productions.
+      summary: List Auditions
       parameters:
       - name: page
         required: false
@@ -343,7 +395,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedAuditionList'
           description: ''
     post:
-      operationId: auditions_v1_audition_create
+      operationId: auditions_v1_auditions_create
+      description: Create a new audition for a production.
+      summary: Create an Audition
       tags:
       - auditions
       requestBody:
@@ -362,382 +416,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Audition'
           description: ''
-  /api/auditions/v1/audition/{id}/:
+  /api/auditions/v1/auditions/{audition_id}/slots/:
     get:
-      operationId: auditions_v1_audition_retrieve
+      operationId: auditions_v1_auditions_slots_list
+      description: Retrieve all slots for a specific audition.
+      summary: List Slots for an Audition
       parameters:
       - in: path
-        name: id
+        name: audition_id
         schema:
           type: integer
-        description: A unique integer value identifying this Audition.
+        description: ID of the audition
         required: true
-      tags:
-      - auditions
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Audition'
-          description: ''
-    put:
-      operationId: auditions_v1_audition_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Audition.
-        required: true
-      tags:
-      - auditions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Audition'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Audition'
-          description: ''
-    patch:
-      operationId: auditions_v1_audition_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Audition.
-        required: true
-      tags:
-      - auditions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedAudition'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Audition'
-          description: ''
-    delete:
-      operationId: auditions_v1_audition_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Audition.
-        required: true
-      tags:
-      - auditions
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/auditions/v1/feedback/:
-    get:
-      operationId: auditions_v1_feedback_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - auditions
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedFeedbackList'
-          description: ''
-    post:
-      operationId: auditions_v1_feedback_create
-      tags:
-      - auditions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Feedback'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Feedback'
-          description: ''
-  /api/auditions/v1/feedback/{id}/:
-    get:
-      operationId: auditions_v1_feedback_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Feedback.
-        required: true
-      tags:
-      - auditions
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Feedback'
-          description: ''
-    put:
-      operationId: auditions_v1_feedback_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Feedback.
-        required: true
-      tags:
-      - auditions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Feedback'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Feedback'
-          description: ''
-    patch:
-      operationId: auditions_v1_feedback_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Feedback.
-        required: true
-      tags:
-      - auditions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedFeedback'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Feedback'
-          description: ''
-    delete:
-      operationId: auditions_v1_feedback_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Feedback.
-        required: true
-      tags:
-      - auditions
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/auditions/v1/signup/:
-    get:
-      operationId: auditions_v1_signup_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - auditions
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedSignupList'
-          description: ''
-    post:
-      operationId: auditions_v1_signup_create
-      tags:
-      - auditions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Signup'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Signup'
-          description: ''
-  /api/auditions/v1/signup/{id}/:
-    get:
-      operationId: auditions_v1_signup_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Signup.
-        required: true
-      tags:
-      - auditions
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Signup'
-          description: ''
-    put:
-      operationId: auditions_v1_signup_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Signup.
-        required: true
-      tags:
-      - auditions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Signup'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Signup'
-          description: ''
-    patch:
-      operationId: auditions_v1_signup_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Signup.
-        required: true
-      tags:
-      - auditions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedSignup'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Signup'
-          description: ''
-    delete:
-      operationId: auditions_v1_signup_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Signup.
-        required: true
-      tags:
-      - auditions
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/auditions/v1/slot/:
-    get:
-      operationId: auditions_v1_slot_list
-      parameters:
       - name: page
         required: false
         in: query
@@ -763,7 +453,16 @@ paths:
                 $ref: '#/components/schemas/PaginatedSlotList'
           description: ''
     post:
-      operationId: auditions_v1_slot_create
+      operationId: auditions_v1_auditions_slots_create
+      description: Create a new slot for a specific audition.
+      summary: Create a Slot
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
       tags:
       - auditions
       requestBody:
@@ -782,15 +481,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/Slot'
           description: ''
-  /api/auditions/v1/slot/{id}/:
+  /api/auditions/v1/auditions/{audition_id}/slots/{id}/:
     get:
-      operationId: auditions_v1_slot_retrieve
+      operationId: auditions_v1_auditions_slots_retrieve
+      description: Get details of a specific slot for an audition.
+      summary: Retrieve a Slot
       parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
       - in: path
         name: id
         schema:
           type: integer
         description: A unique integer value identifying this Slot.
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
         required: true
       tags:
       - auditions
@@ -805,13 +518,27 @@ paths:
                 $ref: '#/components/schemas/Slot'
           description: ''
     put:
-      operationId: auditions_v1_slot_update
+      operationId: auditions_v1_auditions_slots_update
+      description: Update an existing slot for a specific audition.
+      summary: Update a Slot
       parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
       - in: path
         name: id
         schema:
           type: integer
         description: A unique integer value identifying this Slot.
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
         required: true
       tags:
       - auditions
@@ -832,13 +559,27 @@ paths:
                 $ref: '#/components/schemas/Slot'
           description: ''
     patch:
-      operationId: auditions_v1_slot_partial_update
+      operationId: auditions_v1_auditions_slots_partial_update
+      description: Partially update an existing slot for a specific audition.
+      summary: Partially Update a Slot
       parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
       - in: path
         name: id
         schema:
           type: integer
         description: A unique integer value identifying this Slot.
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
         required: true
       tags:
       - auditions
@@ -858,13 +599,662 @@ paths:
                 $ref: '#/components/schemas/Slot'
           description: ''
     delete:
-      operationId: auditions_v1_slot_destroy
+      operationId: auditions_v1_auditions_slots_destroy
+      description: Delete a specific slot for an audition.
+      summary: Delete a Slot
       parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
       - in: path
         name: id
         schema:
           type: integer
         description: A unique integer value identifying this Slot.
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/auditions/v1/auditions/{audition_id}/slots/{slot_id}/signups/:
+    get:
+      operationId: auditions_v1_auditions_slots_signups_list
+      description: Retrieve all signups for a specific slot in an audition.
+      summary: List Signups for a Slot
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSignupList'
+          description: ''
+    post:
+      operationId: auditions_v1_auditions_slots_signups_create
+      description: Create a new signup for a specific slot in an audition.
+      summary: Create a Signup
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Signup'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signup'
+          description: ''
+  /api/auditions/v1/auditions/{audition_id}/slots/{slot_id}/signups/{id}/:
+    get:
+      operationId: auditions_v1_auditions_slots_signups_retrieve
+      description: Get details of a specific signup for a slot in an audition.
+      summary: Retrieve a Signup
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Signup.
+        required: true
+      - in: path
+        name: signup_id
+        schema:
+          type: integer
+        description: ID of the signup
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signup'
+          description: ''
+    put:
+      operationId: auditions_v1_auditions_slots_signups_update
+      description: Update an existing signup for a specific slot in an audition.
+      summary: Update a Signup
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Signup.
+        required: true
+      - in: path
+        name: signup_id
+        schema:
+          type: integer
+        description: ID of the signup
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Signup'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signup'
+          description: ''
+    patch:
+      operationId: auditions_v1_auditions_slots_signups_partial_update
+      description: Partially update an existing signup for a specific slot in an audition.
+      summary: Partially Update a Signup
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Signup.
+        required: true
+      - in: path
+        name: signup_id
+        schema:
+          type: integer
+        description: ID of the signup
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSignup'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signup'
+          description: ''
+    delete:
+      operationId: auditions_v1_auditions_slots_signups_destroy
+      description: Delete a specific signup for a slot in an audition.
+      summary: Delete a Signup
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Signup.
+        required: true
+      - in: path
+        name: signup_id
+        schema:
+          type: integer
+        description: ID of the signup
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/auditions/v1/auditions/{audition_id}/slots/{slot_id}/signups/{signup_id}/feedback/:
+    get:
+      operationId: auditions_v1_auditions_slots_signups_feedback_list
+      description: Retrieve all feedback for a specific signup in an audition slot.
+      summary: List Feedback for a Signup
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: signup_id
+        schema:
+          type: integer
+        description: ID of the signup
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFeedbackList'
+          description: ''
+    post:
+      operationId: auditions_v1_auditions_slots_signups_feedback_create
+      description: Create new feedback for a specific signup in an audition slot.
+      summary: Create Feedback
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      - in: path
+        name: signup_id
+        schema:
+          type: integer
+        description: ID of the signup
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+          description: ''
+  /api/auditions/v1/auditions/{audition_id}/slots/{slot_id}/signups/{signup_id}/feedback/{id}/:
+    get:
+      operationId: auditions_v1_auditions_slots_signups_feedback_retrieve
+      description: Get details of specific feedback for a signup in an audition slot.
+      summary: Retrieve Feedback
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: ID of the feedback
+        required: true
+      - in: path
+        name: signup_id
+        schema:
+          type: integer
+        description: ID of the signup
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+          description: ''
+    put:
+      operationId: auditions_v1_auditions_slots_signups_feedback_update
+      description: Update existing feedback for a specific signup in an audition slot.
+      summary: Update Feedback
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: ID of the feedback
+        required: true
+      - in: path
+        name: signup_id
+        schema:
+          type: integer
+        description: ID of the signup
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+          description: ''
+    patch:
+      operationId: auditions_v1_auditions_slots_signups_feedback_partial_update
+      description: Partially update existing feedback for a specific signup in an
+        audition slot.
+      summary: Partially Update Feedback
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: ID of the feedback
+        required: true
+      - in: path
+        name: signup_id
+        schema:
+          type: integer
+        description: ID of the signup
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFeedback'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+          description: ''
+    delete:
+      operationId: auditions_v1_auditions_slots_signups_feedback_destroy
+      description: Delete specific feedback for a signup in an audition slot.
+      summary: Delete Feedback
+      parameters:
+      - in: path
+        name: audition_id
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: ID of the feedback
+        required: true
+      - in: path
+        name: signup_id
+        schema:
+          type: integer
+        description: ID of the signup
+        required: true
+      - in: path
+        name: slot_id
+        schema:
+          type: integer
+        description: ID of the slot
+        required: true
+      tags:
+      - auditions
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/auditions/v1/auditions/{id}/:
+    get:
+      operationId: auditions_v1_auditions_retrieve
+      description: Get details of a specific audition.
+      summary: Retrieve an Audition
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Audition.
+        required: true
+      - in: path
+        name: pk
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      tags:
+      - auditions
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audition'
+          description: ''
+    put:
+      operationId: auditions_v1_auditions_update
+      description: Update an existing audition.
+      summary: Update an Audition
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Audition.
+        required: true
+      - in: path
+        name: pk
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      tags:
+      - auditions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Audition'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audition'
+          description: ''
+    patch:
+      operationId: auditions_v1_auditions_partial_update
+      description: Partially update an existing audition.
+      summary: Partially Update an Audition
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Audition.
+        required: true
+      - in: path
+        name: pk
+        schema:
+          type: integer
+        description: ID of the audition
+        required: true
+      tags:
+      - auditions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAudition'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audition'
+          description: ''
+    delete:
+      operationId: auditions_v1_auditions_destroy
+      description: Delete a specific audition.
+      summary: Delete an Audition
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Audition.
+        required: true
+      - in: path
+        name: pk
+        schema:
+          type: integer
+        description: ID of the audition
         required: true
       tags:
       - auditions
@@ -877,6 +1267,8 @@ paths:
   /api/budgeting/v1/cost-categories/:
     get:
       operationId: budgeting_v1_cost_categories_list
+      description: Retrieve a list of all cost categories in the system.
+      summary: List all cost categories
       parameters:
       - name: page
         required: false
@@ -904,6 +1296,8 @@ paths:
           description: ''
     post:
       operationId: budgeting_v1_cost_categories_create
+      description: Add a new cost category to the system.
+      summary: Create a new cost category
       tags:
       - budgeting
       requestBody:
@@ -925,6 +1319,9 @@ paths:
   /api/budgeting/v1/cost-categories/{id}/:
     get:
       operationId: budgeting_v1_cost_categories_retrieve
+      description: Get detailed information about a specific cost category by its
+        ID.
+      summary: Retrieve a specific cost category
       parameters:
       - in: path
         name: id
@@ -946,6 +1343,8 @@ paths:
           description: ''
     put:
       operationId: budgeting_v1_cost_categories_update
+      description: Modify the details of an existing cost category by its ID.
+      summary: Update an existing cost category
       parameters:
       - in: path
         name: id
@@ -973,6 +1372,9 @@ paths:
           description: ''
     patch:
       operationId: budgeting_v1_cost_categories_partial_update
+      description: Update specific fields of an existing cost category without affecting
+        others.
+      summary: Partially update a cost category
       parameters:
       - in: path
         name: id
@@ -999,6 +1401,8 @@ paths:
           description: ''
     delete:
       operationId: budgeting_v1_cost_categories_destroy
+      description: Remove a cost category from the system by its ID.
+      summary: Delete a cost category
       parameters:
       - in: path
         name: id
@@ -1017,6 +1421,8 @@ paths:
   /api/budgeting/v1/expenses/:
     get:
       operationId: budgeting_v1_expenses_list
+      description: Retrieve a list of all expenses in the system.
+      summary: List all expenses
       parameters:
       - name: page
         required: false
@@ -1044,6 +1450,8 @@ paths:
           description: ''
     post:
       operationId: budgeting_v1_expenses_create
+      description: Add a new expense to the system.
+      summary: Create a new expense
       tags:
       - budgeting
       requestBody:
@@ -1065,11 +1473,14 @@ paths:
   /api/budgeting/v1/expenses/{expense_id}/attachments/:
     get:
       operationId: budgeting_v1_expenses_attachments_list
+      description: Retrieve a list of all attachments associated with a specific expense.
+      summary: List all attachments for an expense
       parameters:
       - in: path
         name: expense_id
         schema:
           type: integer
+        description: Expense ID
         required: true
       - name: page
         required: false
@@ -1097,11 +1508,14 @@ paths:
           description: ''
     post:
       operationId: budgeting_v1_expenses_attachments_create
+      description: Add a new attachment to a specific expense.
+      summary: Create a new attachment for an expense
       parameters:
       - in: path
         name: expense_id
         schema:
           type: integer
+        description: Expense ID
         required: true
       tags:
       - budgeting
@@ -1124,11 +1538,14 @@ paths:
   /api/budgeting/v1/expenses/{expense_id}/attachments/{id}/:
     get:
       operationId: budgeting_v1_expenses_attachments_retrieve
+      description: Get detailed information about a specific attachment by its ID.
+      summary: Retrieve a specific attachment
       parameters:
       - in: path
         name: expense_id
         schema:
           type: integer
+        description: Expense ID
         required: true
       - in: path
         name: id
@@ -1150,11 +1567,14 @@ paths:
           description: ''
     put:
       operationId: budgeting_v1_expenses_attachments_update
+      description: Modify the details of an existing attachment by its ID.
+      summary: Update an existing attachment
       parameters:
       - in: path
         name: expense_id
         schema:
           type: integer
+        description: Expense ID
         required: true
       - in: path
         name: id
@@ -1182,11 +1602,15 @@ paths:
           description: ''
     patch:
       operationId: budgeting_v1_expenses_attachments_partial_update
+      description: Update specific fields of an existing attachment without affecting
+        others.
+      summary: Partially update an attachment
       parameters:
       - in: path
         name: expense_id
         schema:
           type: integer
+        description: Expense ID
         required: true
       - in: path
         name: id
@@ -1213,11 +1637,14 @@ paths:
           description: ''
     delete:
       operationId: budgeting_v1_expenses_attachments_destroy
+      description: Remove an attachment from the system by its ID.
+      summary: Delete an attachment
       parameters:
       - in: path
         name: expense_id
         schema:
           type: integer
+        description: Expense ID
         required: true
       - in: path
         name: id
@@ -1236,6 +1663,8 @@ paths:
   /api/budgeting/v1/expenses/{id}/:
     get:
       operationId: budgeting_v1_expenses_retrieve
+      description: Get detailed information about a specific expense by its ID.
+      summary: Retrieve a specific expense
       parameters:
       - in: path
         name: id
@@ -1257,6 +1686,8 @@ paths:
           description: ''
     put:
       operationId: budgeting_v1_expenses_update
+      description: Modify the details of an existing expense by its ID.
+      summary: Update an existing expense
       parameters:
       - in: path
         name: id
@@ -1284,6 +1715,9 @@ paths:
           description: ''
     patch:
       operationId: budgeting_v1_expenses_partial_update
+      description: Update specific fields of an existing expense without affecting
+        others.
+      summary: Partially update an expense
       parameters:
       - in: path
         name: id
@@ -1310,6 +1744,8 @@ paths:
           description: ''
     delete:
       operationId: budgeting_v1_expenses_destroy
+      description: Remove an expense from the system by its ID.
+      summary: Delete an expense
       parameters:
       - in: path
         name: id
@@ -1328,6 +1764,8 @@ paths:
   /api/budgeting/v1/income-categories/:
     get:
       operationId: budgeting_v1_income_categories_list
+      description: Retrieve a list of all income categories in the system.
+      summary: List all income categories
       parameters:
       - name: page
         required: false
@@ -1355,6 +1793,8 @@ paths:
           description: ''
     post:
       operationId: budgeting_v1_income_categories_create
+      description: Add a new income category to the system.
+      summary: Create a new income category
       tags:
       - budgeting
       requestBody:
@@ -1376,6 +1816,9 @@ paths:
   /api/budgeting/v1/income-categories/{id}/:
     get:
       operationId: budgeting_v1_income_categories_retrieve
+      description: Get detailed information about a specific income category by its
+        ID.
+      summary: Retrieve a specific income category
       parameters:
       - in: path
         name: id
@@ -1397,6 +1840,8 @@ paths:
           description: ''
     put:
       operationId: budgeting_v1_income_categories_update
+      description: Modify the details of an existing income category by its ID.
+      summary: Update an existing income category
       parameters:
       - in: path
         name: id
@@ -1424,6 +1869,9 @@ paths:
           description: ''
     patch:
       operationId: budgeting_v1_income_categories_partial_update
+      description: Update specific fields of an existing income category without affecting
+        others.
+      summary: Partially update an income category
       parameters:
       - in: path
         name: id
@@ -1450,6 +1898,8 @@ paths:
           description: ''
     delete:
       operationId: budgeting_v1_income_categories_destroy
+      description: Remove an income category from the system by its ID.
+      summary: Delete an income category
       parameters:
       - in: path
         name: id
@@ -1468,6 +1918,9 @@ paths:
   /api/budgeting/v1/incomes/:
     get:
       operationId: budgeting_v1_incomes_list
+      description: Retrieve a list of all incomes in the system, optionally filtered
+        by category.
+      summary: List all incomes
       parameters:
       - in: query
         name: category
@@ -1500,6 +1953,8 @@ paths:
           description: ''
     post:
       operationId: budgeting_v1_incomes_create
+      description: Add a new income to the system.
+      summary: Create a new income
       tags:
       - budgeting
       requestBody:
@@ -1521,6 +1976,8 @@ paths:
   /api/budgeting/v1/incomes/{id}/:
     get:
       operationId: budgeting_v1_incomes_retrieve
+      description: Get detailed information about a specific income by its ID.
+      summary: Retrieve a specific income
       parameters:
       - in: path
         name: id
@@ -1542,6 +1999,8 @@ paths:
           description: ''
     put:
       operationId: budgeting_v1_incomes_update
+      description: Modify the details of an existing income by its ID.
+      summary: Update an existing income
       parameters:
       - in: path
         name: id
@@ -1569,6 +2028,9 @@ paths:
           description: ''
     patch:
       operationId: budgeting_v1_incomes_partial_update
+      description: Update specific fields of an existing income without affecting
+        others.
+      summary: Partially update an income
       parameters:
       - in: path
         name: id
@@ -1595,6 +2057,8 @@ paths:
           description: ''
     delete:
       operationId: budgeting_v1_incomes_destroy
+      description: Remove an income from the system by its ID.
+      summary: Delete an income
       parameters:
       - in: path
         name: id
@@ -1613,6 +2077,9 @@ paths:
   /api/budgeting/v1/productions/{production_id}/cost-categories/:
     get:
       operationId: budgeting_v1_productions_cost_categories_list
+      description: Retrieve a list of all production cost categories for a specific
+        production.
+      summary: List all production cost categories
       parameters:
       - name: page
         required: false
@@ -1630,6 +2097,7 @@ paths:
         name: production_id
         schema:
           type: integer
+        description: Production ID
         required: true
       tags:
       - budgeting
@@ -1645,11 +2113,14 @@ paths:
           description: ''
     post:
       operationId: budgeting_v1_productions_cost_categories_create
+      description: Add a new production cost category to the system.
+      summary: Create a new production cost category
       parameters:
       - in: path
         name: production_id
         schema:
           type: integer
+        description: Production ID
         required: true
       tags:
       - budgeting
@@ -1672,6 +2143,9 @@ paths:
   /api/budgeting/v1/productions/{production_id}/cost-categories/{id}/:
     get:
       operationId: budgeting_v1_productions_cost_categories_retrieve
+      description: Get detailed information about a specific production cost category
+        by its ID.
+      summary: Retrieve a specific production cost category
       parameters:
       - in: path
         name: id
@@ -1683,6 +2157,7 @@ paths:
         name: production_id
         schema:
           type: integer
+        description: Production ID
         required: true
       tags:
       - budgeting
@@ -1698,6 +2173,9 @@ paths:
           description: ''
     put:
       operationId: budgeting_v1_productions_cost_categories_update
+      description: Modify the details of an existing production cost category by its
+        ID.
+      summary: Update an existing production cost category
       parameters:
       - in: path
         name: id
@@ -1709,6 +2187,7 @@ paths:
         name: production_id
         schema:
           type: integer
+        description: Production ID
         required: true
       tags:
       - budgeting
@@ -1730,6 +2209,9 @@ paths:
           description: ''
     patch:
       operationId: budgeting_v1_productions_cost_categories_partial_update
+      description: Update specific fields of an existing production cost category
+        without affecting others.
+      summary: Partially update a production cost category
       parameters:
       - in: path
         name: id
@@ -1741,6 +2223,7 @@ paths:
         name: production_id
         schema:
           type: integer
+        description: Production ID
         required: true
       tags:
       - budgeting
@@ -1761,6 +2244,8 @@ paths:
           description: ''
     delete:
       operationId: budgeting_v1_productions_cost_categories_destroy
+      description: Remove a production cost category from the system by its ID.
+      summary: Delete a production cost category
       parameters:
       - in: path
         name: id
@@ -1772,6 +2257,7 @@ paths:
         name: production_id
         schema:
           type: integer
+        description: Production ID
         required: true
       tags:
       - budgeting
@@ -1784,6 +2270,8 @@ paths:
   /api/budgeting/v1/productions/{production_id}/income-categories/:
     get:
       operationId: budgeting_v1_productions_income_categories_list
+      description: Retrieve a list of all income categories for a specific production.
+      summary: List all production income categories
       parameters:
       - name: page
         required: false
@@ -1801,6 +2289,7 @@ paths:
         name: production_id
         schema:
           type: integer
+        description: Production ID
         required: true
       tags:
       - budgeting
@@ -1816,11 +2305,14 @@ paths:
           description: ''
     post:
       operationId: budgeting_v1_productions_income_categories_create
+      description: Add a new production income category to the system.
+      summary: Create a new production income category
       parameters:
       - in: path
         name: production_id
         schema:
           type: integer
+        description: Production ID
         required: true
       tags:
       - budgeting
@@ -1843,6 +2335,9 @@ paths:
   /api/budgeting/v1/productions/{production_id}/income-categories/{id}/:
     get:
       operationId: budgeting_v1_productions_income_categories_retrieve
+      description: Get detailed information about a specific production income category
+        by its ID.
+      summary: Retrieve a specific production income category
       parameters:
       - in: path
         name: id
@@ -1854,6 +2349,7 @@ paths:
         name: production_id
         schema:
           type: integer
+        description: Production ID
         required: true
       tags:
       - budgeting
@@ -1869,6 +2365,9 @@ paths:
           description: ''
     put:
       operationId: budgeting_v1_productions_income_categories_update
+      description: Modify the details of an existing production income category by
+        its ID.
+      summary: Update an existing production income category
       parameters:
       - in: path
         name: id
@@ -1880,6 +2379,7 @@ paths:
         name: production_id
         schema:
           type: integer
+        description: Production ID
         required: true
       tags:
       - budgeting
@@ -1901,6 +2401,9 @@ paths:
           description: ''
     patch:
       operationId: budgeting_v1_productions_income_categories_partial_update
+      description: Update specific fields of an existing production income category
+        without affecting others.
+      summary: Partially update a production income category
       parameters:
       - in: path
         name: id
@@ -1912,6 +2415,7 @@ paths:
         name: production_id
         schema:
           type: integer
+        description: Production ID
         required: true
       tags:
       - budgeting
@@ -1932,6 +2436,8 @@ paths:
           description: ''
     delete:
       operationId: budgeting_v1_productions_income_categories_destroy
+      description: Remove a production income category from the system by its ID.
+      summary: Delete a production income category
       parameters:
       - in: path
         name: id
@@ -1943,6 +2449,7 @@ paths:
         name: production_id
         schema:
           type: integer
+        description: Production ID
         required: true
       tags:
       - budgeting
@@ -1955,6 +2462,8 @@ paths:
   /api/budgeting/v1/reimbursements/:
     get:
       operationId: budgeting_v1_reimbursements_list
+      description: Retrieve a list of all reimbursements in the system.
+      summary: List all reimbursements
       parameters:
       - name: page
         required: false
@@ -1982,6 +2491,8 @@ paths:
           description: ''
     post:
       operationId: budgeting_v1_reimbursements_create
+      description: Add a new reimbursement to the system.
+      summary: Create a new reimbursement
       tags:
       - budgeting
       requestBody:
@@ -2003,6 +2514,9 @@ paths:
   /api/budgeting/v1/reimbursements/{id}/:
     get:
       operationId: budgeting_v1_reimbursements_retrieve
+      description: Get detailed information about a specific reimbursement by its
+        ID.
+      summary: Retrieve a specific reimbursement
       parameters:
       - in: path
         name: id
@@ -2024,6 +2538,8 @@ paths:
           description: ''
     put:
       operationId: budgeting_v1_reimbursements_update
+      description: Modify the details of an existing reimbursement by its ID.
+      summary: Update an existing reimbursement
       parameters:
       - in: path
         name: id
@@ -2051,6 +2567,9 @@ paths:
           description: ''
     patch:
       operationId: budgeting_v1_reimbursements_partial_update
+      description: Update specific fields of an existing reimbursement without affecting
+        others.
+      summary: Partially update a reimbursement
       parameters:
       - in: path
         name: id
@@ -2077,6 +2596,8 @@ paths:
           description: ''
     delete:
       operationId: budgeting_v1_reimbursements_destroy
+      description: Remove a reimbursement from the system by its ID.
+      summary: Delete a reimbursement
       parameters:
       - in: path
         name: id
@@ -2095,6 +2616,8 @@ paths:
   /api/budgeting/v1/vendors/:
     get:
       operationId: budgeting_v1_vendors_list
+      description: Retrieve a list of all vendors in the system.
+      summary: List all vendors
       parameters:
       - name: page
         required: false
@@ -2122,6 +2645,8 @@ paths:
           description: ''
     post:
       operationId: budgeting_v1_vendors_create
+      description: Add a new vendor to the system.
+      summary: Create a new vendor
       tags:
       - budgeting
       requestBody:
@@ -2143,6 +2668,8 @@ paths:
   /api/budgeting/v1/vendors/{id}/:
     get:
       operationId: budgeting_v1_vendors_retrieve
+      description: Get detailed information about a specific vendor by its ID.
+      summary: Retrieve a specific vendor
       parameters:
       - in: path
         name: id
@@ -2164,6 +2691,8 @@ paths:
           description: ''
     put:
       operationId: budgeting_v1_vendors_update
+      description: Modify the details of an existing vendor by its ID.
+      summary: Update an existing vendor
       parameters:
       - in: path
         name: id
@@ -2191,6 +2720,9 @@ paths:
           description: ''
     patch:
       operationId: budgeting_v1_vendors_partial_update
+      description: Update specific fields of an existing vendor without affecting
+        others.
+      summary: Partially update a vendor
       parameters:
       - in: path
         name: id
@@ -2217,6 +2749,8 @@ paths:
           description: ''
     delete:
       operationId: budgeting_v1_vendors_destroy
+      description: Remove a vendor from the system by its ID.
+      summary: Delete a vendor
       parameters:
       - in: path
         name: id
@@ -10663,10 +11197,15 @@ components:
           type:
           - integer
           - 'null'
+          description: The Expense Category this expense belongs to. Either this or
+            `prod_category` must be set (but not both).
         prod_category:
           type:
           - integer
           - 'null'
+          description: The Production Expense Category this expense belongs to (if
+            the expense belongs to a production). Either this or `category` must be
+            set (but not both).
         vendor:
           type:
           - integer
@@ -11626,10 +12165,15 @@ components:
           type:
           - integer
           - 'null'
+          description: The Income Category this income belongs to. Either this or
+            `prod_category` must be set (but not both).
         prod_category:
           type:
           - integer
           - 'null'
+          description: The Production Income Category this income belongs to (if the
+            income belongs to a production). Either this or `category` must be set
+            (but not both).
       required:
       - amount
       - created_at
@@ -14128,10 +14672,15 @@ components:
           type:
           - integer
           - 'null'
+          description: The Expense Category this expense belongs to. Either this or
+            `prod_category` must be set (but not both).
         prod_category:
           type:
           - integer
           - 'null'
+          description: The Production Expense Category this expense belongs to (if
+            the expense belongs to a production). Either this or `category` must be
+            set (but not both).
         vendor:
           type:
           - integer
@@ -14961,10 +15510,15 @@ components:
           type:
           - integer
           - 'null'
+          description: The Income Category this income belongs to. Either this or
+            `prod_category` must be set (but not both).
         prod_category:
           type:
           - integer
           - 'null'
+          description: The Production Income Category this income belongs to (if the
+            income belongs to a production). Either this or `category` must be set
+            (but not both).
     PatchedIncomeCategory:
       type: object
       properties:
