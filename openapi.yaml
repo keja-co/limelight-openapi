@@ -874,6 +874,1364 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/budgeting/v1/cost-categories/:
+    get:
+      operationId: budgeting_v1_cost_categories_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCostCategoryList'
+          description: ''
+    post:
+      operationId: budgeting_v1_cost_categories_create
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostCategory'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCategory'
+          description: ''
+  /api/budgeting/v1/cost-categories/{id}/:
+    get:
+      operationId: budgeting_v1_cost_categories_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Cost Category.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCategory'
+          description: ''
+    put:
+      operationId: budgeting_v1_cost_categories_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Cost Category.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostCategory'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCategory'
+          description: ''
+    patch:
+      operationId: budgeting_v1_cost_categories_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Cost Category.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCostCategory'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCategory'
+          description: ''
+    delete:
+      operationId: budgeting_v1_cost_categories_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Cost Category.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/budgeting/v1/expenses/:
+    get:
+      operationId: budgeting_v1_expenses_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedExpenseList'
+          description: ''
+    post:
+      operationId: budgeting_v1_expenses_create
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Expense'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Expense'
+          description: ''
+  /api/budgeting/v1/expenses/{expense_id}/attachments/:
+    get:
+      operationId: budgeting_v1_expenses_attachments_list
+      parameters:
+      - in: path
+        name: expense_id
+        schema:
+          type: integer
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedExpenseAttachmentList'
+          description: ''
+    post:
+      operationId: budgeting_v1_expenses_attachments_create
+      parameters:
+      - in: path
+        name: expense_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseAttachment'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseAttachment'
+          description: ''
+  /api/budgeting/v1/expenses/{expense_id}/attachments/{id}/:
+    get:
+      operationId: budgeting_v1_expenses_attachments_retrieve
+      parameters:
+      - in: path
+        name: expense_id
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Expense Attachment.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseAttachment'
+          description: ''
+    put:
+      operationId: budgeting_v1_expenses_attachments_update
+      parameters:
+      - in: path
+        name: expense_id
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Expense Attachment.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseAttachment'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseAttachment'
+          description: ''
+    patch:
+      operationId: budgeting_v1_expenses_attachments_partial_update
+      parameters:
+      - in: path
+        name: expense_id
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Expense Attachment.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedExpenseAttachment'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseAttachment'
+          description: ''
+    delete:
+      operationId: budgeting_v1_expenses_attachments_destroy
+      parameters:
+      - in: path
+        name: expense_id
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Expense Attachment.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/budgeting/v1/expenses/{id}/:
+    get:
+      operationId: budgeting_v1_expenses_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Expense.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Expense'
+          description: ''
+    put:
+      operationId: budgeting_v1_expenses_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Expense.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Expense'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Expense'
+          description: ''
+    patch:
+      operationId: budgeting_v1_expenses_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Expense.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedExpense'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Expense'
+          description: ''
+    delete:
+      operationId: budgeting_v1_expenses_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Expense.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/budgeting/v1/income-categories/:
+    get:
+      operationId: budgeting_v1_income_categories_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedIncomeCategoryList'
+          description: ''
+    post:
+      operationId: budgeting_v1_income_categories_create
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncomeCategory'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomeCategory'
+          description: ''
+  /api/budgeting/v1/income-categories/{id}/:
+    get:
+      operationId: budgeting_v1_income_categories_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Income Category.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomeCategory'
+          description: ''
+    put:
+      operationId: budgeting_v1_income_categories_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Income Category.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncomeCategory'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomeCategory'
+          description: ''
+    patch:
+      operationId: budgeting_v1_income_categories_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Income Category.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedIncomeCategory'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomeCategory'
+          description: ''
+    delete:
+      operationId: budgeting_v1_income_categories_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Income Category.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/budgeting/v1/incomes/:
+    get:
+      operationId: budgeting_v1_incomes_list
+      parameters:
+      - in: query
+        name: category
+        schema:
+          type: string
+        description: Filter by income category
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedIncomeList'
+          description: ''
+    post:
+      operationId: budgeting_v1_incomes_create
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Income'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Income'
+          description: ''
+  /api/budgeting/v1/incomes/{id}/:
+    get:
+      operationId: budgeting_v1_incomes_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Income.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Income'
+          description: ''
+    put:
+      operationId: budgeting_v1_incomes_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Income.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Income'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Income'
+          description: ''
+    patch:
+      operationId: budgeting_v1_incomes_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Income.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedIncome'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Income'
+          description: ''
+    delete:
+      operationId: budgeting_v1_incomes_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Income.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/budgeting/v1/productions/{production_id}/cost-categories/:
+    get:
+      operationId: budgeting_v1_productions_cost_categories_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductionCostCategoryList'
+          description: ''
+    post:
+      operationId: budgeting_v1_productions_cost_categories_create
+      parameters:
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionCostCategory'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCostCategory'
+          description: ''
+  /api/budgeting/v1/productions/{production_id}/cost-categories/{id}/:
+    get:
+      operationId: budgeting_v1_productions_cost_categories_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Cost Category.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCostCategory'
+          description: ''
+    put:
+      operationId: budgeting_v1_productions_cost_categories_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Cost Category.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionCostCategory'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCostCategory'
+          description: ''
+    patch:
+      operationId: budgeting_v1_productions_cost_categories_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Cost Category.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProductionCostCategory'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCostCategory'
+          description: ''
+    delete:
+      operationId: budgeting_v1_productions_cost_categories_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Cost Category.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/budgeting/v1/productions/{production_id}/income-categories/:
+    get:
+      operationId: budgeting_v1_productions_income_categories_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductionIncomeCategoryList'
+          description: ''
+    post:
+      operationId: budgeting_v1_productions_income_categories_create
+      parameters:
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionIncomeCategory'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionIncomeCategory'
+          description: ''
+  /api/budgeting/v1/productions/{production_id}/income-categories/{id}/:
+    get:
+      operationId: budgeting_v1_productions_income_categories_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Income Category.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionIncomeCategory'
+          description: ''
+    put:
+      operationId: budgeting_v1_productions_income_categories_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Income Category.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionIncomeCategory'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionIncomeCategory'
+          description: ''
+    patch:
+      operationId: budgeting_v1_productions_income_categories_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Income Category.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProductionIncomeCategory'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionIncomeCategory'
+          description: ''
+    delete:
+      operationId: budgeting_v1_productions_income_categories_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Income Category.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/budgeting/v1/reimbursements/:
+    get:
+      operationId: budgeting_v1_reimbursements_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedReimbursementList'
+          description: ''
+    post:
+      operationId: budgeting_v1_reimbursements_create
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reimbursement'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reimbursement'
+          description: ''
+  /api/budgeting/v1/reimbursements/{id}/:
+    get:
+      operationId: budgeting_v1_reimbursements_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Reimbursement.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reimbursement'
+          description: ''
+    put:
+      operationId: budgeting_v1_reimbursements_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Reimbursement.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reimbursement'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reimbursement'
+          description: ''
+    patch:
+      operationId: budgeting_v1_reimbursements_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Reimbursement.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReimbursement'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reimbursement'
+          description: ''
+    delete:
+      operationId: budgeting_v1_reimbursements_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Reimbursement.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/budgeting/v1/vendors/:
+    get:
+      operationId: budgeting_v1_vendors_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVendorList'
+          description: ''
+    post:
+      operationId: budgeting_v1_vendors_create
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+          description: ''
+  /api/budgeting/v1/vendors/{id}/:
+    get:
+      operationId: budgeting_v1_vendors_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Vendor.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+          description: ''
+    put:
+      operationId: budgeting_v1_vendors_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Vendor.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+          description: ''
+    patch:
+      operationId: budgeting_v1_vendors_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Vendor.
+        required: true
+      tags:
+      - budgeting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVendor'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+          description: ''
+    delete:
+      operationId: budgeting_v1_vendors_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Vendor.
+        required: true
+      tags:
+      - budgeting
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/compliance/auditlogs/:
     get:
       operationId: compliance_auditlogs_list
@@ -7145,6 +8503,9 @@ components:
       - production
       - tenant
       - updated_at
+    BlankEnum:
+      enum:
+      - ''
     ConditionEnum:
       enum:
       - new
@@ -7246,6 +8607,57 @@ components:
       - name
       - tenant
       - updated_at
+    CostCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        line_code:
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        parent:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - id
+      - name
+      - tenant
+      - updated_at
     Country:
       type: object
       properties:
@@ -7291,6 +8703,24 @@ components:
       - name
       - tenant
       - updated_at
+    CurrencyEnum:
+      enum:
+      - AUD
+      - CAD
+      - EUR
+      - GBP
+      - JPY
+      - NZD
+      - USD
+      type: string
+      description: |-
+        * `AUD` - AUD - Australian Dollar
+        * `CAD` - CAD - Canadian Dollar
+        * `EUR` - EUR - Euro
+        * `GBP` - GBP - British Pound
+        * `JPY` - JPY - Japanese Yen
+        * `NZD` - NZD - New Zealand Dollar
+        * `USD` - USD - United States Dollar
     Document:
       type: object
       properties:
@@ -7746,6 +9176,181 @@ components:
       - name
       - tenant
       - updated_at
+    Expense:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        approved_date_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          $ref: '#/components/schemas/ExpenseStatusEnum'
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        expense_date_time:
+          type: string
+          format: date-time
+        payment_method:
+          $ref: '#/components/schemas/ExpensePaymentMethodEnum'
+        notes:
+          type: string
+        receipt_number:
+          type: string
+          maxLength: 100
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        purchaser:
+          type: integer
+        approver:
+          type:
+          - integer
+          - 'null'
+        category:
+          type:
+          - integer
+          - 'null'
+        prod_category:
+          type:
+          - integer
+          - 'null'
+        vendor:
+          type:
+          - integer
+          - 'null'
+      required:
+      - cost
+      - created_at
+      - created_by
+      - expense_date_time
+      - id
+      - payment_method
+      - purchaser
+      - tenant
+      - title
+      - updated_at
+    ExpenseAttachment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        description:
+          type: string
+          maxLength: 255
+        file_uri:
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 500
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        expense:
+          type: integer
+        uploaded_by:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - expense
+      - id
+      - tenant
+      - updated_at
+    ExpensePaymentMethodEnum:
+      enum:
+      - personal_card
+      - company_card
+      - cash
+      - bank_transfer
+      - direct_debit
+      type: string
+      description: |-
+        * `personal_card` - Personal Card
+        * `company_card` - Company Card
+        * `cash` - Cash
+        * `bank_transfer` - Bank Transfer
+        * `direct_debit` - Direct Debit
+    ExpenseStatusEnum:
+      enum:
+      - draft
+      - submitted
+      - under_review
+      - approved
+      - rejected
+      - reimbursed
+      - partial_reimbursed
+      - internal
+      - cancelled
+      - additional_info_required
+      type: string
+      description: |-
+        * `draft` - Draft
+        * `submitted` - Submitted
+        * `under_review` - Under Review
+        * `approved` - Approved
+        * `rejected` - Rejected
+        * `reimbursed` - Reimbursed
+        * `partial_reimbursed` - Partially Reimbursed
+        * `internal` - Internal (Company Card)
+        * `cancelled` - Cancelled
+        * `additional_info_required` - Additional Info Required
     Feedback:
       type: object
       description: Serializer for the Feedback model.
@@ -8519,6 +10124,239 @@ components:
         * `rating` - Star Rating
         * `signature` - Digital Signature
         * `external_signature` - External Signature
+    Income:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        income_date:
+          type: string
+          format: date
+        status:
+          $ref: '#/components/schemas/IncomeStatusEnum'
+        payment_method:
+          oneOf:
+          - $ref: '#/components/schemas/IncomePaymentMethodEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        source_name:
+          type: string
+          maxLength: 200
+        source_contact:
+          type: string
+          maxLength: 200
+        currency:
+          $ref: '#/components/schemas/CurrencyEnum'
+        gross_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        fees_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        tax_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        reference_number:
+          type: string
+          maxLength: 100
+        notes:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        category:
+          type:
+          - integer
+          - 'null'
+        prod_category:
+          type:
+          - integer
+          - 'null'
+      required:
+      - amount
+      - created_at
+      - created_by
+      - id
+      - tenant
+      - title
+      - updated_at
+    IncomeCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        type:
+          $ref: '#/components/schemas/IncomeCategoryTypeEnum'
+        line_code:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        parent:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - id
+      - line_code
+      - name
+      - tenant
+      - type
+      - updated_at
+    IncomeCategoryTypeEnum:
+      enum:
+      - ticket_sales
+      - season_subscriptions
+      - group_sales
+      - concessions
+      - merchandise
+      - parking
+      - grants
+      - donations
+      - sponsorships
+      - fundraising_events
+      - membership_fees
+      - venue_rental
+      - equipment_rental
+      - workshop_fees
+      - investment_income
+      - insurance_claims
+      - refunds
+      - other
+      type: string
+      description: |-
+        * `ticket_sales` - Ticket Sales
+        * `season_subscriptions` - Season Subscriptions
+        * `group_sales` - Group Sales
+        * `concessions` - Food/Snack Concessions
+        * `merchandise` - Merchandise
+        * `parking` - Parking
+        * `grants` - Grants
+        * `donations` - Donations
+        * `sponsorships` - Sponsorships
+        * `fundraising_events` - Fundraising Events
+        * `membership_fees` - Membership Fees
+        * `venue_rental` - Venue Rental
+        * `equipment_rental` - Equipment Rental
+        * `workshop_fees` - Workshop/Class Fees
+        * `investment_income` - Investment Income
+        * `insurance_claims` - Insurance Claims
+        * `refunds` - Refunds/Returns
+        * `other` - Other
+    IncomePaymentMethodEnum:
+      enum:
+      - cash
+      - credit_card
+      - debit_card
+      - bank_transfer
+      - cheque
+      - paypal
+      - stripe
+      - square
+      - eftpos
+      - other
+      type: string
+      description: |-
+        * `cash` - Cash
+        * `credit_card` - Credit Card
+        * `debit_card` - Debit Card
+        * `bank_transfer` - Bank Transfer
+        * `cheque` - Cheque
+        * `paypal` - PayPal
+        * `stripe` - Stripe
+        * `square` - Square
+        * `eftpos` - EFTPOS
+        * `other` - Other
+    IncomeStatusEnum:
+      enum:
+      - expected
+      - pending
+      - received
+      - deposited
+      - cancelled
+      - refunded
+      type: string
+      description: |-
+        * `expected` - Expected
+        * `pending` - Pending
+        * `received` - Received
+        * `deposited` - Deposited
+        * `cancelled` - Cancelled
+        * `refunded` - Refunded
+    NullEnum:
+      type: 'null'
     PaginatedAddressList:
       type: object
       required:
@@ -8680,6 +10518,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Context'
+    PaginatedCostCategoryList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostCategory'
     PaginatedCountryList:
       type: object
       required:
@@ -8864,6 +10725,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EmploymentType'
+    PaginatedExpenseAttachmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseAttachment'
+    PaginatedExpenseList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Expense'
     PaginatedFeedbackList:
       type: object
       required:
@@ -8956,6 +10863,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Form'
+    PaginatedIncomeCategoryList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/IncomeCategory'
+    PaginatedIncomeList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Income'
     PaginatedPerformanceList:
       type: object
       required:
@@ -9048,6 +11001,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductionCategory'
+    PaginatedProductionCostCategoryList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductionCostCategory'
+    PaginatedProductionIncomeCategoryList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductionIncomeCategory'
     PaginatedProductionList:
       type: object
       required:
@@ -9186,6 +11185,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RehearsalParticipant'
+    PaginatedReimbursementList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reimbursement'
     PaginatedRoleList:
       type: object
       required:
@@ -9416,6 +11438,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserRoleAssignment'
+    PaginatedVendorList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vendor'
     PaginatedVenueCapacityList:
       type: object
       required:
@@ -9873,6 +11918,50 @@ components:
           type:
           - integer
           - 'null'
+    PatchedCostCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        line_code:
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        parent:
+          type:
+          - integer
+          - 'null'
     PatchedCountry:
       type: object
       properties:
@@ -10250,6 +12339,125 @@ components:
           - 'null'
           readOnly: true
         updated_by:
+          type:
+          - integer
+          - 'null'
+    PatchedExpense:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        approved_date_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          $ref: '#/components/schemas/ExpenseStatusEnum'
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        expense_date_time:
+          type: string
+          format: date-time
+        payment_method:
+          $ref: '#/components/schemas/ExpensePaymentMethodEnum'
+        notes:
+          type: string
+        receipt_number:
+          type: string
+          maxLength: 100
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        purchaser:
+          type: integer
+        approver:
+          type:
+          - integer
+          - 'null'
+        category:
+          type:
+          - integer
+          - 'null'
+        prod_category:
+          type:
+          - integer
+          - 'null'
+        vendor:
+          type:
+          - integer
+          - 'null'
+    PatchedExpenseAttachment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        description:
+          type: string
+          maxLength: 255
+        file_uri:
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 500
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        expense:
+          type: integer
+        uploaded_by:
           type:
           - integer
           - 'null'
@@ -10952,6 +13160,140 @@ components:
           - 'null'
         form:
           type: integer
+    PatchedIncome:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        income_date:
+          type: string
+          format: date
+        status:
+          $ref: '#/components/schemas/IncomeStatusEnum'
+        payment_method:
+          oneOf:
+          - $ref: '#/components/schemas/IncomePaymentMethodEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        source_name:
+          type: string
+          maxLength: 200
+        source_contact:
+          type: string
+          maxLength: 200
+        currency:
+          $ref: '#/components/schemas/CurrencyEnum'
+        gross_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        fees_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        tax_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        reference_number:
+          type: string
+          maxLength: 100
+        notes:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        category:
+          type:
+          - integer
+          - 'null'
+        prod_category:
+          type:
+          - integer
+          - 'null'
+    PatchedIncomeCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        type:
+          $ref: '#/components/schemas/IncomeCategoryTypeEnum'
+        line_code:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        parent:
+          type:
+          - integer
+          - 'null'
     PatchedPerformance:
       type: object
       properties:
@@ -11169,6 +13511,106 @@ components:
           type: integer
         category:
           type: integer
+    PatchedProductionCostCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        line_code:
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        budget:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        company_cost_category:
+          type:
+          - integer
+          - 'null'
+    PatchedProductionIncomeCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 100
+        line_code:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        budget:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        notes:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        income_category:
+          type:
+          - integer
+          - 'null'
     PatchedProductionMember:
       type: object
       properties:
@@ -11360,6 +13802,72 @@ components:
           type: integer
         member:
           type: integer
+    PatchedReimbursement:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        approved_date_time:
+          type: string
+          format: date-time
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        scheduled_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        processed_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        status:
+          $ref: '#/components/schemas/ReimbursementStatusEnum'
+        payment_reference:
+          type: string
+          maxLength: 100
+        notes:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        payee:
+          type:
+          - integer
+          - 'null'
+        approver:
+          type:
+          - integer
+          - 'null'
+        expense:
+          type:
+          - integer
+          - 'null'
     PatchedRole:
       type: object
       properties:
@@ -11895,6 +14403,78 @@ components:
           type: integer
         role:
           type: integer
+    PatchedVendor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 255
+        address:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        notes:
+          type: string
+        contact_name:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        contact_email:
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        contact_phone:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+        website:
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        abn:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        payment_terms:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
     PatchedVenue:
       type: object
       properties:
@@ -12376,6 +14956,125 @@ components:
       - production
       - tenant
       - updated_at
+    ProductionCostCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        line_code:
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        budget:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        company_cost_category:
+          type:
+          - integer
+          - 'null'
+      required:
+      - budget
+      - created_at
+      - created_by
+      - id
+      - name
+      - production
+      - tenant
+      - updated_at
+    ProductionIncomeCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 100
+        line_code:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        budget:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        notes:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        production:
+          type: integer
+        income_category:
+          type:
+          - integer
+          - 'null'
+      required:
+      - budget
+      - created_at
+      - created_by
+      - id
+      - line_code
+      - name
+      - production
+      - tenant
+      - updated_at
     ProductionMember:
       type: object
       properties:
@@ -12628,6 +15327,93 @@ components:
       - rehearsal
       - tenant
       - updated_at
+    Reimbursement:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        approved_date_time:
+          type: string
+          format: date-time
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        scheduled_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        processed_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        status:
+          $ref: '#/components/schemas/ReimbursementStatusEnum'
+        payment_reference:
+          type: string
+          maxLength: 100
+        notes:
+          type: string
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+        payee:
+          type:
+          - integer
+          - 'null'
+        approver:
+          type:
+          - integer
+          - 'null'
+        expense:
+          type:
+          - integer
+          - 'null'
+      required:
+      - amount
+      - created_at
+      - created_by
+      - id
+      - tenant
+      - updated_at
+    ReimbursementStatusEnum:
+      enum:
+      - pending
+      - processing
+      - completed
+      - failed
+      - cancelled
+      type: string
+      description: |-
+        * `pending` - Pending
+        * `processing` - Processing
+        * `completed` - Completed
+        * `failed` - Failed
+        * `cancelled` - Cancelled
     Role:
       type: object
       properties:
@@ -12778,7 +15564,6 @@ components:
           - integer
           - 'null'
       required:
-      - context
       - created_at
       - id
       - permission
@@ -12880,13 +15665,10 @@ components:
       required:
       - created_at
       - created_by
-      - email
-      - first_name
       - id
       - slot
       - tenant
       - updated_at
-      - user
     Slot:
       type: object
       description: Serializer for the Slot model.
@@ -13280,12 +16062,10 @@ components:
             type: integer
           description: Specific permissions for this user.
       required:
-      - email
       - first_name
       - id
       - password
       - tenant
-      - user_sso_id
       - username
     UserRoleAssignment:
       type: object
@@ -13327,6 +16107,85 @@ components:
       - tenant
       - updated_at
       - user
+    Vendor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          maxLength: 255
+        address:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        notes:
+          type: string
+        contact_name:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        contact_email:
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        contact_phone:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+        website:
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        abn:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        payment_terms:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        tenant:
+          type: integer
+        created_by:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        updated_by:
+          type:
+          - integer
+          - 'null'
+      required:
+      - created_at
+      - created_by
+      - id
+      - name
+      - tenant
+      - updated_at
     Venue:
       type: object
       properties:
