@@ -6794,149 +6794,11 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/location/v1/addresses/:
-    get:
-      operationId: location_v1_addresses_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - location
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedAddressList'
-          description: ''
-    post:
-      operationId: location_v1_addresses_create
-      tags:
-      - location
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Address'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Address'
-          description: ''
-  /api/location/v1/addresses/{id}/:
-    get:
-      operationId: location_v1_addresses_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this address.
-        required: true
-      tags:
-      - location
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Address'
-          description: ''
-    put:
-      operationId: location_v1_addresses_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this address.
-        required: true
-      tags:
-      - location
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Address'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Address'
-          description: ''
-    patch:
-      operationId: location_v1_addresses_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this address.
-        required: true
-      tags:
-      - location
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedAddress'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Address'
-          description: ''
-    delete:
-      operationId: location_v1_addresses_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this address.
-        required: true
-      tags:
-      - location
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
   /api/location/v1/countries/:
     get:
       operationId: location_v1_countries_list
+      description: Retrieve a list of all countries in the system.
+      summary: List all countries
       parameters:
       - name: page
         required: false
@@ -6964,6 +6826,8 @@ paths:
           description: ''
     post:
       operationId: location_v1_countries_create
+      description: Add a new country to the system.
+      summary: Create a new country
       tags:
       - location
       requestBody:
@@ -6982,9 +6846,390 @@ paths:
               schema:
                 $ref: '#/components/schemas/Country'
           description: ''
+  /api/location/v1/countries/{country_id}/addresses/:
+    get:
+      operationId: location_v1_countries_addresses_list
+      description: Retrieve a list of all addresses within a specific country.
+      summary: List all addresses in a country
+      parameters:
+      - in: path
+        name: country_id
+        schema:
+          type: integer
+        description: Country ID
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - location
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAddressList'
+          description: ''
+    post:
+      operationId: location_v1_countries_addresses_create
+      description: Add a new address to a specific country.
+      summary: Create a new address in a country
+      parameters:
+      - in: path
+        name: country_id
+        schema:
+          type: integer
+        description: Country ID
+        required: true
+      tags:
+      - location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+          description: ''
+  /api/location/v1/countries/{country_id}/addresses/{id}/:
+    get:
+      operationId: location_v1_countries_addresses_retrieve
+      description: Get detailed information about a specific address by its ID.
+      summary: Retrieve a specific address
+      parameters:
+      - in: path
+        name: country_id
+        schema:
+          type: integer
+        description: Country ID
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this address.
+        required: true
+      tags:
+      - location
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+          description: ''
+    put:
+      operationId: location_v1_countries_addresses_update
+      description: Modify the details of an existing address by its ID.
+      summary: Update an existing address
+      parameters:
+      - in: path
+        name: country_id
+        schema:
+          type: integer
+        description: Country ID
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this address.
+        required: true
+      tags:
+      - location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+          description: ''
+    patch:
+      operationId: location_v1_countries_addresses_partial_update
+      description: Update specific fields of an existing address without affecting
+        others.
+      summary: Partially update an address
+      parameters:
+      - in: path
+        name: country_id
+        schema:
+          type: integer
+        description: Country ID
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this address.
+        required: true
+      tags:
+      - location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAddress'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+          description: ''
+    delete:
+      operationId: location_v1_countries_addresses_destroy
+      description: Remove an address from the system by its ID.
+      summary: Delete an address
+      parameters:
+      - in: path
+        name: country_id
+        schema:
+          type: integer
+        description: Country ID
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this address.
+        required: true
+      tags:
+      - location
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/location/v1/countries/{country_id}/state/:
+    get:
+      operationId: location_v1_countries_state_list
+      description: Retrieve a list of all states within a specific country.
+      summary: List all states in a country
+      parameters:
+      - in: path
+        name: country_id
+        schema:
+          type: integer
+        description: Country ID
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - location
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedStateList'
+          description: ''
+    post:
+      operationId: location_v1_countries_state_create
+      description: Add a new state to a specific country.
+      summary: Create a new state in a country
+      parameters:
+      - in: path
+        name: country_id
+        schema:
+          type: integer
+        description: Country ID
+        required: true
+      tags:
+      - location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/State'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/State'
+          description: ''
+  /api/location/v1/countries/{country_id}/state/{id}/:
+    get:
+      operationId: location_v1_countries_state_retrieve
+      description: Get detailed information about a specific state by its ID.
+      summary: Retrieve a specific state
+      parameters:
+      - in: path
+        name: country_id
+        schema:
+          type: integer
+        description: Country ID
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this state.
+        required: true
+      tags:
+      - location
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/State'
+          description: ''
+    put:
+      operationId: location_v1_countries_state_update
+      description: Modify the details of an existing state by its ID.
+      summary: Update an existing state
+      parameters:
+      - in: path
+        name: country_id
+        schema:
+          type: integer
+        description: Country ID
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this state.
+        required: true
+      tags:
+      - location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/State'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/State'
+          description: ''
+    patch:
+      operationId: location_v1_countries_state_partial_update
+      description: Update specific fields of an existing state without affecting others.
+      summary: Partially update a state
+      parameters:
+      - in: path
+        name: country_id
+        schema:
+          type: integer
+        description: Country ID
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this state.
+        required: true
+      tags:
+      - location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedState'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/State'
+          description: ''
+    delete:
+      operationId: location_v1_countries_state_destroy
+      description: Remove a state from the system by its ID.
+      summary: Delete a state
+      parameters:
+      - in: path
+        name: country_id
+        schema:
+          type: integer
+        description: Country ID
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this state.
+        required: true
+      tags:
+      - location
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/location/v1/countries/{id}/:
     get:
       operationId: location_v1_countries_retrieve
+      description: Get detailed information about a specific country by its ID.
+      summary: Retrieve a specific country
       parameters:
       - in: path
         name: id
@@ -7006,6 +7251,8 @@ paths:
           description: ''
     put:
       operationId: location_v1_countries_update
+      description: Modify the details of an existing country by its ID.
+      summary: Update an existing country
       parameters:
       - in: path
         name: id
@@ -7033,6 +7280,9 @@ paths:
           description: ''
     patch:
       operationId: location_v1_countries_partial_update
+      description: Update specific fields of an existing country without affecting
+        others.
+      summary: Partially update a country
       parameters:
       - in: path
         name: id
@@ -7059,6 +7309,8 @@ paths:
           description: ''
     delete:
       operationId: location_v1_countries_destroy
+      description: Remove a country from the system by its ID.
+      summary: Delete a country
       parameters:
       - in: path
         name: id
@@ -7074,429 +7326,11 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/location/v1/states/:
-    get:
-      operationId: location_v1_states_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - location
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedStateList'
-          description: ''
-    post:
-      operationId: location_v1_states_create
-      tags:
-      - location
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/State'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/State'
-          description: ''
-  /api/location/v1/states/{id}/:
-    get:
-      operationId: location_v1_states_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this state.
-        required: true
-      tags:
-      - location
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/State'
-          description: ''
-    put:
-      operationId: location_v1_states_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this state.
-        required: true
-      tags:
-      - location
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/State'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/State'
-          description: ''
-    patch:
-      operationId: location_v1_states_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this state.
-        required: true
-      tags:
-      - location
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedState'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/State'
-          description: ''
-    delete:
-      operationId: location_v1_states_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this state.
-        required: true
-      tags:
-      - location
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/location/v1/venue-capacities/:
-    get:
-      operationId: location_v1_venue_capacities_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - location
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedVenueCapacityList'
-          description: ''
-    post:
-      operationId: location_v1_venue_capacities_create
-      tags:
-      - location
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VenueCapacity'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VenueCapacity'
-          description: ''
-  /api/location/v1/venue-capacities/{id}/:
-    get:
-      operationId: location_v1_venue_capacities_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this venue capacity.
-        required: true
-      tags:
-      - location
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VenueCapacity'
-          description: ''
-    put:
-      operationId: location_v1_venue_capacities_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this venue capacity.
-        required: true
-      tags:
-      - location
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VenueCapacity'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VenueCapacity'
-          description: ''
-    patch:
-      operationId: location_v1_venue_capacities_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this venue capacity.
-        required: true
-      tags:
-      - location
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedVenueCapacity'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VenueCapacity'
-          description: ''
-    delete:
-      operationId: location_v1_venue_capacities_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this venue capacity.
-        required: true
-      tags:
-      - location
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/location/v1/venue-tag-assignments/:
-    get:
-      operationId: location_v1_venue_tag_assignments_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - location
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedVenueTagAssignmentList'
-          description: ''
-    post:
-      operationId: location_v1_venue_tag_assignments_create
-      tags:
-      - location
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VenueTagAssignment'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VenueTagAssignment'
-          description: ''
-  /api/location/v1/venue-tag-assignments/{id}/:
-    get:
-      operationId: location_v1_venue_tag_assignments_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this venue tag assignment.
-        required: true
-      tags:
-      - location
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VenueTagAssignment'
-          description: ''
-    put:
-      operationId: location_v1_venue_tag_assignments_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this venue tag assignment.
-        required: true
-      tags:
-      - location
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VenueTagAssignment'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VenueTagAssignment'
-          description: ''
-    patch:
-      operationId: location_v1_venue_tag_assignments_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this venue tag assignment.
-        required: true
-      tags:
-      - location
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedVenueTagAssignment'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VenueTagAssignment'
-          description: ''
-    delete:
-      operationId: location_v1_venue_tag_assignments_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this venue tag assignment.
-        required: true
-      tags:
-      - location
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
   /api/location/v1/venue-tags/:
     get:
       operationId: location_v1_venue_tags_list
+      description: Retrieve a list of all tags associated with venues.
+      summary: List all venue tags
       parameters:
       - name: page
         required: false
@@ -7524,6 +7358,8 @@ paths:
           description: ''
     post:
       operationId: location_v1_venue_tags_create
+      description: Add a new tag to the venue system.
+      summary: Create a new venue tag
       tags:
       - location
       requestBody:
@@ -7545,6 +7381,8 @@ paths:
   /api/location/v1/venue-tags/{id}/:
     get:
       operationId: location_v1_venue_tags_retrieve
+      description: Get detailed information about a specific venue tag by its ID.
+      summary: Retrieve a specific venue tag
       parameters:
       - in: path
         name: id
@@ -7566,6 +7404,8 @@ paths:
           description: ''
     put:
       operationId: location_v1_venue_tags_update
+      description: Modify the details of an existing venue tag by its ID.
+      summary: Update an existing venue tag
       parameters:
       - in: path
         name: id
@@ -7593,6 +7433,9 @@ paths:
           description: ''
     patch:
       operationId: location_v1_venue_tags_partial_update
+      description: Update specific fields of an existing venue tag without affecting
+        others.
+      summary: Partially update a venue tag
       parameters:
       - in: path
         name: id
@@ -7619,6 +7462,8 @@ paths:
           description: ''
     delete:
       operationId: location_v1_venue_tags_destroy
+      description: Remove a venue tag from the system by its ID.
+      summary: Delete a venue tag
       parameters:
       - in: path
         name: id
@@ -7637,6 +7482,8 @@ paths:
   /api/location/v1/venues/:
     get:
       operationId: location_v1_venues_list
+      description: Retrieve a list of all venues in the system.
+      summary: List all venues
       parameters:
       - name: page
         required: false
@@ -7664,6 +7511,8 @@ paths:
           description: ''
     post:
       operationId: location_v1_venues_create
+      description: Add a new venue to the system.
+      summary: Create a new venue
       tags:
       - location
       requestBody:
@@ -7685,6 +7534,8 @@ paths:
   /api/location/v1/venues/{id}/:
     get:
       operationId: location_v1_venues_retrieve
+      description: Get detailed information about a specific venue by its ID.
+      summary: Retrieve a specific venue
       parameters:
       - in: path
         name: id
@@ -7706,6 +7557,8 @@ paths:
           description: ''
     put:
       operationId: location_v1_venues_update
+      description: Modify the details of an existing venue by its ID.
+      summary: Update an existing venue
       parameters:
       - in: path
         name: id
@@ -7733,6 +7586,8 @@ paths:
           description: ''
     patch:
       operationId: location_v1_venues_partial_update
+      description: Update specific fields of an existing venue without affecting others.
+      summary: Partially update a venue
       parameters:
       - in: path
         name: id
@@ -7759,12 +7614,396 @@ paths:
           description: ''
     delete:
       operationId: location_v1_venues_destroy
+      description: Remove a venue from the system by its ID.
+      summary: Delete a venue
       parameters:
       - in: path
         name: id
         schema:
           type: integer
         description: A unique integer value identifying this venue.
+        required: true
+      tags:
+      - location
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/location/v1/venues/{venue_id}/capacities/:
+    get:
+      operationId: location_v1_venues_capacities_list
+      description: Retrieve a list of all seating capacities for a venue.
+      summary: List all venue capacities
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: venue_id
+        schema:
+          type: integer
+        description: Venue ID
+        required: true
+      tags:
+      - location
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVenueCapacityList'
+          description: ''
+    post:
+      operationId: location_v1_venues_capacities_create
+      description: Add a new seating capacity for a specific venue.
+      summary: Create a new venue capacity
+      parameters:
+      - in: path
+        name: venue_id
+        schema:
+          type: integer
+        description: Venue ID
+        required: true
+      tags:
+      - location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VenueCapacity'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueCapacity'
+          description: ''
+  /api/location/v1/venues/{venue_id}/capacities/{id}/:
+    get:
+      operationId: location_v1_venues_capacities_retrieve
+      description: Get detailed information about a specific venue capacity by its
+        ID.
+      summary: Retrieve a specific venue capacity
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue capacity.
+        required: true
+      - in: path
+        name: venue_id
+        schema:
+          type: integer
+        description: Venue ID
+        required: true
+      tags:
+      - location
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueCapacity'
+          description: ''
+    put:
+      operationId: location_v1_venues_capacities_update
+      description: Modify the details of an existing venue capacity by its ID.
+      summary: Update an existing venue capacity
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue capacity.
+        required: true
+      - in: path
+        name: venue_id
+        schema:
+          type: integer
+        description: Venue ID
+        required: true
+      tags:
+      - location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VenueCapacity'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueCapacity'
+          description: ''
+    patch:
+      operationId: location_v1_venues_capacities_partial_update
+      description: Update specific fields of an existing venue capacity without affecting
+        others.
+      summary: Partially update a venue capacity
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue capacity.
+        required: true
+      - in: path
+        name: venue_id
+        schema:
+          type: integer
+        description: Venue ID
+        required: true
+      tags:
+      - location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVenueCapacity'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueCapacity'
+          description: ''
+    delete:
+      operationId: location_v1_venues_capacities_destroy
+      description: Remove a venue capacity from the system by its ID.
+      summary: Delete a venue capacity
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue capacity.
+        required: true
+      - in: path
+        name: venue_id
+        schema:
+          type: integer
+        description: Venue ID
+        required: true
+      tags:
+      - location
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/location/v1/venues/{venue_id}/tags/:
+    get:
+      operationId: location_v1_venues_tags_list
+      description: Retrieve a list of all tags assigned to a specific venue.
+      summary: List all tag assignments for a venue
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: venue_id
+        schema:
+          type: integer
+        description: Venue ID
+        required: true
+      tags:
+      - location
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVenueTagAssignmentList'
+          description: ''
+    post:
+      operationId: location_v1_venues_tags_create
+      description: Assign a new tag to a specific venue.
+      summary: Create a new tag assignment for a venue
+      parameters:
+      - in: path
+        name: venue_id
+        schema:
+          type: integer
+        description: Venue ID
+        required: true
+      tags:
+      - location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VenueTagAssignment'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueTagAssignment'
+          description: ''
+  /api/location/v1/venues/{venue_id}/tags/{id}/:
+    get:
+      operationId: location_v1_venues_tags_retrieve
+      description: Get detailed information about a specific tag assignment by its
+        ID.
+      summary: Retrieve a specific tag assignment
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue tag assignment.
+        required: true
+      - in: path
+        name: venue_id
+        schema:
+          type: integer
+        description: Venue ID
+        required: true
+      tags:
+      - location
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueTagAssignment'
+          description: ''
+    put:
+      operationId: location_v1_venues_tags_update
+      description: Modify the details of an existing tag assignment by its ID.
+      summary: Update an existing tag assignment
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue tag assignment.
+        required: true
+      - in: path
+        name: venue_id
+        schema:
+          type: integer
+        description: Venue ID
+        required: true
+      tags:
+      - location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VenueTagAssignment'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueTagAssignment'
+          description: ''
+    patch:
+      operationId: location_v1_venues_tags_partial_update
+      description: Update specific fields of an existing tag assignment without affecting
+        others.
+      summary: Partially update a tag assignment
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue tag assignment.
+        required: true
+      - in: path
+        name: venue_id
+        schema:
+          type: integer
+        description: Venue ID
+        required: true
+      tags:
+      - location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVenueTagAssignment'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueTagAssignment'
+          description: ''
+    delete:
+      operationId: location_v1_venues_tags_destroy
+      description: Remove a tag assignment from the system by its ID.
+      summary: Delete a tag assignment
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue tag assignment.
+        required: true
+      - in: path
+        name: venue_id
+        schema:
+          type: integer
+        description: Venue ID
         required: true
       tags:
       - location
