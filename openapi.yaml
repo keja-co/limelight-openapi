@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.61
+  version: 1.0.62
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -8098,7 +8098,7 @@ components:
                 description: List of allowed file types (e.g., 'image', 'document',
                   'video', 'audio', 'all')
                 items:
-                  $ref: '#/$defs/FileType'
+                  $ref: '#/components/schemas/FileType'
                 title: Allowed File Types
                 type: array
               max_file_size:
@@ -8327,7 +8327,7 @@ components:
             title: External Signature Configuration
             properties:
               service:
-                $ref: '#/$defs/ExternalSignatureService'
+                $ref: '#/components/schemas/ExternalSignatureService'
                 description: External signature service to use (e.g., 'dropboxsign',
                   'docusign', 'adobe', etc.)
               service_url:
@@ -10583,7 +10583,7 @@ components:
                 description: List of allowed file types (e.g., 'image', 'document',
                   'video', 'audio', 'all')
                 items:
-                  $ref: '#/$defs/FileType'
+                  $ref: '#/components/schemas/FileType'
                 title: Allowed File Types
                 type: array
               max_file_size:
@@ -10812,7 +10812,7 @@ components:
             title: External Signature Configuration
             properties:
               service:
-                $ref: '#/$defs/ExternalSignatureService'
+                $ref: '#/components/schemas/ExternalSignatureService'
                 description: External signature service to use (e.g., 'dropboxsign',
                   'docusign', 'adobe', etc.)
               service_url:
