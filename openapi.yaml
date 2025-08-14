@@ -8013,149 +8013,11 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/v1/performance/:
+  /api/production/v1/categories/:
     get:
-      operationId: production_v1_performance_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedPerformanceList'
-          description: ''
-    post:
-      operationId: production_v1_performance_create
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Performance'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Performance'
-          description: ''
-  /api/production/v1/performance/{id}/:
-    get:
-      operationId: production_v1_performance_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Performance.
-        required: true
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Performance'
-          description: ''
-    put:
-      operationId: production_v1_performance_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Performance.
-        required: true
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Performance'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Performance'
-          description: ''
-    patch:
-      operationId: production_v1_performance_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Performance.
-        required: true
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedPerformance'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Performance'
-          description: ''
-    delete:
-      operationId: production_v1_performance_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Performance.
-        required: true
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/production/v1/prod-category/:
-    get:
-      operationId: production_v1_prod_category_list
+      operationId: production_v1_categories_list
+      description: Retrieve all production categories.
+      summary: List Production Categories
       parameters:
       - name: page
         required: false
@@ -8182,7 +8044,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductionCategoryList'
           description: ''
     post:
-      operationId: production_v1_prod_category_create
+      operationId: production_v1_categories_create
+      description: Create a new production category.
+      summary: Create a Production Category
       tags:
       - production
       requestBody:
@@ -8201,10 +8065,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProductionCategory'
           description: ''
-  /api/production/v1/prod-category-assignment/:
+  /api/production/v1/categories/{category_id}/assignments/:
     get:
-      operationId: production_v1_prod_category_assignment_list
+      operationId: production_v1_categories_assignments_list
+      description: Retrieve all category assignments for a production.
+      summary: List Production Category Assignments
       parameters:
+      - in: path
+        name: category_id
+        schema:
+          type: integer
+        description: ID of the category
+        required: true
       - name: page
         required: false
         in: query
@@ -8230,7 +8102,16 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductionCategoryAssignmentList'
           description: ''
     post:
-      operationId: production_v1_prod_category_assignment_create
+      operationId: production_v1_categories_assignments_create
+      description: Create a new production category assignment.
+      summary: Create a Production Category Assignment
+      parameters:
+      - in: path
+        name: category_id
+        schema:
+          type: integer
+        description: ID of the category
+        required: true
       tags:
       - production
       requestBody:
@@ -8249,10 +8130,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProductionCategoryAssignment'
           description: ''
-  /api/production/v1/prod-category-assignment/{id}/:
+  /api/production/v1/categories/{category_id}/assignments/{id}/:
     get:
-      operationId: production_v1_prod_category_assignment_retrieve
+      operationId: production_v1_categories_assignments_retrieve
+      description: Retrieve a specific production category assignment.
+      summary: Retrieve a Production Category Assignment
       parameters:
+      - in: path
+        name: category_id
+        schema:
+          type: integer
+        description: ID of the category
+        required: true
       - in: path
         name: id
         schema:
@@ -8272,8 +8161,16 @@ paths:
                 $ref: '#/components/schemas/ProductionCategoryAssignment'
           description: ''
     put:
-      operationId: production_v1_prod_category_assignment_update
+      operationId: production_v1_categories_assignments_update
+      description: Update an existing production category assignment.
+      summary: Update a Production Category Assignment
       parameters:
+      - in: path
+        name: category_id
+        schema:
+          type: integer
+        description: ID of the category
+        required: true
       - in: path
         name: id
         schema:
@@ -8299,8 +8196,16 @@ paths:
                 $ref: '#/components/schemas/ProductionCategoryAssignment'
           description: ''
     patch:
-      operationId: production_v1_prod_category_assignment_partial_update
+      operationId: production_v1_categories_assignments_partial_update
+      description: Partially update an existing production category assignment.
+      summary: Partially Update a Production Category Assignment
       parameters:
+      - in: path
+        name: category_id
+        schema:
+          type: integer
+        description: ID of the category
+        required: true
       - in: path
         name: id
         schema:
@@ -8325,8 +8230,16 @@ paths:
                 $ref: '#/components/schemas/ProductionCategoryAssignment'
           description: ''
     delete:
-      operationId: production_v1_prod_category_assignment_destroy
+      operationId: production_v1_categories_assignments_destroy
+      description: Delete a specific production category assignment.
+      summary: Delete a Production Category Assignment
       parameters:
+      - in: path
+        name: category_id
+        schema:
+          type: integer
+        description: ID of the category
+        required: true
       - in: path
         name: id
         schema:
@@ -8341,9 +8254,11 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/v1/prod-category/{id}/:
+  /api/production/v1/categories/{id}/:
     get:
-      operationId: production_v1_prod_category_retrieve
+      operationId: production_v1_categories_retrieve
+      description: Retrieve a specific production category.
+      summary: Retrieve a Production Category
       parameters:
       - in: path
         name: id
@@ -8364,7 +8279,9 @@ paths:
                 $ref: '#/components/schemas/ProductionCategory'
           description: ''
     put:
-      operationId: production_v1_prod_category_update
+      operationId: production_v1_categories_update
+      description: Update an existing production category.
+      summary: Update a Production Category
       parameters:
       - in: path
         name: id
@@ -8391,7 +8308,9 @@ paths:
                 $ref: '#/components/schemas/ProductionCategory'
           description: ''
     patch:
-      operationId: production_v1_prod_category_partial_update
+      operationId: production_v1_categories_partial_update
+      description: Partially update an existing production category.
+      summary: Partially Update a Production Category
       parameters:
       - in: path
         name: id
@@ -8417,7 +8336,9 @@ paths:
                 $ref: '#/components/schemas/ProductionCategory'
           description: ''
     delete:
-      operationId: production_v1_prod_category_destroy
+      operationId: production_v1_categories_destroy
+      description: Delete a specific production category.
+      summary: Delete a Production Category
       parameters:
       - in: path
         name: id
@@ -8433,289 +8354,11 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/v1/prod-members/:
+  /api/production/v1/productions/:
     get:
-      operationId: production_v1_prod_members_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedProductionMemberList'
-          description: ''
-    post:
-      operationId: production_v1_prod_members_create
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProductionMember'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductionMember'
-          description: ''
-  /api/production/v1/prod-members/{id}/:
-    get:
-      operationId: production_v1_prod_members_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this production member.
-        required: true
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductionMember'
-          description: ''
-    put:
-      operationId: production_v1_prod_members_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this production member.
-        required: true
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProductionMember'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductionMember'
-          description: ''
-    patch:
-      operationId: production_v1_prod_members_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this production member.
-        required: true
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedProductionMember'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductionMember'
-          description: ''
-    delete:
-      operationId: production_v1_prod_members_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this production member.
-        required: true
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/production/v1/prod-roles/:
-    get:
-      operationId: production_v1_prod_roles_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedProductionRoleAssignmentList'
-          description: ''
-    post:
-      operationId: production_v1_prod_roles_create
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProductionRoleAssignment'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductionRoleAssignment'
-          description: ''
-  /api/production/v1/prod-roles/{id}/:
-    get:
-      operationId: production_v1_prod_roles_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Production Role Assignment.
-        required: true
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductionRoleAssignment'
-          description: ''
-    put:
-      operationId: production_v1_prod_roles_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Production Role Assignment.
-        required: true
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProductionRoleAssignment'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductionRoleAssignment'
-          description: ''
-    patch:
-      operationId: production_v1_prod_roles_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Production Role Assignment.
-        required: true
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedProductionRoleAssignment'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductionRoleAssignment'
-          description: ''
-    delete:
-      operationId: production_v1_prod_roles_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Production Role Assignment.
-        required: true
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/production/v1/production/:
-    get:
-      operationId: production_v1_production_list
+      operationId: production_v1_productions_list
+      description: Retrieve all productions.
+      summary: List Productions
       parameters:
       - name: page
         required: false
@@ -8742,7 +8385,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductionList'
           description: ''
     post:
-      operationId: production_v1_production_create
+      operationId: production_v1_productions_create
+      description: Create a new production.
+      summary: Create a Production
       tags:
       - production
       requestBody:
@@ -8761,9 +8406,1124 @@ paths:
               schema:
                 $ref: '#/components/schemas/Production'
           description: ''
-  /api/production/v1/production-venue/:
+  /api/production/v1/productions/{id}/:
     get:
-      operationId: production_v1_production_venue_list
+      operationId: production_v1_productions_retrieve
+      description: Retrieve a specific production.
+      summary: Retrieve a Production
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production.
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Production'
+          description: ''
+    put:
+      operationId: production_v1_productions_update
+      description: Update an existing production.
+      summary: Update a Production
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production.
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Production'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Production'
+          description: ''
+    patch:
+      operationId: production_v1_productions_partial_update
+      description: Partially update an existing production.
+      summary: Partially Update a Production
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production.
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProduction'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Production'
+          description: ''
+    delete:
+      operationId: production_v1_productions_destroy
+      description: Delete a specific production.
+      summary: Delete a Production
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production.
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/production/v1/productions/{production_id}/members/:
+    get:
+      operationId: production_v1_productions_members_list
+      description: Retrieve all members of a production.
+      summary: List Production Members
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductionMemberList'
+          description: ''
+    post:
+      operationId: production_v1_productions_members_create
+      description: Create a new production member.
+      summary: Create a Production Member
+      parameters:
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionMember'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionMember'
+          description: ''
+  /api/production/v1/productions/{production_id}/members/{member_id}/roles/:
+    get:
+      operationId: production_v1_productions_members_roles_list
+      description: Retrieve all role assignments for a production member.
+      summary: List Production Role Assignments
+      parameters:
+      - in: path
+        name: member_id
+        schema:
+          type: integer
+        description: ID of the member
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductionRoleAssignmentList'
+          description: ''
+    post:
+      operationId: production_v1_productions_members_roles_create
+      description: Create a new production role assignment.
+      summary: Create a Production Role Assignment
+      parameters:
+      - in: path
+        name: member_id
+        schema:
+          type: integer
+        description: ID of the member
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionRoleAssignment'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionRoleAssignment'
+          description: ''
+  /api/production/v1/productions/{production_id}/members/{member_id}/roles/{id}/:
+    get:
+      operationId: production_v1_productions_members_roles_retrieve
+      description: Retrieve a specific production role assignment.
+      summary: Retrieve a Production Role Assignment
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
+        required: true
+      - in: path
+        name: member_id
+        schema:
+          type: integer
+        description: ID of the member
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionRoleAssignment'
+          description: ''
+    put:
+      operationId: production_v1_productions_members_roles_update
+      description: Update an existing production role assignment.
+      summary: Update a Production Role Assignment
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
+        required: true
+      - in: path
+        name: member_id
+        schema:
+          type: integer
+        description: ID of the member
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionRoleAssignment'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionRoleAssignment'
+          description: ''
+    patch:
+      operationId: production_v1_productions_members_roles_partial_update
+      description: Partially update an existing production role assignment.
+      summary: Partially Update a Production Role Assignment
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
+        required: true
+      - in: path
+        name: member_id
+        schema:
+          type: integer
+        description: ID of the member
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProductionRoleAssignment'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionRoleAssignment'
+          description: ''
+    delete:
+      operationId: production_v1_productions_members_roles_destroy
+      description: Delete a specific production role assignment.
+      summary: Delete a Production Role Assignment
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
+        required: true
+      - in: path
+        name: member_id
+        schema:
+          type: integer
+        description: ID of the member
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/production/v1/productions/{production_id}/members/{id}/:
+    get:
+      operationId: production_v1_productions_members_retrieve
+      description: Retrieve a specific production member.
+      summary: Retrieve a Production Member
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this production member.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionMember'
+          description: ''
+    put:
+      operationId: production_v1_productions_members_update
+      description: Update an existing production member.
+      summary: Update a Production Member
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this production member.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionMember'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionMember'
+          description: ''
+    patch:
+      operationId: production_v1_productions_members_partial_update
+      description: Partially update an existing production member.
+      summary: Partially Update a Production Member
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this production member.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProductionMember'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionMember'
+          description: ''
+    delete:
+      operationId: production_v1_productions_members_destroy
+      description: Delete a specific production member.
+      summary: Delete a Production Member
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this production member.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/production/v1/productions/{production_id}/performances/:
+    get:
+      operationId: production_v1_productions_performances_list
+      description: Retrieve all performances for a production.
+      summary: List Performances
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPerformanceList'
+          description: ''
+    post:
+      operationId: production_v1_productions_performances_create
+      description: Create a new performance.
+      summary: Create a Performance
+      parameters:
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Performance'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Performance'
+          description: ''
+  /api/production/v1/productions/{production_id}/performances/{id}/:
+    get:
+      operationId: production_v1_productions_performances_retrieve
+      description: Retrieve a specific performance.
+      summary: Retrieve a Performance
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Performance.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Performance'
+          description: ''
+    put:
+      operationId: production_v1_productions_performances_update
+      description: Update an existing performance.
+      summary: Update a Performance
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Performance.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Performance'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Performance'
+          description: ''
+    patch:
+      operationId: production_v1_productions_performances_partial_update
+      description: Partially update an existing performance.
+      summary: Partially Update a Performance
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Performance.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPerformance'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Performance'
+          description: ''
+    delete:
+      operationId: production_v1_productions_performances_destroy
+      description: Delete a specific performance.
+      summary: Delete a Performance
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Performance.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/production/v1/productions/{production_id}/rehearsals/:
+    get:
+      operationId: production_v1_productions_rehearsals_list
+      description: Retrieve all rehearsals for a production.
+      summary: List Rehearsals
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRehearsalList'
+          description: ''
+    post:
+      operationId: production_v1_productions_rehearsals_create
+      description: Create a new rehearsal.
+      summary: Create a Rehearsal
+      parameters:
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rehearsal'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rehearsal'
+          description: ''
+  /api/production/v1/productions/{production_id}/rehearsals/{id}/:
+    get:
+      operationId: production_v1_productions_rehearsals_retrieve
+      description: Retrieve a specific rehearsal.
+      summary: Retrieve a Rehearsal
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Rehearsal.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rehearsal'
+          description: ''
+    put:
+      operationId: production_v1_productions_rehearsals_update
+      description: Update an existing rehearsal.
+      summary: Update a Rehearsal
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Rehearsal.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rehearsal'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rehearsal'
+          description: ''
+    patch:
+      operationId: production_v1_productions_rehearsals_partial_update
+      description: Partially update an existing rehearsal.
+      summary: Partially Update a Rehearsal
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Rehearsal.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRehearsal'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rehearsal'
+          description: ''
+    delete:
+      operationId: production_v1_productions_rehearsals_destroy
+      description: Delete a specific rehearsal.
+      summary: Delete a Rehearsal
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Rehearsal.
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/production/v1/productions/{production_id}/rehearsals/{rehearsal_id}/participants/:
+    get:
+      operationId: production_v1_productions_rehearsals_participants_list
+      description: Retrieve all participants for a rehearsal.
+      summary: List Rehearsal Participants
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      - in: path
+        name: rehearsal_id
+        schema:
+          type: integer
+        description: ID of the rehearsal
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRehearsalParticipantList'
+          description: ''
+    post:
+      operationId: production_v1_productions_rehearsals_participants_create
+      description: Create a new rehearsal participant.
+      summary: Create a Rehearsal Participant
+      parameters:
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      - in: path
+        name: rehearsal_id
+        schema:
+          type: integer
+        description: ID of the rehearsal
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RehearsalParticipant'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RehearsalParticipant'
+          description: ''
+  /api/production/v1/productions/{production_id}/rehearsals/{rehearsal_id}/participants/{id}/:
+    get:
+      operationId: production_v1_productions_rehearsals_participants_retrieve
+      description: Retrieve a specific rehearsal participant.
+      summary: Retrieve a Rehearsal Participant
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      - in: path
+        name: rehearsal_id
+        schema:
+          type: integer
+        description: ID of the rehearsal
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RehearsalParticipant'
+          description: ''
+    put:
+      operationId: production_v1_productions_rehearsals_participants_update
+      description: Update an existing rehearsal participant.
+      summary: Update a Rehearsal Participant
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      - in: path
+        name: rehearsal_id
+        schema:
+          type: integer
+        description: ID of the rehearsal
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RehearsalParticipant'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RehearsalParticipant'
+          description: ''
+    patch:
+      operationId: production_v1_productions_rehearsals_participants_partial_update
+      description: Partially update an existing rehearsal participant.
+      summary: Partially Update a Rehearsal Participant
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      - in: path
+        name: rehearsal_id
+        schema:
+          type: integer
+        description: ID of the rehearsal
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRehearsalParticipant'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RehearsalParticipant'
+          description: ''
+    delete:
+      operationId: production_v1_productions_rehearsals_participants_destroy
+      description: Delete a specific rehearsal participant.
+      summary: Delete a Rehearsal Participant
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      - in: path
+        name: rehearsal_id
+        schema:
+          type: integer
+        description: ID of the rehearsal
+        required: true
+      tags:
+      - production
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/production/v1/venues/:
+    get:
+      operationId: production_v1_venues_list
+      description: Retrieve all production venues.
+      summary: List Production Venues
       parameters:
       - name: page
         required: false
@@ -8790,7 +9550,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductionVenueList'
           description: ''
     post:
-      operationId: production_v1_production_venue_create
+      operationId: production_v1_venues_create
+      description: Create a new production venue.
+      summary: Create a Production Venue
       tags:
       - production
       requestBody:
@@ -8809,9 +9571,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProductionVenue'
           description: ''
-  /api/production/v1/production-venue/{id}/:
+  /api/production/v1/venues/{id}/:
     get:
-      operationId: production_v1_production_venue_retrieve
+      operationId: production_v1_venues_retrieve
+      description: Retrieve a specific production venue.
+      summary: Retrieve a Production Venue
       parameters:
       - in: path
         name: id
@@ -8832,7 +9596,9 @@ paths:
                 $ref: '#/components/schemas/ProductionVenue'
           description: ''
     put:
-      operationId: production_v1_production_venue_update
+      operationId: production_v1_venues_update
+      description: Update an existing production venue.
+      summary: Update a Production Venue
       parameters:
       - in: path
         name: id
@@ -8859,7 +9625,9 @@ paths:
                 $ref: '#/components/schemas/ProductionVenue'
           description: ''
     patch:
-      operationId: production_v1_production_venue_partial_update
+      operationId: production_v1_venues_partial_update
+      description: Partially update an existing production venue.
+      summary: Partially Update a Production Venue
       parameters:
       - in: path
         name: id
@@ -8885,385 +9653,15 @@ paths:
                 $ref: '#/components/schemas/ProductionVenue'
           description: ''
     delete:
-      operationId: production_v1_production_venue_destroy
+      operationId: production_v1_venues_destroy
+      description: Delete a specific production venue.
+      summary: Delete a Production Venue
       parameters:
       - in: path
         name: id
         schema:
           type: integer
         description: A unique integer value identifying this Production Venue.
-        required: true
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/production/v1/production/{id}/:
-    get:
-      operationId: production_v1_production_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Production.
-        required: true
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Production'
-          description: ''
-    put:
-      operationId: production_v1_production_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Production.
-        required: true
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Production'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Production'
-          description: ''
-    patch:
-      operationId: production_v1_production_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Production.
-        required: true
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedProduction'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Production'
-          description: ''
-    delete:
-      operationId: production_v1_production_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Production.
-        required: true
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/production/v1/rehearsal/:
-    get:
-      operationId: production_v1_rehearsal_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedRehearsalList'
-          description: ''
-    post:
-      operationId: production_v1_rehearsal_create
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Rehearsal'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rehearsal'
-          description: ''
-  /api/production/v1/rehearsal-participant/:
-    get:
-      operationId: production_v1_rehearsal_participant_list
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedRehearsalParticipantList'
-          description: ''
-    post:
-      operationId: production_v1_rehearsal_participant_create
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RehearsalParticipant'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RehearsalParticipant'
-          description: ''
-  /api/production/v1/rehearsal-participant/{id}/:
-    get:
-      operationId: production_v1_rehearsal_participant_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Rehearsal Participant.
-        required: true
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RehearsalParticipant'
-          description: ''
-    put:
-      operationId: production_v1_rehearsal_participant_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Rehearsal Participant.
-        required: true
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RehearsalParticipant'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RehearsalParticipant'
-          description: ''
-    patch:
-      operationId: production_v1_rehearsal_participant_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Rehearsal Participant.
-        required: true
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedRehearsalParticipant'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RehearsalParticipant'
-          description: ''
-    delete:
-      operationId: production_v1_rehearsal_participant_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Rehearsal Participant.
-        required: true
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/production/v1/rehearsal/{id}/:
-    get:
-      operationId: production_v1_rehearsal_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Rehearsal.
-        required: true
-      tags:
-      - production
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rehearsal'
-          description: ''
-    put:
-      operationId: production_v1_rehearsal_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Rehearsal.
-        required: true
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Rehearsal'
-        required: true
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rehearsal'
-          description: ''
-    patch:
-      operationId: production_v1_rehearsal_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Rehearsal.
-        required: true
-      tags:
-      - production
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedRehearsal'
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rehearsal'
-          description: ''
-    delete:
-      operationId: production_v1_rehearsal_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Rehearsal.
         required: true
       tags:
       - production
