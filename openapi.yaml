@@ -9384,7 +9384,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: ID of the rehearsal participant
         required: true
       - in: path
         name: production_id
@@ -9418,7 +9419,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: ID of the rehearsal participant
         required: true
       - in: path
         name: production_id
@@ -9458,7 +9460,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: ID of the rehearsal participant
         required: true
       - in: path
         name: production_id
@@ -9497,7 +9500,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: ID of the rehearsal participant
         required: true
       - in: path
         name: production_id
@@ -9820,6 +9824,8 @@ paths:
   /api/ticketing/v1/discounts/:
     get:
       operationId: ticketing_v1_discounts_list
+      description: Retrieve all discounts. Optionally filter by production venue.
+      summary: List Discounts
       parameters:
       - name: page
         required: false
@@ -9833,6 +9839,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: production_venue_id
+        schema:
+          type: integer
+        description: (optional)ID of the production venue
       tags:
       - ticketing
       security:
@@ -9847,6 +9858,14 @@ paths:
           description: ''
     post:
       operationId: ticketing_v1_discounts_create
+      description: Create a new discount.
+      summary: Create a Discount
+      parameters:
+      - in: query
+        name: production_venue_id
+        schema:
+          type: integer
+        description: (optional)ID of the production venue
       tags:
       - ticketing
       requestBody:
@@ -9868,11 +9887,14 @@ paths:
   /api/ticketing/v1/discounts/{discount_id}/ticket-types/:
     get:
       operationId: ticketing_v1_discounts_ticket_types_list
+      description: Retrieve all ticket types assigned to a discount.
+      summary: List Ticket Types assigned to a Discount
       parameters:
       - in: path
         name: discount_id
         schema:
           type: integer
+        description: ID of the discount
         required: true
       - name: page
         required: false
@@ -9900,11 +9922,14 @@ paths:
           description: ''
     post:
       operationId: ticketing_v1_discounts_ticket_types_create
+      description: Create a new ticket type assigned to a discount.
+      summary: Create a Ticket Type assigned to a Discount
       parameters:
       - in: path
         name: discount_id
         schema:
           type: integer
+        description: ID of the discount
         required: true
       tags:
       - ticketing
@@ -9927,11 +9952,14 @@ paths:
   /api/ticketing/v1/discounts/{discount_id}/ticket-types/{id}/:
     get:
       operationId: ticketing_v1_discounts_ticket_types_retrieve
+      description: Retrieve a specific ticket type assigned to a discount.
+      summary: Retrieve a Ticket Type assigned to a Discount
       parameters:
       - in: path
         name: discount_id
         schema:
           type: integer
+        description: ID of the discount
         required: true
       - in: path
         name: id
@@ -9951,9 +9979,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/DiscountTicketType'
           description: ''
+    delete:
+      operationId: ticketing_v1_discounts_ticket_types_destroy
+      description: Delete a specific ticket type assigned to a discount.
+      summary: Delete a Ticket Type assigned to a Discount
+      parameters:
+      - in: path
+        name: discount_id
+        schema:
+          type: integer
+        description: ID of the discount
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Discount Ticket Type.
+        required: true
+      tags:
+      - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/ticketing/v1/discounts/{id}/:
     get:
       operationId: ticketing_v1_discounts_retrieve
+      description: Retrieve a specific discount.
+      summary: Retrieve a Discount
       parameters:
       - in: path
         name: id
@@ -9961,6 +10016,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Discount.
         required: true
+      - in: query
+        name: production_venue_id
+        schema:
+          type: integer
+        description: (optional)ID of the production venue
       tags:
       - ticketing
       security:
@@ -9975,6 +10035,8 @@ paths:
           description: ''
     put:
       operationId: ticketing_v1_discounts_update
+      description: Update an existing discount.
+      summary: Update a Discount
       parameters:
       - in: path
         name: id
@@ -9982,6 +10044,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Discount.
         required: true
+      - in: query
+        name: production_venue_id
+        schema:
+          type: integer
+        description: (optional)ID of the production venue
       tags:
       - ticketing
       requestBody:
@@ -10002,6 +10069,8 @@ paths:
           description: ''
     patch:
       operationId: ticketing_v1_discounts_partial_update
+      description: Partially update an existing discount.
+      summary: Partially Update a Discount
       parameters:
       - in: path
         name: id
@@ -10009,6 +10078,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Discount.
         required: true
+      - in: query
+        name: production_venue_id
+        schema:
+          type: integer
+        description: (optional)ID of the production venue
       tags:
       - ticketing
       requestBody:
@@ -10028,6 +10102,8 @@ paths:
           description: ''
     delete:
       operationId: ticketing_v1_discounts_destroy
+      description: Delete a specific discount.
+      summary: Delete a Discount
       parameters:
       - in: path
         name: id
@@ -10035,6 +10111,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Discount.
         required: true
+      - in: query
+        name: production_venue_id
+        schema:
+          type: integer
+        description: (optional)ID of the production venue
       tags:
       - ticketing
       security:
@@ -10046,6 +10127,8 @@ paths:
   /api/ticketing/v1/prod-venue/{production_venue_id}/sections/:
     get:
       operationId: ticketing_v1_prod_venue_sections_list
+      description: Retrieve all sections for a production venue.
+      summary: List Sections
       parameters:
       - name: page
         required: false
@@ -10063,7 +10146,7 @@ paths:
         name: production_venue_id
         schema:
           type: integer
-          description: The production & venue this section belongs to
+        description: ID of the production venue
         required: true
       tags:
       - ticketing
@@ -10079,12 +10162,14 @@ paths:
           description: ''
     post:
       operationId: ticketing_v1_prod_venue_sections_create
+      description: Create a new section for a production venue.
+      summary: Create a Section
       parameters:
       - in: path
         name: production_venue_id
         schema:
           type: integer
-          description: The production & venue this section belongs to
+        description: ID of the production venue
         required: true
       tags:
       - ticketing
@@ -10107,6 +10192,8 @@ paths:
   /api/ticketing/v1/prod-venue/{production_venue_id}/sections/{id}/:
     get:
       operationId: ticketing_v1_prod_venue_sections_retrieve
+      description: Retrieve a specific section for a production venue.
+      summary: Retrieve a Section
       parameters:
       - in: path
         name: id
@@ -10118,7 +10205,7 @@ paths:
         name: production_venue_id
         schema:
           type: integer
-          description: The production & venue this section belongs to
+        description: ID of the production venue
         required: true
       tags:
       - ticketing
@@ -10134,6 +10221,8 @@ paths:
           description: ''
     put:
       operationId: ticketing_v1_prod_venue_sections_update
+      description: Update an existing section for a production venue.
+      summary: Update a Section
       parameters:
       - in: path
         name: id
@@ -10145,7 +10234,7 @@ paths:
         name: production_venue_id
         schema:
           type: integer
-          description: The production & venue this section belongs to
+        description: ID of the production venue
         required: true
       tags:
       - ticketing
@@ -10167,6 +10256,8 @@ paths:
           description: ''
     patch:
       operationId: ticketing_v1_prod_venue_sections_partial_update
+      description: Partially update an existing section for a production venue.
+      summary: Partially Update a Section
       parameters:
       - in: path
         name: id
@@ -10178,7 +10269,7 @@ paths:
         name: production_venue_id
         schema:
           type: integer
-          description: The production & venue this section belongs to
+        description: ID of the production venue
         required: true
       tags:
       - ticketing
@@ -10199,6 +10290,8 @@ paths:
           description: ''
     delete:
       operationId: ticketing_v1_prod_venue_sections_destroy
+      description: Delete a specific section for a production venue.
+      summary: Delete a Section
       parameters:
       - in: path
         name: id
@@ -10210,7 +10303,7 @@ paths:
         name: production_venue_id
         schema:
           type: integer
-          description: The production & venue this section belongs to
+        description: ID of the production venue
         required: true
       tags:
       - ticketing
@@ -10223,6 +10316,8 @@ paths:
   /api/ticketing/v1/prod-venue/{production_venue_id}/sections/{section_id}/seats/:
     get:
       operationId: ticketing_v1_prod_venue_sections_seats_list
+      description: Retrieve all section seats for a section.
+      summary: List Section Seats
       parameters:
       - name: page
         required: false
@@ -10239,12 +10334,14 @@ paths:
       - in: path
         name: production_venue_id
         schema:
-          type: string
+          type: integer
+        description: ID of the production venue
         required: true
       - in: path
         name: section_id
         schema:
-          type: string
+          type: integer
+        description: ID of the section
         required: true
       tags:
       - ticketing
@@ -10260,16 +10357,20 @@ paths:
           description: ''
     post:
       operationId: ticketing_v1_prod_venue_sections_seats_create
+      description: Create a new section seat for a section.
+      summary: Create a Section Seat
       parameters:
       - in: path
         name: production_venue_id
         schema:
-          type: string
+          type: integer
+        description: ID of the production venue
         required: true
       - in: path
         name: section_id
         schema:
-          type: string
+          type: integer
+        description: ID of the section
         required: true
       tags:
       - ticketing
@@ -10292,6 +10393,8 @@ paths:
   /api/ticketing/v1/prod-venue/{production_venue_id}/sections/{section_id}/seats/{id}/:
     get:
       operationId: ticketing_v1_prod_venue_sections_seats_retrieve
+      description: Retrieve a specific section seat for a section.
+      summary: Retrieve a Section Seat
       parameters:
       - in: path
         name: id
@@ -10302,12 +10405,14 @@ paths:
       - in: path
         name: production_venue_id
         schema:
-          type: string
+          type: integer
+        description: ID of the production venue
         required: true
       - in: path
         name: section_id
         schema:
-          type: string
+          type: integer
+        description: ID of the section
         required: true
       tags:
       - ticketing
@@ -10323,22 +10428,26 @@ paths:
           description: ''
     put:
       operationId: ticketing_v1_prod_venue_sections_seats_update
+      description: Update an existing section seat for a section.
+      summary: Update a Section Seat
       parameters:
       - in: path
         name: id
         schema:
           type: integer
-        description: Section Seat ID
+        description: A unique integer value identifying this Section Seat.
         required: true
       - in: path
         name: production_venue_id
         schema:
-          type: string
+          type: integer
+        description: ID of the production venue
         required: true
       - in: path
         name: section_id
         schema:
-          type: string
+          type: integer
+        description: ID of the section
         required: true
       tags:
       - ticketing
@@ -10360,22 +10469,26 @@ paths:
           description: ''
     patch:
       operationId: ticketing_v1_prod_venue_sections_seats_partial_update
+      description: Partially update an existing section seat for a section.
+      summary: Partially Update a Section Seat
       parameters:
       - in: path
         name: id
         schema:
           type: integer
-        description: Section Seat ID
+        description: A unique integer value identifying this Section Seat.
         required: true
       - in: path
         name: production_venue_id
         schema:
-          type: string
+          type: integer
+        description: ID of the production venue
         required: true
       - in: path
         name: section_id
         schema:
-          type: string
+          type: integer
+        description: ID of the section
         required: true
       tags:
       - ticketing
@@ -10396,22 +10509,26 @@ paths:
           description: ''
     delete:
       operationId: ticketing_v1_prod_venue_sections_seats_destroy
+      description: Delete a specific section seat for a section.
+      summary: Delete a Section Seat
       parameters:
       - in: path
         name: id
         schema:
           type: integer
-        description: Section Seat ID
+        description: A unique integer value identifying this Section Seat.
         required: true
       - in: path
         name: production_venue_id
         schema:
-          type: string
+          type: integer
+        description: ID of the production venue
         required: true
       - in: path
         name: section_id
         schema:
-          type: string
+          type: integer
+        description: ID of the section
         required: true
       tags:
       - ticketing
@@ -10424,6 +10541,8 @@ paths:
   /api/ticketing/v1/prod-venue/{production_venue_id}/ticket-types/:
     get:
       operationId: ticketing_v1_prod_venue_ticket_types_list
+      description: Retrieve all ticket types for a production venue.
+      summary: List Ticket Types
       parameters:
       - name: page
         required: false
@@ -10441,7 +10560,7 @@ paths:
         name: production_venue_id
         schema:
           type: integer
-          description: The production venue this ticket type belongs to.
+        description: ID of the production venue
         required: true
       tags:
       - ticketing
@@ -10457,12 +10576,14 @@ paths:
           description: ''
     post:
       operationId: ticketing_v1_prod_venue_ticket_types_create
+      description: Create a new ticket type for a production venue.
+      summary: Create a Ticket Type
       parameters:
       - in: path
         name: production_venue_id
         schema:
           type: integer
-          description: The production venue this ticket type belongs to.
+        description: ID of the production venue
         required: true
       tags:
       - ticketing
@@ -10485,6 +10606,8 @@ paths:
   /api/ticketing/v1/prod-venue/{production_venue_id}/ticket-types/{id}/:
     get:
       operationId: ticketing_v1_prod_venue_ticket_types_retrieve
+      description: Retrieve a specific ticket type for a production venue.
+      summary: Retrieve a Ticket Type
       parameters:
       - in: path
         name: id
@@ -10496,7 +10619,7 @@ paths:
         name: production_venue_id
         schema:
           type: integer
-          description: The production venue this ticket type belongs to.
+        description: ID of the production venue
         required: true
       tags:
       - ticketing
@@ -10512,6 +10635,8 @@ paths:
           description: ''
     put:
       operationId: ticketing_v1_prod_venue_ticket_types_update
+      description: Update an existing ticket type for a production venue.
+      summary: Update a Ticket Type
       parameters:
       - in: path
         name: id
@@ -10523,7 +10648,7 @@ paths:
         name: production_venue_id
         schema:
           type: integer
-          description: The production venue this ticket type belongs to.
+        description: ID of the production venue
         required: true
       tags:
       - ticketing
@@ -10545,6 +10670,8 @@ paths:
           description: ''
     patch:
       operationId: ticketing_v1_prod_venue_ticket_types_partial_update
+      description: Partially update an existing ticket type for a production venue.
+      summary: Partially Update a Ticket Type
       parameters:
       - in: path
         name: id
@@ -10556,7 +10683,7 @@ paths:
         name: production_venue_id
         schema:
           type: integer
-          description: The production venue this ticket type belongs to.
+        description: ID of the production venue
         required: true
       tags:
       - ticketing
@@ -10577,6 +10704,8 @@ paths:
           description: ''
     delete:
       operationId: ticketing_v1_prod_venue_ticket_types_destroy
+      description: Delete a specific ticket type for a production venue.
+      summary: Delete a Ticket Type
       parameters:
       - in: path
         name: id
@@ -10588,7 +10717,7 @@ paths:
         name: production_venue_id
         schema:
           type: integer
-          description: The production venue this ticket type belongs to.
+        description: ID of the production venue
         required: true
       tags:
       - ticketing
@@ -10601,6 +10730,8 @@ paths:
   /api/ticketing/v1/purchases/:
     get:
       operationId: ticketing_v1_purchases_list
+      description: Retrieve all purchases.
+      summary: List Purchases
       parameters:
       - name: page
         required: false
@@ -10628,6 +10759,8 @@ paths:
           description: ''
     post:
       operationId: ticketing_v1_purchases_create
+      description: Create a new purchase.
+      summary: Create a Purchase
       tags:
       - ticketing
       requestBody:
@@ -10649,6 +10782,8 @@ paths:
   /api/ticketing/v1/purchases/{id}/:
     get:
       operationId: ticketing_v1_purchases_retrieve
+      description: Retrieve a specific purchase.
+      summary: Retrieve a Purchase
       parameters:
       - in: path
         name: id
@@ -10670,6 +10805,8 @@ paths:
           description: ''
     put:
       operationId: ticketing_v1_purchases_update
+      description: Update an existing purchase.
+      summary: Update a Purchase
       parameters:
       - in: path
         name: id
@@ -10697,6 +10834,8 @@ paths:
           description: ''
     patch:
       operationId: ticketing_v1_purchases_partial_update
+      description: Partially update an existing purchase.
+      summary: Partially Update a Purchase
       parameters:
       - in: path
         name: id
@@ -10723,6 +10862,8 @@ paths:
           description: ''
     delete:
       operationId: ticketing_v1_purchases_destroy
+      description: Delete a specific purchase.
+      summary: Delete a Purchase
       parameters:
       - in: path
         name: id
@@ -10741,6 +10882,8 @@ paths:
   /api/ticketing/v1/purchases/{purchase_id}/tickets/:
     get:
       operationId: ticketing_v1_purchases_tickets_list
+      description: Retrieve all tickets for a purchase.
+      summary: List Tickets
       parameters:
       - name: page
         required: false
@@ -10758,7 +10901,7 @@ paths:
         name: purchase_id
         schema:
           type: integer
-          description: The purchase this ticket belongs to.
+        description: ID of the purchase
         required: true
       tags:
       - ticketing
@@ -10774,12 +10917,14 @@ paths:
           description: ''
     post:
       operationId: ticketing_v1_purchases_tickets_create
+      description: Create a new ticket for a purchase.
+      summary: Create a Ticket
       parameters:
       - in: path
         name: purchase_id
         schema:
           type: integer
-          description: The purchase this ticket belongs to.
+        description: ID of the purchase
         required: true
       tags:
       - ticketing
@@ -10802,6 +10947,8 @@ paths:
   /api/ticketing/v1/purchases/{purchase_id}/tickets/{id}/:
     get:
       operationId: ticketing_v1_purchases_tickets_retrieve
+      description: Retrieve a specific ticket for a purchase.
+      summary: Retrieve a Ticket
       parameters:
       - in: path
         name: id
@@ -10813,7 +10960,7 @@ paths:
         name: purchase_id
         schema:
           type: integer
-          description: The purchase this ticket belongs to.
+        description: ID of the purchase
         required: true
       tags:
       - ticketing
@@ -10829,6 +10976,8 @@ paths:
           description: ''
     put:
       operationId: ticketing_v1_purchases_tickets_update
+      description: Update an existing ticket for a purchase.
+      summary: Update a Ticket
       parameters:
       - in: path
         name: id
@@ -10840,7 +10989,7 @@ paths:
         name: purchase_id
         schema:
           type: integer
-          description: The purchase this ticket belongs to.
+        description: ID of the purchase
         required: true
       tags:
       - ticketing
@@ -10862,6 +11011,8 @@ paths:
           description: ''
     patch:
       operationId: ticketing_v1_purchases_tickets_partial_update
+      description: Partially update an existing ticket for a purchase.
+      summary: Partially Update a Ticket
       parameters:
       - in: path
         name: id
@@ -10873,7 +11024,7 @@ paths:
         name: purchase_id
         schema:
           type: integer
-          description: The purchase this ticket belongs to.
+        description: ID of the purchase
         required: true
       tags:
       - ticketing
@@ -10894,6 +11045,8 @@ paths:
           description: ''
     delete:
       operationId: ticketing_v1_purchases_tickets_destroy
+      description: Delete a specific ticket for a purchase.
+      summary: Delete a Ticket
       parameters:
       - in: path
         name: id
@@ -10905,7 +11058,7 @@ paths:
         name: purchase_id
         schema:
           type: integer
-          description: The purchase this ticket belongs to.
+        description: ID of the purchase
         required: true
       tags:
       - ticketing
