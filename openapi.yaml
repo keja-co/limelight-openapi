@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.73
+  version: 1.0.74
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -22,7 +22,153 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerMeta'
           description: ''
-  /api/assets/v1/assets/:
+  /api/schema/:
+    get:
+      operationId: api_schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - api
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/t/{tenant_ref}/assets/v1/assets/:
     get:
       operationId: assets_v1_assets_list
       description: Retrieve a list of all assets in the system.
@@ -40,6 +186,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - assets
       security:
@@ -56,6 +207,12 @@ paths:
       operationId: assets_v1_assets_create
       description: Add a new asset to the system.
       summary: Create a new asset
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - assets
       requestBody:
@@ -74,7 +231,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Asset'
           description: ''
-  /api/assets/v1/assets/{asset_id}/assignments/:
+  /api/t/{tenant_ref}/assets/v1/assets/{asset_id}/assignments/:
     get:
       operationId: assets_v1_assets_assignments_list
       description: Retrieve a list of all assignments associated with a specific asset.
@@ -98,6 +255,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - assets
       security:
@@ -121,6 +283,11 @@ paths:
           type: integer
         description: Asset ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - assets
       requestBody:
@@ -139,7 +306,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Assignment'
           description: ''
-  /api/assets/v1/assets/{asset_id}/assignments/{id}/:
+  /api/t/{tenant_ref}/assets/v1/assets/{asset_id}/assignments/{id}/:
     get:
       operationId: assets_v1_assets_assignments_retrieve
       description: Get detailed information about a specific assignment by its ID.
@@ -156,6 +323,11 @@ paths:
         schema:
           type: integer
         description: Assignment ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - assets
@@ -185,6 +357,11 @@ paths:
         schema:
           type: integer
         description: Assignment ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - assets
@@ -222,6 +399,11 @@ paths:
           type: integer
         description: Assignment ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - assets
       requestBody:
@@ -256,6 +438,11 @@ paths:
           type: integer
         description: Assignment ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - assets
       security:
@@ -264,7 +451,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/assets/v1/assets/{id}/:
+  /api/t/{tenant_ref}/assets/v1/assets/{id}/:
     get:
       operationId: assets_v1_assets_retrieve
       description: Get detailed information about a specific asset by its ID.
@@ -275,6 +462,11 @@ paths:
         schema:
           type: integer
         description: Asset ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - assets
@@ -298,6 +490,11 @@ paths:
         schema:
           type: integer
         description: Asset ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - assets
@@ -328,6 +525,11 @@ paths:
           type: integer
         description: Asset ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - assets
       requestBody:
@@ -356,6 +558,11 @@ paths:
           type: integer
         description: Asset ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - assets
       security:
@@ -364,7 +571,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/auditions/v1/auditions/:
+  /api/t/{tenant_ref}/auditions/v1/auditions/:
     get:
       operationId: auditions_v1_auditions_list
       description: Retrieve all auditions for productions.
@@ -382,6 +589,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - auditions
       security:
@@ -398,6 +610,12 @@ paths:
       operationId: auditions_v1_auditions_create
       description: Create a new audition for a production.
       summary: Create an Audition
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - auditions
       requestBody:
@@ -416,7 +634,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Audition'
           description: ''
-  /api/auditions/v1/auditions/{audition_id}/slots/:
+  /api/t/{tenant_ref}/auditions/v1/auditions/{audition_id}/slots/:
     get:
       operationId: auditions_v1_auditions_slots_list
       description: Retrieve all slots for a specific audition.
@@ -440,6 +658,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - auditions
       security:
@@ -463,6 +686,11 @@ paths:
           type: integer
         description: ID of the audition
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - auditions
       requestBody:
@@ -481,7 +709,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Slot'
           description: ''
-  /api/auditions/v1/auditions/{audition_id}/slots/{id}/:
+  /api/t/{tenant_ref}/auditions/v1/auditions/{audition_id}/slots/{id}/:
     get:
       operationId: auditions_v1_auditions_slots_retrieve
       description: Get details of a specific slot for an audition.
@@ -496,14 +724,18 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Slot.
+          type: string
         required: true
       - in: path
         name: slot_id
         schema:
           type: integer
         description: ID of the slot
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -531,14 +763,18 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Slot.
+          type: string
         required: true
       - in: path
         name: slot_id
         schema:
           type: integer
         description: ID of the slot
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -572,14 +808,18 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Slot.
+          type: string
         required: true
       - in: path
         name: slot_id
         schema:
           type: integer
         description: ID of the slot
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -612,14 +852,18 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Slot.
+          type: string
         required: true
       - in: path
         name: slot_id
         schema:
           type: integer
         description: ID of the slot
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -629,7 +873,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/auditions/v1/auditions/{audition_id}/slots/{slot_id}/signups/:
+  /api/t/{tenant_ref}/auditions/v1/auditions/{audition_id}/slots/{slot_id}/signups/:
     get:
       operationId: auditions_v1_auditions_slots_signups_list
       description: Retrieve all signups for a specific slot in an audition.
@@ -658,6 +902,11 @@ paths:
         schema:
           type: integer
         description: ID of the slot
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -688,6 +937,11 @@ paths:
           type: integer
         description: ID of the slot
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - auditions
       requestBody:
@@ -706,7 +960,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Signup'
           description: ''
-  /api/auditions/v1/auditions/{audition_id}/slots/{slot_id}/signups/{id}/:
+  /api/t/{tenant_ref}/auditions/v1/auditions/{audition_id}/slots/{slot_id}/signups/{id}/:
     get:
       operationId: auditions_v1_auditions_slots_signups_retrieve
       description: Get details of a specific signup for a slot in an audition.
@@ -721,8 +975,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Signup.
+          type: string
         required: true
       - in: path
         name: signup_id
@@ -735,6 +988,11 @@ paths:
         schema:
           type: integer
         description: ID of the slot
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -762,8 +1020,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Signup.
+          type: string
         required: true
       - in: path
         name: signup_id
@@ -776,6 +1033,11 @@ paths:
         schema:
           type: integer
         description: ID of the slot
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -809,8 +1071,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Signup.
+          type: string
         required: true
       - in: path
         name: signup_id
@@ -823,6 +1084,11 @@ paths:
         schema:
           type: integer
         description: ID of the slot
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -855,8 +1121,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Signup.
+          type: string
         required: true
       - in: path
         name: signup_id
@@ -870,6 +1135,11 @@ paths:
           type: integer
         description: ID of the slot
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - auditions
       security:
@@ -878,7 +1148,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/auditions/v1/auditions/{audition_id}/slots/{slot_id}/signups/{signup_id}/feedback/:
+  /api/t/{tenant_ref}/auditions/v1/auditions/{audition_id}/slots/{slot_id}/signups/{signup_id}/feedback/:
     get:
       operationId: auditions_v1_auditions_slots_signups_feedback_list
       description: Retrieve all feedback for a specific signup in an audition slot.
@@ -913,6 +1183,11 @@ paths:
         schema:
           type: integer
         description: ID of the slot
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -949,6 +1224,11 @@ paths:
           type: integer
         description: ID of the slot
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - auditions
       requestBody:
@@ -967,7 +1247,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Feedback'
           description: ''
-  /api/auditions/v1/auditions/{audition_id}/slots/{slot_id}/signups/{signup_id}/feedback/{id}/:
+  /api/t/{tenant_ref}/auditions/v1/auditions/{audition_id}/slots/{slot_id}/signups/{signup_id}/feedback/{id}/:
     get:
       operationId: auditions_v1_auditions_slots_signups_feedback_retrieve
       description: Get details of specific feedback for a signup in an audition slot.
@@ -996,6 +1276,11 @@ paths:
         schema:
           type: integer
         description: ID of the slot
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -1037,6 +1322,11 @@ paths:
         schema:
           type: integer
         description: ID of the slot
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -1086,6 +1376,11 @@ paths:
           type: integer
         description: ID of the slot
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - auditions
       requestBody:
@@ -1132,6 +1427,11 @@ paths:
           type: integer
         description: ID of the slot
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - auditions
       security:
@@ -1140,7 +1440,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/auditions/v1/auditions/{id}/:
+  /api/t/{tenant_ref}/auditions/v1/auditions/{id}/:
     get:
       operationId: auditions_v1_auditions_retrieve
       description: Get details of a specific audition.
@@ -1157,6 +1457,11 @@ paths:
         schema:
           type: integer
         description: ID of the audition
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -1186,6 +1491,11 @@ paths:
         schema:
           type: integer
         description: ID of the audition
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - auditions
@@ -1222,6 +1532,11 @@ paths:
           type: integer
         description: ID of the audition
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - auditions
       requestBody:
@@ -1256,6 +1571,11 @@ paths:
           type: integer
         description: ID of the audition
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - auditions
       security:
@@ -1264,7 +1584,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/budgeting/v1/cost-categories/:
+  /api/t/{tenant_ref}/budgeting/v1/cost-categories/:
     get:
       operationId: budgeting_v1_cost_categories_list
       description: Retrieve a list of all cost categories in the system.
@@ -1282,6 +1602,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -1298,6 +1623,12 @@ paths:
       operationId: budgeting_v1_cost_categories_create
       description: Add a new cost category to the system.
       summary: Create a new cost category
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -1316,7 +1647,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CostCategory'
           description: ''
-  /api/budgeting/v1/cost-categories/{id}/:
+  /api/t/{tenant_ref}/budgeting/v1/cost-categories/{id}/:
     get:
       operationId: budgeting_v1_cost_categories_retrieve
       description: Get detailed information about a specific cost category by its
@@ -1328,6 +1659,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Cost Category.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -1351,6 +1687,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Cost Category.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -1382,6 +1723,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Cost Category.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -1410,6 +1756,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Cost Category.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -1418,7 +1769,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/budgeting/v1/expenses/:
+  /api/t/{tenant_ref}/budgeting/v1/expenses/:
     get:
       operationId: budgeting_v1_expenses_list
       description: Retrieve a list of all expenses in the system.
@@ -1436,6 +1787,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -1452,6 +1808,12 @@ paths:
       operationId: budgeting_v1_expenses_create
       description: Add a new expense to the system.
       summary: Create a new expense
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -1470,7 +1832,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Expense'
           description: ''
-  /api/budgeting/v1/expenses/{expense_id}/attachments/:
+  /api/t/{tenant_ref}/budgeting/v1/expenses/{expense_id}/attachments/:
     get:
       operationId: budgeting_v1_expenses_attachments_list
       description: Retrieve a list of all attachments associated with a specific expense.
@@ -1494,6 +1856,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -1517,6 +1884,11 @@ paths:
           type: integer
         description: Expense ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -1535,7 +1907,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpenseAttachment'
           description: ''
-  /api/budgeting/v1/expenses/{expense_id}/attachments/{id}/:
+  /api/t/{tenant_ref}/budgeting/v1/expenses/{expense_id}/attachments/{id}/:
     get:
       operationId: budgeting_v1_expenses_attachments_retrieve
       description: Get detailed information about a specific attachment by its ID.
@@ -1552,6 +1924,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Expense Attachment.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -1581,6 +1958,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Expense Attachment.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -1618,6 +2000,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Expense Attachment.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -1652,6 +2039,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Expense Attachment.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -1660,7 +2052,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/budgeting/v1/expenses/{id}/:
+  /api/t/{tenant_ref}/budgeting/v1/expenses/{id}/:
     get:
       operationId: budgeting_v1_expenses_retrieve
       description: Get detailed information about a specific expense by its ID.
@@ -1671,6 +2063,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Expense.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -1694,6 +2091,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Expense.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -1725,6 +2127,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Expense.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -1753,6 +2160,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Expense.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -1761,7 +2173,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/budgeting/v1/income-categories/:
+  /api/t/{tenant_ref}/budgeting/v1/income-categories/:
     get:
       operationId: budgeting_v1_income_categories_list
       description: Retrieve a list of all income categories in the system.
@@ -1779,6 +2191,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -1795,6 +2212,12 @@ paths:
       operationId: budgeting_v1_income_categories_create
       description: Add a new income category to the system.
       summary: Create a new income category
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -1813,7 +2236,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/IncomeCategory'
           description: ''
-  /api/budgeting/v1/income-categories/{id}/:
+  /api/t/{tenant_ref}/budgeting/v1/income-categories/{id}/:
     get:
       operationId: budgeting_v1_income_categories_retrieve
       description: Get detailed information about a specific income category by its
@@ -1825,6 +2248,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Income Category.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -1848,6 +2276,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Income Category.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -1879,6 +2312,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Income Category.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -1907,6 +2345,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Income Category.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -1915,7 +2358,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/budgeting/v1/incomes/:
+  /api/t/{tenant_ref}/budgeting/v1/incomes/:
     get:
       operationId: budgeting_v1_incomes_list
       description: Retrieve a list of all incomes in the system, optionally filtered
@@ -1939,6 +2382,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -1955,6 +2403,12 @@ paths:
       operationId: budgeting_v1_incomes_create
       description: Add a new income to the system.
       summary: Create a new income
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -1973,7 +2427,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Income'
           description: ''
-  /api/budgeting/v1/incomes/{id}/:
+  /api/t/{tenant_ref}/budgeting/v1/incomes/{id}/:
     get:
       operationId: budgeting_v1_incomes_retrieve
       description: Get detailed information about a specific income by its ID.
@@ -1984,6 +2438,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Income.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -2007,6 +2466,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Income.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -2038,6 +2502,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Income.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -2066,6 +2535,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Income.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -2074,7 +2548,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/budgeting/v1/productions/{production_id}/cost-categories/:
+  /api/t/{tenant_ref}/budgeting/v1/productions/{production_id}/cost-categories/:
     get:
       operationId: budgeting_v1_productions_cost_categories_list
       description: Retrieve a list of all production cost categories for a specific
@@ -2099,6 +2573,11 @@ paths:
           type: integer
         description: Production ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -2122,6 +2601,11 @@ paths:
           type: integer
         description: Production ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -2140,7 +2624,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProductionCostCategory'
           description: ''
-  /api/budgeting/v1/productions/{production_id}/cost-categories/{id}/:
+  /api/t/{tenant_ref}/budgeting/v1/productions/{production_id}/cost-categories/{id}/:
     get:
       operationId: budgeting_v1_productions_cost_categories_retrieve
       description: Get detailed information about a specific production cost category
@@ -2158,6 +2642,11 @@ paths:
         schema:
           type: integer
         description: Production ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -2188,6 +2677,11 @@ paths:
         schema:
           type: integer
         description: Production ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -2225,6 +2719,11 @@ paths:
           type: integer
         description: Production ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -2259,6 +2758,11 @@ paths:
           type: integer
         description: Production ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -2267,7 +2771,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/budgeting/v1/productions/{production_id}/income-categories/:
+  /api/t/{tenant_ref}/budgeting/v1/productions/{production_id}/income-categories/:
     get:
       operationId: budgeting_v1_productions_income_categories_list
       description: Retrieve a list of all income categories for a specific production.
@@ -2290,6 +2794,11 @@ paths:
         schema:
           type: integer
         description: Production ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -2314,6 +2823,11 @@ paths:
           type: integer
         description: Production ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -2332,7 +2846,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProductionIncomeCategory'
           description: ''
-  /api/budgeting/v1/productions/{production_id}/income-categories/{id}/:
+  /api/t/{tenant_ref}/budgeting/v1/productions/{production_id}/income-categories/{id}/:
     get:
       operationId: budgeting_v1_productions_income_categories_retrieve
       description: Get detailed information about a specific production income category
@@ -2350,6 +2864,11 @@ paths:
         schema:
           type: integer
         description: Production ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -2380,6 +2899,11 @@ paths:
         schema:
           type: integer
         description: Production ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -2417,6 +2941,11 @@ paths:
           type: integer
         description: Production ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -2451,6 +2980,11 @@ paths:
           type: integer
         description: Production ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -2459,7 +2993,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/budgeting/v1/reimbursements/:
+  /api/t/{tenant_ref}/budgeting/v1/reimbursements/:
     get:
       operationId: budgeting_v1_reimbursements_list
       description: Retrieve a list of all reimbursements in the system.
@@ -2477,6 +3011,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -2493,6 +3032,12 @@ paths:
       operationId: budgeting_v1_reimbursements_create
       description: Add a new reimbursement to the system.
       summary: Create a new reimbursement
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -2511,7 +3056,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Reimbursement'
           description: ''
-  /api/budgeting/v1/reimbursements/{id}/:
+  /api/t/{tenant_ref}/budgeting/v1/reimbursements/{id}/:
     get:
       operationId: budgeting_v1_reimbursements_retrieve
       description: Get detailed information about a specific reimbursement by its
@@ -2523,6 +3068,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Reimbursement.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -2546,6 +3096,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Reimbursement.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -2577,6 +3132,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Reimbursement.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -2605,6 +3165,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Reimbursement.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -2613,7 +3178,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/budgeting/v1/vendors/:
+  /api/t/{tenant_ref}/budgeting/v1/vendors/:
     get:
       operationId: budgeting_v1_vendors_list
       description: Retrieve a list of all vendors in the system.
@@ -2631,6 +3196,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -2647,6 +3217,12 @@ paths:
       operationId: budgeting_v1_vendors_create
       description: Add a new vendor to the system.
       summary: Create a new vendor
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -2665,7 +3241,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Vendor'
           description: ''
-  /api/budgeting/v1/vendors/{id}/:
+  /api/t/{tenant_ref}/budgeting/v1/vendors/{id}/:
     get:
       operationId: budgeting_v1_vendors_retrieve
       description: Get detailed information about a specific vendor by its ID.
@@ -2676,6 +3252,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Vendor.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -2699,6 +3280,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Vendor.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - budgeting
@@ -2730,6 +3316,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Vendor.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       requestBody:
@@ -2758,6 +3349,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Vendor.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - budgeting
       security:
@@ -2766,7 +3362,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/compliance/auditlogs/:
+  /api/t/{tenant_ref}/compliance/auditlogs/:
     get:
       operationId: compliance_auditlogs_list
       parameters:
@@ -2782,6 +3378,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -2796,6 +3397,12 @@ paths:
           description: ''
     post:
       operationId: compliance_auditlogs_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -2814,7 +3421,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AuditLog'
           description: ''
-  /api/compliance/auditlogs/{id}/:
+  /api/t/{tenant_ref}/compliance/auditlogs/{id}/:
     get:
       operationId: compliance_auditlogs_retrieve
       parameters:
@@ -2823,6 +3430,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this audit log.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -2844,6 +3456,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this audit log.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -2872,6 +3489,11 @@ paths:
           type: integer
         description: A unique integer value identifying this audit log.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -2898,6 +3520,11 @@ paths:
           type: integer
         description: A unique integer value identifying this audit log.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -2906,7 +3533,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/compliance/contextkeys/:
+  /api/t/{tenant_ref}/compliance/contextkeys/:
     get:
       operationId: compliance_contextkeys_list
       parameters:
@@ -2922,6 +3549,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -2936,6 +3568,12 @@ paths:
           description: ''
     post:
       operationId: compliance_contextkeys_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -2954,7 +3592,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ContextKey'
           description: ''
-  /api/compliance/contextkeys/{id}/:
+  /api/t/{tenant_ref}/compliance/contextkeys/{id}/:
     get:
       operationId: compliance_contextkeys_retrieve
       parameters:
@@ -2963,6 +3601,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this context key.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -2984,6 +3627,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this context key.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -3012,6 +3660,11 @@ paths:
           type: integer
         description: A unique integer value identifying this context key.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -3038,6 +3691,11 @@ paths:
           type: integer
         description: A unique integer value identifying this context key.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -3046,7 +3704,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/compliance/contexts/:
+  /api/t/{tenant_ref}/compliance/contexts/:
     get:
       operationId: compliance_contexts_list
       parameters:
@@ -3062,6 +3720,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -3076,6 +3739,12 @@ paths:
           description: ''
     post:
       operationId: compliance_contexts_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -3094,7 +3763,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Context'
           description: ''
-  /api/compliance/contexts/{id}/:
+  /api/t/{tenant_ref}/compliance/contexts/{id}/:
     get:
       operationId: compliance_contexts_retrieve
       parameters:
@@ -3103,6 +3772,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this context.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -3124,6 +3798,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this context.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -3152,6 +3831,11 @@ paths:
           type: integer
         description: A unique integer value identifying this context.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -3178,6 +3862,11 @@ paths:
           type: integer
         description: A unique integer value identifying this context.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -3186,7 +3875,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/compliance/permissions/:
+  /api/t/{tenant_ref}/compliance/permissions/:
     get:
       operationId: compliance_permissions_list
       parameters:
@@ -3202,6 +3891,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -3216,6 +3910,12 @@ paths:
           description: ''
     post:
       operationId: compliance_permissions_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -3234,7 +3934,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Permission'
           description: ''
-  /api/compliance/permissions/{id}/:
+  /api/t/{tenant_ref}/compliance/permissions/{id}/:
     get:
       operationId: compliance_permissions_retrieve
       parameters:
@@ -3243,6 +3943,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this permission.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -3264,6 +3969,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this permission.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -3292,6 +4002,11 @@ paths:
           type: integer
         description: A unique integer value identifying this permission.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -3318,6 +4033,11 @@ paths:
           type: integer
         description: A unique integer value identifying this permission.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -3326,7 +4046,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/compliance/rolepermissions/:
+  /api/t/{tenant_ref}/compliance/rolepermissions/:
     get:
       operationId: compliance_rolepermissions_list
       parameters:
@@ -3342,6 +4062,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -3356,6 +4081,12 @@ paths:
           description: ''
     post:
       operationId: compliance_rolepermissions_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -3374,7 +4105,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RolePermission'
           description: ''
-  /api/compliance/rolepermissions/{id}/:
+  /api/t/{tenant_ref}/compliance/rolepermissions/{id}/:
     get:
       operationId: compliance_rolepermissions_retrieve
       parameters:
@@ -3383,6 +4114,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this role permission.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -3404,6 +4140,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this role permission.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -3432,6 +4173,11 @@ paths:
           type: integer
         description: A unique integer value identifying this role permission.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -3458,6 +4204,11 @@ paths:
           type: integer
         description: A unique integer value identifying this role permission.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -3466,7 +4217,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/compliance/roles/:
+  /api/t/{tenant_ref}/compliance/roles/:
     get:
       operationId: compliance_roles_list
       parameters:
@@ -3482,6 +4233,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -3496,6 +4252,12 @@ paths:
           description: ''
     post:
       operationId: compliance_roles_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -3514,7 +4276,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Role'
           description: ''
-  /api/compliance/roles/{id}/:
+  /api/t/{tenant_ref}/compliance/roles/{id}/:
     get:
       operationId: compliance_roles_retrieve
       parameters:
@@ -3523,6 +4285,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this role.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -3544,6 +4311,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this role.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -3572,6 +4344,11 @@ paths:
           type: integer
         description: A unique integer value identifying this role.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -3598,6 +4375,11 @@ paths:
           type: integer
         description: A unique integer value identifying this role.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -3606,7 +4388,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/compliance/userroleassignments/:
+  /api/t/{tenant_ref}/compliance/userroleassignments/:
     get:
       operationId: compliance_userroleassignments_list
       parameters:
@@ -3622,6 +4404,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -3636,6 +4423,12 @@ paths:
           description: ''
     post:
       operationId: compliance_userroleassignments_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -3654,7 +4447,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserRoleAssignment'
           description: ''
-  /api/compliance/userroleassignments/{id}/:
+  /api/t/{tenant_ref}/compliance/userroleassignments/{id}/:
     get:
       operationId: compliance_userroleassignments_retrieve
       parameters:
@@ -3663,6 +4456,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this user role assignment.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -3684,6 +4482,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this user role assignment.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - compliance
@@ -3712,6 +4515,11 @@ paths:
           type: integer
         description: A unique integer value identifying this user role assignment.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       requestBody:
@@ -3738,6 +4546,11 @@ paths:
           type: integer
         description: A unique integer value identifying this user role assignment.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - compliance
       security:
@@ -3746,7 +4559,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/documents/v1/repos/:
+  /api/t/{tenant_ref}/documents/v1/repos/:
     get:
       operationId: documents_v1_repos_list
       description: Retrieve a list of all document repositories in the system.
@@ -3764,6 +4577,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       security:
@@ -3780,6 +4598,12 @@ paths:
       operationId: documents_v1_repos_create
       description: Add a new document repository to the system.
       summary: Create a new document repository
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       requestBody:
@@ -3798,7 +4622,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentRepo'
           description: ''
-  /api/documents/v1/repos/{id}/:
+  /api/t/{tenant_ref}/documents/v1/repos/{id}/:
     get:
       operationId: documents_v1_repos_retrieve
       description: Get detailed information about a specific document repository by
@@ -3810,6 +4634,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Document Repository.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - documents
@@ -3833,6 +4662,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Document Repository.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - documents
@@ -3864,6 +4698,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Document Repository.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       requestBody:
@@ -3892,6 +4731,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Document Repository.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       security:
@@ -3900,7 +4744,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/documents/v1/repos/{repo_id}/documents/:
+  /api/t/{tenant_ref}/documents/v1/repos/{repo_id}/documents/:
     get:
       operationId: documents_v1_repos_documents_list
       description: Retrieve a list of all documents within a specific document repository,
@@ -3929,6 +4773,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       security:
@@ -3952,6 +4801,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       requestBody:
@@ -3970,7 +4824,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Document'
           description: ''
-  /api/documents/v1/repos/{repo_id}/documents/{document_id}/tags/:
+  /api/t/{tenant_ref}/documents/v1/repos/{repo_id}/documents/{document_id}/tags/:
     get:
       operationId: documents_v1_repos_documents_tags_list
       description: Retrieve a list of all tags associated with a specific document
@@ -4000,6 +4854,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       security:
@@ -4028,6 +4887,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       requestBody:
@@ -4046,7 +4910,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentTag'
           description: ''
-  /api/documents/v1/repos/{repo_id}/documents/{document_id}/tags/{id}/:
+  /api/t/{tenant_ref}/documents/v1/repos/{repo_id}/documents/{document_id}/tags/{id}/:
     get:
       operationId: documents_v1_repos_documents_tags_retrieve
       description: Get detailed information about a specific tag associated with a
@@ -4069,6 +4933,11 @@ paths:
         schema:
           type: string
         description: Document Repository ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - documents
@@ -4104,6 +4973,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       security:
@@ -4112,7 +4986,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/documents/v1/repos/{repo_id}/documents/{document_id}/versions/:
+  /api/t/{tenant_ref}/documents/v1/repos/{repo_id}/documents/{document_id}/versions/:
     get:
       operationId: documents_v1_repos_documents_versions_list
       description: Retrieve a list of all versions of a specific document within a
@@ -4142,6 +5016,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       security:
@@ -4170,6 +5049,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       requestBody:
@@ -4188,7 +5072,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentVersion'
           description: ''
-  /api/documents/v1/repos/{repo_id}/documents/{document_id}/versions/{id}/:
+  /api/t/{tenant_ref}/documents/v1/repos/{repo_id}/documents/{document_id}/versions/{id}/:
     get:
       operationId: documents_v1_repos_documents_versions_retrieve
       description: Get detailed information about a specific version of a document
@@ -4211,6 +5095,11 @@ paths:
         schema:
           type: string
         description: Document Repository ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - documents
@@ -4246,6 +5135,11 @@ paths:
         schema:
           type: string
         description: Document Repository ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - documents
@@ -4288,6 +5182,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       requestBody:
@@ -4328,6 +5227,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       security:
@@ -4336,7 +5240,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/documents/v1/repos/{repo_id}/documents/{id}/:
+  /api/t/{tenant_ref}/documents/v1/repos/{repo_id}/documents/{id}/:
     get:
       operationId: documents_v1_repos_documents_retrieve
       description: Get detailed information about a specific document in a document
@@ -4354,6 +5258,11 @@ paths:
         schema:
           type: string
         description: Document Repository ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - documents
@@ -4384,6 +5293,11 @@ paths:
         schema:
           type: string
         description: Document Repository ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - documents
@@ -4421,6 +5335,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       requestBody:
@@ -4455,6 +5374,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       security:
@@ -4463,7 +5387,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/documents/v1/repos/{repo_id}/folders/:
+  /api/t/{tenant_ref}/documents/v1/repos/{repo_id}/folders/:
     get:
       operationId: documents_v1_repos_folders_list
       description: Retrieve a list of all folders within a specific document repository,
@@ -4493,6 +5417,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       security:
@@ -4516,6 +5445,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       requestBody:
@@ -4534,7 +5468,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Folder'
           description: ''
-  /api/documents/v1/repos/{repo_id}/folders/{id}/:
+  /api/t/{tenant_ref}/documents/v1/repos/{repo_id}/folders/{id}/:
     get:
       operationId: documents_v1_repos_folders_retrieve
       description: Get detailed information about a specific folder in a document
@@ -4552,6 +5486,11 @@ paths:
         schema:
           type: string
         description: Document Repository ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - documents
@@ -4582,6 +5521,11 @@ paths:
         schema:
           type: string
         description: Document Repository ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - documents
@@ -4619,6 +5563,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       requestBody:
@@ -4653,6 +5602,11 @@ paths:
           type: string
         description: Document Repository ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       security:
@@ -4661,7 +5615,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/documents/v1/tags/:
+  /api/t/{tenant_ref}/documents/v1/tags/:
     get:
       operationId: documents_v1_tags_list
       description: Retrieve a list of all tags in the system.
@@ -4679,6 +5633,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       security:
@@ -4695,6 +5654,12 @@ paths:
       operationId: documents_v1_tags_create
       description: Add a new tag to the system.
       summary: Create a new tag
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       requestBody:
@@ -4713,7 +5678,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Tag'
           description: ''
-  /api/documents/v1/tags/{id}/:
+  /api/t/{tenant_ref}/documents/v1/tags/{id}/:
     get:
       operationId: documents_v1_tags_retrieve
       description: Get detailed information about a specific tag by its ID.
@@ -4724,6 +5689,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Tag.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - documents
@@ -4747,6 +5717,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Tag.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - documents
@@ -4777,6 +5752,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Tag.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       requestBody:
@@ -4805,6 +5785,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Tag.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - documents
       security:
@@ -4813,7 +5798,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/forms/v1/forms/:
+  /api/t/{tenant_ref}/forms/v1/forms/:
     get:
       operationId: forms_v1_forms_list
       description: Retrieve a list of all forms in the system.
@@ -4831,6 +5816,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       security:
@@ -4847,6 +5837,12 @@ paths:
       operationId: forms_v1_forms_create
       description: Add a new form to the system.
       summary: Create a new form
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       requestBody:
@@ -4865,7 +5861,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Form'
           description: ''
-  /api/forms/v1/forms/{form_id}/fields/:
+  /api/t/{tenant_ref}/forms/v1/forms/{form_id}/fields/:
     get:
       operationId: forms_v1_forms_fields_list
       description: Retrieve a list of all fields associated with a specific form.
@@ -4889,6 +5885,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       security:
@@ -4966,6 +5967,11 @@ paths:
         schema:
           type: integer
         description: ID of the form
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - forms
@@ -5045,7 +6051,7 @@ paths:
                       allow_multiple: true
                   summary: Multiple Choice Field
           description: ''
-  /api/forms/v1/forms/{form_id}/fields/{id}/:
+  /api/t/{tenant_ref}/forms/v1/forms/{form_id}/fields/{id}/:
     get:
       operationId: forms_v1_forms_fields_retrieve
       description: Get detailed information about a specific form field by its ID.
@@ -5062,6 +6068,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Form Field.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - forms
@@ -5134,6 +6145,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Form Field.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - forms
@@ -5257,6 +6273,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Form Field.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       requestBody:
@@ -5377,6 +6398,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Form Field.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       security:
@@ -5385,7 +6411,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/forms/v1/forms/{form_id}/submissions/:
+  /api/t/{tenant_ref}/forms/v1/forms/{form_id}/submissions/:
     get:
       operationId: forms_v1_forms_submissions_list
       description: Retrieve a list of all submissions associated with a specific form.
@@ -5409,6 +6435,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       security:
@@ -5432,6 +6463,11 @@ paths:
           type: integer
         description: ID of the form
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       requestBody:
@@ -5450,7 +6486,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Submission'
           description: ''
-  /api/forms/v1/forms/{form_id}/submissions/{id}/:
+  /api/t/{tenant_ref}/forms/v1/forms/{form_id}/submissions/{id}/:
     get:
       operationId: forms_v1_forms_submissions_retrieve
       description: Get detailed information about a specific submission by its ID.
@@ -5467,6 +6503,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Form Submission.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - forms
@@ -5496,6 +6537,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Form Submission.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - forms
@@ -5533,6 +6579,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Form Submission.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       requestBody:
@@ -5567,6 +6618,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Form Submission.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       security:
@@ -5575,7 +6631,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/forms/v1/forms/{form_id}/submissions/{submission_id}/field/{field_id}/response/:
+  /api/t/{tenant_ref}/forms/v1/forms/{form_id}/submissions/{submission_id}/field/{field_id}/response/:
     get:
       operationId: forms_v1_forms_submissions_field_response_list
       description: Retrieve a list of all field values associated with a specific
@@ -5612,6 +6668,11 @@ paths:
           type: integer
         description: ID of the submission
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       security:
@@ -5647,6 +6708,11 @@ paths:
           type: integer
         description: ID of the submission
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       requestBody:
@@ -5665,7 +6731,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SubmissionFieldValue'
           description: ''
-  /api/forms/v1/forms/{form_id}/submissions/{submission_id}/field/{field_id}/response/{id}/:
+  /api/t/{tenant_ref}/forms/v1/forms/{form_id}/submissions/{submission_id}/field/{field_id}/response/{id}/:
     get:
       operationId: forms_v1_forms_submissions_field_response_retrieve
       description: Get detailed information about a specific field value by its ID.
@@ -5694,6 +6760,11 @@ paths:
         schema:
           type: integer
         description: ID of the submission
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - forms
@@ -5735,6 +6806,11 @@ paths:
         schema:
           type: integer
         description: ID of the submission
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - forms
@@ -5784,6 +6860,11 @@ paths:
           type: integer
         description: ID of the submission
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       requestBody:
@@ -5830,6 +6911,11 @@ paths:
           type: integer
         description: ID of the submission
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       security:
@@ -5838,7 +6924,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/forms/v1/forms/{id}/:
+  /api/t/{tenant_ref}/forms/v1/forms/{id}/:
     get:
       operationId: forms_v1_forms_retrieve
       description: Get detailed information about a specific form by its ID.
@@ -5849,6 +6935,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Form.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - forms
@@ -5872,6 +6963,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Form.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - forms
@@ -5902,6 +6998,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Form.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       requestBody:
@@ -5930,6 +7031,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Form.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - forms
       security:
@@ -5938,7 +7044,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/hr/employee-qualifications/:
+  /api/t/{tenant_ref}/hr/employee-qualifications/:
     get:
       operationId: hr_employee_qualifications_list
       parameters:
@@ -5954,6 +7060,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       security:
@@ -5968,6 +7079,12 @@ paths:
           description: ''
     post:
       operationId: hr_employee_qualifications_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       requestBody:
@@ -5986,7 +7103,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/EmployeeQualification'
           description: ''
-  /api/hr/employee-qualifications/{id}/:
+  /api/t/{tenant_ref}/hr/employee-qualifications/{id}/:
     get:
       operationId: hr_employee_qualifications_retrieve
       parameters:
@@ -5995,6 +7112,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this employee qualification.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - hr
@@ -6016,6 +7138,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this employee qualification.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - hr
@@ -6044,6 +7171,11 @@ paths:
           type: integer
         description: A unique integer value identifying this employee qualification.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       requestBody:
@@ -6070,6 +7202,11 @@ paths:
           type: integer
         description: A unique integer value identifying this employee qualification.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       security:
@@ -6078,7 +7215,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/hr/employees/:
+  /api/t/{tenant_ref}/hr/employees/:
     get:
       operationId: hr_employees_list
       parameters:
@@ -6094,6 +7231,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       security:
@@ -6108,6 +7250,12 @@ paths:
           description: ''
     post:
       operationId: hr_employees_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       requestBody:
@@ -6126,7 +7274,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Employee'
           description: ''
-  /api/hr/employees/{id}/:
+  /api/t/{tenant_ref}/hr/employees/{id}/:
     get:
       operationId: hr_employees_retrieve
       parameters:
@@ -6135,6 +7283,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Employee.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - hr
@@ -6156,6 +7309,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Employee.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - hr
@@ -6184,6 +7342,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Employee.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       requestBody:
@@ -6210,6 +7373,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Employee.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       security:
@@ -6218,7 +7386,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/hr/employment-types/:
+  /api/t/{tenant_ref}/hr/employment-types/:
     get:
       operationId: hr_employment_types_list
       parameters:
@@ -6234,6 +7402,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       security:
@@ -6248,6 +7421,12 @@ paths:
           description: ''
     post:
       operationId: hr_employment_types_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       requestBody:
@@ -6266,7 +7445,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/EmploymentType'
           description: ''
-  /api/hr/employment-types/{id}/:
+  /api/t/{tenant_ref}/hr/employment-types/{id}/:
     get:
       operationId: hr_employment_types_retrieve
       parameters:
@@ -6275,6 +7454,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this employment type.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - hr
@@ -6296,6 +7480,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this employment type.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - hr
@@ -6324,6 +7513,11 @@ paths:
           type: integer
         description: A unique integer value identifying this employment type.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       requestBody:
@@ -6350,6 +7544,11 @@ paths:
           type: integer
         description: A unique integer value identifying this employment type.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       security:
@@ -6358,7 +7557,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/hr/qualifications/:
+  /api/t/{tenant_ref}/hr/qualifications/:
     get:
       operationId: hr_qualifications_list
       parameters:
@@ -6374,6 +7573,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       security:
@@ -6388,6 +7592,12 @@ paths:
           description: ''
     post:
       operationId: hr_qualifications_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       requestBody:
@@ -6406,7 +7616,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Qualification'
           description: ''
-  /api/hr/qualifications/{id}/:
+  /api/t/{tenant_ref}/hr/qualifications/{id}/:
     get:
       operationId: hr_qualifications_retrieve
       parameters:
@@ -6415,6 +7625,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this qualification.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - hr
@@ -6436,6 +7651,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this qualification.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - hr
@@ -6464,6 +7684,11 @@ paths:
           type: integer
         description: A unique integer value identifying this qualification.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       requestBody:
@@ -6490,6 +7715,11 @@ paths:
           type: integer
         description: A unique integer value identifying this qualification.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       security:
@@ -6498,7 +7728,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/hr/work-locations/:
+  /api/t/{tenant_ref}/hr/work-locations/:
     get:
       operationId: hr_work_locations_list
       parameters:
@@ -6514,6 +7744,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       security:
@@ -6528,6 +7763,12 @@ paths:
           description: ''
     post:
       operationId: hr_work_locations_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       requestBody:
@@ -6546,7 +7787,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/WorkLocation'
           description: ''
-  /api/hr/work-locations/{id}/:
+  /api/t/{tenant_ref}/hr/work-locations/{id}/:
     get:
       operationId: hr_work_locations_retrieve
       parameters:
@@ -6555,6 +7796,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this work location.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - hr
@@ -6576,6 +7822,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this work location.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - hr
@@ -6604,6 +7855,11 @@ paths:
           type: integer
         description: A unique integer value identifying this work location.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       requestBody:
@@ -6630,6 +7886,11 @@ paths:
           type: integer
         description: A unique integer value identifying this work location.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - hr
       security:
@@ -6638,9 +7899,15 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/identity/session-status/:
+  /api/t/{tenant_ref}/identity/session-status/:
     get:
       operationId: identity_session_status_retrieve
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - identity
       security:
@@ -6654,7 +7921,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SessionStatus'
           description: ''
-  /api/identity/users/:
+  /api/t/{tenant_ref}/identity/users/:
     get:
       operationId: identity_users_list
       parameters:
@@ -6670,6 +7937,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - identity
       security:
@@ -6684,6 +7956,12 @@ paths:
           description: ''
     post:
       operationId: identity_users_create
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - identity
       requestBody:
@@ -6702,7 +7980,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
           description: ''
-  /api/identity/users/{id}/:
+  /api/t/{tenant_ref}/identity/users/{id}/:
     get:
       operationId: identity_users_retrieve
       parameters:
@@ -6711,6 +7989,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this User.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - identity
@@ -6732,6 +8015,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this User.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - identity
@@ -6760,6 +8048,11 @@ paths:
           type: integer
         description: A unique integer value identifying this User.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - identity
       requestBody:
@@ -6786,6 +8079,11 @@ paths:
           type: integer
         description: A unique integer value identifying this User.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - identity
       security:
@@ -6794,7 +8092,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/location/v1/countries/:
+  /api/t/{tenant_ref}/location/v1/countries/:
     get:
       operationId: location_v1_countries_list
       description: Retrieve a list of all countries in the system.
@@ -6812,6 +8110,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       security:
@@ -6828,6 +8131,12 @@ paths:
       operationId: location_v1_countries_create
       description: Add a new country to the system.
       summary: Create a new country
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       requestBody:
@@ -6846,7 +8155,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Country'
           description: ''
-  /api/location/v1/countries/{country_id}/addresses/:
+  /api/t/{tenant_ref}/location/v1/countries/{country_id}/addresses/:
     get:
       operationId: location_v1_countries_addresses_list
       description: Retrieve a list of all addresses within a specific country.
@@ -6870,6 +8179,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       security:
@@ -6893,6 +8207,11 @@ paths:
           type: integer
         description: Country ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       requestBody:
@@ -6911,7 +8230,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Address'
           description: ''
-  /api/location/v1/countries/{country_id}/addresses/{id}/:
+  /api/t/{tenant_ref}/location/v1/countries/{country_id}/addresses/{id}/:
     get:
       operationId: location_v1_countries_addresses_retrieve
       description: Get detailed information about a specific address by its ID.
@@ -6928,6 +8247,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this address.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - location
@@ -6957,6 +8281,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this address.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - location
@@ -6994,6 +8323,11 @@ paths:
           type: integer
         description: A unique integer value identifying this address.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       requestBody:
@@ -7028,6 +8362,11 @@ paths:
           type: integer
         description: A unique integer value identifying this address.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       security:
@@ -7036,7 +8375,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/location/v1/countries/{country_id}/state/:
+  /api/t/{tenant_ref}/location/v1/countries/{country_id}/state/:
     get:
       operationId: location_v1_countries_state_list
       description: Retrieve a list of all states within a specific country.
@@ -7060,6 +8399,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       security:
@@ -7083,6 +8427,11 @@ paths:
           type: integer
         description: Country ID
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       requestBody:
@@ -7101,7 +8450,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/State'
           description: ''
-  /api/location/v1/countries/{country_id}/state/{id}/:
+  /api/t/{tenant_ref}/location/v1/countries/{country_id}/state/{id}/:
     get:
       operationId: location_v1_countries_state_retrieve
       description: Get detailed information about a specific state by its ID.
@@ -7118,6 +8467,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this state.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - location
@@ -7147,6 +8501,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this state.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - location
@@ -7183,6 +8542,11 @@ paths:
           type: integer
         description: A unique integer value identifying this state.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       requestBody:
@@ -7217,6 +8581,11 @@ paths:
           type: integer
         description: A unique integer value identifying this state.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       security:
@@ -7225,7 +8594,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/location/v1/countries/{id}/:
+  /api/t/{tenant_ref}/location/v1/countries/{id}/:
     get:
       operationId: location_v1_countries_retrieve
       description: Get detailed information about a specific country by its ID.
@@ -7236,6 +8605,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this country.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - location
@@ -7259,6 +8633,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this country.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - location
@@ -7290,6 +8669,11 @@ paths:
           type: integer
         description: A unique integer value identifying this country.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       requestBody:
@@ -7318,6 +8702,11 @@ paths:
           type: integer
         description: A unique integer value identifying this country.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       security:
@@ -7326,7 +8715,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/location/v1/venue-tags/:
+  /api/t/{tenant_ref}/location/v1/venue-tags/:
     get:
       operationId: location_v1_venue_tags_list
       description: Retrieve a list of all tags associated with venues.
@@ -7344,6 +8733,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       security:
@@ -7360,6 +8754,12 @@ paths:
       operationId: location_v1_venue_tags_create
       description: Add a new tag to the venue system.
       summary: Create a new venue tag
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       requestBody:
@@ -7378,7 +8778,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/VenueTag'
           description: ''
-  /api/location/v1/venue-tags/{id}/:
+  /api/t/{tenant_ref}/location/v1/venue-tags/{id}/:
     get:
       operationId: location_v1_venue_tags_retrieve
       description: Get detailed information about a specific venue tag by its ID.
@@ -7389,6 +8789,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this venue tag.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - location
@@ -7412,6 +8817,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this venue tag.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - location
@@ -7443,6 +8853,11 @@ paths:
           type: integer
         description: A unique integer value identifying this venue tag.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       requestBody:
@@ -7471,6 +8886,11 @@ paths:
           type: integer
         description: A unique integer value identifying this venue tag.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       security:
@@ -7479,7 +8899,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/location/v1/venues/:
+  /api/t/{tenant_ref}/location/v1/venues/:
     get:
       operationId: location_v1_venues_list
       description: Retrieve a list of all venues in the system.
@@ -7497,6 +8917,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       security:
@@ -7513,6 +8938,12 @@ paths:
       operationId: location_v1_venues_create
       description: Add a new venue to the system.
       summary: Create a new venue
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       requestBody:
@@ -7531,7 +8962,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Venue'
           description: ''
-  /api/location/v1/venues/{id}/:
+  /api/t/{tenant_ref}/location/v1/venues/{id}/:
     get:
       operationId: location_v1_venues_retrieve
       description: Get detailed information about a specific venue by its ID.
@@ -7542,6 +8973,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this venue.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - location
@@ -7565,6 +9001,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this venue.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - location
@@ -7595,6 +9036,11 @@ paths:
           type: integer
         description: A unique integer value identifying this venue.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       requestBody:
@@ -7623,6 +9069,11 @@ paths:
           type: integer
         description: A unique integer value identifying this venue.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - location
       security:
@@ -7631,7 +9082,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/location/v1/venues/{venue_id}/capacities/:
+  /api/t/{tenant_ref}/location/v1/venues/{venue_id}/capacities/:
     get:
       operationId: location_v1_venues_capacities_list
       description: Retrieve a list of all seating capacities for a venue.
@@ -7649,6 +9100,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       - in: path
         name: venue_id
         schema:
@@ -7673,6 +9129,11 @@ paths:
       summary: Create a new venue capacity
       parameters:
       - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      - in: path
         name: venue_id
         schema:
           type: integer
@@ -7696,7 +9157,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/VenueCapacity'
           description: ''
-  /api/location/v1/venues/{venue_id}/capacities/{id}/:
+  /api/t/{tenant_ref}/location/v1/venues/{venue_id}/capacities/{id}/:
     get:
       operationId: location_v1_venues_capacities_retrieve
       description: Get detailed information about a specific venue capacity by its
@@ -7708,6 +9169,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this venue capacity.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       - in: path
         name: venue_id
@@ -7737,6 +9203,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this venue capacity.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       - in: path
         name: venue_id
@@ -7775,6 +9246,11 @@ paths:
         description: A unique integer value identifying this venue capacity.
         required: true
       - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      - in: path
         name: venue_id
         schema:
           type: integer
@@ -7809,6 +9285,11 @@ paths:
         description: A unique integer value identifying this venue capacity.
         required: true
       - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      - in: path
         name: venue_id
         schema:
           type: integer
@@ -7822,7 +9303,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/location/v1/venues/{venue_id}/tags/:
+  /api/t/{tenant_ref}/location/v1/venues/{venue_id}/tags/:
     get:
       operationId: location_v1_venues_tags_list
       description: Retrieve a list of all tags assigned to a specific venue.
@@ -7840,6 +9321,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       - in: path
         name: venue_id
         schema:
@@ -7864,6 +9350,11 @@ paths:
       summary: Create a new tag assignment for a venue
       parameters:
       - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      - in: path
         name: venue_id
         schema:
           type: integer
@@ -7887,7 +9378,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/VenueTagAssignment'
           description: ''
-  /api/location/v1/venues/{venue_id}/tags/{id}/:
+  /api/t/{tenant_ref}/location/v1/venues/{venue_id}/tags/{id}/:
     get:
       operationId: location_v1_venues_tags_retrieve
       description: Get detailed information about a specific tag assignment by its
@@ -7899,6 +9390,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this venue tag assignment.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       - in: path
         name: venue_id
@@ -7928,6 +9424,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this venue tag assignment.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       - in: path
         name: venue_id
@@ -7966,6 +9467,11 @@ paths:
         description: A unique integer value identifying this venue tag assignment.
         required: true
       - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      - in: path
         name: venue_id
         schema:
           type: integer
@@ -8000,6 +9506,11 @@ paths:
         description: A unique integer value identifying this venue tag assignment.
         required: true
       - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      - in: path
         name: venue_id
         schema:
           type: integer
@@ -8013,7 +9524,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/v1/categories/:
+  /api/t/{tenant_ref}/production/v1/categories/:
     get:
       operationId: production_v1_categories_list
       description: Retrieve all production categories.
@@ -8031,6 +9542,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -8047,6 +9563,12 @@ paths:
       operationId: production_v1_categories_create
       description: Create a new production category.
       summary: Create a Production Category
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -8065,7 +9587,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProductionCategory'
           description: ''
-  /api/production/v1/categories/{category_id}/assignments/:
+  /api/t/{tenant_ref}/production/v1/categories/{category_id}/assignments/:
     get:
       operationId: production_v1_categories_assignments_list
       description: Retrieve all category assignments for a production.
@@ -8089,6 +9611,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -8112,6 +9639,11 @@ paths:
           type: integer
         description: ID of the category
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -8130,7 +9662,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProductionCategoryAssignment'
           description: ''
-  /api/production/v1/categories/{category_id}/assignments/{id}/:
+  /api/t/{tenant_ref}/production/v1/categories/{category_id}/assignments/{id}/:
     get:
       operationId: production_v1_categories_assignments_retrieve
       description: Retrieve a specific production category assignment.
@@ -8147,6 +9679,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Production Category Assignment.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8176,6 +9713,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Production Category Assignment.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8212,6 +9754,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Production Category Assignment.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -8246,6 +9793,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Production Category Assignment.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -8254,7 +9806,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/v1/categories/{id}/:
+  /api/t/{tenant_ref}/production/v1/categories/{id}/:
     get:
       operationId: production_v1_categories_retrieve
       description: Retrieve a specific production category.
@@ -8265,6 +9817,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Production Category.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8288,6 +9845,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Production Category.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8318,6 +9880,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Production Category.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -8346,6 +9913,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Production Category.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -8354,7 +9926,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/v1/productions/:
+  /api/t/{tenant_ref}/production/v1/productions/:
     get:
       operationId: production_v1_productions_list
       description: Retrieve all productions.
@@ -8372,6 +9944,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -8388,6 +9965,12 @@ paths:
       operationId: production_v1_productions_create
       description: Create a new production.
       summary: Create a Production
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -8406,7 +9989,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Production'
           description: ''
-  /api/production/v1/productions/{id}/:
+  /api/t/{tenant_ref}/production/v1/productions/{id}/:
     get:
       operationId: production_v1_productions_retrieve
       description: Retrieve a specific production.
@@ -8417,6 +10000,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Production.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8440,6 +10028,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Production.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8470,6 +10063,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Production.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -8498,6 +10096,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Production.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -8506,7 +10109,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/v1/productions/{production_id}/members/:
+  /api/t/{tenant_ref}/production/v1/productions/{production_id}/members/:
     get:
       operationId: production_v1_productions_members_list
       description: Retrieve all members of a production.
@@ -8529,6 +10132,11 @@ paths:
         schema:
           type: integer
         description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8553,6 +10161,11 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -8571,7 +10184,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProductionMember'
           description: ''
-  /api/production/v1/productions/{production_id}/members/{member_id}/roles/:
+  /api/t/{tenant_ref}/production/v1/productions/{production_id}/members/{member_id}/roles/:
     get:
       operationId: production_v1_productions_members_roles_list
       description: Retrieve all role assignments for a production member.
@@ -8600,6 +10213,11 @@ paths:
         schema:
           type: integer
         description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8630,6 +10248,11 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -8648,7 +10271,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProductionRoleAssignment'
           description: ''
-  /api/production/v1/productions/{production_id}/members/{member_id}/roles/{id}/:
+  /api/t/{tenant_ref}/production/v1/productions/{production_id}/members/{member_id}/roles/{id}/:
     get:
       operationId: production_v1_productions_members_roles_retrieve
       description: Retrieve a specific production role assignment.
@@ -8671,6 +10294,11 @@ paths:
         schema:
           type: integer
         description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8706,6 +10334,11 @@ paths:
         schema:
           type: integer
         description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8748,6 +10381,11 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -8788,6 +10426,11 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -8796,7 +10439,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/v1/productions/{production_id}/members/{id}/:
+  /api/t/{tenant_ref}/production/v1/productions/{production_id}/members/{id}/:
     get:
       operationId: production_v1_productions_members_retrieve
       description: Retrieve a specific production member.
@@ -8813,6 +10456,11 @@ paths:
         schema:
           type: integer
         description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8842,6 +10490,11 @@ paths:
         schema:
           type: integer
         description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8878,6 +10531,11 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -8912,6 +10570,11 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -8920,7 +10583,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/v1/productions/{production_id}/performances/:
+  /api/t/{tenant_ref}/production/v1/productions/{production_id}/performances/:
     get:
       operationId: production_v1_productions_performances_list
       description: Retrieve all performances for a production.
@@ -8943,6 +10606,11 @@ paths:
         schema:
           type: integer
         description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -8967,6 +10635,11 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -8985,7 +10658,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Performance'
           description: ''
-  /api/production/v1/productions/{production_id}/performances/{id}/:
+  /api/t/{tenant_ref}/production/v1/productions/{production_id}/performances/{id}/:
     get:
       operationId: production_v1_productions_performances_retrieve
       description: Retrieve a specific performance.
@@ -9002,6 +10675,11 @@ paths:
         schema:
           type: integer
         description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -9031,6 +10709,11 @@ paths:
         schema:
           type: integer
         description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -9067,6 +10750,11 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -9101,6 +10789,11 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -9109,7 +10802,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/v1/productions/{production_id}/rehearsals/:
+  /api/t/{tenant_ref}/production/v1/productions/{production_id}/rehearsals/:
     get:
       operationId: production_v1_productions_rehearsals_list
       description: Retrieve all rehearsals for a production.
@@ -9132,6 +10825,11 @@ paths:
         schema:
           type: integer
         description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -9156,6 +10854,11 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -9174,7 +10877,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Rehearsal'
           description: ''
-  /api/production/v1/productions/{production_id}/rehearsals/{id}/:
+  /api/t/{tenant_ref}/production/v1/productions/{production_id}/rehearsals/{id}/:
     get:
       operationId: production_v1_productions_rehearsals_retrieve
       description: Retrieve a specific rehearsal.
@@ -9191,6 +10894,11 @@ paths:
         schema:
           type: integer
         description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -9220,6 +10928,11 @@ paths:
         schema:
           type: integer
         description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -9256,6 +10969,11 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -9290,6 +11008,11 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -9298,7 +11021,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/v1/productions/{production_id}/rehearsals/{rehearsal_id}/participants/:
+  /api/t/{tenant_ref}/production/v1/productions/{production_id}/rehearsals/{rehearsal_id}/participants/:
     get:
       operationId: production_v1_productions_rehearsals_participants_list
       description: Retrieve all participants for a rehearsal.
@@ -9327,6 +11050,11 @@ paths:
         schema:
           type: integer
         description: ID of the rehearsal
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -9357,6 +11085,11 @@ paths:
           type: integer
         description: ID of the rehearsal
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -9375,7 +11108,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RehearsalParticipant'
           description: ''
-  /api/production/v1/productions/{production_id}/rehearsals/{rehearsal_id}/participants/{id}/:
+  /api/t/{tenant_ref}/production/v1/productions/{production_id}/rehearsals/{rehearsal_id}/participants/{id}/:
     get:
       operationId: production_v1_productions_rehearsals_participants_retrieve
       description: Retrieve a specific rehearsal participant.
@@ -9398,6 +11131,11 @@ paths:
         schema:
           type: integer
         description: ID of the rehearsal
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -9433,6 +11171,11 @@ paths:
         schema:
           type: integer
         description: ID of the rehearsal
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -9475,6 +11218,11 @@ paths:
           type: integer
         description: ID of the rehearsal
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -9515,6 +11263,11 @@ paths:
           type: integer
         description: ID of the rehearsal
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -9523,7 +11276,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/production/v1/venues/:
+  /api/t/{tenant_ref}/production/v1/venues/:
     get:
       operationId: production_v1_venues_list
       description: Retrieve all production venues.
@@ -9541,6 +11294,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -9557,6 +11315,12 @@ paths:
       operationId: production_v1_venues_create
       description: Create a new production venue.
       summary: Create a Production Venue
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -9575,7 +11339,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProductionVenue'
           description: ''
-  /api/production/v1/venues/{id}/:
+  /api/t/{tenant_ref}/production/v1/venues/{id}/:
     get:
       operationId: production_v1_venues_retrieve
       description: Retrieve a specific production venue.
@@ -9586,6 +11350,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Production Venue.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -9609,6 +11378,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Production Venue.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - production
@@ -9639,6 +11413,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Production Venue.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       requestBody:
@@ -9667,6 +11446,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Production Venue.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - production
       security:
@@ -9675,153 +11459,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/schema/:
-    get:
-      operationId: schema_retrieve
-      description: |-
-        OpenApi3 schema for this API. Format can be selected via content negotiation.
-
-        - YAML: application/vnd.oai.openapi
-        - JSON: application/vnd.oai.openapi+json
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - yaml
-      - in: query
-        name: lang
-        schema:
-          type: string
-          enum:
-          - af
-          - ar
-          - ar-dz
-          - ast
-          - az
-          - be
-          - bg
-          - bn
-          - br
-          - bs
-          - ca
-          - ckb
-          - cs
-          - cy
-          - da
-          - de
-          - dsb
-          - el
-          - en
-          - en-au
-          - en-gb
-          - eo
-          - es
-          - es-ar
-          - es-co
-          - es-mx
-          - es-ni
-          - es-ve
-          - et
-          - eu
-          - fa
-          - fi
-          - fr
-          - fy
-          - ga
-          - gd
-          - gl
-          - he
-          - hi
-          - hr
-          - hsb
-          - hu
-          - hy
-          - ia
-          - id
-          - ig
-          - io
-          - is
-          - it
-          - ja
-          - ka
-          - kab
-          - kk
-          - km
-          - kn
-          - ko
-          - ky
-          - lb
-          - lt
-          - lv
-          - mk
-          - ml
-          - mn
-          - mr
-          - ms
-          - my
-          - nb
-          - ne
-          - nl
-          - nn
-          - os
-          - pa
-          - pl
-          - pt
-          - pt-br
-          - ro
-          - ru
-          - sk
-          - sl
-          - sq
-          - sr
-          - sr-latn
-          - sv
-          - sw
-          - ta
-          - te
-          - tg
-          - th
-          - tk
-          - tr
-          - tt
-          - udm
-          - ug
-          - uk
-          - ur
-          - uz
-          - vi
-          - zh-hans
-          - zh-hant
-      tags:
-      - schema
-      security:
-      - CadenceSession: []
-      - cookieAuth: []
-      - {}
-      responses:
-        '200':
-          content:
-            application/vnd.oai.openapi:
-              schema:
-                type: object
-                additionalProperties: {}
-            application/yaml:
-              schema:
-                type: object
-                additionalProperties: {}
-            application/vnd.oai.openapi+json:
-              schema:
-                type: object
-                additionalProperties: {}
-            application/json:
-              schema:
-                type: object
-                additionalProperties: {}
-          description: ''
-  /api/ticketing/v1/discounts/:
+  /api/t/{tenant_ref}/ticketing/v1/discounts/:
     get:
       operationId: ticketing_v1_discounts_list
       description: Retrieve all discounts. Optionally filter by production venue.
@@ -9844,6 +11482,11 @@ paths:
         schema:
           type: integer
         description: (optional)ID of the production venue
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       security:
@@ -9866,6 +11509,11 @@ paths:
         schema:
           type: integer
         description: (optional)ID of the production venue
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -9884,7 +11532,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Discount'
           description: ''
-  /api/ticketing/v1/discounts/{discount_id}/ticket-types/:
+  /api/t/{tenant_ref}/ticketing/v1/discounts/{discount_id}/ticket-types/:
     get:
       operationId: ticketing_v1_discounts_ticket_types_list
       description: Retrieve all ticket types assigned to a discount.
@@ -9908,6 +11556,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       security:
@@ -9931,6 +11584,11 @@ paths:
           type: integer
         description: ID of the discount
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -9949,7 +11607,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DiscountTicketType'
           description: ''
-  /api/ticketing/v1/discounts/{discount_id}/ticket-types/{id}/:
+  /api/t/{tenant_ref}/ticketing/v1/discounts/{discount_id}/ticket-types/{id}/:
     get:
       operationId: ticketing_v1_discounts_ticket_types_retrieve
       description: Retrieve a specific ticket type assigned to a discount.
@@ -9966,6 +11624,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Discount Ticket Type.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -9996,6 +11659,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Discount Ticket Type.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       security:
@@ -10004,7 +11672,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/ticketing/v1/discounts/{id}/:
+  /api/t/{tenant_ref}/ticketing/v1/discounts/{id}/:
     get:
       operationId: ticketing_v1_discounts_retrieve
       description: Retrieve a specific discount.
@@ -10021,6 +11689,11 @@ paths:
         schema:
           type: integer
         description: (optional)ID of the production venue
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       security:
@@ -10049,6 +11722,11 @@ paths:
         schema:
           type: integer
         description: (optional)ID of the production venue
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -10083,6 +11761,11 @@ paths:
         schema:
           type: integer
         description: (optional)ID of the production venue
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -10116,6 +11799,11 @@ paths:
         schema:
           type: integer
         description: (optional)ID of the production venue
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       security:
@@ -10124,7 +11812,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/ticketing/v1/prod-venue/{production_venue_id}/sections/:
+  /api/t/{tenant_ref}/ticketing/v1/prod-venue/{production_venue_id}/sections/:
     get:
       operationId: ticketing_v1_prod_venue_sections_list
       description: Retrieve all sections for a production venue.
@@ -10147,6 +11835,11 @@ paths:
         schema:
           type: integer
         description: ID of the production venue
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10171,6 +11864,11 @@ paths:
           type: integer
         description: ID of the production venue
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -10189,7 +11887,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Section'
           description: ''
-  /api/ticketing/v1/prod-venue/{production_venue_id}/sections/{id}/:
+  /api/t/{tenant_ref}/ticketing/v1/prod-venue/{production_venue_id}/sections/{id}/:
     get:
       operationId: ticketing_v1_prod_venue_sections_retrieve
       description: Retrieve a specific section for a production venue.
@@ -10206,6 +11904,11 @@ paths:
         schema:
           type: integer
         description: ID of the production venue
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10235,6 +11938,11 @@ paths:
         schema:
           type: integer
         description: ID of the production venue
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10271,6 +11979,11 @@ paths:
           type: integer
         description: ID of the production venue
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -10305,6 +12018,11 @@ paths:
           type: integer
         description: ID of the production venue
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       security:
@@ -10313,7 +12031,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/ticketing/v1/prod-venue/{production_venue_id}/sections/{section_id}/seats/:
+  /api/t/{tenant_ref}/ticketing/v1/prod-venue/{production_venue_id}/sections/{section_id}/seats/:
     get:
       operationId: ticketing_v1_prod_venue_sections_seats_list
       description: Retrieve all section seats for a section.
@@ -10342,6 +12060,11 @@ paths:
         schema:
           type: integer
         description: ID of the section
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10372,6 +12095,11 @@ paths:
           type: integer
         description: ID of the section
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -10390,7 +12118,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SectionSeat'
           description: ''
-  /api/ticketing/v1/prod-venue/{production_venue_id}/sections/{section_id}/seats/{id}/:
+  /api/t/{tenant_ref}/ticketing/v1/prod-venue/{production_venue_id}/sections/{section_id}/seats/{id}/:
     get:
       operationId: ticketing_v1_prod_venue_sections_seats_retrieve
       description: Retrieve a specific section seat for a section.
@@ -10413,6 +12141,11 @@ paths:
         schema:
           type: integer
         description: ID of the section
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10448,6 +12181,11 @@ paths:
         schema:
           type: integer
         description: ID of the section
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10490,6 +12228,11 @@ paths:
           type: integer
         description: ID of the section
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -10530,6 +12273,11 @@ paths:
           type: integer
         description: ID of the section
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       security:
@@ -10538,7 +12286,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/ticketing/v1/prod-venue/{production_venue_id}/ticket-types/:
+  /api/t/{tenant_ref}/ticketing/v1/prod-venue/{production_venue_id}/ticket-types/:
     get:
       operationId: ticketing_v1_prod_venue_ticket_types_list
       description: Retrieve all ticket types for a production venue.
@@ -10561,6 +12309,11 @@ paths:
         schema:
           type: integer
         description: ID of the production venue
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10585,6 +12338,11 @@ paths:
           type: integer
         description: ID of the production venue
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -10603,7 +12361,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TicketType'
           description: ''
-  /api/ticketing/v1/prod-venue/{production_venue_id}/ticket-types/{id}/:
+  /api/t/{tenant_ref}/ticketing/v1/prod-venue/{production_venue_id}/ticket-types/{id}/:
     get:
       operationId: ticketing_v1_prod_venue_ticket_types_retrieve
       description: Retrieve a specific ticket type for a production venue.
@@ -10620,6 +12378,11 @@ paths:
         schema:
           type: integer
         description: ID of the production venue
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10649,6 +12412,11 @@ paths:
         schema:
           type: integer
         description: ID of the production venue
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10685,6 +12453,11 @@ paths:
           type: integer
         description: ID of the production venue
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -10719,6 +12492,11 @@ paths:
           type: integer
         description: ID of the production venue
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       security:
@@ -10727,7 +12505,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/ticketing/v1/purchases/:
+  /api/t/{tenant_ref}/ticketing/v1/purchases/:
     get:
       operationId: ticketing_v1_purchases_list
       description: Retrieve all purchases.
@@ -10745,6 +12523,11 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       security:
@@ -10761,6 +12544,12 @@ paths:
       operationId: ticketing_v1_purchases_create
       description: Create a new purchase.
       summary: Create a Purchase
+      parameters:
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -10779,7 +12568,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Purchase'
           description: ''
-  /api/ticketing/v1/purchases/{id}/:
+  /api/t/{tenant_ref}/ticketing/v1/purchases/{id}/:
     get:
       operationId: ticketing_v1_purchases_retrieve
       description: Retrieve a specific purchase.
@@ -10790,6 +12579,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Purchase.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10813,6 +12607,11 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Purchase.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10843,6 +12642,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Purchase.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -10871,6 +12675,11 @@ paths:
           type: integer
         description: A unique integer value identifying this Purchase.
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       security:
@@ -10879,7 +12688,7 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/ticketing/v1/purchases/{purchase_id}/tickets/:
+  /api/t/{tenant_ref}/ticketing/v1/purchases/{purchase_id}/tickets/:
     get:
       operationId: ticketing_v1_purchases_tickets_list
       description: Retrieve all tickets for a purchase.
@@ -10902,6 +12711,11 @@ paths:
         schema:
           type: integer
         description: ID of the purchase
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10926,6 +12740,11 @@ paths:
           type: integer
         description: ID of the purchase
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -10944,7 +12763,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Ticket'
           description: ''
-  /api/ticketing/v1/purchases/{purchase_id}/tickets/{id}/:
+  /api/t/{tenant_ref}/ticketing/v1/purchases/{purchase_id}/tickets/{id}/:
     get:
       operationId: ticketing_v1_purchases_tickets_retrieve
       description: Retrieve a specific ticket for a purchase.
@@ -10961,6 +12780,11 @@ paths:
         schema:
           type: integer
         description: ID of the purchase
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -10990,6 +12814,11 @@ paths:
         schema:
           type: integer
         description: ID of the purchase
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
         required: true
       tags:
       - ticketing
@@ -11026,6 +12855,11 @@ paths:
           type: integer
         description: ID of the purchase
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
       requestBody:
@@ -11060,8 +12894,166 @@ paths:
           type: integer
         description: ID of the purchase
         required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
       tags:
       - ticketing
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/tenant/v1/tenants/:
+    get:
+      operationId: api_tenant_v1_tenants_list
+      description: Retrieve a list of all tenants in the system.
+      summary: List all tenants
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - tenant
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTenantList'
+          description: ''
+    post:
+      operationId: api_tenant_v1_tenants_create
+      description: Create a new tenant in the system.
+      summary: Create a new tenant
+      tags:
+      - tenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tenant'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
+          description: ''
+  /api/tenant/v1/tenants/{ulid}/:
+    get:
+      operationId: api_tenant_v1_tenants_retrieve
+      description: Get detailed information about a specific tenant by its ULID.
+      summary: Retrieve a specific tenant
+      parameters:
+      - in: path
+        name: ulid
+        schema:
+          type: string
+        description: The ULID of the tenant
+        required: true
+      tags:
+      - tenant
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
+          description: ''
+    put:
+      operationId: api_tenant_v1_tenants_update
+      description: Modify the details of an existing tenant by its ULID.
+      summary: Update an existing tenant
+      parameters:
+      - in: path
+        name: ulid
+        schema:
+          type: string
+        description: The ULID of the tenant
+        required: true
+      tags:
+      - tenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tenant'
+        required: true
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
+          description: ''
+    patch:
+      operationId: api_tenant_v1_tenants_partial_update
+      description: Update specific fields of an existing tenant without affecting
+        others.
+      summary: Partially update a tenant
+      parameters:
+      - in: path
+        name: ulid
+        schema:
+          type: string
+        description: The ULID of the tenant
+        required: true
+      tags:
+      - tenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTenant'
+      security:
+      - CadenceSession: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
+          description: ''
+    delete:
+      operationId: api_tenant_v1_tenants_destroy
+      description: Remove a tenant from the system by its ULID.
+      summary: Delete a tenant
+      parameters:
+      - in: path
+        name: ulid
+        schema:
+          type: string
+        description: The ULID of the tenant
+        required: true
+      tags:
+      - tenant
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -14629,6 +16621,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+    PaginatedTenantList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tenant'
     PaginatedTicketList:
       type: object
       required:
@@ -17990,6 +20005,26 @@ components:
           type:
           - integer
           - 'null'
+    PatchedTenant:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        ulid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
     PatchedTicket:
       type: object
       properties:
@@ -20216,6 +22251,32 @@ components:
       - id
       - name
       - tenant
+      - updated_at
+    Tenant:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        ulid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - name
+      - ulid
       - updated_at
     Ticket:
       type: object
