@@ -4899,7 +4899,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DocumentTag'
-        required: true
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -11596,7 +11595,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DiscountTicketType'
-        required: true
       security:
       - CadenceSession: []
       - cookieAuth: []
@@ -13095,6 +13093,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         line_1:
           type: string
           description: Street address or PO Box
@@ -13114,6 +13113,7 @@ components:
           maxLength: 20
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -13123,6 +13123,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         state:
           type:
           - integer
@@ -13130,6 +13131,7 @@ components:
         country:
           type: integer
       required:
+      - archive_at
       - country
       - created_at
       - created_by
@@ -13137,6 +13139,7 @@ components:
       - line_1
       - tenant
       - updated_at
+      - updated_by
     Asset:
       type: object
       properties:
@@ -13156,6 +13159,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           description: Name of the asset
@@ -13199,6 +13203,7 @@ components:
             * `out_of_service` - Out of Service
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -13208,18 +13213,21 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         owning_user:
           type:
           - integer
           - 'null'
           description: User who owns the asset
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - name
       - tenant
       - updated_at
+      - updated_by
     AssetTypeEnum:
       enum:
       - company
@@ -13247,6 +13255,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         start_date:
           type: string
           format: date-time
@@ -13259,6 +13268,7 @@ components:
           description: Date and time when the asset was returned
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -13268,6 +13278,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         asset:
           type: integer
           description: The asset being assigned
@@ -13282,6 +13293,7 @@ components:
           - 'null'
           description: Production associated with the asset assignment
       required:
+      - archive_at
       - asset
       - created_at
       - created_by
@@ -13289,6 +13301,7 @@ components:
       - start_date
       - tenant
       - updated_at
+      - updated_by
     AuditLog:
       type: object
       properties:
@@ -13365,6 +13378,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           description: Name of the audition
@@ -13374,6 +13388,7 @@ components:
           description: Description of the audition
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -13383,6 +13398,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         venue:
@@ -13391,6 +13407,7 @@ components:
           - 'null'
           description: Venue for the audition
       required:
+      - archive_at
       - created_at
       - created_by
       - description
@@ -13399,6 +13416,7 @@ components:
       - production
       - tenant
       - updated_at
+      - updated_by
     ConditionEnum:
       enum:
       - new
@@ -13519,6 +13537,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 255
@@ -13531,6 +13550,7 @@ components:
           maxLength: 50
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -13540,17 +13560,20 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         parent:
           type:
           - integer
           - 'null'
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - name
       - tenant
       - updated_at
+      - updated_by
     Country:
       type: object
       properties:
@@ -13570,6 +13593,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
@@ -13579,6 +13603,7 @@ components:
           maxLength: 3
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -13588,7 +13613,9 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
       required:
+      - archive_at
       - created_at
       - created_by
       - id
@@ -13596,6 +13623,7 @@ components:
       - name
       - tenant
       - updated_at
+      - updated_by
     CurrencyEnum:
       enum:
       - AUD
@@ -13633,6 +13661,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           description: Name of the discount, e.g., Early Bird, Student Discount, etc.
@@ -13708,6 +13737,7 @@ components:
             discount is valid indefinitely.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -13717,6 +13747,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
           description: The production this discount applies to.
@@ -13735,6 +13766,7 @@ components:
             discount applies to all ticket types for the production.
       required:
       - applicable_ticket_types
+      - archive_at
       - code
       - created_at
       - created_by
@@ -13743,6 +13775,7 @@ components:
       - production
       - tenant
       - updated_at
+      - updated_by
       - value
     DiscountTicketType:
       type: object
@@ -13771,8 +13804,10 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -13782,7 +13817,9 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
       required:
+      - archive_at
       - created_at
       - created_by
       - discount
@@ -13790,6 +13827,7 @@ components:
       - tenant
       - ticket_type
       - updated_at
+      - updated_by
     DiscountTypeEnum:
       enum:
       - percentage
@@ -13819,6 +13857,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         title:
           type: string
           maxLength: 200
@@ -13828,6 +13867,7 @@ components:
           $ref: '#/components/schemas/DocumentStatusEnum'
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -13837,6 +13877,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type:
           - integer
@@ -13862,6 +13903,7 @@ components:
             type: integer
           readOnly: true
       required:
+      - archive_at
       - created_at
       - created_by
       - id
@@ -13870,6 +13912,7 @@ components:
       - tenant
       - title
       - updated_at
+      - updated_by
     DocumentRepo:
       type: object
       properties:
@@ -13889,6 +13932,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
@@ -13899,6 +13943,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -13908,7 +13953,9 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
       required:
+      - archive_at
       - code
       - created_at
       - created_by
@@ -13916,6 +13963,7 @@ components:
       - name
       - tenant
       - updated_at
+      - updated_by
     DocumentStatusEnum:
       enum:
       - draft
@@ -13959,8 +14007,10 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -13970,7 +14020,9 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
       required:
+      - archive_at
       - created_at
       - created_by
       - document
@@ -13978,6 +14030,7 @@ components:
       - tag
       - tenant
       - updated_at
+      - updated_by
     DocumentVersion:
       type: object
       properties:
@@ -13997,6 +14050,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         version:
           type: integer
           readOnly: true
@@ -14010,6 +14064,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -14019,9 +14074,11 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         document:
           type: integer
       required:
+      - archive_at
       - created_at
       - created_by
       - document
@@ -14029,6 +14086,7 @@ components:
       - id
       - tenant
       - updated_at
+      - updated_by
       - version
     Employee:
       type: object
@@ -14049,6 +14107,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         first_name:
           type: string
           maxLength: 50
@@ -14120,6 +14179,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -14129,6 +14189,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         user:
           type: integer
         employee_address:
@@ -14157,6 +14218,7 @@ components:
             type: integer
           readOnly: true
       required:
+      - archive_at
       - created_at
       - created_by
       - first_name
@@ -14164,6 +14226,7 @@ components:
       - qualifications
       - tenant
       - updated_at
+      - updated_by
       - user
     EmployeeQualification:
       type: object
@@ -14184,6 +14247,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         issue_date:
           type: string
           format: date
@@ -14192,6 +14256,7 @@ components:
           format: date
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -14201,11 +14266,13 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         employee:
           type: integer
         qualification:
           type: integer
       required:
+      - archive_at
       - created_at
       - created_by
       - employee
@@ -14213,6 +14280,7 @@ components:
       - qualification
       - tenant
       - updated_at
+      - updated_by
     EmploymentType:
       type: object
       properties:
@@ -14232,6 +14300,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 50
@@ -14239,6 +14308,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -14248,13 +14318,16 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - name
       - tenant
       - updated_at
+      - updated_by
     Expense:
       type: object
       properties:
@@ -14274,6 +14347,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         approved_date_time:
           type:
           - string
@@ -14302,6 +14376,7 @@ components:
           maxLength: 100
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -14311,6 +14386,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         purchaser:
           type: integer
         approver:
@@ -14335,6 +14411,7 @@ components:
           - integer
           - 'null'
       required:
+      - archive_at
       - cost
       - created_at
       - created_by
@@ -14345,6 +14422,7 @@ components:
       - tenant
       - title
       - updated_at
+      - updated_by
     ExpenseAttachment:
       type: object
       properties:
@@ -14364,6 +14442,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         description:
           type: string
           maxLength: 255
@@ -14375,6 +14454,7 @@ components:
           maxLength: 500
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -14384,6 +14464,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         expense:
           type: integer
         uploaded_by:
@@ -14391,12 +14472,14 @@ components:
           - integer
           - 'null'
       required:
+      - archive_at
       - created_at
       - created_by
       - expense
       - id
       - tenant
       - updated_at
+      - updated_by
     ExpensePaymentMethodEnum:
       enum:
       - personal_card
@@ -14455,6 +14538,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         notes:
           type:
           - string
@@ -14469,6 +14553,7 @@ components:
           description: If the panel wishes to use scores, they can enter them here.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -14478,6 +14563,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         signup:
           type: integer
         reviewer:
@@ -14487,12 +14573,14 @@ components:
           description: User who provided the feedback. Can be null if feedback is
             anonymous.
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - signup
       - tenant
       - updated_at
+      - updated_by
     Folder:
       type: object
       properties:
@@ -14517,11 +14605,13 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -14531,6 +14621,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         repo:
           type: integer
         parent:
@@ -14538,6 +14629,7 @@ components:
           - integer
           - 'null'
       required:
+      - archive_at
       - created_at
       - created_by
       - id
@@ -14546,6 +14638,7 @@ components:
       - subfolders
       - tenant
       - updated_at
+      - updated_by
     Form:
       type: object
       properties:
@@ -14565,6 +14658,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         title:
           type: string
           maxLength: 200
@@ -14602,6 +14696,7 @@ components:
           type: boolean
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -14611,18 +14706,21 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type:
           - integer
           - 'null'
           description: If this form is associated with a production, select it here.
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - tenant
       - title
       - updated_at
+      - updated_by
     FormField:
       type: object
       properties:
@@ -15233,6 +15331,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         title:
           type: string
           maxLength: 200
@@ -15282,6 +15381,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -15291,6 +15391,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         category:
           type:
           - integer
@@ -15306,6 +15407,7 @@ components:
             (but not both).
       required:
       - amount
+      - archive_at
       - created_at
       - created_by
       - id
@@ -15313,6 +15415,7 @@ components:
       - tenant
       - title
       - updated_at
+      - updated_by
     IncomeCategory:
       type: object
       properties:
@@ -15332,6 +15435,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         type:
           $ref: '#/components/schemas/IncomeCategoryTypeEnum'
         line_code:
@@ -15346,6 +15450,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -15355,11 +15460,13 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         parent:
           type:
           - integer
           - 'null'
       required:
+      - archive_at
       - created_at
       - created_by
       - id
@@ -15368,6 +15475,7 @@ components:
       - tenant
       - type
       - updated_at
+      - updated_by
     IncomeCategoryTypeEnum:
       enum:
       - ticket_sales
@@ -16893,6 +17001,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         line_1:
           type: string
           description: Street address or PO Box
@@ -16912,6 +17021,7 @@ components:
           maxLength: 20
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -16921,6 +17031,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         state:
           type:
           - integer
@@ -16946,6 +17057,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           description: Name of the asset
@@ -16989,6 +17101,7 @@ components:
             * `out_of_service` - Out of Service
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -16998,6 +17111,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         owning_user:
           type:
           - integer
@@ -17022,6 +17136,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         start_date:
           type: string
           format: date-time
@@ -17034,6 +17149,7 @@ components:
           description: Date and time when the asset was returned
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17043,6 +17159,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         asset:
           type: integer
           description: The asset being assigned
@@ -17120,6 +17237,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           description: Name of the audition
@@ -17129,6 +17247,7 @@ components:
           description: Description of the audition
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17138,6 +17257,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         venue:
@@ -17235,6 +17355,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 255
@@ -17247,6 +17368,7 @@ components:
           maxLength: 50
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17256,6 +17378,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         parent:
           type:
           - integer
@@ -17279,6 +17402,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
@@ -17288,6 +17412,7 @@ components:
           maxLength: 3
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17297,6 +17422,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
     PatchedDiscount:
       type: object
       properties:
@@ -17316,6 +17442,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           description: Name of the discount, e.g., Early Bird, Student Discount, etc.
@@ -17391,6 +17518,7 @@ components:
             discount is valid indefinitely.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17400,6 +17528,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
           description: The production this discount applies to.
@@ -17435,6 +17564,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         title:
           type: string
           maxLength: 200
@@ -17444,6 +17574,7 @@ components:
           $ref: '#/components/schemas/DocumentStatusEnum'
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17453,6 +17584,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type:
           - integer
@@ -17496,6 +17628,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
@@ -17506,6 +17639,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17515,6 +17649,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
     PatchedDocumentVersion:
       type: object
       properties:
@@ -17534,6 +17669,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         version:
           type: integer
           readOnly: true
@@ -17547,6 +17683,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17556,6 +17693,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         document:
           type: integer
     PatchedEmployee:
@@ -17577,6 +17715,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         first_name:
           type: string
           maxLength: 50
@@ -17648,6 +17787,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17657,6 +17797,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         user:
           type: integer
         employee_address:
@@ -17703,6 +17844,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         issue_date:
           type: string
           format: date
@@ -17711,6 +17853,7 @@ components:
           format: date
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17720,6 +17863,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         employee:
           type: integer
         qualification:
@@ -17743,6 +17887,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 50
@@ -17750,6 +17895,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17759,6 +17905,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
     PatchedExpense:
       type: object
       properties:
@@ -17778,6 +17925,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         approved_date_time:
           type:
           - string
@@ -17806,6 +17954,7 @@ components:
           maxLength: 100
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17815,6 +17964,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         purchaser:
           type: integer
         approver:
@@ -17857,6 +18007,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         description:
           type: string
           maxLength: 255
@@ -17868,6 +18019,7 @@ components:
           maxLength: 500
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17877,6 +18029,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         expense:
           type: integer
         uploaded_by:
@@ -17903,6 +18056,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         notes:
           type:
           - string
@@ -17917,6 +18071,7 @@ components:
           description: If the panel wishes to use scores, they can enter them here.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17926,6 +18081,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         signup:
           type: integer
         reviewer:
@@ -17958,11 +18114,13 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -17972,6 +18130,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         repo:
           type: integer
         parent:
@@ -17997,6 +18156,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         title:
           type: string
           maxLength: 200
@@ -18034,6 +18194,7 @@ components:
           type: boolean
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -18043,6 +18204,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type:
           - integer
@@ -18606,6 +18768,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         title:
           type: string
           maxLength: 200
@@ -18655,6 +18818,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -18664,6 +18828,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         category:
           type:
           - integer
@@ -18696,6 +18861,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         type:
           $ref: '#/components/schemas/IncomeCategoryTypeEnum'
         line_code:
@@ -18710,6 +18876,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -18719,6 +18886,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         parent:
           type:
           - integer
@@ -18742,6 +18910,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         date:
           type: string
           format: date-time
@@ -18751,6 +18920,7 @@ components:
           $ref: '#/components/schemas/PerformanceStatusEnum'
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -18760,6 +18930,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         venue:
@@ -18820,6 +18991,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 255
@@ -18839,6 +19011,7 @@ components:
           $ref: '#/components/schemas/ProductionStatusEnum'
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -18848,6 +19021,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         venue:
           type:
           - integer
@@ -18877,6 +19051,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 255
@@ -18893,6 +19068,7 @@ components:
           description: Indicates if the category is currently active.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -18902,6 +19078,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         parent:
           type:
           - integer
@@ -18926,11 +19103,13 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         is_primary:
           type: boolean
           description: Indicates if this is the primary category for the production.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -18940,6 +19119,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         category:
@@ -18963,6 +19143,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 255
@@ -18979,6 +19160,7 @@ components:
           pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -18988,6 +19170,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         company_cost_category:
@@ -19013,6 +19196,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
@@ -19029,6 +19213,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19038,6 +19223,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         income_category:
@@ -19063,8 +19249,10 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19074,6 +19262,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         member:
@@ -19097,10 +19286,12 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         role:
           $ref: '#/components/schemas/RoleEnum'
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19110,6 +19301,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         member:
@@ -19133,8 +19325,10 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19144,6 +19338,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         venue:
@@ -19167,6 +19362,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         title:
           type: string
           description: Title for the purchase, e.g., 'VIP Tickets for Opening Night'.
@@ -19244,6 +19440,7 @@ components:
           maxLength: 100
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19253,6 +19450,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         discount_applied:
           type:
           - integer
@@ -19277,6 +19475,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
@@ -19284,6 +19483,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19293,6 +19493,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
     PatchedRehearsal:
       type: object
       properties:
@@ -19312,6 +19513,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         start_datetime:
           type: string
           format: date-time
@@ -19324,6 +19526,7 @@ components:
             is needed, etc. Support Markdown formatting.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19333,6 +19536,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         venue:
@@ -19358,6 +19562,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         is_required:
           type: boolean
           description: Indicates if the participant is required for this rehearsal
@@ -19366,6 +19571,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19375,6 +19581,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         rehearsal:
           type: integer
         member:
@@ -19398,6 +19605,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         approved_date_time:
           type: string
           format: date-time
@@ -19424,6 +19632,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19433,6 +19642,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         payee:
           type:
           - integer
@@ -19544,6 +19754,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         section_code:
           type: string
           description: 'Section Code, example: L-MEZ, ORCH, R-BALC, etc.'
@@ -19586,6 +19797,7 @@ components:
             sections, ignored for Reserved Seating sections.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19595,6 +19807,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production_venue:
           type: integer
           description: The production & venue this section belongs to
@@ -19621,6 +19834,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         seat_code:
           type: string
           description: 'Seat Code, example: 1, 2, 3 etc. This should be unique within
@@ -19655,6 +19869,7 @@ components:
             Include accessibility notes in the notes field.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19664,6 +19879,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
     PatchedSignup:
       type: object
       description: Serializer for the Signup model.
@@ -19684,6 +19900,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         first_name:
           type:
           - string
@@ -19716,6 +19933,7 @@ components:
           description: Notes for the signup. Supports markdown.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19725,6 +19943,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         slot:
           type: integer
         user:
@@ -19754,6 +19973,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type:
           - string
@@ -19784,6 +20004,7 @@ components:
           description: Notes for the slot. Supports markdown.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19793,6 +20014,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         audition:
           type: integer
     PatchedState:
@@ -19814,6 +20036,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
@@ -19823,6 +20046,7 @@ components:
           maxLength: 10
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19832,6 +20056,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         country:
           type: integer
     PatchedSubmission:
@@ -19853,12 +20078,14 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         submitted_date_time:
           type: string
           format: date-time
           readOnly: true
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19868,6 +20095,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         form:
           type: integer
         member:
@@ -19893,6 +20121,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         text_data:
           type: string
         number_data:
@@ -19949,6 +20178,7 @@ components:
           type: boolean
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -19958,6 +20188,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         submission:
           type: integer
         form_field:
@@ -19981,6 +20212,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 50
@@ -19996,6 +20228,7 @@ components:
           - 'null'
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20005,6 +20238,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
     PatchedTenant:
       type: object
       properties:
@@ -20056,6 +20290,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         ticket_uuid:
           type: string
           format: uuid
@@ -20097,6 +20332,7 @@ components:
           maxLength: 200
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20106,6 +20342,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         performance:
           type: integer
           description: The performance for which this ticket is valid.
@@ -20141,6 +20378,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         external_name:
           type: string
           description: Name of the ticket type, e.g., General Admission, VIP, etc.
@@ -20188,6 +20426,7 @@ components:
             first.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20197,6 +20436,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production_venue:
           type: integer
           description: The production venue this ticket type belongs to.
@@ -20333,6 +20573,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 255
@@ -20377,6 +20618,7 @@ components:
           maxLength: 255
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20386,6 +20628,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
     PatchedVenue:
       type: object
       properties:
@@ -20407,6 +20650,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           description: Name of the venue
@@ -20432,6 +20676,7 @@ components:
           description: Is the venue currently active?
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20441,6 +20686,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         tags:
           type: array
           items:
@@ -20466,6 +20712,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         seating_mode:
           type: string
           description: Seating mode of the venue
@@ -20481,6 +20728,7 @@ components:
           description: Additional notes about the capacity
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20490,6 +20738,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         venue:
           type: integer
           description: Venue for which the capacity is defined
@@ -20512,6 +20761,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           description: Name of the tag
@@ -20521,6 +20771,7 @@ components:
           description: Description of the tag
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20530,6 +20781,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
     PatchedVenueTagAssignment:
       type: object
       properties:
@@ -20549,8 +20801,10 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20560,6 +20814,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         venue:
           type: integer
           description: Venue to which the tag is assigned
@@ -20585,11 +20840,13 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20599,6 +20856,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         address:
           type: integer
     Performance:
@@ -20620,6 +20878,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         date:
           type: string
           format: date-time
@@ -20629,6 +20888,7 @@ components:
           $ref: '#/components/schemas/PerformanceStatusEnum'
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20638,6 +20898,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         venue:
@@ -20646,6 +20907,7 @@ components:
           - 'null'
           description: The venue where the performance will take place.
       required:
+      - archive_at
       - created_at
       - created_by
       - date
@@ -20653,6 +20915,7 @@ components:
       - production
       - tenant
       - updated_at
+      - updated_by
     PerformanceStatusEnum:
       enum:
       - scheduled
@@ -20724,6 +20987,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 255
@@ -20743,6 +21007,7 @@ components:
           $ref: '#/components/schemas/ProductionStatusEnum'
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20752,6 +21017,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         venue:
           type:
           - integer
@@ -20763,12 +21029,14 @@ components:
           - integer
           - 'null'
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - name
       - tenant
       - updated_at
+      - updated_by
     ProductionCategory:
       type: object
       properties:
@@ -20788,6 +21056,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 255
@@ -20804,6 +21073,7 @@ components:
           description: Indicates if the category is currently active.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20813,12 +21083,14 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         parent:
           type:
           - integer
           - 'null'
           description: Parent category for hierarchical categorisation.
       required:
+      - archive_at
       - created_at
       - created_by
       - id
@@ -20826,6 +21098,7 @@ components:
       - slug
       - tenant
       - updated_at
+      - updated_by
     ProductionCategoryAssignment:
       type: object
       properties:
@@ -20845,11 +21118,13 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         is_primary:
           type: boolean
           description: Indicates if this is the primary category for the production.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20859,11 +21134,13 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         category:
           type: integer
       required:
+      - archive_at
       - category
       - created_at
       - created_by
@@ -20871,6 +21148,7 @@ components:
       - production
       - tenant
       - updated_at
+      - updated_by
     ProductionCostCategory:
       type: object
       properties:
@@ -20890,6 +21168,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 255
@@ -20906,6 +21185,7 @@ components:
           pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20915,6 +21195,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         company_cost_category:
@@ -20922,6 +21203,7 @@ components:
           - integer
           - 'null'
       required:
+      - archive_at
       - budget
       - created_at
       - created_by
@@ -20930,6 +21212,7 @@ components:
       - production
       - tenant
       - updated_at
+      - updated_by
     ProductionIncomeCategory:
       type: object
       properties:
@@ -20949,6 +21232,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
@@ -20965,6 +21249,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -20974,6 +21259,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         income_category:
@@ -20981,6 +21267,7 @@ components:
           - integer
           - 'null'
       required:
+      - archive_at
       - budget
       - created_at
       - created_by
@@ -20990,6 +21277,7 @@ components:
       - production
       - tenant
       - updated_at
+      - updated_by
     ProductionMember:
       type: object
       properties:
@@ -21009,8 +21297,10 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -21020,11 +21310,13 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         member:
           type: integer
       required:
+      - archive_at
       - created_at
       - created_by
       - id
@@ -21032,6 +21324,7 @@ components:
       - production
       - tenant
       - updated_at
+      - updated_by
     ProductionRoleAssignment:
       type: object
       properties:
@@ -21051,10 +21344,12 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         role:
           $ref: '#/components/schemas/RoleEnum'
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -21064,11 +21359,13 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         member:
           type: integer
       required:
+      - archive_at
       - created_at
       - created_by
       - id
@@ -21077,6 +21374,7 @@ components:
       - role
       - tenant
       - updated_at
+      - updated_by
     ProductionStatusEnum:
       enum:
       - planning
@@ -21116,8 +21414,10 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -21127,17 +21427,20 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         venue:
           type: integer
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - production
       - tenant
       - updated_at
+      - updated_by
       - venue
     Purchase:
       type: object
@@ -21158,6 +21461,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         title:
           type: string
           description: Title for the purchase, e.g., 'VIP Tickets for Opening Night'.
@@ -21235,6 +21539,7 @@ components:
           maxLength: 100
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -21244,12 +21549,14 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         discount_applied:
           type:
           - integer
           - 'null'
           description: Discount applied to this purchase.
       required:
+      - archive_at
       - created_at
       - created_by
       - customer_address
@@ -21260,6 +21567,7 @@ components:
       - tenant
       - total_amount
       - updated_at
+      - updated_by
     PurchaseMethodEnum:
       enum:
       - online
@@ -21293,6 +21601,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
@@ -21300,6 +21609,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -21309,13 +21619,16 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - name
       - tenant
       - updated_at
+      - updated_by
     Rehearsal:
       type: object
       properties:
@@ -21335,6 +21648,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         start_datetime:
           type: string
           format: date-time
@@ -21347,6 +21661,7 @@ components:
             is needed, etc. Support Markdown formatting.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -21356,6 +21671,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production:
           type: integer
         venue:
@@ -21363,6 +21679,7 @@ components:
           - integer
           - 'null'
       required:
+      - archive_at
       - created_at
       - created_by
       - end_datetime
@@ -21371,6 +21688,7 @@ components:
       - start_datetime
       - tenant
       - updated_at
+      - updated_by
     RehearsalParticipant:
       type: object
       properties:
@@ -21390,6 +21708,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         is_required:
           type: boolean
           description: Indicates if the participant is required for this rehearsal
@@ -21398,6 +21717,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -21407,11 +21727,13 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         rehearsal:
           type: integer
         member:
           type: integer
       required:
+      - archive_at
       - created_at
       - created_by
       - id
@@ -21419,6 +21741,7 @@ components:
       - rehearsal
       - tenant
       - updated_at
+      - updated_by
     Reimbursement:
       type: object
       properties:
@@ -21438,6 +21761,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         approved_date_time:
           type: string
           format: date-time
@@ -21464,6 +21788,7 @@ components:
           type: string
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -21473,6 +21798,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         payee:
           type:
           - integer
@@ -21487,11 +21813,13 @@ components:
           - 'null'
       required:
       - amount
+      - archive_at
       - created_at
       - created_by
       - id
       - tenant
       - updated_at
+      - updated_by
     ReimbursementStatusEnum:
       enum:
       - pending
@@ -21689,6 +22017,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         section_code:
           type: string
           description: 'Section Code, example: L-MEZ, ORCH, R-BALC, etc.'
@@ -21731,6 +22060,7 @@ components:
             sections, ignored for Reserved Seating sections.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -21740,10 +22070,12 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production_venue:
           type: integer
           description: The production & venue this section belongs to
       required:
+      - archive_at
       - created_at
       - created_by
       - id
@@ -21752,6 +22084,7 @@ components:
       - section_code
       - tenant
       - updated_at
+      - updated_by
     SectionSeat:
       type: object
       properties:
@@ -21775,6 +22108,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         seat_code:
           type: string
           description: 'Seat Code, example: 1, 2, 3 etc. This should be unique within
@@ -21809,6 +22143,7 @@ components:
             Include accessibility notes in the notes field.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -21818,7 +22153,9 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
       required:
+      - archive_at
       - created_at
       - created_by
       - id
@@ -21827,6 +22164,7 @@ components:
       - section
       - tenant
       - updated_at
+      - updated_by
     ServerMeta:
       type: object
       properties:
@@ -21869,6 +22207,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         first_name:
           type:
           - string
@@ -21901,6 +22240,7 @@ components:
           description: Notes for the signup. Supports markdown.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -21910,6 +22250,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         slot:
           type: integer
         user:
@@ -21920,12 +22261,14 @@ components:
             user. If not, it will be null and the first_name, last_name, email, and
             phone fields will be used to identify the participant.
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - slot
       - tenant
       - updated_at
+      - updated_by
     Slot:
       type: object
       description: Serializer for the Slot model.
@@ -21946,6 +22289,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type:
           - string
@@ -21976,6 +22320,7 @@ components:
           description: Notes for the slot. Supports markdown.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -21985,9 +22330,11 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         audition:
           type: integer
       required:
+      - archive_at
       - audition
       - created_at
       - created_by
@@ -21996,6 +22343,7 @@ components:
       - start_time
       - tenant
       - updated_at
+      - updated_by
     State:
       type: object
       properties:
@@ -22015,6 +22363,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
@@ -22024,6 +22373,7 @@ components:
           maxLength: 10
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -22033,9 +22383,11 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         country:
           type: integer
       required:
+      - archive_at
       - country
       - created_at
       - created_by
@@ -22043,6 +22395,7 @@ components:
       - name
       - tenant
       - updated_at
+      - updated_by
     Subfolder:
       type: object
       properties:
@@ -22077,12 +22430,14 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         submitted_date_time:
           type: string
           format: date-time
           readOnly: true
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -22092,6 +22447,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         form:
           type: integer
         member:
@@ -22099,6 +22455,7 @@ components:
           - integer
           - 'null'
       required:
+      - archive_at
       - created_at
       - created_by
       - form
@@ -22106,6 +22463,7 @@ components:
       - submitted_date_time
       - tenant
       - updated_at
+      - updated_by
     SubmissionFieldValue:
       type: object
       properties:
@@ -22125,6 +22483,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         text_data:
           type: string
         number_data:
@@ -22181,6 +22540,7 @@ components:
           type: boolean
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -22190,11 +22550,13 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         submission:
           type: integer
         form_field:
           type: integer
       required:
+      - archive_at
       - created_at
       - created_by
       - form_field
@@ -22202,6 +22564,7 @@ components:
       - submission
       - tenant
       - updated_at
+      - updated_by
     Tag:
       type: object
       properties:
@@ -22221,6 +22584,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 50
@@ -22236,6 +22600,7 @@ components:
           - 'null'
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -22245,13 +22610,16 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - name
       - tenant
       - updated_at
+      - updated_by
     Tenant:
       type: object
       properties:
@@ -22309,6 +22677,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         ticket_uuid:
           type: string
           format: uuid
@@ -22350,6 +22719,7 @@ components:
           maxLength: 200
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -22359,6 +22729,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         performance:
           type: integer
           description: The performance for which this ticket is valid.
@@ -22376,6 +22747,7 @@ components:
           - 'null'
           description: User who checked in the ticket. Null if not checked in.
       required:
+      - archive_at
       - created_at
       - created_by
       - id
@@ -22388,6 +22760,7 @@ components:
       - ticket_type
       - ticket_uuid
       - updated_at
+      - updated_by
     TicketStatusEnum:
       enum:
       - active
@@ -22421,6 +22794,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         external_name:
           type: string
           description: Name of the ticket type, e.g., General Admission, VIP, etc.
@@ -22468,6 +22842,7 @@ components:
             first.
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -22477,10 +22852,12 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         production_venue:
           type: integer
           description: The production venue this ticket type belongs to.
       required:
+      - archive_at
       - created_at
       - created_by
       - external_name
@@ -22490,6 +22867,7 @@ components:
       - production_venue
       - tenant
       - updated_at
+      - updated_by
     User:
       type: object
       properties:
@@ -22636,6 +23014,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 255
@@ -22680,6 +23059,7 @@ components:
           maxLength: 255
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -22689,13 +23069,16 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - name
       - tenant
       - updated_at
+      - updated_by
     Venue:
       type: object
       properties:
@@ -22717,6 +23100,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           description: Name of the venue
@@ -22742,6 +23126,7 @@ components:
           description: Is the venue currently active?
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -22751,6 +23136,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         tags:
           type: array
           items:
@@ -22759,6 +23145,7 @@ components:
           description: Tags associated with the venue
       required:
       - address
+      - archive_at
       - created_at
       - created_by
       - id
@@ -22766,6 +23153,7 @@ components:
       - tags
       - tenant
       - updated_at
+      - updated_by
     VenueCapacity:
       type: object
       properties:
@@ -22785,6 +23173,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         seating_mode:
           type: string
           description: Seating mode of the venue
@@ -22800,6 +23189,7 @@ components:
           description: Additional notes about the capacity
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -22809,10 +23199,12 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         venue:
           type: integer
           description: Venue for which the capacity is defined
       required:
+      - archive_at
       - capacity
       - created_at
       - created_by
@@ -22820,6 +23212,7 @@ components:
       - seating_mode
       - tenant
       - updated_at
+      - updated_by
       - venue
     VenueTag:
       type: object
@@ -22840,6 +23233,7 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           description: Name of the tag
@@ -22849,6 +23243,7 @@ components:
           description: Description of the tag
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -22858,13 +23253,16 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - name
       - tenant
       - updated_at
+      - updated_by
     VenueTagAssignment:
       type: object
       properties:
@@ -22884,8 +23282,10 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -22895,6 +23295,7 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         venue:
           type: integer
           description: Venue to which the tag is assigned
@@ -22902,12 +23303,14 @@ components:
           type: integer
           description: Tag assigned to the venue
       required:
+      - archive_at
       - created_at
       - created_by
       - id
       - tag
       - tenant
       - updated_at
+      - updated_by
       - venue
     WorkLocation:
       type: object
@@ -22928,11 +23331,13 @@ components:
           - string
           - 'null'
           format: date-time
+          readOnly: true
         name:
           type: string
           maxLength: 100
         tenant:
           type: integer
+          readOnly: true
         created_by:
           type:
           - integer
@@ -22942,16 +23347,19 @@ components:
           type:
           - integer
           - 'null'
+          readOnly: true
         address:
           type: integer
       required:
       - address
+      - archive_at
       - created_at
       - created_by
       - id
       - name
       - tenant
       - updated_at
+      - updated_by
     FileType:
       type: string
       enum:
