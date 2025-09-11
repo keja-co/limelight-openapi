@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.82
+  version: 1.0.83
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -22594,6 +22594,8 @@ components:
           type: string
         user:
           type: integer
+        tenant_ulid:
+          type: string
       required:
       - status
     Signup:
