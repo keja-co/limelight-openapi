@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.86
+  version: 1.0.87
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -5968,57 +5968,45 @@ paths:
               examples:
                 ShortTextField:
                   value:
-                    count: 123
-                    next: http://api.example.org/accounts/?page=4
-                    previous: http://api.example.org/accounts/?page=2
-                    results:
-                    - id: 1
-                      form: 1
-                      order: 1
-                      type: short_text
-                      title: Sample Field
-                      description: This is a sample field description.
-                      placeholder: Enter text here
-                      is_required: true
-                      configuration:
-                        max_length: 500
-                        min_length: 10
+                    id: 1
+                    form: 1
+                    order: 1
+                    type: short_text
+                    title: Sample Field
+                    description: This is a sample field description.
+                    placeholder: Enter text here
+                    is_required: true
+                    configuration:
+                      max_length: 500
+                      min_length: 10
                   summary: Short Text Field
                 FileUploadField:
                   value:
-                    count: 123
-                    next: http://api.example.org/accounts/?page=4
-                    previous: http://api.example.org/accounts/?page=2
-                    results:
-                    - id: 2
-                      form: 1
-                      order: 2
-                      type: file_upload
-                      title: Upload Documents
-                      description: Please upload your documents
-                      is_required: true
-                      configuration:
-                        allowed_file_types:
-                        - image
-                        - document
-                        max_file_size: 10485760
-                        allow_multiple: false
+                    id: 2
+                    form: 1
+                    order: 2
+                    type: file_upload
+                    title: Upload Documents
+                    description: Please upload your documents
+                    is_required: true
+                    configuration:
+                      allowed_file_types:
+                      - image
+                      - document
+                      max_file_size: 10485760
+                      allow_multiple: false
                   summary: File Upload Field
                 ExternalSignatureField:
                   value:
-                    count: 123
-                    next: http://api.example.org/accounts/?page=4
-                    previous: http://api.example.org/accounts/?page=2
-                    results:
-                    - id: 3
-                      form: 1
-                      order: 3
-                      type: external_signature
-                      title: Sign Document
-                      description: Please sign this document
-                      is_required: true
-                      configuration:
-                        service: docusign
+                    id: 3
+                    form: 1
+                    order: 3
+                    type: external_signature
+                    title: Sign Document
+                    description: Please sign this document
+                    is_required: true
+                    configuration:
+                      service: docusign
                   summary: External Signature Field
           description: ''
     post:
@@ -15621,6 +15609,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Address'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedAssetList:
       type: object
       required:
@@ -15644,6 +15638,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Asset'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedAssignmentList:
       type: object
       required:
@@ -15667,6 +15667,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Assignment'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedAuditLogList:
       type: object
       required:
@@ -15690,6 +15696,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AuditLog'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedAuditionList:
       type: object
       required:
@@ -15713,6 +15725,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Audition'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedContextKeyList:
       type: object
       required:
@@ -15736,6 +15754,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ContextKey'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedContextList:
       type: object
       required:
@@ -15759,6 +15783,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Context'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedCostCategoryList:
       type: object
       required:
@@ -15782,6 +15812,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CostCategory'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedCountryList:
       type: object
       required:
@@ -15805,6 +15841,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Country'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedDiscountList:
       type: object
       required:
@@ -15828,6 +15870,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Discount'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedDiscountTicketTypeList:
       type: object
       required:
@@ -15851,6 +15899,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DiscountTicketType'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedDocumentList:
       type: object
       required:
@@ -15874,6 +15928,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Document'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedDocumentRepoList:
       type: object
       required:
@@ -15897,6 +15957,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentRepo'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedDocumentTagList:
       type: object
       required:
@@ -15920,6 +15986,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentTag'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedDocumentVersionList:
       type: object
       required:
@@ -15943,6 +16015,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentVersion'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedEmployeeList:
       type: object
       required:
@@ -15966,6 +16044,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Employee'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedEmployeeQualificationList:
       type: object
       required:
@@ -15989,6 +16073,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EmployeeQualification'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedEmploymentTypeList:
       type: object
       required:
@@ -16012,6 +16102,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EmploymentType'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedExpenseAttachmentList:
       type: object
       required:
@@ -16035,6 +16131,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExpenseAttachment'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedExpenseList:
       type: object
       required:
@@ -16058,6 +16160,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Expense'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedFeedbackList:
       type: object
       required:
@@ -16081,6 +16189,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Feedback'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedFolderList:
       type: object
       required:
@@ -16104,6 +16218,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Folder'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedFormFieldList:
       type: object
       required:
@@ -16127,6 +16247,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FormField'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedFormList:
       type: object
       required:
@@ -16150,6 +16276,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Form'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedIncomeCategoryList:
       type: object
       required:
@@ -16173,6 +16305,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IncomeCategory'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedIncomeList:
       type: object
       required:
@@ -16196,6 +16334,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Income'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedPerformanceList:
       type: object
       required:
@@ -16219,6 +16363,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Performance'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedPermissionList:
       type: object
       required:
@@ -16242,6 +16392,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Permission'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedProductionCategoryAssignmentList:
       type: object
       required:
@@ -16265,6 +16421,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductionCategoryAssignment'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedProductionCategoryList:
       type: object
       required:
@@ -16288,6 +16450,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductionCategory'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedProductionCostCategoryList:
       type: object
       required:
@@ -16311,6 +16479,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductionCostCategory'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedProductionIncomeCategoryList:
       type: object
       required:
@@ -16334,6 +16508,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductionIncomeCategory'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedProductionList:
       type: object
       required:
@@ -16357,6 +16537,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Production'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedProductionMemberList:
       type: object
       required:
@@ -16380,6 +16566,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductionMember'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedProductionRoleAssignmentList:
       type: object
       required:
@@ -16403,6 +16595,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductionRoleAssignment'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedProductionVenueList:
       type: object
       required:
@@ -16426,6 +16624,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductionVenue'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedPurchaseList:
       type: object
       required:
@@ -16449,6 +16653,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Purchase'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedQualificationList:
       type: object
       required:
@@ -16472,6 +16682,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Qualification'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedRehearsalList:
       type: object
       required:
@@ -16495,6 +16711,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Rehearsal'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedRehearsalParticipantList:
       type: object
       required:
@@ -16518,6 +16740,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RehearsalParticipant'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedReimbursementList:
       type: object
       required:
@@ -16541,6 +16769,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Reimbursement'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedRoleList:
       type: object
       required:
@@ -16564,6 +16798,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Role'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedRolePermissionList:
       type: object
       required:
@@ -16587,6 +16827,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RolePermission'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedSectionList:
       type: object
       required:
@@ -16610,6 +16856,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Section'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedSectionSeatList:
       type: object
       required:
@@ -16633,6 +16885,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SectionSeat'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedSignupList:
       type: object
       required:
@@ -16656,6 +16914,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Signup'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedSlotList:
       type: object
       required:
@@ -16679,6 +16943,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Slot'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedStateList:
       type: object
       required:
@@ -16702,6 +16972,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/State'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedSubmissionFieldValueList:
       type: object
       required:
@@ -16725,6 +17001,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SubmissionFieldValue'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedSubmissionList:
       type: object
       required:
@@ -16748,6 +17030,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Submission'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedTagList:
       type: object
       required:
@@ -16771,6 +17059,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedTenantList:
       type: object
       required:
@@ -16794,6 +17088,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tenant'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedTicketList:
       type: object
       required:
@@ -16817,6 +17117,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Ticket'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedTicketTypeList:
       type: object
       required:
@@ -16840,6 +17146,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TicketType'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedUserList:
       type: object
       required:
@@ -16863,6 +17175,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedUserRoleAssignmentList:
       type: object
       required:
@@ -16886,6 +17204,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserRoleAssignment'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedVendorList:
       type: object
       required:
@@ -16909,6 +17233,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Vendor'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedVenueCapacityList:
       type: object
       required:
@@ -16932,6 +17262,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VenueCapacity'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedVenueList:
       type: object
       required:
@@ -16955,6 +17291,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Venue'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedVenueTagAssignmentList:
       type: object
       required:
@@ -16978,6 +17320,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VenueTagAssignment'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedVenueTagList:
       type: object
       required:
@@ -17001,6 +17349,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VenueTag'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PaginatedWorkLocationList:
       type: object
       required:
@@ -17024,6 +17378,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WorkLocation'
+        page:
+          type: integer
+        page_size:
+          type: integer
+        page_count:
+          type: integer
     PatchedAddress:
       type: object
       properties:
