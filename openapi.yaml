@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.85
+  version: 1.0.86
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -20927,6 +20927,13 @@ components:
           maxLength: 25
         is_active:
           type: boolean
+        avatar_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL of the user's avatar
+          maxLength: 200
         tenant:
           type: integer
         groups:
@@ -23363,6 +23370,13 @@ components:
           maxLength: 25
         is_active:
           type: boolean
+        avatar_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL of the user's avatar
+          maxLength: 200
         tenant:
           type: integer
         groups:
