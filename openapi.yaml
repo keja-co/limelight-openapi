@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.83
+  version: 1.0.85
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -13312,9 +13312,15 @@ paths:
   /api/tenant/v1/tenants/:
     get:
       operationId: api_tenant_v1_tenants_list
-      description: Retrieve a list of all tenants in the system.
+      description: Retrieve a list of all tenants in the system. Optionally filter
+        by ?code prefix.
       summary: List all tenants
       parameters:
+      - in: query
+        name: code
+        schema:
+          type: string
+        description: Filter by tenant code prefix (min length 5)
       - name: page
         required: false
         in: query
@@ -13332,6 +13338,7 @@ paths:
       security:
       - CadenceSession: []
       - cookieAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -13378,6 +13385,7 @@ paths:
       security:
       - CadenceSession: []
       - cookieAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -20655,6 +20663,9 @@ components:
         ulid:
           type: string
           readOnly: true
+        code:
+          type: string
+          minLength: 5
         name:
           type: string
           maxLength: 255
@@ -23040,6 +23051,9 @@ components:
         ulid:
           type: string
           readOnly: true
+        code:
+          type: string
+          minLength: 5
         name:
           type: string
           maxLength: 255
@@ -23052,6 +23066,7 @@ components:
           format: date-time
           readOnly: true
       required:
+      - code
       - created_at
       - id
       - name
