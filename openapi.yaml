@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.77
+  version: 1.0.82
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -12083,7 +12083,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Discount.
         required: true
       - in: query
         name: production_venue_id
@@ -12115,7 +12116,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Discount.
         required: true
       - in: query
         name: production_venue_id
@@ -12153,7 +12155,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Discount.
         required: true
       - in: query
         name: production_venue_id
@@ -12190,7 +12193,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Discount.
         required: true
       - in: query
         name: production_venue_id
@@ -12294,7 +12298,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Section.
         required: true
       - in: path
         name: production_venue_id
@@ -12327,7 +12332,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Section.
         required: true
       - in: path
         name: production_venue_id
@@ -12366,7 +12372,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Section.
         required: true
       - in: path
         name: production_venue_id
@@ -12404,7 +12411,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Section.
         required: true
       - in: path
         name: production_venue_id
@@ -12521,7 +12529,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Section Seat.
         required: true
       - in: path
         name: production_venue_id
@@ -12560,7 +12569,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Section Seat.
         required: true
       - in: path
         name: production_venue_id
@@ -12605,7 +12615,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Section Seat.
         required: true
       - in: path
         name: production_venue_id
@@ -12649,7 +12660,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Section Seat.
         required: true
       - in: path
         name: production_venue_id
@@ -12760,7 +12772,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Ticket Type.
         required: true
       - in: path
         name: production_venue_id
@@ -12793,7 +12806,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Ticket Type.
         required: true
       - in: path
         name: production_venue_id
@@ -12832,7 +12846,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Ticket Type.
         required: true
       - in: path
         name: production_venue_id
@@ -12870,7 +12885,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Ticket Type.
         required: true
       - in: path
         name: production_venue_id
@@ -13158,7 +13174,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Ticket.
         required: true
       - in: path
         name: purchase_id
@@ -13191,7 +13208,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Ticket.
         required: true
       - in: path
         name: purchase_id
@@ -13230,7 +13248,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Ticket.
         required: true
       - in: path
         name: purchase_id
@@ -13268,7 +13287,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Ticket.
         required: true
       - in: path
         name: purchase_id
@@ -14272,6 +14292,7 @@ components:
           - 'null'
         repo:
           type: integer
+          readOnly: true
         folder:
           type:
           - integer
@@ -17979,6 +18000,7 @@ components:
           - 'null'
         repo:
           type: integer
+          readOnly: true
         folder:
           type:
           - integer
@@ -20194,6 +20216,7 @@ components:
           readOnly: true
         production_venue:
           type: integer
+          readOnly: true
           description: The production & venue this section belongs to
     PatchedSectionSeat:
       type: object
@@ -20823,6 +20846,7 @@ components:
           readOnly: true
         production_venue:
           type: integer
+          readOnly: true
           description: The production venue this ticket type belongs to.
     PatchedUser:
       type: object
@@ -22457,6 +22481,7 @@ components:
           readOnly: true
         production_venue:
           type: integer
+          readOnly: true
           description: The production & venue this section belongs to
       required:
       - archive_at
@@ -23239,6 +23264,7 @@ components:
           readOnly: true
         production_venue:
           type: integer
+          readOnly: true
           description: The production venue this ticket type belongs to.
       required:
       - archive_at
