@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.75
+  version: 1.0.77
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -1922,8 +1922,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Expense Attachment.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -1956,8 +1955,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Expense Attachment.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -1997,8 +1995,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Expense Attachment.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -2036,8 +2033,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Expense Attachment.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -2856,8 +2852,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Production Income Category.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -2891,8 +2886,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Production Income Category.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -2932,8 +2926,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Production Income Category.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -2971,8 +2964,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Production Income Category.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -3365,6 +3357,12 @@ paths:
   /api/t/{tenant_ref}/compliance/auditlogs/:
     get:
       operationId: compliance_auditlogs_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -3397,6 +3395,12 @@ paths:
           description: ''
     post:
       operationId: compliance_auditlogs_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -3424,6 +3428,12 @@ paths:
   /api/t/{tenant_ref}/compliance/auditlogs/{id}/:
     get:
       operationId: compliance_auditlogs_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3450,6 +3460,12 @@ paths:
           description: ''
     put:
       operationId: compliance_auditlogs_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3482,6 +3498,12 @@ paths:
           description: ''
     patch:
       operationId: compliance_auditlogs_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3513,6 +3535,12 @@ paths:
           description: ''
     delete:
       operationId: compliance_auditlogs_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3536,6 +3564,12 @@ paths:
   /api/t/{tenant_ref}/compliance/contextkeys/:
     get:
       operationId: compliance_contextkeys_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -3568,6 +3602,12 @@ paths:
           description: ''
     post:
       operationId: compliance_contextkeys_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -3595,6 +3635,12 @@ paths:
   /api/t/{tenant_ref}/compliance/contextkeys/{id}/:
     get:
       operationId: compliance_contextkeys_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3621,6 +3667,12 @@ paths:
           description: ''
     put:
       operationId: compliance_contextkeys_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3653,6 +3705,12 @@ paths:
           description: ''
     patch:
       operationId: compliance_contextkeys_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3684,6 +3742,12 @@ paths:
           description: ''
     delete:
       operationId: compliance_contextkeys_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3707,6 +3771,12 @@ paths:
   /api/t/{tenant_ref}/compliance/contexts/:
     get:
       operationId: compliance_contexts_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -3739,6 +3809,12 @@ paths:
           description: ''
     post:
       operationId: compliance_contexts_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -3766,6 +3842,12 @@ paths:
   /api/t/{tenant_ref}/compliance/contexts/{id}/:
     get:
       operationId: compliance_contexts_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3792,6 +3874,12 @@ paths:
           description: ''
     put:
       operationId: compliance_contexts_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3824,6 +3912,12 @@ paths:
           description: ''
     patch:
       operationId: compliance_contexts_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3855,6 +3949,12 @@ paths:
           description: ''
     delete:
       operationId: compliance_contexts_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3878,6 +3978,12 @@ paths:
   /api/t/{tenant_ref}/compliance/permissions/:
     get:
       operationId: compliance_permissions_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -3910,6 +4016,12 @@ paths:
           description: ''
     post:
       operationId: compliance_permissions_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -3937,6 +4049,12 @@ paths:
   /api/t/{tenant_ref}/compliance/permissions/{id}/:
     get:
       operationId: compliance_permissions_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3963,6 +4081,12 @@ paths:
           description: ''
     put:
       operationId: compliance_permissions_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -3995,6 +4119,12 @@ paths:
           description: ''
     patch:
       operationId: compliance_permissions_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4026,6 +4156,12 @@ paths:
           description: ''
     delete:
       operationId: compliance_permissions_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4049,6 +4185,12 @@ paths:
   /api/t/{tenant_ref}/compliance/rolepermissions/:
     get:
       operationId: compliance_rolepermissions_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -4081,6 +4223,12 @@ paths:
           description: ''
     post:
       operationId: compliance_rolepermissions_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -4108,6 +4256,12 @@ paths:
   /api/t/{tenant_ref}/compliance/rolepermissions/{id}/:
     get:
       operationId: compliance_rolepermissions_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4134,6 +4288,12 @@ paths:
           description: ''
     put:
       operationId: compliance_rolepermissions_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4166,6 +4326,12 @@ paths:
           description: ''
     patch:
       operationId: compliance_rolepermissions_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4197,6 +4363,12 @@ paths:
           description: ''
     delete:
       operationId: compliance_rolepermissions_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4220,6 +4392,12 @@ paths:
   /api/t/{tenant_ref}/compliance/roles/:
     get:
       operationId: compliance_roles_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -4252,6 +4430,12 @@ paths:
           description: ''
     post:
       operationId: compliance_roles_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -4279,6 +4463,12 @@ paths:
   /api/t/{tenant_ref}/compliance/roles/{id}/:
     get:
       operationId: compliance_roles_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4305,6 +4495,12 @@ paths:
           description: ''
     put:
       operationId: compliance_roles_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4337,6 +4533,12 @@ paths:
           description: ''
     patch:
       operationId: compliance_roles_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4368,6 +4570,12 @@ paths:
           description: ''
     delete:
       operationId: compliance_roles_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4391,6 +4599,12 @@ paths:
   /api/t/{tenant_ref}/compliance/userroleassignments/:
     get:
       operationId: compliance_userroleassignments_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -4423,6 +4637,12 @@ paths:
           description: ''
     post:
       operationId: compliance_userroleassignments_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -4450,6 +4670,12 @@ paths:
   /api/t/{tenant_ref}/compliance/userroleassignments/{id}/:
     get:
       operationId: compliance_userroleassignments_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4476,6 +4702,12 @@ paths:
           description: ''
     put:
       operationId: compliance_userroleassignments_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4508,6 +4740,12 @@ paths:
           description: ''
     patch:
       operationId: compliance_userroleassignments_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -4539,6 +4777,12 @@ paths:
           description: ''
     delete:
       operationId: compliance_userroleassignments_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -5249,8 +5493,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Document.
+          type: string
         required: true
       - in: path
         name: repo_id
@@ -5284,8 +5527,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Document.
+          type: string
         required: true
       - in: path
         name: repo_id
@@ -5325,8 +5567,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Document.
+          type: string
         required: true
       - in: path
         name: repo_id
@@ -5364,8 +5605,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Document.
+          type: string
         required: true
       - in: path
         name: repo_id
@@ -5477,8 +5717,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Folder.
+          type: string
         required: true
       - in: path
         name: repo_id
@@ -5512,8 +5751,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Folder.
+          type: string
         required: true
       - in: path
         name: repo_id
@@ -5553,8 +5791,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Folder.
+          type: string
         required: true
       - in: path
         name: repo_id
@@ -5592,8 +5829,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Folder.
+          type: string
         required: true
       - in: path
         name: repo_id
@@ -6065,8 +6301,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Form Field.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -6142,8 +6377,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Form Field.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -6269,8 +6503,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Form Field.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -6394,8 +6627,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Form Field.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -6500,8 +6732,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Form Submission.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -6534,8 +6765,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Form Submission.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -6575,8 +6805,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Form Submission.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -6614,8 +6843,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Form Submission.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -6751,8 +6979,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Submission Field Value.
+          type: string
         required: true
       - in: path
         name: submission_id
@@ -6797,8 +7024,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Submission Field Value.
+          type: string
         required: true
       - in: path
         name: submission_id
@@ -6850,8 +7076,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Submission Field Value.
+          type: string
         required: true
       - in: path
         name: submission_id
@@ -6901,8 +7126,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Submission Field Value.
+          type: string
         required: true
       - in: path
         name: submission_id
@@ -7046,6 +7270,12 @@ paths:
   /api/t/{tenant_ref}/hr/employee-qualifications/:
     get:
       operationId: hr_employee_qualifications_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -7078,6 +7308,12 @@ paths:
           description: ''
     post:
       operationId: hr_employee_qualifications_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -7105,6 +7341,12 @@ paths:
   /api/t/{tenant_ref}/hr/employee-qualifications/{id}/:
     get:
       operationId: hr_employee_qualifications_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7131,6 +7373,12 @@ paths:
           description: ''
     put:
       operationId: hr_employee_qualifications_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7163,6 +7411,12 @@ paths:
           description: ''
     patch:
       operationId: hr_employee_qualifications_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7194,6 +7448,12 @@ paths:
           description: ''
     delete:
       operationId: hr_employee_qualifications_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7217,6 +7477,12 @@ paths:
   /api/t/{tenant_ref}/hr/employees/:
     get:
       operationId: hr_employees_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -7249,6 +7515,12 @@ paths:
           description: ''
     post:
       operationId: hr_employees_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -7276,6 +7548,12 @@ paths:
   /api/t/{tenant_ref}/hr/employees/{id}/:
     get:
       operationId: hr_employees_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7302,6 +7580,12 @@ paths:
           description: ''
     put:
       operationId: hr_employees_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7334,6 +7618,12 @@ paths:
           description: ''
     patch:
       operationId: hr_employees_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7365,6 +7655,12 @@ paths:
           description: ''
     delete:
       operationId: hr_employees_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7388,6 +7684,12 @@ paths:
   /api/t/{tenant_ref}/hr/employment-types/:
     get:
       operationId: hr_employment_types_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -7420,6 +7722,12 @@ paths:
           description: ''
     post:
       operationId: hr_employment_types_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -7447,6 +7755,12 @@ paths:
   /api/t/{tenant_ref}/hr/employment-types/{id}/:
     get:
       operationId: hr_employment_types_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7473,6 +7787,12 @@ paths:
           description: ''
     put:
       operationId: hr_employment_types_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7505,6 +7825,12 @@ paths:
           description: ''
     patch:
       operationId: hr_employment_types_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7536,6 +7862,12 @@ paths:
           description: ''
     delete:
       operationId: hr_employment_types_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7559,6 +7891,12 @@ paths:
   /api/t/{tenant_ref}/hr/qualifications/:
     get:
       operationId: hr_qualifications_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -7591,6 +7929,12 @@ paths:
           description: ''
     post:
       operationId: hr_qualifications_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -7618,6 +7962,12 @@ paths:
   /api/t/{tenant_ref}/hr/qualifications/{id}/:
     get:
       operationId: hr_qualifications_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7644,6 +7994,12 @@ paths:
           description: ''
     put:
       operationId: hr_qualifications_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7676,6 +8032,12 @@ paths:
           description: ''
     patch:
       operationId: hr_qualifications_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7707,6 +8069,12 @@ paths:
           description: ''
     delete:
       operationId: hr_qualifications_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7730,6 +8098,12 @@ paths:
   /api/t/{tenant_ref}/hr/work-locations/:
     get:
       operationId: hr_work_locations_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -7762,6 +8136,12 @@ paths:
           description: ''
     post:
       operationId: hr_work_locations_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -7789,6 +8169,12 @@ paths:
   /api/t/{tenant_ref}/hr/work-locations/{id}/:
     get:
       operationId: hr_work_locations_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7815,6 +8201,12 @@ paths:
           description: ''
     put:
       operationId: hr_work_locations_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7847,6 +8239,12 @@ paths:
           description: ''
     patch:
       operationId: hr_work_locations_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7878,6 +8276,12 @@ paths:
           description: ''
     delete:
       operationId: hr_work_locations_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -7923,6 +8327,12 @@ paths:
   /api/t/{tenant_ref}/identity/users/:
     get:
       operationId: identity_users_list
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - name: page
         required: false
@@ -7955,6 +8365,12 @@ paths:
           description: ''
     post:
       operationId: identity_users_create
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: tenant_ref
@@ -7982,6 +8398,12 @@ paths:
   /api/t/{tenant_ref}/identity/users/{id}/:
     get:
       operationId: identity_users_retrieve
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -8008,6 +8430,12 @@ paths:
           description: ''
     put:
       operationId: identity_users_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -8040,6 +8468,12 @@ paths:
           description: ''
     patch:
       operationId: identity_users_partial_update
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -8071,6 +8505,12 @@ paths:
           description: ''
     delete:
       operationId: identity_users_destroy
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -8244,8 +8684,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this address.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -8278,8 +8717,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this address.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -8319,8 +8757,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this address.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -8358,8 +8795,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this address.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -8464,8 +8900,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this state.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -8498,8 +8933,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this state.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -8538,8 +8972,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this state.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -8577,8 +9010,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this state.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -9166,8 +9598,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this venue capacity.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -9200,8 +9631,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this venue capacity.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -9241,8 +9671,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this venue capacity.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -9280,8 +9709,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this venue capacity.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -9387,8 +9815,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this venue tag assignment.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -9421,8 +9848,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this venue tag assignment.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -9462,8 +9888,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this venue tag assignment.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -9501,8 +9926,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this venue tag assignment.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -9676,8 +10100,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Production Category Assignment.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -9710,8 +10133,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Production Category Assignment.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -9750,8 +10172,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Production Category Assignment.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -9789,8 +10210,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Production Category Assignment.
+          type: string
         required: true
       - in: path
         name: tenant_ref
@@ -10279,8 +10699,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Production Role Assignment.
+          type: string
         required: true
       - in: path
         name: member_id
@@ -10319,8 +10738,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Production Role Assignment.
+          type: string
         required: true
       - in: path
         name: member_id
@@ -10365,8 +10783,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Production Role Assignment.
+          type: string
         required: true
       - in: path
         name: member_id
@@ -10410,8 +10827,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Production Role Assignment.
+          type: string
         required: true
       - in: path
         name: member_id
@@ -10447,8 +10863,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this production member.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -10481,8 +10896,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this production member.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -10521,8 +10935,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this production member.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -10560,8 +10973,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this production member.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -10666,8 +11078,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Performance.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -10700,8 +11111,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Performance.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -10740,8 +11150,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Performance.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -10779,8 +11188,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Performance.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -10885,8 +11293,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Rehearsal.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -10919,8 +11326,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Rehearsal.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -10959,8 +11365,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Rehearsal.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -10998,8 +11403,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Rehearsal.
+          type: string
         required: true
       - in: path
         name: production_id
@@ -11679,8 +12083,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Discount.
+          type: string
         required: true
       - in: query
         name: production_venue_id
@@ -11712,8 +12115,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Discount.
+          type: string
         required: true
       - in: query
         name: production_venue_id
@@ -11751,8 +12153,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Discount.
+          type: string
         required: true
       - in: query
         name: production_venue_id
@@ -11789,8 +12190,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Discount.
+          type: string
         required: true
       - in: query
         name: production_venue_id
@@ -11894,8 +12294,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Section.
+          type: string
         required: true
       - in: path
         name: production_venue_id
@@ -11928,8 +12327,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Section.
+          type: string
         required: true
       - in: path
         name: production_venue_id
@@ -11968,8 +12366,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Section.
+          type: string
         required: true
       - in: path
         name: production_venue_id
@@ -12007,8 +12404,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Section.
+          type: string
         required: true
       - in: path
         name: production_venue_id
@@ -12125,8 +12521,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Section Seat.
+          type: string
         required: true
       - in: path
         name: production_venue_id
@@ -12165,8 +12560,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Section Seat.
+          type: string
         required: true
       - in: path
         name: production_venue_id
@@ -12211,8 +12605,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Section Seat.
+          type: string
         required: true
       - in: path
         name: production_venue_id
@@ -12256,8 +12649,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Section Seat.
+          type: string
         required: true
       - in: path
         name: production_venue_id
@@ -12368,8 +12760,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Ticket Type.
+          type: string
         required: true
       - in: path
         name: production_venue_id
@@ -12402,8 +12793,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Ticket Type.
+          type: string
         required: true
       - in: path
         name: production_venue_id
@@ -12442,8 +12832,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Ticket Type.
+          type: string
         required: true
       - in: path
         name: production_venue_id
@@ -12481,8 +12870,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Ticket Type.
+          type: string
         required: true
       - in: path
         name: production_venue_id
@@ -12770,8 +13158,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Ticket.
+          type: string
         required: true
       - in: path
         name: purchase_id
@@ -12804,8 +13191,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Ticket.
+          type: string
         required: true
       - in: path
         name: purchase_id
@@ -12844,8 +13230,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Ticket.
+          type: string
         required: true
       - in: path
         name: purchase_id
@@ -12883,8 +13268,7 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Ticket.
+          type: string
         required: true
       - in: path
         name: purchase_id
