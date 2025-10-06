@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.87
+  version: 1.0.89
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -172,6 +172,14 @@ paths:
       description: Retrieve a list of all assets in the system.
       summary: List all assets
       parameters:
+      - in: query
+        name: condition
+        schema:
+          type: string
+      - in: query
+        name: name
+        schema:
+          type: string
       - name: page
         required: false
         in: query
@@ -189,6 +197,10 @@ paths:
         schema:
           type: string
         required: true
+      - in: query
+        name: type
+        schema:
+          type: string
       tags:
       - assets
       security:
@@ -563,6 +575,22 @@ paths:
       description: Retrieve all auditions for productions.
       summary: List Auditions
       parameters:
+      - in: query
+        name: description
+        schema:
+          type: string
+      - in: query
+        name: description__icontains
+        schema:
+          type: string
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: name__icontains
+        schema:
+          type: string
       - name: page
         required: false
         in: query
@@ -575,11 +603,19 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: production
+        schema:
+          type: number
       - in: path
         name: tenant_ref
         schema:
           type: string
         required: true
+      - in: query
+        name: venue
+        schema:
+          type: number
       tags:
       - auditions
       security:
