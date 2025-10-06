@@ -180,6 +180,14 @@ paths:
         name: name
         schema:
           type: string
+      - in: query
+        name: name__icontains
+        schema:
+          type: string
+      - in: query
+        name: name__istartswith
+        schema:
+          type: string
       - name: page
         required: false
         in: query
