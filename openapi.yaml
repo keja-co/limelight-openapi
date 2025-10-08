@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.90
+  version: 1.0.91
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -8143,6 +8143,42 @@ paths:
         - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
         - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
+      - in: query
+        name: email
+        schema:
+          type: string
+      - in: query
+        name: email__icontains
+        schema:
+          type: string
+      - in: query
+        name: email__istartswith
+        schema:
+          type: string
+      - in: query
+        name: first_name
+        schema:
+          type: string
+      - in: query
+        name: first_name__icontains
+        schema:
+          type: string
+      - in: query
+        name: first_name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: last_name
+        schema:
+          type: string
+      - in: query
+        name: last_name__icontains
+        schema:
+          type: string
+      - in: query
+        name: last_name__istartswith
+        schema:
+          type: string
       - name: page
         required: false
         in: query
@@ -10100,6 +10136,18 @@ paths:
       description: Retrieve all productions.
       summary: List Productions
       parameters:
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: name__icontains
+        schema:
+          type: string
+      - in: query
+        name: name__istartswith
+        schema:
+          type: string
       - name: page
         required: false
         in: query
@@ -10112,6 +10160,10 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: status__iexact
+        schema:
+          type: string
       - in: path
         name: tenant_ref
         schema:
@@ -13002,9 +13054,6 @@ paths:
           type: integer
       tags:
       - tenant
-      security:
-      - cookieAuth: []
-      - {}
       responses:
         '200':
           content:
@@ -13047,9 +13096,6 @@ paths:
         required: true
       tags:
       - tenant
-      security:
-      - cookieAuth: []
-      - {}
       responses:
         '200':
           content:
@@ -13219,6 +13265,13 @@ components:
         id:
           type: integer
           readOnly: true
+        is_assigned:
+          type: boolean
+          description: |-
+            Return True if the asset currently has an active assignment now.
+
+            Active means: start_date <= now AND (end_date IS NULL OR end_date >= now)
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -13297,6 +13350,7 @@ components:
       - created_at
       - created_by
       - id
+      - is_assigned
       - name
       - tenant
       - updated_at
@@ -17489,6 +17543,13 @@ components:
       properties:
         id:
           type: integer
+          readOnly: true
+        is_assigned:
+          type: boolean
+          description: |-
+            Return True if the asset currently has an active assignment now.
+
+            Active means: start_date <= now AND (end_date IS NULL OR end_date >= now)
           readOnly: true
         created_at:
           type: string
