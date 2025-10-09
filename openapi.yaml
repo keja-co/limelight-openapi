@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.96
+  version: 1.0.97
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -11585,6 +11585,10 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: production
+        schema:
+          type: integer
       - in: path
         name: tenant_ref
         schema:
@@ -20156,6 +20160,9 @@ components:
         id:
           type: integer
           readOnly: true
+        venue_name:
+          type: string
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -22326,6 +22333,9 @@ components:
         id:
           type: integer
           readOnly: true
+        venue_name:
+          type: string
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -22367,6 +22377,7 @@ components:
       - updated_at
       - updated_by
       - venue
+      - venue_name
     Purchase:
       type: object
       properties:
