@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.93
+  version: 1.0.94
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -10214,6 +10214,23 @@ paths:
       summary: List Productions
       parameters:
       - in: query
+        name: category
+        schema:
+          type: number
+      - in: query
+        name: director
+        schema:
+          type: number
+      - in: query
+        name: end_date_lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: has_future_performances
+        schema:
+          type: boolean
+      - in: query
         name: name
         schema:
           type: string
@@ -10238,6 +10255,15 @@ paths:
         schema:
           type: integer
       - in: query
+        name: primary_category
+        schema:
+          type: number
+      - in: query
+        name: start_date_gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
         name: status__iexact
         schema:
           type: string
@@ -10246,6 +10272,10 @@ paths:
         schema:
           type: string
         required: true
+      - in: query
+        name: venue
+        schema:
+          type: number
       tags:
       - production
       security:
@@ -10255,7 +10285,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedProductionList'
+                $ref: '#/components/schemas/PaginatedProductionListList'
           description: ''
     post:
       operationId: production_v1_productions_create
@@ -16813,7 +16843,7 @@ components:
         page_count:
           type: integer
           example: 10
-    PaginatedProductionList:
+    PaginatedProductionListList:
       type: object
       required:
       - count
@@ -16835,7 +16865,7 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/Production'
+            $ref: '#/components/schemas/ProductionList'
         page:
           type: integer
           example: 2
@@ -22099,6 +22129,69 @@ components:
       - tenant
       - updated_at
       - updated_by
+    ProductionList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          $ref: '#/components/schemas/ProductionStatusEnum'
+        venue:
+          type:
+          - integer
+          - 'null'
+          description: The primary venue for the production, not necessarily where
+            all performances will take place.
+        venue_name:
+          type: string
+          readOnly: true
+        director_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        primary_category_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        performances_count:
+          type: integer
+          readOnly: true
+        rehearsals_count:
+          type: integer
+          readOnly: true
+        members_count:
+          type: integer
+          readOnly: true
+        next_performance_datetime:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - director_name
+      - id
+      - members_count
+      - name
+      - next_performance_datetime
+      - performances_count
+      - primary_category_name
+      - rehearsals_count
+      - venue_name
     ProductionMember:
       type: object
       properties:
