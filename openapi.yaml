@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.91
+  version: 1.0.93
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -750,7 +750,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Slot.
         required: true
       - in: path
         name: slot_id
@@ -788,7 +789,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Slot.
         required: true
       - in: path
         name: slot_id
@@ -832,7 +834,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Slot.
         required: true
       - in: path
         name: slot_id
@@ -875,7 +878,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Slot.
         required: true
       - in: path
         name: slot_id
@@ -995,7 +999,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Signup.
         required: true
       - in: path
         name: signup_id
@@ -1039,7 +1044,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Signup.
         required: true
       - in: path
         name: signup_id
@@ -1089,7 +1095,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Signup.
         required: true
       - in: path
         name: signup_id
@@ -1138,7 +1145,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Signup.
         required: true
       - in: path
         name: signup_id
@@ -1918,7 +1926,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Expense Attachment.
         required: true
       - in: path
         name: tenant_ref
@@ -1950,7 +1959,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Expense Attachment.
         required: true
       - in: path
         name: tenant_ref
@@ -1989,7 +1999,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Expense Attachment.
         required: true
       - in: path
         name: tenant_ref
@@ -2026,7 +2037,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Expense Attachment.
         required: true
       - in: path
         name: tenant_ref
@@ -2820,7 +2832,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Production Income Category.
         required: true
       - in: path
         name: production_id
@@ -2853,7 +2866,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Production Income Category.
         required: true
       - in: path
         name: production_id
@@ -2892,7 +2906,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Production Income Category.
         required: true
       - in: path
         name: production_id
@@ -2929,7 +2944,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Production Income Category.
         required: true
       - in: path
         name: production_id
@@ -5385,7 +5401,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Document.
         required: true
       - in: path
         name: repo_id
@@ -5418,7 +5435,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Document.
         required: true
       - in: path
         name: repo_id
@@ -5457,7 +5475,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Document.
         required: true
       - in: path
         name: repo_id
@@ -5494,7 +5513,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Document.
         required: true
       - in: path
         name: repo_id
@@ -5603,7 +5623,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Folder.
         required: true
       - in: path
         name: repo_id
@@ -5636,7 +5657,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Folder.
         required: true
       - in: path
         name: repo_id
@@ -5675,7 +5697,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Folder.
         required: true
       - in: path
         name: repo_id
@@ -5712,7 +5735,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Folder.
         required: true
       - in: path
         name: repo_id
@@ -6012,45 +6036,66 @@ paths:
               examples:
                 ShortTextField:
                   value:
-                    id: 1
-                    form: 1
-                    order: 1
-                    type: short_text
-                    title: Sample Field
-                    description: This is a sample field description.
-                    placeholder: Enter text here
-                    is_required: true
-                    configuration:
-                      max_length: 500
-                      min_length: 10
+                    count: 987
+                    next: https://api.example.com/resource/?page=3
+                    previous: https://api.example.com/resource/?page=1
+                    results:
+                    - id: 1
+                      form: 1
+                      order: 1
+                      type: short_text
+                      title: Sample Field
+                      description: This is a sample field description.
+                      placeholder: Enter text here
+                      is_required: true
+                      configuration:
+                        max_length: 500
+                        min_length: 10
+                    page: 2
+                    page_size: 100
+                    page_count: 10
                   summary: Short Text Field
                 FileUploadField:
                   value:
-                    id: 2
-                    form: 1
-                    order: 2
-                    type: file_upload
-                    title: Upload Documents
-                    description: Please upload your documents
-                    is_required: true
-                    configuration:
-                      allowed_file_types:
-                      - image
-                      - document
-                      max_file_size: 10485760
-                      allow_multiple: false
+                    count: 987
+                    next: https://api.example.com/resource/?page=3
+                    previous: https://api.example.com/resource/?page=1
+                    results:
+                    - id: 2
+                      form: 1
+                      order: 2
+                      type: file_upload
+                      title: Upload Documents
+                      description: Please upload your documents
+                      is_required: true
+                      configuration:
+                        allowed_file_types:
+                        - image
+                        - document
+                        max_file_size: 10485760
+                        allow_multiple: false
+                    page: 2
+                    page_size: 100
+                    page_count: 10
                   summary: File Upload Field
                 ExternalSignatureField:
                   value:
-                    id: 3
-                    form: 1
-                    order: 3
-                    type: external_signature
-                    title: Sign Document
-                    description: Please sign this document
-                    is_required: true
-                    configuration:
-                      service: docusign
+                    count: 987
+                    next: https://api.example.com/resource/?page=3
+                    previous: https://api.example.com/resource/?page=1
+                    results:
+                    - id: 3
+                      form: 1
+                      order: 3
+                      type: external_signature
+                      title: Sign Document
+                      description: Please sign this document
+                      is_required: true
+                      configuration:
+                        service: docusign
+                    page: 2
+                    page_size: 100
+                    page_count: 10
                   summary: External Signature Field
           description: ''
     post:
@@ -6161,7 +6206,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Form Field.
         required: true
       - in: path
         name: tenant_ref
@@ -6236,7 +6282,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Form Field.
         required: true
       - in: path
         name: tenant_ref
@@ -6361,7 +6408,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Form Field.
         required: true
       - in: path
         name: tenant_ref
@@ -6484,7 +6532,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Form Field.
         required: true
       - in: path
         name: tenant_ref
@@ -6586,7 +6635,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Form Submission.
         required: true
       - in: path
         name: tenant_ref
@@ -6618,7 +6668,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Form Submission.
         required: true
       - in: path
         name: tenant_ref
@@ -6657,7 +6708,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Form Submission.
         required: true
       - in: path
         name: tenant_ref
@@ -6694,7 +6746,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Form Submission.
         required: true
       - in: path
         name: tenant_ref
@@ -6827,7 +6880,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Submission Field Value.
         required: true
       - in: path
         name: submission_id
@@ -6871,7 +6925,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Submission Field Value.
         required: true
       - in: path
         name: submission_id
@@ -6922,7 +6977,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Submission Field Value.
         required: true
       - in: path
         name: submission_id
@@ -6971,7 +7027,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Submission Field Value.
         required: true
       - in: path
         name: submission_id
@@ -8519,7 +8576,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this address.
         required: true
       - in: path
         name: tenant_ref
@@ -8551,7 +8609,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this address.
         required: true
       - in: path
         name: tenant_ref
@@ -8590,7 +8649,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this address.
         required: true
       - in: path
         name: tenant_ref
@@ -8627,7 +8687,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this address.
         required: true
       - in: path
         name: tenant_ref
@@ -8729,7 +8790,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this state.
         required: true
       - in: path
         name: tenant_ref
@@ -8761,7 +8823,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this state.
         required: true
       - in: path
         name: tenant_ref
@@ -8799,7 +8862,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this state.
         required: true
       - in: path
         name: tenant_ref
@@ -8836,7 +8900,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this state.
         required: true
       - in: path
         name: tenant_ref
@@ -9405,7 +9470,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this venue capacity.
         required: true
       - in: path
         name: tenant_ref
@@ -9437,7 +9503,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this venue capacity.
         required: true
       - in: path
         name: tenant_ref
@@ -9476,7 +9543,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this venue capacity.
         required: true
       - in: path
         name: tenant_ref
@@ -9513,7 +9581,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this venue capacity.
         required: true
       - in: path
         name: tenant_ref
@@ -9616,7 +9685,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this venue tag assignment.
         required: true
       - in: path
         name: tenant_ref
@@ -9648,7 +9718,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this venue tag assignment.
         required: true
       - in: path
         name: tenant_ref
@@ -9687,7 +9758,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this venue tag assignment.
         required: true
       - in: path
         name: tenant_ref
@@ -9724,7 +9796,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this venue tag assignment.
         required: true
       - in: path
         name: tenant_ref
@@ -9893,7 +9966,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Production Category Assignment.
         required: true
       - in: path
         name: tenant_ref
@@ -9925,7 +9999,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Production Category Assignment.
         required: true
       - in: path
         name: tenant_ref
@@ -9963,7 +10038,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Production Category Assignment.
         required: true
       - in: path
         name: tenant_ref
@@ -10000,7 +10076,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Production Category Assignment.
         required: true
       - in: path
         name: tenant_ref
@@ -10490,7 +10567,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
         required: true
       - in: path
         name: member_id
@@ -10528,7 +10606,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
         required: true
       - in: path
         name: member_id
@@ -10572,7 +10651,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
         required: true
       - in: path
         name: member_id
@@ -10615,7 +10695,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
         required: true
       - in: path
         name: member_id
@@ -10650,7 +10731,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this production member.
         required: true
       - in: path
         name: production_id
@@ -10682,7 +10764,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this production member.
         required: true
       - in: path
         name: production_id
@@ -10720,7 +10803,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this production member.
         required: true
       - in: path
         name: production_id
@@ -10757,7 +10841,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this production member.
         required: true
       - in: path
         name: production_id
@@ -10859,7 +10944,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Performance.
         required: true
       - in: path
         name: production_id
@@ -10891,7 +10977,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Performance.
         required: true
       - in: path
         name: production_id
@@ -10929,7 +11016,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Performance.
         required: true
       - in: path
         name: production_id
@@ -10966,7 +11054,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Performance.
         required: true
       - in: path
         name: production_id
@@ -11068,7 +11157,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Rehearsal.
         required: true
       - in: path
         name: production_id
@@ -11100,7 +11190,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Rehearsal.
         required: true
       - in: path
         name: production_id
@@ -11138,7 +11229,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Rehearsal.
         required: true
       - in: path
         name: production_id
@@ -11175,7 +11267,8 @@ paths:
       - in: path
         name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this Rehearsal.
         required: true
       - in: path
         name: production_id
@@ -13369,6 +13462,16 @@ components:
         id:
           type: integer
           readOnly: true
+        user_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        production_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -13425,10 +13528,12 @@ components:
       - created_at
       - created_by
       - id
+      - production_name
       - start_date
       - tenant
       - updated_at
       - updated_by
+      - user_name
     AuditLog:
       type: object
       properties:
@@ -15692,27 +15797,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Address'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedAssetList:
       type: object
       required:
@@ -15721,27 +15829,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Asset'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedAssignmentList:
       type: object
       required:
@@ -15750,27 +15861,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Assignment'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedAuditLogList:
       type: object
       required:
@@ -15779,27 +15893,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/AuditLog'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedAuditionList:
       type: object
       required:
@@ -15808,27 +15925,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Audition'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedContextKeyList:
       type: object
       required:
@@ -15837,27 +15957,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/ContextKey'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedContextList:
       type: object
       required:
@@ -15866,27 +15989,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Context'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedCostCategoryList:
       type: object
       required:
@@ -15895,27 +16021,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/CostCategory'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedCountryList:
       type: object
       required:
@@ -15924,27 +16053,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Country'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedDiscountList:
       type: object
       required:
@@ -15953,27 +16085,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Discount'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedDiscountTicketTypeList:
       type: object
       required:
@@ -15982,27 +16117,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/DiscountTicketType'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedDocumentList:
       type: object
       required:
@@ -16011,27 +16149,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Document'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedDocumentRepoList:
       type: object
       required:
@@ -16040,27 +16181,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/DocumentRepo'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedDocumentTagList:
       type: object
       required:
@@ -16069,27 +16213,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/DocumentTag'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedDocumentVersionList:
       type: object
       required:
@@ -16098,27 +16245,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/DocumentVersion'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedEmployeeList:
       type: object
       required:
@@ -16127,27 +16277,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Employee'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedEmployeeQualificationList:
       type: object
       required:
@@ -16156,27 +16309,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/EmployeeQualification'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedEmploymentTypeList:
       type: object
       required:
@@ -16185,27 +16341,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/EmploymentType'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedExpenseAttachmentList:
       type: object
       required:
@@ -16214,27 +16373,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/ExpenseAttachment'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedExpenseList:
       type: object
       required:
@@ -16243,27 +16405,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Expense'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedFeedbackList:
       type: object
       required:
@@ -16272,27 +16437,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Feedback'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedFolderList:
       type: object
       required:
@@ -16301,27 +16469,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Folder'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedFormFieldList:
       type: object
       required:
@@ -16330,27 +16501,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/FormField'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedFormList:
       type: object
       required:
@@ -16359,27 +16533,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Form'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedIncomeCategoryList:
       type: object
       required:
@@ -16388,27 +16565,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/IncomeCategory'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedIncomeList:
       type: object
       required:
@@ -16417,27 +16597,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Income'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedPerformanceList:
       type: object
       required:
@@ -16446,27 +16629,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Performance'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedPermissionList:
       type: object
       required:
@@ -16475,27 +16661,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Permission'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedProductionCategoryAssignmentList:
       type: object
       required:
@@ -16504,27 +16693,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/ProductionCategoryAssignment'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedProductionCategoryList:
       type: object
       required:
@@ -16533,27 +16725,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/ProductionCategory'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedProductionCostCategoryList:
       type: object
       required:
@@ -16562,27 +16757,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/ProductionCostCategory'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedProductionIncomeCategoryList:
       type: object
       required:
@@ -16591,27 +16789,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/ProductionIncomeCategory'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedProductionList:
       type: object
       required:
@@ -16620,27 +16821,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Production'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedProductionMemberList:
       type: object
       required:
@@ -16649,27 +16853,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/ProductionMember'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedProductionRoleAssignmentList:
       type: object
       required:
@@ -16678,27 +16885,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/ProductionRoleAssignment'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedProductionVenueList:
       type: object
       required:
@@ -16707,27 +16917,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/ProductionVenue'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedPurchaseList:
       type: object
       required:
@@ -16736,27 +16949,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Purchase'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedQualificationList:
       type: object
       required:
@@ -16765,27 +16981,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Qualification'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedRehearsalList:
       type: object
       required:
@@ -16794,27 +17013,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Rehearsal'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedRehearsalParticipantList:
       type: object
       required:
@@ -16823,27 +17045,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/RehearsalParticipant'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedReimbursementList:
       type: object
       required:
@@ -16852,27 +17077,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Reimbursement'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedRoleList:
       type: object
       required:
@@ -16881,27 +17109,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Role'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedRolePermissionList:
       type: object
       required:
@@ -16910,27 +17141,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/RolePermission'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedSectionList:
       type: object
       required:
@@ -16939,27 +17173,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Section'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedSectionSeatList:
       type: object
       required:
@@ -16968,27 +17205,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/SectionSeat'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedSignupList:
       type: object
       required:
@@ -16997,27 +17237,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Signup'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedSlotList:
       type: object
       required:
@@ -17026,27 +17269,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Slot'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedStateList:
       type: object
       required:
@@ -17055,27 +17301,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/State'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedSubmissionFieldValueList:
       type: object
       required:
@@ -17084,27 +17333,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/SubmissionFieldValue'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedSubmissionList:
       type: object
       required:
@@ -17113,27 +17365,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Submission'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedTagList:
       type: object
       required:
@@ -17142,27 +17397,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedTenantList:
       type: object
       required:
@@ -17171,27 +17429,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Tenant'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedTicketList:
       type: object
       required:
@@ -17200,27 +17461,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Ticket'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedTicketTypeList:
       type: object
       required:
@@ -17229,27 +17493,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/TicketType'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedUserList:
       type: object
       required:
@@ -17258,27 +17525,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/User'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedUserRoleAssignmentList:
       type: object
       required:
@@ -17287,27 +17557,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/UserRoleAssignment'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedVendorList:
       type: object
       required:
@@ -17316,27 +17589,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Vendor'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedVenueCapacityList:
       type: object
       required:
@@ -17345,27 +17621,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/VenueCapacity'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedVenueList:
       type: object
       required:
@@ -17374,27 +17653,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/Venue'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedVenueTagAssignmentList:
       type: object
       required:
@@ -17403,27 +17685,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/VenueTagAssignment'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedVenueTagList:
       type: object
       required:
@@ -17432,27 +17717,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/VenueTag'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PaginatedWorkLocationList:
       type: object
       required:
@@ -17461,27 +17749,30 @@ components:
       properties:
         count:
           type: integer
-          example: 123
+          example: 987
         next:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=4
+          example: https://api.example.com/resource/?page=3
         previous:
           type: string
           nullable: true
           format: uri
-          example: http://api.example.org/accounts/?page=2
+          example: https://api.example.com/resource/?page=1
         results:
           type: array
           items:
             $ref: '#/components/schemas/WorkLocation'
         page:
           type: integer
+          example: 2
         page_size:
           type: integer
+          example: 100
         page_count:
           type: integer
+          example: 10
     PatchedAddress:
       type: object
       properties:
@@ -17629,6 +17920,16 @@ components:
       properties:
         id:
           type: integer
+          readOnly: true
+        user_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        production_name:
+          type:
+          - string
+          - 'null'
           readOnly: true
         created_at:
           type: string
