@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.98
+  version: 1.0.99
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -11554,6 +11554,255 @@ paths:
         schema:
           type: integer
         description: ID of the rehearsal
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      tags:
+      - production
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/t/{tenant_ref}/production/v1/productions/{production_id}/roles/:
+    get:
+      operationId: production_v1_productions_roles_list
+      description: Retrieve all role assignments for a production member.
+      summary: List Production Role Assignments
+      parameters:
+      - in: path
+        name: member_id
+        schema:
+          type: integer
+        description: ID of the member
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      tags:
+      - production
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductionRoleAssignmentList'
+          description: ''
+    post:
+      operationId: production_v1_productions_roles_create
+      description: Create a new production role assignment.
+      summary: Create a Production Role Assignment
+      parameters:
+      - in: path
+        name: member_id
+        schema:
+          type: integer
+        description: ID of the member
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionRoleAssignment'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionRoleAssignment'
+          description: ''
+  /api/t/{tenant_ref}/production/v1/productions/{production_id}/roles/{id}/:
+    get:
+      operationId: production_v1_productions_roles_retrieve
+      description: Retrieve a specific production role assignment.
+      summary: Retrieve a Production Role Assignment
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
+        required: true
+      - in: path
+        name: member_id
+        schema:
+          type: integer
+        description: ID of the member
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      tags:
+      - production
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionRoleAssignment'
+          description: ''
+    put:
+      operationId: production_v1_productions_roles_update
+      description: Update an existing production role assignment.
+      summary: Update a Production Role Assignment
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
+        required: true
+      - in: path
+        name: member_id
+        schema:
+          type: integer
+        description: ID of the member
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionRoleAssignment'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionRoleAssignment'
+          description: ''
+    patch:
+      operationId: production_v1_productions_roles_partial_update
+      description: Partially update an existing production role assignment.
+      summary: Partially Update a Production Role Assignment
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
+        required: true
+      - in: path
+        name: member_id
+        schema:
+          type: integer
+        description: ID of the member
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      tags:
+      - production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProductionRoleAssignment'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionRoleAssignment'
+          description: ''
+    delete:
+      operationId: production_v1_productions_roles_destroy
+      description: Delete a specific production role assignment.
+      summary: Delete a Production Role Assignment
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Production Role Assignment.
+        required: true
+      - in: path
+        name: member_id
+        schema:
+          type: integer
+        description: ID of the member
+        required: true
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: ID of the production
         required: true
       - in: path
         name: tenant_ref
