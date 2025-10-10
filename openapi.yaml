@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.109
+  version: 1.0.110
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -14842,6 +14842,16 @@ components:
           - string
           - 'null'
           readOnly: true
+        latest_version_id:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        latest_version_file_url:
+          type:
+          - string
+          - 'null'
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -14908,6 +14918,8 @@ components:
       - created_by
       - folder_path
       - id
+      - latest_version_file_url
+      - latest_version_id
       - repo
       - repo_name
       - tags
@@ -19155,6 +19167,16 @@ components:
           - 'null'
           readOnly: true
         folder_path:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        latest_version_id:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        latest_version_file_url:
           type:
           - string
           - 'null'
