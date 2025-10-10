@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.97
+  version: 1.0.98
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -21604,6 +21604,7 @@ components:
           readOnly: true
         venue:
           type: integer
+          readOnly: true
           description: Venue for which the capacity is defined
     PatchedVenueTag:
       type: object
@@ -24153,6 +24154,7 @@ components:
           readOnly: true
         venue:
           type: integer
+          readOnly: true
           description: Venue for which the capacity is defined
       required:
       - archive_at
