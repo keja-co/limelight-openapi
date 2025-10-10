@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.107
+  version: 1.0.108
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -15079,6 +15079,7 @@ components:
           readOnly: true
         document:
           type: integer
+          readOnly: true
       required:
       - archive_at
       - created_at
@@ -19304,6 +19305,7 @@ components:
           readOnly: true
         document:
           type: integer
+          readOnly: true
     PatchedEmployee:
       type: object
       properties:
