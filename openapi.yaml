@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.105
+  version: 1.0.106
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -16325,7 +16325,8 @@ components:
         performances:
           type: array
           items:
-            $ref: '#/components/schemas/Performance'
+            type: object
+            additionalProperties: {}
       required:
       - performances
       - rehearsals
