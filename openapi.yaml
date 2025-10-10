@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.104
+  version: 1.0.105
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -20246,6 +20246,11 @@ components:
         id:
           type: integer
           readOnly: true
+        venue_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -20862,6 +20867,9 @@ components:
         id:
           type: integer
           readOnly: true
+        venue_name:
+          type: string
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -20910,6 +20918,11 @@ components:
       properties:
         id:
           type: integer
+          readOnly: true
+        member_name:
+          type:
+          - string
+          - 'null'
           readOnly: true
         created_at:
           type: string
@@ -22240,6 +22253,11 @@ components:
         id:
           type: integer
           readOnly: true
+        venue_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -22291,6 +22309,7 @@ components:
       - tenant
       - updated_at
       - updated_by
+      - venue_name
     PerformanceStatusEnum:
       enum:
       - scheduled
@@ -23089,6 +23108,9 @@ components:
         id:
           type: integer
           readOnly: true
+        venue_name:
+          type: string
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -23143,11 +23165,17 @@ components:
       - tenant
       - updated_at
       - updated_by
+      - venue_name
     RehearsalParticipant:
       type: object
       properties:
         id:
           type: integer
+          readOnly: true
+        member_name:
+          type:
+          - string
+          - 'null'
           readOnly: true
         created_at:
           type: string
@@ -23192,6 +23220,7 @@ components:
       - created_by
       - id
       - member
+      - member_name
       - rehearsal
       - tenant
       - updated_at
