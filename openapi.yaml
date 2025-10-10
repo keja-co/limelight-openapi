@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.101
+  version: 1.0.102
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -10506,8 +10506,8 @@ paths:
   /api/t/{tenant_ref}/production/v1/productions/{production_id}/members/{member_id}/roles/:
     get:
       operationId: production_v1_productions_members_roles_list
-      description: Retrieve all role assignments for a production member.
-      summary: List Production Role Assignments
+      description: Retrieve all role assignments for a specific production member.
+      summary: List Member Role Assignments
       parameters:
       - in: path
         name: member_id
@@ -10615,8 +10615,8 @@ paths:
           description: ''
     post:
       operationId: production_v1_productions_members_roles_create
-      description: Create a new production role assignment.
-      summary: Create a Production Role Assignment
+      description: Create a new role assignment for a production member.
+      summary: Create a Member Role Assignment
       parameters:
       - in: path
         name: member_id
@@ -10655,8 +10655,8 @@ paths:
   /api/t/{tenant_ref}/production/v1/productions/{production_id}/members/{member_id}/roles/{id}/:
     get:
       operationId: production_v1_productions_members_roles_retrieve
-      description: Retrieve a specific production role assignment.
-      summary: Retrieve a Production Role Assignment
+      description: Retrieve a specific role assignment for a production member.
+      summary: Retrieve a Member Role Assignment
       parameters:
       - in: path
         name: id
@@ -10694,8 +10694,8 @@ paths:
           description: ''
     put:
       operationId: production_v1_productions_members_roles_update
-      description: Update an existing production role assignment.
-      summary: Update a Production Role Assignment
+      description: Update an existing role assignment for a production member.
+      summary: Update a Member Role Assignment
       parameters:
       - in: path
         name: id
@@ -10739,8 +10739,8 @@ paths:
           description: ''
     patch:
       operationId: production_v1_productions_members_roles_partial_update
-      description: Partially update an existing production role assignment.
-      summary: Partially Update a Production Role Assignment
+      description: Partially update an existing role assignment for a production member.
+      summary: Partially Update a Member Role Assignment
       parameters:
       - in: path
         name: id
@@ -10783,8 +10783,8 @@ paths:
           description: ''
     delete:
       operationId: production_v1_productions_members_roles_destroy
-      description: Delete a specific production role assignment.
-      summary: Delete a Production Role Assignment
+      description: Delete a specific role assignment for a production member.
+      summary: Delete a Member Role Assignment
       parameters:
       - in: path
         name: id
@@ -11637,12 +11637,6 @@ paths:
       description: Retrieve all role assignments for a production (across all members).
       summary: List Production Role Assignments (by production)
       parameters:
-      - in: path
-        name: member_id
-        schema:
-          type: integer
-        description: ID of the member
-        required: true
       - name: page
         required: false
         in: query
@@ -11743,20 +11737,17 @@ paths:
           description: ''
     post:
       operationId: production_v1_productions_roles_create
-      description: Create a new production role assignment.
-      summary: Create a Production Role Assignment
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
-      - in: path
-        name: member_id
-        schema:
-          type: integer
-        description: ID of the member
-        required: true
       - in: path
         name: production_id
         schema:
           type: integer
-        description: ID of the production
         required: true
       - in: path
         name: tenant_ref
@@ -11783,8 +11774,12 @@ paths:
   /api/t/{tenant_ref}/production/v1/productions/{production_id}/roles/{id}/:
     get:
       operationId: production_v1_productions_roles_retrieve
-      description: Retrieve a specific production role assignment.
-      summary: Retrieve a Production Role Assignment
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -11793,16 +11788,9 @@ paths:
         description: A unique integer value identifying this Production Role Assignment.
         required: true
       - in: path
-        name: member_id
-        schema:
-          type: integer
-        description: ID of the member
-        required: true
-      - in: path
         name: production_id
         schema:
           type: integer
-        description: ID of the production
         required: true
       - in: path
         name: tenant_ref
@@ -11822,8 +11810,12 @@ paths:
           description: ''
     put:
       operationId: production_v1_productions_roles_update
-      description: Update an existing production role assignment.
-      summary: Update a Production Role Assignment
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -11832,16 +11824,9 @@ paths:
         description: A unique integer value identifying this Production Role Assignment.
         required: true
       - in: path
-        name: member_id
-        schema:
-          type: integer
-        description: ID of the member
-        required: true
-      - in: path
         name: production_id
         schema:
           type: integer
-        description: ID of the production
         required: true
       - in: path
         name: tenant_ref
@@ -11867,8 +11852,12 @@ paths:
           description: ''
     patch:
       operationId: production_v1_productions_roles_partial_update
-      description: Partially update an existing production role assignment.
-      summary: Partially Update a Production Role Assignment
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -11877,16 +11866,9 @@ paths:
         description: A unique integer value identifying this Production Role Assignment.
         required: true
       - in: path
-        name: member_id
-        schema:
-          type: integer
-        description: ID of the member
-        required: true
-      - in: path
         name: production_id
         schema:
           type: integer
-        description: ID of the production
         required: true
       - in: path
         name: tenant_ref
@@ -11911,8 +11893,12 @@ paths:
           description: ''
     delete:
       operationId: production_v1_productions_roles_destroy
-      description: Delete a specific production role assignment.
-      summary: Delete a Production Role Assignment
+      description: |-
+        Base ViewSet for tenant-aware models.
+
+        Responsibilities:
+        - Inherit tenant-aware behavior (scoped get_queryset, perform_create sets tenant)
+        - Extend here with cross-cutting defaults common to most apps (e.g., pagination, permissions)
       parameters:
       - in: path
         name: id
@@ -11921,16 +11907,9 @@ paths:
         description: A unique integer value identifying this Production Role Assignment.
         required: true
       - in: path
-        name: member_id
-        schema:
-          type: integer
-        description: ID of the member
-        required: true
-      - in: path
         name: production_id
         schema:
           type: integer
-        description: ID of the production
         required: true
       - in: path
         name: tenant_ref
