@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.102
+  version: 1.0.103
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -1783,6 +1783,16 @@ paths:
       description: Retrieve a list of all expenses in the system.
       summary: List all expenses
       parameters:
+      - in: query
+        name: expense_date_time_gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: expense_date_time_lte
+        schema:
+          type: string
+          format: date-time
       - name: page
         required: false
         in: query
@@ -1795,6 +1805,22 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: prod_category
+        schema:
+          type: number
+      - in: query
+        name: purchaser
+        schema:
+          type: number
+      - in: query
+        name: status
+        schema:
+          type: string
+      - in: query
+        name: status__iexact
+        schema:
+          type: string
       - in: path
         name: tenant_ref
         schema:
@@ -2983,6 +3009,38 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: payee
+        schema:
+          type: number
+      - in: query
+        name: processed_date_gte
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: processed_date_lte
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: scheduled_date_gte
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: scheduled_date_lte
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: status
+        schema:
+          type: string
+      - in: query
+        name: status__iexact
+        schema:
+          type: string
       - in: path
         name: tenant_ref
         schema:
@@ -4916,6 +4974,10 @@ paths:
       summary: List all documents in a document repository
       parameters:
       - in: query
+        name: author
+        schema:
+          type: number
+      - in: query
         name: folder_id
         schema:
           type: string
@@ -6559,6 +6621,10 @@ paths:
           type: integer
         description: ID of the form
         required: true
+      - in: query
+        name: member
+        schema:
+          type: number
       - name: page
         required: false
         in: query
@@ -7164,6 +7230,34 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/t/{tenant_ref}/forms/v1/forms/submissions-by-member/:
+    get:
+      operationId: forms_v1_forms_submissions_by_member_retrieve
+      description: Convenience endpoint to list latest submissions for a specific
+        user across forms.
+      summary: List submissions by member
+      parameters:
+      - in: query
+        name: member
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      tags:
+      - forms
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+          description: ''
   /api/t/{tenant_ref}/hr/employee-qualifications/:
     get:
       operationId: hr_employee_qualifications_list
@@ -8426,6 +8520,43 @@ paths:
       - cookieAuth: []
       responses:
         '204':
+          description: No response body
+  /api/t/{tenant_ref}/identity/users/{id}/events/:
+    get:
+      operationId: identity_users_events_retrieve
+      description: Aggregate upcoming rehearsals the user is assigned to and performances
+        for productions the user belongs to. Optionally constrain by from/to date-times.
+      summary: Get upcoming events for user
+      parameters:
+      - in: query
+        name: from
+        schema:
+          type: string
+          format: date-time
+        description: Lower bound (inclusive) for event start (defaults to now)
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this User.
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: to
+        schema:
+          type: string
+          format: date-time
+        description: Upper bound (inclusive) for event end/date
+      tags:
+      - identity
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
           description: No response body
   /api/t/{tenant_ref}/location/v1/countries/:
     get:
