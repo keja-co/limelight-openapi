@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.99
+  version: 1.0.100
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -20370,6 +20370,11 @@ components:
         id:
           type: integer
           readOnly: true
+        member_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -22513,6 +22518,11 @@ components:
         id:
           type: integer
           readOnly: true
+        member_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -22552,6 +22562,7 @@ components:
       - created_by
       - id
       - member
+      - member_name
       - production
       - role
       - tenant
