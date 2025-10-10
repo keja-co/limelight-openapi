@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.108
+  version: 1.0.109
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -22997,12 +22997,16 @@ components:
         members_count:
           type: integer
           readOnly: true
+        documents_count:
+          type: integer
+          readOnly: true
         next_performance_datetime:
           type: string
           format: date-time
           readOnly: true
       required:
       - director_name
+      - documents_count
       - id
       - members_count
       - name
