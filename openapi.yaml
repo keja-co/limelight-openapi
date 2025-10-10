@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.100
+  version: 1.0.101
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -10533,6 +10533,70 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: query
+        name: role
+        schema:
+          type: string
+          enum:
+          - actor
+          - assistant_choreographer
+          - assistant_costume_designer
+          - assistant_director
+          - assistant_lighting_designer
+          - assistant_lighting_operator
+          - assistant_producer
+          - assistant_set_designer
+          - assistant_sound_designer
+          - assistant_sound_operator
+          - assistant_stage_manager
+          - cast
+          - choreographer
+          - costume_designer
+          - crew
+          - deputy_stage_manager
+          - designer
+          - director
+          - lighting_designer
+          - lighting_operator
+          - musician
+          - prod_manager
+          - producer
+          - set_designer
+          - sound_designer
+          - sound_operator
+          - stage_manager
+          - technician
+          - volunteer
+        description: |-
+          * `actor` - Actor
+          * `cast` - Cast Member
+          * `crew` - Crew Member
+          * `choreographer` - Choreographer
+          * `assistant_choreographer` - Assistant Choreographer
+          * `costume_designer` - Costume Designer
+          * `assistant_costume_designer` - Assistant Costume Designer
+          * `designer` - Designer
+          * `director` - Director
+          * `assistant_director` - Assistant Director
+          * `lighting_designer` - Lighting Designer
+          * `assistant_lighting_designer` - Assistant Lighting Designer
+          * `lighting_operator` - Lighting Operator
+          * `assistant_lighting_operator` - Assistant Lighting Operator
+          * `producer` - Producer
+          * `assistant_producer` - Assistant Producer
+          * `prod_manager` - Production Manager
+          * `musician` - Musician
+          * `set_designer` - Set Designer
+          * `assistant_set_designer` - Assistant Set Designer
+          * `sound_designer` - Sound Designer
+          * `assistant_sound_designer` - Assistant Sound Designer
+          * `sound_operator` - Sound Operator
+          * `assistant_sound_operator` - Assistant Sound Operator
+          * `stage_manager` - Stage Manager
+          * `assistant_stage_manager` - Assistant Stage Manager
+          * `deputy_stage_manager` - Deputy Stage Manager
+          * `technician` - Technician
+          * `volunteer` - Volunteer
       - in: path
         name: tenant_ref
         schema:
@@ -11570,8 +11634,8 @@ paths:
   /api/t/{tenant_ref}/production/v1/productions/{production_id}/roles/:
     get:
       operationId: production_v1_productions_roles_list
-      description: Retrieve all role assignments for a production member.
-      summary: List Production Role Assignments
+      description: Retrieve all role assignments for a production (across all members).
+      summary: List Production Role Assignments (by production)
       parameters:
       - in: path
         name: member_id
@@ -11597,6 +11661,70 @@ paths:
           type: integer
         description: ID of the production
         required: true
+      - in: query
+        name: role
+        schema:
+          type: string
+          enum:
+          - actor
+          - assistant_choreographer
+          - assistant_costume_designer
+          - assistant_director
+          - assistant_lighting_designer
+          - assistant_lighting_operator
+          - assistant_producer
+          - assistant_set_designer
+          - assistant_sound_designer
+          - assistant_sound_operator
+          - assistant_stage_manager
+          - cast
+          - choreographer
+          - costume_designer
+          - crew
+          - deputy_stage_manager
+          - designer
+          - director
+          - lighting_designer
+          - lighting_operator
+          - musician
+          - prod_manager
+          - producer
+          - set_designer
+          - sound_designer
+          - sound_operator
+          - stage_manager
+          - technician
+          - volunteer
+        description: |-
+          * `actor` - Actor
+          * `cast` - Cast Member
+          * `crew` - Crew Member
+          * `choreographer` - Choreographer
+          * `assistant_choreographer` - Assistant Choreographer
+          * `costume_designer` - Costume Designer
+          * `assistant_costume_designer` - Assistant Costume Designer
+          * `designer` - Designer
+          * `director` - Director
+          * `assistant_director` - Assistant Director
+          * `lighting_designer` - Lighting Designer
+          * `assistant_lighting_designer` - Assistant Lighting Designer
+          * `lighting_operator` - Lighting Operator
+          * `assistant_lighting_operator` - Assistant Lighting Operator
+          * `producer` - Producer
+          * `assistant_producer` - Assistant Producer
+          * `prod_manager` - Production Manager
+          * `musician` - Musician
+          * `set_designer` - Set Designer
+          * `assistant_set_designer` - Assistant Set Designer
+          * `sound_designer` - Sound Designer
+          * `assistant_sound_designer` - Assistant Sound Designer
+          * `sound_operator` - Sound Operator
+          * `assistant_sound_operator` - Assistant Sound Operator
+          * `stage_manager` - Stage Manager
+          * `assistant_stage_manager` - Assistant Stage Manager
+          * `deputy_stage_manager` - Deputy Stage Manager
+          * `technician` - Technician
+          * `volunteer` - Volunteer
       - in: path
         name: tenant_ref
         schema:
