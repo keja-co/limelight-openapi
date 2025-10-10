@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.103
+  version: 1.0.104
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -8544,6 +8544,7 @@ paths:
         name: tenant_ref
         schema:
           type: string
+        description: Tenant ULID path parameter
         required: true
       - in: query
         name: to
@@ -8557,7 +8558,11 @@ paths:
       - cookieAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberEvents'
+          description: ''
   /api/t/{tenant_ref}/location/v1/countries/:
     get:
       operationId: location_v1_countries_list
@@ -16310,6 +16315,20 @@ components:
         * `deposited` - Deposited
         * `cancelled` - Cancelled
         * `refunded` - Refunded
+    MemberEvents:
+      type: object
+      properties:
+        rehearsals:
+          type: array
+          items:
+            $ref: '#/components/schemas/RehearsalWithParticipantRead'
+        performances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Performance'
+      required:
+      - performances
+      - rehearsals
     PaginatedAddressList:
       type: object
       required:
@@ -23177,6 +23196,38 @@ components:
       - tenant
       - updated_at
       - updated_by
+    RehearsalWithParticipantRead:
+      type: object
+      properties:
+        id:
+          type: integer
+        production:
+          type: integer
+        start_datetime:
+          type: string
+          format: date-time
+        end_datetime:
+          type: string
+          format: date-time
+        venue:
+          type:
+          - integer
+          - 'null'
+        notes:
+          type: string
+        participant_is_required:
+          type: boolean
+        participant_id:
+          type: integer
+      required:
+      - end_datetime
+      - id
+      - notes
+      - participant_id
+      - participant_is_required
+      - production
+      - start_datetime
+      - venue
     Reimbursement:
       type: object
       properties:
