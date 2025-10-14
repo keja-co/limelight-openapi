@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.111
+  version: 1.0.113
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -1784,6 +1784,14 @@ paths:
       summary: List all expenses
       parameters:
       - in: query
+        name: approver
+        schema:
+          type: number
+      - in: query
+        name: category
+        schema:
+          type: number
+      - in: query
         name: expense_date_time_gte
         schema:
           type: string
@@ -1806,7 +1814,15 @@ paths:
         schema:
           type: integer
       - in: query
+        name: payment_method
+        schema:
+          type: string
+      - in: query
         name: prod_category
+        schema:
+          type: number
+      - in: query
+        name: production
         schema:
           type: number
       - in: query
@@ -1826,6 +1842,10 @@ paths:
         schema:
           type: string
         required: true
+      - in: query
+        name: vendor
+        schema:
+          type: number
       tags:
       - budgeting
       security:
@@ -2386,6 +2406,16 @@ paths:
         schema:
           type: string
         description: Filter by income category
+      - in: query
+        name: income_date_gte
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: income_date_lte
+        schema:
+          type: string
+          format: date
       - name: page
         required: false
         in: query
@@ -2398,6 +2428,22 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: prod_category
+        schema:
+          type: number
+      - in: query
+        name: production
+        schema:
+          type: number
+      - in: query
+        name: status
+        schema:
+          type: string
+      - in: query
+        name: status__iexact
+        schema:
+          type: string
       - in: path
         name: tenant_ref
         schema:
@@ -2991,6 +3037,35 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/t/{tenant_ref}/budgeting/v1/productions/{production_id}/summary/:
+    get:
+      operationId: budgeting_v1_productions_summary_retrieve
+      description: Return budget totals and annotated breakdowns for a production.
+      summary: Production budget summary
+      parameters:
+      - in: path
+        name: production_id
+        schema:
+          type: integer
+        description: Production ID
+        required: true
+      - in: path
+        name: tenant_ref
+        schema:
+          type: string
+        required: true
+      tags:
+      - budgeting
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/t/{tenant_ref}/budgeting/v1/reimbursements/:
     get:
       operationId: budgeting_v1_reimbursements_list
@@ -3023,6 +3098,10 @@ paths:
         schema:
           type: string
           format: date
+      - in: query
+        name: production
+        schema:
+          type: number
       - in: query
         name: scheduled_date_gte
         schema:
@@ -14507,6 +14586,9 @@ components:
         id:
           type: integer
           readOnly: true
+        parent_name:
+          type: string
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -14554,6 +14636,7 @@ components:
       - created_by
       - id
       - name
+      - parent_name
       - tenant
       - updated_at
       - updated_by
@@ -15349,6 +15432,44 @@ components:
         id:
           type: integer
           readOnly: true
+        purchaser_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        approver_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        vendor_name:
+          type: string
+          readOnly: true
+        category_name:
+          type: string
+          readOnly: true
+        prod_category_name:
+          type: string
+          readOnly: true
+        production_id:
+          type: integer
+          readOnly: true
+        production_name:
+          type: string
+          readOnly: true
+        attachments_count:
+          type: integer
+          readOnly: true
+        reimbursed_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+          readOnly: true
+        pending_reimbursement_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -15426,23 +15547,38 @@ components:
           - integer
           - 'null'
       required:
+      - approver_name
       - archive_at
+      - attachments_count
+      - category_name
       - cost
       - created_at
       - created_by
       - expense_date_time
       - id
       - payment_method
+      - pending_reimbursement_amount
+      - prod_category_name
+      - production_id
+      - production_name
       - purchaser
+      - purchaser_name
+      - reimbursed_amount
       - tenant
       - title
       - updated_at
       - updated_by
+      - vendor_name
     ExpenseAttachment:
       type: object
       properties:
         id:
           type: integer
+          readOnly: true
+        uploaded_by_name:
+          type:
+          - string
+          - 'null'
           readOnly: true
         created_at:
           type: string
@@ -15495,6 +15631,7 @@ components:
       - tenant
       - updated_at
       - updated_by
+      - uploaded_by_name
     ExpensePaymentMethodEnum:
       enum:
       - personal_card
@@ -16333,6 +16470,18 @@ components:
         id:
           type: integer
           readOnly: true
+        category_name:
+          type: string
+          readOnly: true
+        prod_category_name:
+          type: string
+          readOnly: true
+        production_id:
+          type: integer
+          readOnly: true
+        production_name:
+          type: string
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -16423,10 +16572,14 @@ components:
       required:
       - amount
       - archive_at
+      - category_name
       - created_at
       - created_by
       - id
       - payment_method
+      - prod_category_name
+      - production_id
+      - production_name
       - tenant
       - title
       - updated_at
@@ -16436,6 +16589,9 @@ components:
       properties:
         id:
           type: integer
+          readOnly: true
+        parent_name:
+          type: string
           readOnly: true
         created_at:
           type: string
@@ -16487,6 +16643,7 @@ components:
       - id
       - line_code
       - name
+      - parent_name
       - tenant
       - type
       - updated_at
@@ -18947,6 +19104,9 @@ components:
         id:
           type: integer
           readOnly: true
+        parent_name:
+          type: string
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -19544,6 +19704,44 @@ components:
         id:
           type: integer
           readOnly: true
+        purchaser_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        approver_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        vendor_name:
+          type: string
+          readOnly: true
+        category_name:
+          type: string
+          readOnly: true
+        prod_category_name:
+          type: string
+          readOnly: true
+        production_id:
+          type: integer
+          readOnly: true
+        production_name:
+          type: string
+          readOnly: true
+        attachments_count:
+          type: integer
+          readOnly: true
+        reimbursed_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+          readOnly: true
+        pending_reimbursement_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -19625,6 +19823,11 @@ components:
       properties:
         id:
           type: integer
+          readOnly: true
+        uploaded_by_name:
+          type:
+          - string
+          - 'null'
           readOnly: true
         created_at:
           type: string
@@ -20387,6 +20590,18 @@ components:
         id:
           type: integer
           readOnly: true
+        category_name:
+          type: string
+          readOnly: true
+        prod_category_name:
+          type: string
+          readOnly: true
+        production_id:
+          type: integer
+          readOnly: true
+        production_name:
+          type: string
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -20479,6 +20694,9 @@ components:
       properties:
         id:
           type: integer
+          readOnly: true
+        parent_name:
+          type: string
           readOnly: true
         created_at:
           type: string
@@ -20770,6 +20988,12 @@ components:
         id:
           type: integer
           readOnly: true
+        production_name:
+          type: string
+          readOnly: true
+        company_cost_category_name:
+          type: string
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -20822,6 +21046,15 @@ components:
       properties:
         id:
           type: integer
+          readOnly: true
+        production_name:
+          type: string
+          readOnly: true
+        income_category_name:
+          type: string
+          readOnly: true
+        income_type_label:
+          type: string
           readOnly: true
         created_at:
           type: string
@@ -21260,6 +21493,28 @@ components:
       properties:
         id:
           type: integer
+          readOnly: true
+        payee_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        approver_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        expense_title:
+          type: string
+          readOnly: true
+        expense_is_production:
+          type: boolean
+          readOnly: true
+        production_id:
+          type: integer
+          readOnly: true
+        production_name:
+          type: string
           readOnly: true
         created_at:
           type: string
@@ -22847,6 +23102,12 @@ components:
         id:
           type: integer
           readOnly: true
+        production_name:
+          type: string
+          readOnly: true
+        company_cost_category_name:
+          type: string
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -22897,11 +23158,13 @@ components:
       required:
       - archive_at
       - budget
+      - company_cost_category_name
       - created_at
       - created_by
       - id
       - name
       - production
+      - production_name
       - tenant
       - updated_at
       - updated_by
@@ -22910,6 +23173,15 @@ components:
       properties:
         id:
           type: integer
+          readOnly: true
+        production_name:
+          type: string
+          readOnly: true
+        income_category_name:
+          type: string
+          readOnly: true
+        income_type_label:
+          type: string
           readOnly: true
         created_at:
           type: string
@@ -22964,9 +23236,12 @@ components:
       - created_at
       - created_by
       - id
+      - income_category_name
+      - income_type_label
       - line_code
       - name
       - production
+      - production_name
       - tenant
       - updated_at
       - updated_by
@@ -23575,6 +23850,28 @@ components:
         id:
           type: integer
           readOnly: true
+        payee_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        approver_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        expense_title:
+          type: string
+          readOnly: true
+        expense_is_production:
+          type: boolean
+          readOnly: true
+        production_id:
+          type: integer
+          readOnly: true
+        production_name:
+          type: string
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -23640,10 +23937,16 @@ components:
           - 'null'
       required:
       - amount
+      - approver_name
       - archive_at
       - created_at
       - created_by
+      - expense_is_production
+      - expense_title
       - id
+      - payee_name
+      - production_id
+      - production_name
       - tenant
       - updated_at
       - updated_by
