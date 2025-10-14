@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Limelight API
-  version: 1.0.113
+  version: 1.0.114
   x-forms.spectacular_extensions.TypedConfigFieldExtension:
     x-badges:
     - label: Custom Field
@@ -3039,10 +3039,22 @@ paths:
           description: No response body
   /api/t/{tenant_ref}/budgeting/v1/productions/{production_id}/summary/:
     get:
-      operationId: budgeting_v1_productions_summary_retrieve
+      operationId: budgeting_v1_productions_summary_list
       description: Return budget totals and annotated breakdowns for a production.
       summary: Production budget summary
       parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
       - in: path
         name: production_id
         schema:
@@ -3053,6 +3065,7 @@ paths:
         name: tenant_ref
         schema:
           type: string
+        description: Tenant Ref
         required: true
       tags:
       - budgeting
@@ -3063,8 +3076,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: {}
+                $ref: '#/components/schemas/PaginatedProductionBudgetSummaryList'
           description: ''
   /api/t/{tenant_ref}/budgeting/v1/reimbursements/:
     get:
@@ -17639,6 +17651,38 @@ components:
         page_count:
           type: integer
           example: 10
+    PaginatedProductionBudgetSummaryList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 987
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: https://api.example.com/resource/?page=3
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: https://api.example.com/resource/?page=1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductionBudgetSummary'
+        page:
+          type: integer
+          example: 2
+        page_size:
+          type: integer
+          example: 100
+        page_count:
+          type: integer
+          example: 10
     PaginatedProductionCategoryAssignmentList:
       type: object
       required:
@@ -22980,6 +23024,60 @@ components:
       - tenant
       - updated_at
       - updated_by
+    ProductionBudgetSummary:
+      type: object
+      properties:
+        totals:
+          $ref: '#/components/schemas/ProductionBudgetTotals'
+        breakdowns:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties: {}
+      required:
+      - breakdowns
+      - totals
+    ProductionBudgetTotals:
+      type: object
+      properties:
+        cost_actual:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        cost_all:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        cost_pending:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        income_actual:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        income_pending:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        income_expected:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+        net_actual:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,30}(?:\.\d{0,2})?$
+      required:
+      - cost_actual
+      - cost_all
+      - cost_pending
+      - income_actual
+      - income_expected
+      - income_pending
+      - net_actual
     ProductionCategory:
       type: object
       properties:
